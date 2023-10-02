@@ -1,0 +1,79 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+html{
+    height: 100vh;
+    font-family: sans-serif;
+}
+
+body{
+    height: 100%;
+    background-image: url("https://wallpapers.com/images/high/aesthetic-abstract-pastel-minimal-background-n1c1ntrn6mpjz9s4.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.p-main{
+    color: black;
+    padding-top: 2%;
+    padding-left: 5%;
+}
+
+.home-header{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color:#60b9ff;
+    padding: 10px;
+    border: 5px solid #e3f3fe;
+    height: 10%;
+}
+
+.hello-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.subhello-header{ 
+    display:flex;
+    background-color: #bbe0fe
+
+}
+
+.home-main{
+    height: 80%;
+    display: flex;
+}
+
+.home-left{
+    height: 100%;
+    width: 100%;
+}
+
+.home-right{
+    height: 100%;
+    width: 100%;
+}
+
+.home-footer{
+    display: flex;
+    gap: 10px;
+    height: 10%;
+    background-color: #8fcdff;
+}
+
+.home-main-image{
+    position: absolute;
+    left: 30%;
+    right: 30%;
+}
+
+.splitter{
+    margin: auto;
+    width: 1%;
+    height: 100%;
+    background-color: #60b9ff;
+    border: 5px solid #e3f3fe;
+}
