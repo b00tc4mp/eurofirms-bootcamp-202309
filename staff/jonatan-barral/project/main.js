@@ -1,17 +1,7 @@
 var loginView = document.getElementById('login-view')
-var homeView = document.getElementById('home-view')
-var registerView = document.getElementById('register-view')
+var reprisesView = document.getElementById('reprises-view')
+var eventsView = document.getElementById('events-view')
 
-var registerForm = document.getElementById('register-form')
-registerForm.onsubmit = function(event){
-    event.preventDefault()
-
-    var name = event.target['name-input'].value
-    var email = event.target['email-input'].value
-    var password = event.target['password-input'].value
-
-    console.log(name, email, password)
-}
 
 var loginForm = loginView.querySelector('#login-form')
 loginForm.onsubmit = function(event){
