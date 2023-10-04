@@ -1,0 +1,49 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+header{
+    padding: 20px;
+}
+
+.header-container{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.header-top{
+    display: flex;
+    justify-content: space-between;
+}
+
+.search-form{
+    display: flex;
+    width: 100%;
+}
+
+.search-input{
+    width: 100%;
+}
+
+.header-bottom{
+    display: flex;
+    justify-content: space-between;
+}
+
+.results-header-container{
+    display: flex;
+}
+
+.results-header-options{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 5px;
+}
+
+.results-link{
+    display: flex;
+    flex-direction: column;
+}

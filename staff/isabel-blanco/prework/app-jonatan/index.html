@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="home-header off" id="home-header">
+        <nav title="nav links" class="home-header-nav">
+            <h1><a href="" id="home-navigate">Home</a></h1>
+            <a href="" id="settings-navigate">Settings</a>
+        </nav>
+        <form class="search-form">
+            <input class="search-input" type="search" role="search">
+            <button>search</button>
+        </form>
+
+        <button id="logout-button" class="logout-button">Logout</button>
+    </header>
+
+    <main id="home-main" title="main content" class="home-main off">
+        <h2>Recents Posts</h2>
+
+        <section class="section-posts">
+            <article class="post-container">
+                <h3>Jonatan Barral</h3>
+                <div>
+                    <img width="300"
+                        src="https://jonatanbarral.com/wp-content/uploads/photo-gallery/imported_from_media_libray/2.jpg?bwg=1592123570"
+                        alt="Baby Jonatan en su caballo" />
+                    <p>
+                        Miren que chulo me veo en mi caballo
+                    </p>
+                    <div class="post-buttons-container">
+                        <button>Comment</button>
+                        <button>Share</button>
+                        <button>Like</button>
+                    </div>
+                </div>
+            </article>
+            <article class="post-container">
+                <h3>Isabel Blanco</h3>
+                <div>
+                    <img width="300"
+                        src="https://imgs.search.brave.com/0xxi_zg2qywVCYv-krkKvAs4uq47XA-iR7KbZISB6vs/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/ZmVlbGNhdHMuY29t/L3dwLWNvbnRlbnQv/dXBsb2Fkcy8yMDE4/LzA5L2dhdG9zLW5l/Z3Jvcy1lbi1hZG9w/Y2lvbi5qcGc"
+                        alt="Gatos bebes" />
+                    <p>
+                        Miren que lindos estos gatitos
+                    </p>
+                    <div>
+                        <button>Comment</button>
+                        <button>Share</button>
+                        <button>Like</button>
+                    </div>
+                </div>
+            </article>
+            <button>more posts</button>
+        </section>
+    </main>
+
+    <main id="settings-main" class="settings-main off">
+        <form class="change-password-form" id="change-password-form">
+            <div class="change-password-container">
+                <div class="change-password-inputs-container">
+                    <label for="current-password">Current password</label>
+                    <label for="new-password">New password</label>
+                    <label for="new-password-repeat">Repetea new password</label>
+                </div>
+                <div class="change-password-inputs-container">
+                    <input id="current-password" type="password">
+                    <input id="new-password" type="password">
+                    <input id="new-password-repeat" type="password">
+                </div>
+            </div>
+            <button type="submit">Change password</button>
+        </form>
+    </main>
+
+    <!--LOGIN PAGE-->
+
+    <main class="login-main" id="login-main">
+        <h2>Iniciar sesión</h2>
+        <form id="login-form">
+            <label for="email">Correo Electrónico:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="contrasena">Contraseña:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Iniciar sesión</button>
+        </form>
+        <p> ¿No tienes cuenta? <a id="register-navigate" href="">Registrate!</a></p>
+    </main>
+
+    <!--REGISTER PAGE-->
+
+    <main class="register-main off" id="register-main">
+        <h1>Registro de Usuario</h1>
+        <form id="register-form">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+
+            <label for="email">Correo Electrónico:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="contrasena">Contraseña:</label>
+            <input type="password" id="contrasena" name="contrasena" required>
+
+            <button type="submit">Registrarse</button>
+        </form> 
+        <p>¿Ya tienes cuenta?<a id="login-navigate" href="">Logeate</a></p>
+    </main>
+    <footer class="main-footer">
+        <a href="about us">About us</a>
+        <a href="contact">Contact</a>
+        <a href="services">Services</a>
+    </footer>
+
+    <script src="./main.js"></script>
+
+</body>
+
+</html>
