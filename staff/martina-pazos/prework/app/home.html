@@ -1,17 +1,52 @@
-<!--TODO contructer the home page, with a title 1 and text "Hello, World!"
-
-    Hello, World!
-
--->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+    <link rel="stylesheet" href="home-style.css">
 </head>
+<!--TODO documento de html, por norma general, tiene una estructa de: header,
+    main y footer-->
 <body>
-    <h1>Hello, World!</h1>
+    <header class = "home-header">
+        <span>Imagen</span>
+        
+            <nav title="new links" class = "home-header-nav">
+                <h1><a>Home</a></h1>
+                <a href="">My Profile</a>
+                <a href="">Our histoty</a>
+
+                <!--TODO creamos el input para hacer la emtrada a un campo y 
+le añadimos el atributo "role" para hacerlo accesible para el l
+ector de pantalla. Creamos la etiqueta "button".Para recuperar la información 
+de dentro del input, si se pone dentro de un formulario <form> es más fácil-->
+                <form class="search-form">      
+                    <div>
+                        <input type="search" role="search">
+                        <button class = "logout-button">Search</button>
+                     </div>
+                 </form> 
+            </nav>
+    </header>
+ <!--TODO el "header" ya estaría, sigue una estructa estándar, ahora 
+comenzamos con la estructura del "main"-->
+<!--TODO en el "main" añadimos un <p>(párrafo), con un relleno
+ficcticio con el "lorem", para que la web tenga una apariencia de más cuerpo-->
+    <main>
+        <h1>Hello World!</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos distinctio ipsa delectus saepe blanditiis accusamus voluptas dignissimos exercitationem mollitia! Quas exercitationem eius officia repellendus dolorum animi nobis accusamus sed quaerat.</p>
+    </main>
+<!--TODO en el footer pongo estes conceptos pq es lo más genérico en las 
+    páginas web--> 
+    <footer>
+        <ul>
+            <li><a href="about us">About us</a></li>
+            <li><a href="contact">Contact</a></li>
+            <li><a href="services">Services</a></li>
+        </ul>
+    </footer>
+    
     
 </body>
 </html>
