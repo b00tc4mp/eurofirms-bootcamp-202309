@@ -300,22 +300,13 @@
     <div id="login-view">
         <h2>¡Quien eres?</h2>
         <form id="login-form">
-            <label for="secretaria">Secretaría</label>
-            <input type="radio" name="login-secretaria" value="1" id="secretaria">
-
-            <label for="Juez C">Juez C</label>
-                        <input type="radio" name="login" value="2" id="Juez C">
-
-                        <label for="juez b">Juez B</label>
-                        <input type="radio" name="login" value="3" id="juez b">
-
-                        <label for="admin">admin</label>
-                            <input type="radio" name="login" value="4" id="admin"><br>
-                            <label for="password">Password</label>
+            <label for="user">user</label>
+            <input id="user"  required><br>
+                        <label for="password">Password</label>
                         <input id="password-login" type="password" pattern=".{6,}" required><br>
             <button type="submit" id="head-view-navigate">login</button>
         </form>
-    </div>
+</div>  
 
     <footer></footer>
     <script src="main.js"></script>
