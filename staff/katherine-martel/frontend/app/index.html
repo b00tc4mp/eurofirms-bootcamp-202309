@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="home-view" class="off">
+
+    <h1>Hello Home</h1>
+    </div>
+ <div id="register-view" class="off"> <!-- se pone despues del div # para autocompletar-->
+    <h1>Register</h1>
+
+    <form id="register-view">
+       <label for="name-input">Name</label> <!-- label es la etiqueta,titulo del input-->
+       <input type="text" id="name-input">  <!--id-->
+
+       <label for="email-input">E-mail</label>
+       <input type="email" id="email-input"> <!--comprobar que es un email el navegador se pone type email-->
+
+       <label for="password-input">Password</label>
+       <input type="password" id="password-input"> <!--los atributos son los que pones entre comillas-->
+
+       <button>Register</button>
+       <button type="reset">Clear</button> <!--te limpia el formulario  type reset-->
+    </form>
+    <a href=""id=login-navigate>Login</a>
+ </div> 
+ <div id="Login-view">
+    <h1>Login</h1>
+    <form id="login-form">
+    <label for="email-input-login">E-mail</label>
+    <input type="email" id="email-input-login">
+
+    <label for="password-input-login">Password</label>
+    <input type="password" id="email-input-login">
+
+    <button type="submit" id="login-button">Login</button>
+</form>
+<a href=""id=></a>
+ </div>
+ <script src="main.js"></script> 
+</body>
+</html>
