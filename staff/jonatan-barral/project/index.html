@@ -5,18 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jonatan's project</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <head id="head-view" class="off">
+    <div id="head-view" class="off">
         <nav>
             <ul>
                 <li><a href="" id="reprises-navigate">reprises</a></li>
                 <li><a href="" id="events-navigate">eventos</a></li>
             </ul>
         </nav>
-    </head>
+    </div>
 
     
         <div id="reprises-view" class="off">
@@ -246,7 +247,7 @@
                     <a
                         href="adaptada/grado III/15-Reprise-Grado-III-Kur-Doma-Paraecuestre.html">15-Reprise-Grado-III-Kur-Doma-Paraecuestre</a>
             </div>
-        </div>
+        
 
         <div id="grado-IV">
             <h2>Grado IV</h2>
@@ -298,26 +299,26 @@
 
     <div id="login-view">
         <h2>¡Quien eres?</h2>
-        <form>
-            <label for="secretaria">secretaria</label>
-            <input type="radio" name="login" value="1" id="secretaria">
+        <form id="login-form">
+            <label for="secretaria">Secretaría</label>
+            <input type="radio" name="login-secretaria" value="1" id="secretaria">
 
             <label for="Juez C">Juez C</label>
                         <input type="radio" name="login" value="2" id="Juez C">
 
-                        <label for="juez b">juez b</label>
+                        <label for="juez b">Juez B</label>
                         <input type="radio" name="login" value="3" id="juez b">
 
-                        <label for="marcador">Marcador</label>
-                            <input type="radio" name="login" value="4" id="marcador"><br>
+                        <label for="admin">admin</label>
+                            <input type="radio" name="login" value="4" id="admin"><br>
                             <label for="password">Password</label>
-                        <input id="password" type="password"><br>
-            <button type="submit">login</button>
+                        <input id="password-login" type="password" pattern=".{6,}" required><br>
+            <button type="submit" id="head-view-navigate">login</button>
         </form>
     </div>
 
     <footer></footer>
-    
+    <script src="main.js"></script>
 </body>
 
 </html>
