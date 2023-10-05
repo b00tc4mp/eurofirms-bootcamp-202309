@@ -1,9 +1,20 @@
 // Obtenemos referencias a elementos HTML por su ID
 var loginView = document.getElementById('login-view') // La vista de inicio de sesión
+loginView.style.display = ''
+
+
 var reprisesView = document.getElementById('reprises-view') // La vista de reprises
+
+reprisesView.style.display = 'none'
+
 var eventsView = document.getElementById('events-view') // La vista de eventos
+
+eventsView.style.display = 'none'
+
 var headView = document.getElementById('head-view') // La vista principal
-var loginButton = document.getElementById('login-button') // El botón de inicio de sesión
+
+headView.style.display = 'none'
+
 
 // Obtenemos el formulario de inicio de sesión dentro de la vista de inicio de sesión
 var loginForm = loginView.querySelector('#login-form')
@@ -16,11 +27,7 @@ loginForm.onsubmit = function (event) {
     var nameLogin = event.target['user'].value
     var passwordLogin = event.target['password-login'].value
 
-    // Imprimimos los valores en la consola
-    console.log(nameLogin, passwordLogin)
-}
-
-// Obtenemos el elemento que permite navegar a la vista principal desde la vista de inicio de sesión
+    // Obtenemos el elemento que permite navegar a la vista principal desde la vista de inicio de sesión
 var navigateToHead = loginView.querySelector('#head-view-navigate')
 
 // Asignamos una función al evento "submit" del elemento de navegación a la vista principal
@@ -28,6 +35,13 @@ navigateToHead.onsubmit = function (event) {
     event.preventDefault() // Evita el comportamiento predeterminado del formulario (recargar la página)
 
     // Ocultamos la vista de inicio de sesión y mostramos la vista principal
-    loginView.classList.add('off')
-    headView.classList.remove('off')
+    loginView.style.display = 'none'
+    headView.style.display = ''
+
+    // Imprimimos los valores en la consola
+    console.log(nameLogin, passwordLogin)
 }
+
+}
+
+
