@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>App</title>
+</head>
+<body>
+    <div id="register-view" class="off">
+        <h1>Register</h1>
+
+        <form>
+            <label for="name-input">Name</label>
+            <input type="text" id="name-input">
+
+            <label for="email-input">E-mail</label>
+            <input type="email" id="email-input">
+
+            <label for="password-input">Password</label>
+            <input type="password" id="password-input">
+
+            <button type="submit" id="register-button">Register</button>
+            <button type="reset">Clear</button>
+        </form>
+        <a href="" id="login-navigate">Login</a>
+    </div>
+
+    <div id="login-view">
+        <h1>Login</h1>
+
+        <form id="login-form">
+            <label for="email-input-login">E-mail</label>
+            <input type="email" id="email-input-login">
+
+            <label for="password-input-login">Pasword</label>
+            <input type="password" id="password-input-login">
+            
+            <button type="submit" id="login-button">Login</button>
+        </form>
+        <a href="" id="register-navigate">Register</a>
+
+    </div>
+
+    <div id="home-view" class="off">
+        <h1>HELLO HOME</h1>
+        <button>Logout</button>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
