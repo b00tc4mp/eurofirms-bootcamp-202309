@@ -1,11 +1,3 @@
-// data
-
-var users = []
-
-users[0] = { name: 'Pepito Grillo', email: 'pepito@grillo.com', password: '123123123' }
-
-users[1] = { name: 'Campa Nilla', email: 'campa@nilla.com', password: '123123123' }
-
 // register view
 
 var registerView = document.getElementById('register-view')
@@ -38,19 +30,7 @@ registerForm.onsubmit = function (event) {
     var email = emailInput.value
     var password = passwordInput.value
 
-    var user = {}
-    user.name = name
-    user.email = email
-    user.password = password
-
-    users.push(user)
-
-    nameInput.value = ''
-    emailInput.value = ''
-    passwordInput.value = ''
-
-    registerView.style.display = 'none'
-    loginView.style.display = ''
+    console.log(name, email, password)
 }
 
 // login view
@@ -83,35 +63,7 @@ loginForm.onsubmit = function (event) {
     var email = emailInput.value
     var password = passwordInput.value
 
-    var foundUser = null
-
-    for (var i = 0; i < users.length; i++) {
-        var user = users[i]
-
-        if (user.email === email) {
-            foundUser = user
-
-            break
-        }
-    }
-
-    if (foundUser === null) {
-        alert('Wrong credentials')
-
-        return
-    }
-
-    if (foundUser.password !== password) {
-        alert('Wrong credentials')
-
-        return
-    }
-
-    emailInput.value = ''
-    passwordInput.value = ''
-
-    loginView.style.display = 'none'
-    homeView.style.display = ''
+    console.log(email, password)
 }
 
 // home view
@@ -119,10 +71,3 @@ loginForm.onsubmit = function (event) {
 var homeView = document.getElementById('home-view')
 
 homeView.style.display = 'none'
-
-var logoutButton = homeView.querySelector('#logout-button')
-
-logoutButton.onclick = function () {
-    homeView.style.display = 'none'
-    loginView.style.display = ''
-}
