@@ -1,47 +1,57 @@
 // Obtenemos referencias a elementos HTML por su ID
-var loginView = document.getElementById('login-view') // La vista de inicio de sesión
-loginView.style.display = ''
+var loginView = document.getElementById('login-view'); // La vista de inicio de sesión
+loginView.style.display = '';
 
+var reprisesView = document.getElementById('reprises-view'); // La vista de reprises
+reprisesView.style.display = 'none';
 
-var reprisesView = document.getElementById('reprises-view') // La vista de reprises
+var eventsView = document.getElementById('events-view'); // La vista de eventos
+eventsView.style.display = 'none';
 
-reprisesView.style.display = 'none'
+var headView = document.getElementById('head-view'); // La vista principal
+headView.style.display = 'none';
 
-var eventsView = document.getElementById('events-view') // La vista de eventos
+// data
+var users = [];
 
-eventsView.style.display = 'none'
-
-var headView = document.getElementById('head-view') // La vista principal
-
-headView.style.display = 'none'
-
+users[0] = { name: 'JuezC',  password: '123123123' };
+users[1] = { name: 'secretaria', password: '123123123' };
 
 // Obtenemos el formulario de inicio de sesión dentro de la vista de inicio de sesión
-var loginForm = loginView.querySelector('#login-form')
-
-// Asignamos una función al evento "submit" del formulario de inicio de sesión
+var loginForm = loginView.querySelector('#login-form');
 loginForm.onsubmit = function (event) {
-    event.preventDefault() // Evita el comportamiento predeterminado del formulario (recargar la página)
+    event.preventDefault();
 
-    // Obtenemos los valores ingresados en los campos de nombre y contraseña
-    var nameLogin = event.target['user'].value
-    var passwordLogin = event.target['password-login'].value
+    var usernameInput = loginForm.querySelector('#user');
+    var passwordInput = loginForm.querySelector('#password-login');
 
-    // Obtenemos el elemento que permite navegar a la vista principal desde la vista de inicio de sesión
-var navigateToHead = loginView.querySelector('#head-view-navigate')
+    var username = usernameInput.value;
+    var password = passwordInput.value;
 
-// Asignamos una función al evento "submit" del elemento de navegación a la vista principal
-navigateToHead.onsubmit = function (event) {
-    event.preventDefault() // Evita el comportamiento predeterminado del formulario (recargar la página)
+    var foundUser = null;
 
-    // Ocultamos la vista de inicio de sesión y mostramos la vista principal
-    loginView.style.display = 'none'
-    headView.style.display = ''
+    for (var i = 0; i < users.length; i++) {
+        var user = users[i];
 
-    // Imprimimos los valores en la consola
-    console.log(nameLogin, passwordLogin)
+        if (user.name === username) {  // Cambia "email" a "name"
+            foundUser = user;
+            break;
+        }
+    }
+
+    if (foundUser === null) {
+        alert('Credenciales incorrectas');
+        return;
+    }
+
+    if (foundUser.password !== password) {
+        alert('Credenciales incorrectas');
+        return;
+    }
+
+    usernameInput.value = '';
+    passwordInput.value = '';
+
+    loginView.style.display = 'none';
+    headView.style.display = '';
 }
-
-}
-
-
