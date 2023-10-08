@@ -1,98 +1,118 @@
-// Obtenemos referencias a elementos HTML por su ID
-var loginView = document.getElementById('login-view') // La vista de inicio de sesión
-var reprisesView = document.getElementById('reprises-view') // La vista de reprises
-var eventsView = document.getElementById('events-view') // La vista de eventos
-var headView = document.getElementById('head-view') // La vista principal
-var dressageView = document.getElementById('dressage-view')
-var paralimpicView = document.getElementById('paralimpic-view')
+// Obtain references to HTML elements by their IDs
+var loginView = document.getElementById('login-view'); // The login view
+var reprisesView = document.getElementById('reprises-view'); // The reprises view
+var eventsView = document.getElementById('events-view'); // The events view
+var headView = document.getElementById('head-view'); // The main view
+var dressageView = document.getElementById('dressage-view'); // The dressage view
+var paralimpicView = document.getElementById('paralimpic-view'); // The paralimpic view
 
-// Ocultamos todas las vistas excepto la de inicio de sesión
-loginView.style.display = ''
-reprisesView.style.display = 'none'
-eventsView.style.display = 'none'
-headView.style.display = 'none'
-dressageView.style.display = 'none'
-paralimpicView.style.display = 'none'
+// Hide all views except for the login view
+loginView.style.display = '';
+reprisesView.style.display = 'none';
+eventsView.style.display = 'none';
+headView.style.display = 'none';
+dressageView.style.display = 'none';
+paralimpicView.style.display = 'none';
 
-// Datos de usuarios
+// User data
 var users = [
     { name: 'JuezC', password: '123123123' },
     { name: 'secretaria', password: '123123123' }
-]
+];
 
-// Obtenemos el formulario de inicio de sesión dentro de la vista de inicio de sesión
-var loginForm = loginView.querySelector('#login-form')
+// Obtain the login form within the login view
+var loginForm = loginView.querySelector('#login-form');
 loginForm.onsubmit = function (event) {
-    event.preventDefault()
+    event.preventDefault();
 
-    var usernameInput = loginForm.querySelector('#user')
-    var passwordInput = loginForm.querySelector('#password-login')
+    var usernameInput = loginForm.querySelector('#user');
+    var passwordInput = loginForm.querySelector('#password-login');
 
-    var username = usernameInput.value
-    var password = passwordInput.value
+    var username = usernameInput.value;
+    var password = passwordInput.value;
 
-    var foundUser = null
+    var foundUser = null;
 
     for (var i = 0; i < users.length; i++) {
-        var user = users[i]
+        var user = users[i];
 
         if (user.name === username) {
-            foundUser = user
-            break
+            foundUser = user;
+            break;
         }
     }
 
     if (foundUser === null || foundUser.password !== password) {
-        alert('Credenciales incorrectas')
-        return
+        alert('Incorrect credentials');
+        usernameInput.value = '';
+        passwordInput.value = '';
+    
+        return;
     }
 
-    usernameInput.value = ''
-    passwordInput.value = ''
+    usernameInput.value = '';
+    passwordInput.value = '';
 
-    loginView.style.display = 'none'
-    headView.style.display = ''
-}
+    loginView.style.display = 'none';
+    headView.style.display = '';
+};
 
-// Gestión de enlaces y botones para cambiar de vistas
-var reprisesLink = headView.querySelector('#reprises-link')
+// Manage links and buttons to switch views
+var reprisesLink = headView.querySelector('#reprises-link');
 reprisesLink.onclick = function (event) {
-    event.preventDefault()
-    headView.style.display = 'none'
-    reprisesView.style.display = ''
-}
+    event.preventDefault();
+    headView.style.display = 'none';
+    reprisesView.style.display = '';
+};
 
-var dressageLink = reprisesView.querySelector('#dressage-link')
+var reprisesGoBack = reprisesView.querySelector('#go-back');
+reprisesGoBack.onclick = function(event) {
+    event.preventDefault();
+
+    reprisesView.style.display = 'none';
+    headView.style.display = '';
+};
+
+var dressageLink = reprisesView.querySelector('#dressage-link');
 dressageLink.onclick = function (event) {
-    event.preventDefault()
-    reprisesView.style.display = 'none'
-    dressageView.style.display = ''
-}
+    event.preventDefault();
+    reprisesView.style.display = 'none';
+    dressageView.style.display = '';
+};
 
-var goBackDressage = dressageView.querySelector('#go-back')
+var goBackDressage = dressageView.querySelector('#go-back');
 goBackDressage.onclick = function (event) {
-    event.preventDefault()
-    dressageView.style.display = 'none'
-    reprisesView.style.display = ''
-}
+    event.preventDefault();
+    dressageView.style.display = 'none';
+    reprisesView.style.display = '';
+};
 
-var paralimpicLink = reprisesView.querySelector('#paralimpic-link')
+var paralimpicLink = reprisesView.querySelector('#paralimpic-link');
 paralimpicLink.onclick = function (event) {
-    event.preventDefault()
-    reprisesView.style.display = 'none'
-    paralimpicView.style.display = ''
-}
+    event.preventDefault();
+    reprisesView.style.display = 'none';
+    paralimpicView.style.display = '';
+};
 
-var goBackParalimpic = paralimpicView.querySelector('#go-back')
+var goBackParalimpic = paralimpicView.querySelector('#go-back');
 goBackParalimpic.onclick = function (event) {
-    event.preventDefault()
-    paralimpicView.style.display = 'none'
-    reprisesView.style.display = ''
-}
-var eventsLink = document.getElementById('events-link')
-eventsLink.onclick = function(event) {
-    event.preventDefault()
+    event.preventDefault();
+    paralimpicView.style.display = 'none';
+    reprisesView.style.display = '';
+};
 
-    headView.style.display = 'none'
-    eventsLink.style.display = ''
-}
+var eventsLink = document.getElementById('events-link');
+eventsLink.onclick = function(event) {
+    event.preventDefault();
+
+    headView.style.display = 'none';
+    eventsView.style.display = '';
+};
+
+var goBackEvents = eventsView.querySelector('#go-back');
+goBackEvents.onclick = function(event) {
+    event.preventDefault();
+
+    eventsView.style.display = 'none';
+    headView.style.display = '';
+};
