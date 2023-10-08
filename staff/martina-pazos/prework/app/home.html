@@ -12,9 +12,11 @@
     <header>
         <span>Imagen</span>
         <nav title="new linka" class="home-header-nav">
-            <h1>Home</h1>
-            <a href="">Your acound</a>
-            <a href="">Our histoty</a>
+            <h1><a href="" id="home-navigate">Home</a></h1>
+            <h1><a href="" id="settings-navigate">Settings</a></h1>
+            <a href="" id="settings-navigate">About me</a>
+            <a href="" id="settings-navigate2">Our histoty</a>
+
 
             <form class="search-form">
                 <input type="search" role="search">
@@ -26,64 +28,68 @@
 
     <!--TODO el "home-main-off" , esto sirve para oculta, por eso se pone off
     el main-->
-    <main class="home-main off">
+    <main id="home-main" class="home-main">
         <h2 class="hello-world">Hello world</h2>
         <h1 class="recents-posts">Recents posts</h1>
 
-        <h2 class="marisa-de-las-paredes">Marisa de las Paredes Ocaña</h2>
-        <div class="marisa-paredes">
-            <img src="data:image/jpeg;base64,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"
-                alt="passport photo the Marisa de las Paredes Ocaña" width="150" heigth="150">
-            <p>Hola, soy Marisa, estoy buscando gente para viajar por las
-                Islas Griegas entre el 15 de noviembre y el 28 de noviembre,
-                ¿alguien se apunta?.</p>
-            <div>
-                <button>Comment</button>
-                <button>Share</button>
-                <button>Like</button>
-            </div>
-        </div>
+        <section class="section-posts">
+            <article class="post-container">
 
-        <h2 class="marisa-de-las-paredes">Pedro Pica Marmol</h2>
-        <div class="pedro-pica">
-            <img src="data:image/jpeg;base64,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"
-                alt="passport photo the Pedro Pica Marmol" width="150" height="150">
-            <p>Hola, soy Pedro, viajo a Nueva Deli todo el mes de diciembre,
-                si quereis apuntaros escribirme al correo viajar@pedropica.com
-            </p>
-            <div>
-                <button>Comment</button>
-                <button>Share</button>
-                <button>Like</button>
-            </div>
-        </div>
+                <h2 class="marisa-de-las-paredes">Marisa de las Paredes Ocaña</h2>
+                <div class="marisa-paredes">
+                    <img src="data:image/jpeg;base64,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"
+                        alt="passport photo the Marisa de las Paredes Ocaña" width="150" heigth="150">
+                    <p>Hola, soy Marisa, estoy buscando gente para viajar por las
+                        Islas Griegas entre el 15 de noviembre y el 28 de noviembre,
+                        ¿alguien se apunta?.</p>
+                    <div>
+                        <button>Comment</button>
+                        <button>Share</button>
+                        <button>Like</button>
+                    </div>
+                </div>
+
+                <h2 class="marisa-de-las-paredes">Pedro Pica Marmol</h2>
+                <div class="pedro-pica">
+                    <img src="data:image/jpeg;base64,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"
+                        alt="passport photo the Pedro Pica Marmol" width="150" height="150">
+                    <p>Hola, soy Pedro, viajo a Nueva Deli todo el mes de diciembre,
+                        si quereis apuntaros escribirme al correo viajar@pedropica.com
+                    </p>
+                    <div>
+                        <button>Comment</button>
+                        <button>Share</button>
+                        <button>Like</button>
+                    </div>
+                </div>
+            </article>
+        </section>
     </main>
 
     <!--TODO lo que vamos a hacer es que todo este en la misma página-->
 
-    <main class="settings-main">
+    <main id="settings-main" class="settings-main">
 
-        <form class="change-password.form">
+        <form class="change-password-form">
             <div class="change-password-container">
-                <div>
+                <div id="change-password-impust-container" class="change-password-impust-container">
                     <label for="current password">Contraseña actual</label>
                     <label for="new-password">Nueva contraseña</label>
                     <label for="new-password-repead">Repetir nueva contraseña</label>
                 </div>
-                <div>
+                <div class="change-password-impust-container">
                     <input id="current password" type="text">
                     <input id="new-password" type="text">
                     <input id="new-password-repead" type="text">
                 </div>
 
                 <button type="submit">Cambiar contraseña</button>
+
             </div>
         </form>
 
-
-
-
     </main>
+
 
     <footer>
         <ul>
@@ -92,6 +98,13 @@
             <li><a href="">Services</a></li>
         </ul>
     </footer>
+    <!--TODO para anclar con JavaScript se pone al final, 
+        despues del footer-->
+
+    <script src="./main.js"></script>
+
+
+
 </body>
 
 </html>
