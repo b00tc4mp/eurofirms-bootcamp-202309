@@ -18,51 +18,52 @@ var loginMain = document.getElementById("logout-button")
 //y algo muy importante, para que no este continuemente recargandose 
 
 
-var navigateToSettings = document.getElementById("settings-main")
+var navigateToSettings = document.getElementById("settings-navigate")
 navigateToSettings.onclick = function (event) {
+    event.preventDefault()
+
+    homeMain.classList.add("off")
+    settingsMain.classList.remove("off")
+}
+var navigateToHome = document.getElementById("home-navigate")
+navigateToHome.onclick = function (event) {
     event.preventDefault()
 
     settingsMain.classList.add("off")
     homeMain.classList.remove("off")
 }
-var navigateToHome = document.getElementById("home-main")
-navigateToHome.onclick = function (event) {
+
+// esto es un formulario, primero se declars la variable, y despues
+//se hacen los inputs uno a uno
+// los inpust se hacen de la siguiente forma:
+// se declara una nueva variable. event.target y entre corchetes y comillas
+// el nombre de id del primer input.value
+var changePasswordForm = settingsMain.querySelector("#change-password-form")
+changePasswordForm.onsubmit = function (event) {
     event.preventDefault()
+    //esta ultima funcion esta mal ,no me sale
 
-    homeMain.classList.add("off")
-    settingsMain.children.remve("off")
+    var currentPassword = event.target["current-password"].value
+    var newPassword = event.target["newpassword"].value
+    var newPasswordRepead = event.target["new-password-repead"].value
+    console.log(currentPassword)
 
-    // esto es un formulario, primero se declars la variable, y despues
-    //se hacen los inputs uno a uno
-    // los inpust se hacen de la siguiente forma:
-    // se declara una nueva variable. event.target y entre corchetes y comillas
-    // el nombre de id del primer input.value
-    var changePassword = settingsMain.querySelector("#change-password-form")
-    changePassword.onsubmit = function (event) {
-        event.preventDefault()
-        //esta ultima funcion esta mal ,no me sale
-
-        var currentPassword = event.target.["current-password"].value
-        var newPassword = event.target.["newpassword"].value
-        var newPasswordRepead = event.target.["new-password-repead"].value
+    if (newPassword === newPasswordRepead) {
         console.log(currentPassword)
+        console.log(newPassword)
+        console.log(newPasswordRepea)
+        console.log("no podiamos verlo antes")
 
-        if (newPassword === newPasswordRepead) {
-            console.log(currentPassword)
-            console.log(newPassword)
-            console.log(newPasswordRepea)
-            console.log(no podiamos verlo antes)
+        alert("contraseña cambiada")
 
-            alert("contraseña cambiada")
+        changePasswordForm.reset()
 
-            changePasswordForm()reset
-
-            settingsMain.classList.add("off")
-            homeMain.classList.remove("off")
-        } else {
-            alert("las contraseñas no coinciden")
-        }
+        settingsMain.classList.add("off")
+        homeMain.classList.remove("off")
+    } else {
+        alert("las contraseñas no coinciden")
     }
+}
 
 
 
