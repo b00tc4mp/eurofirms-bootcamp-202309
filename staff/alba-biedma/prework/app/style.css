@@ -1,0 +1,8 @@
+@import url(https://fonts.googleapis.com/css?family=Rubik+Pixels:regular);
+
+.container { 
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    font-family: Rubik Pixels;
+}  
