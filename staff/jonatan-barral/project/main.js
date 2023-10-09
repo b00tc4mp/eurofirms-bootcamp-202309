@@ -1,4 +1,5 @@
-// Obtain references to HTML elements by their IDs
+
+        // Obtain references to HTML elements by their IDs
 var loginView = document.getElementById('login-view'); // The login view
 var reprisesView = document.getElementById('reprises-view'); // The reprises view
 var eventsView = document.getElementById('events-view'); // The events view
