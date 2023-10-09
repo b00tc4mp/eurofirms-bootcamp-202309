@@ -20,7 +20,3 @@
     box-sizing: content-box;
     gap: 0.25rem;
 }
-
-.post-image {
-    max-width: 300px;
-}
