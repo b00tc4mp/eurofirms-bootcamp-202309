@@ -57,12 +57,7 @@ loginForm.onsubmit = function (event) {
 
     loginView.style.display = 'none'
 
-    // render user name in header
-
-    var userNameSpan = homeView.querySelector('#user-name-span')
-    userNameSpan.innerText = foundUser.name
-
-    // render posts in body
+    // render posts
 
     var postsList = homeView.querySelector('#posts-list')
 

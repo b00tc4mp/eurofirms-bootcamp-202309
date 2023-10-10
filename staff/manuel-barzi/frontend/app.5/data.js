@@ -37,9 +37,3 @@ posts[3] = {
     image: 'https://i.ebayimg.com/images/g/V9wAAOSw~e5ZU~Ls/s-l1200.webp',
     text: 'Pikachu!'
 }
-
-posts[4] = {
-    author: 'pepito@grillo.com',
-    image: 'https://i.pinimg.com/550x/64/65/90/6465907c690be529106e4ada2c94d0d6.jpg',
-    text: 'La Hormiga Atómica!'
-}

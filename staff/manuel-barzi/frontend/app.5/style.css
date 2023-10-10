@@ -24,10 +24,3 @@
 .post-image {
     max-width: 300px;
 }
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: khaki;
-}
