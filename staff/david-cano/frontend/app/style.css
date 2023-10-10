@@ -1,33 +1,26 @@
-#register-view{
+.view {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
-
+    padding-bottom: 1rem;
 }
 
-#register-form{
-    display: flex;/*dispone los elementos en linea, uno al lado de otro*/
-    flex-direction: column;/*dispone los elementos en columna*/
-    padding: 3 vw;/*margen interno con respecto al ancho del contenedor, medida relativa del 5%*/
-    /*max-width: 350px;*//*ancho maximo del formulario, medida fija en pixeles. Esto sobra al poner el display flex en el contenedor padre register-view*/
-    box-sizing: content-box;
-    gap: .5vw;/*separación entre los elementos del formulario, medida relativa*/
+.view-skyblue {
+    background-color: skyblue;
 }
 
-#login-view{
+.view-plum {
+    background-color: plum;
+}
+
+.form {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-
+    box-sizing: content-box;
+    gap: 0.25rem;
 }
 
-#login-form{
-    display: flex;/*dispone los elementos en linea, uno al lado de otro*/
-    flex-direction: column;/*dispone los elementos en columna*/
-    padding: 3 vw;/*margen interno con respecto al ancho del contenedor, medida relativa del 5%*/
-    /*max-width: 350px;*//*ancho maximo del formulario, medida fija en pixeles. Esto sobra al poner el display flex en el contenedor padre register-view*/
-    box-sizing: content-box;
-    gap: .5vw;/*separación entre los elementos del formulario, medida relativa*/
+.post-image {
+    max-width: 300px;
 }
