@@ -57,6 +57,11 @@ loginForm.onsubmit = function (event) {
 
     loginView.style.display = 'none'
 
+    //RENDER USER NAME HEADER
+
+    var userNameSpan = homeView.querySelector('#user-name-span')
+    userNameSpan.innerText = post.author
+    //foundUser.name
 // RENDER POSTS
 
 var postsList = homeView.querySelector('#posts-list')
@@ -81,7 +86,7 @@ for (var i = 0; i < posts.length; i++) {
     article.appendChild(paragraph)
 
     postsList.appendChild(article)
-   }
+    }
 
 homeView.style.display = ''
 }

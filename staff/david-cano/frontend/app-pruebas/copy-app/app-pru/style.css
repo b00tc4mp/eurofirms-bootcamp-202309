@@ -4,9 +4,9 @@
     align-items: center;
     gap: 1rem;
 
-}*/
+}
 
-/*#register-form{
+#register-form{
     display: flex;(dispone los elementos en linea, uno al lado de otro)
     flex-direction: column;(dispone los elementos en columna)
     padding: 3 vw;(margen interno con respecto al ancho del contenedor, medida relativa del 5%)
@@ -21,8 +21,8 @@
     align-items: center;
     gap: 1rem;
 
-}*/
-/*
+}
+
 #login-form{
     display: flex;(dispone los elementos en linea, uno al lado de otro)
     flex-direction: column;(dispone los elementos en columna)
@@ -45,7 +45,7 @@
 }
 
 .view-plum {
-    background-color: plum;
+    background-color: #86e07a;
 }
 
 .form {
@@ -57,4 +57,34 @@
 
 .post-image {
     max-width: 300px;
+    padding: 20px;
+    margin-top: 10px;
+    border-radius: 50%;
+    box-sizing: border-box;
+    width: 90%;
+}
+
+.color-a{
+    color: #f30505;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: aqua;
+    border-radius: 10px;
+    padding: 10px;
+
+}
+
+.articles{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border: ridge 15px aqua;
+    margin: 20px;
+    border-radius: 25px;
 }
