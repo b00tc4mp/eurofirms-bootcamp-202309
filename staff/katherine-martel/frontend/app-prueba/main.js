@@ -40,7 +40,7 @@ registerForm.onsumint = function(event){
     loginview.style.display = ""
 }
 
-var loginForm = loginview.querySelector("#login-form")
+var loginForm = loginView.querySelector("#login-form")
 loginForm.onsumint = function(event){
     event.prevenDefault()
 
