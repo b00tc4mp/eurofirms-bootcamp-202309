@@ -30,6 +30,28 @@ registerForm.onsubmit = function (event) {
     var email = emailInput.value
     var password = passwordInput.value
 
+    // search user by email
+
+    var foundUser = null
+
+    for (var i = 0; i < users.length; i++) {
+        var user = users[i]
+
+        if (user.email === email) {
+            foundUser = user
+
+            break
+        }
+    }
+
+    // if user exists (it was found) then error
+
+    if (foundUser !== null) {
+        alert('User already exists')
+
+        return
+    }
+
     var user = {}
     user.name = name
     user.email = email

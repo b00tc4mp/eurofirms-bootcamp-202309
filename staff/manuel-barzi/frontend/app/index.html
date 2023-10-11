@@ -51,8 +51,24 @@
         <header class="header">
             <h1>Home</h1>
             <span id="user-name-span">Hello World</span>
+            <button id="post-button">+</button>
             <button id="logout-button">Logout</button>
         </header>
+
+        <!-- add post form -->
+
+        <form id="post-form" class="form form-lightgreen">
+            <label for="image-input">Image</label>
+            <input type="url" id="image-input">
+
+            <label for="text-input">Text</label>
+            <input type="text" id="text-input">
+
+            <button type="submit">Add</button>
+            <button id="cancel-post-button">Cancel</button>
+        </form>
+
+        <!-- posts list -->
 
         <div id="posts-list">
         </div>

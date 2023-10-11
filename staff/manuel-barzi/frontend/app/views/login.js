@@ -28,6 +28,8 @@ loginForm.onsubmit = function (event) {
     var email = emailInput.value
     var password = passwordInput.value
 
+    // search user by email
+
     var foundUser = null
 
     for (var i = 0; i < users.length; i++) {
@@ -40,11 +42,15 @@ loginForm.onsubmit = function (event) {
         }
     }
 
+    // if user not found then error
+
     if (foundUser === null) {
         alert('Wrong credentials')
 
         return
     }
+
+    // if user password is wrong then error
 
     if (foundUser.password !== password) {
         alert('Wrong credentials')

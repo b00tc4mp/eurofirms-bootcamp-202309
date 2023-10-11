@@ -21,6 +21,10 @@
     gap: 0.25rem;
 }
 
+.form-lightgreen {
+    background-color: lightgreen;
+}
+
 .post-image {
     max-width: 300px;
 }
