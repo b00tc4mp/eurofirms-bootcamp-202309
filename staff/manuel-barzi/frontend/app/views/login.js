@@ -61,6 +61,8 @@ loginForm.onsubmit = function (event) {
     emailInput.value = ''
     passwordInput.value = ''
 
+    loggedInEmail = foundUser.email
+
     loginView.style.display = 'none'
 
     // render user name in header
@@ -72,7 +74,7 @@ loginForm.onsubmit = function (event) {
 
     var postsList = homeView.querySelector('#posts-list')
 
-    for (var i = 0; i < posts.length; i++) {
+    for (var i = posts.length - 1; i >= 0; i--) {
         var post = posts[i]
 
         var article = document.createElement('article')

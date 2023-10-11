@@ -1,3 +1,9 @@
+h1,
+h2 {
+    margin: 0;
+}
+
+
 .view {
     display: flex;
     flex-direction: column;
@@ -21,7 +27,7 @@
     gap: 0.25rem;
 }
 
-.form-lightgreen {
+.panel-lightgreen {
     background-color: lightgreen;
 }
 

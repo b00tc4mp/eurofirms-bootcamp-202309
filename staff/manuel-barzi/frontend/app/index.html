@@ -55,18 +55,23 @@
             <button id="logout-button">Logout</button>
         </header>
 
-        <!-- add post form -->
+        <!-- add post panel -->
 
-        <form id="post-form" class="form form-lightgreen">
-            <label for="image-input">Image</label>
-            <input type="url" id="image-input">
+        <div id="post-panel" class="panel-lightgreen">
+            <h2>Create post</h2>
 
-            <label for="text-input">Text</label>
-            <input type="text" id="text-input">
+            <form id="post-form" class="form">
+                <label for="image-input">Image</label>
+                <input type="url" id="image-input">
 
-            <button type="submit">Add</button>
-            <button id="cancel-post-button">Cancel</button>
-        </form>
+                <label for="text-input">Text</label>
+                <input type="text" id="text-input">
+
+                <button type="submit">Post</button>
+                <button id="cancel-post-button">Cancel</button>
+            </form>
+        </div>
+
 
         <!-- posts list -->
 
