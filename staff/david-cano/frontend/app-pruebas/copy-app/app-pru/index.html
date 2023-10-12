@@ -10,6 +10,36 @@
 </head>
 
 <body>
+    <div id="home-view">
+        <header class="header">
+            <h1>Home</h1>
+            <span id="user-name-span">
+                <!--Aquí va el nombre del usuario logueado-->
+            </span>
+            <button id="post-button">+</button>
+            <button id="logout-button">Logout</button>
+        </header>
+
+        <div id="post-panel" class="panel-lightgreen">
+            <h2>Create post</h2>
+
+            <form id="post-form" class="articles form">
+                <label for="image-new-post">Image</label>
+                <input type="url" id="image-new-post">
+
+                <label for="text-new-post">Text</label>
+                <input type="text" id="text-new-post">
+
+                <button>Post</button>
+                <button type="button" id="cancel-post-button">Cancel</button>
+            </form>
+        </div>
+
+        <div id="posts-list">
+        <!-- Aquí van los posts -->
+        </div>
+    </div>
+
     <div id="register-view" class="view view-plum">
         <h1>Register</h1>
 
@@ -40,24 +70,11 @@
             <label for="password-login">Password</label>
             <input type="password" id="password-login">
 
-            <button type="submit">Login</button>
+            <button type="submit" id="login-button">Login</button>
             <button type="reset">Clear</button>
         </form>
 
         <a id="register-link" href="" class="color-a">Register</a>
-    </div>
-
-    <div id="home-view">
-        <header class="header">
-            <h1>Home</h1>
-            <span id="user-name-span">
-                <!--Aquí va el nombre del usuario logueado-->
-            </span>
-            <button id="logout-button">Logout</button>
-        </header>
-        <div id="posts-list">
-            <!-- Aquí van los posts -->
-        </div>
     </div>
 
     <script src="data.js"></script>

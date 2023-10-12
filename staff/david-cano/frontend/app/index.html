@@ -14,14 +14,14 @@
         <h1>Register</h1>
 
         <form id="register-form" class="form">
-            <label for="name-register">Name</label>
-            <input type="text" id="name-register">
+            <label for="name-input">Name</label>
+            <input type="text" id="name-input" title="Name">
 
-            <label for="email-register">E-mail</label>
-            <input type="email" id="email-register">
+            <label for="email-input">E-mail</label>
+            <input type="email" id="email-input" title="E-mail">
 
-            <label for="password-register">Password</label>
-            <input type="password" id="password-register">
+            <label for="password-input">Password</label>
+            <input type="password" id="password-input" title="Password">
 
             <button type="submit">Register</button>
             <button type="reset">Clear</button>
@@ -34,11 +34,11 @@
         <h1>Login</h1>
 
         <form id="login-form" class="form">
-            <label for="email-login">E-mail</label>
-            <input type="email" id="email-login">
+            <label for="email-input">E-mail</label>
+            <input type="email" id="email-input" title="E-mail">
 
-            <label for="password-login">Password</label>
-            <input type="password" id="password-login">
+            <label for="password-input">Password</label>
+            <input type="password" id="password-input" title="Password">
 
             <button type="submit">Login</button>
             <button type="reset">Clear</button>
@@ -48,24 +48,34 @@
     </div>
 
     <div id="home-view">
-        <header id="home-header" class="header">
-        <h1>Home</h1>
-        <button id="logout-button">Logout</button>
+        <header class="header">
+            <h1>Home</h1>
+            <span id="user-name-span">Hello World</span>
+            <button id="post-button">+</button>
+            <button id="logout-button">Logout</button>
         </header>
-        <div id="posts-list">
-            <!-- <article>
-                <img class="post-image"
-                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/1200px-SNice.svg.png"
-                    alt="">
-                <p>Smile!</p>
-            </article>
 
-            <article>
-                <img class="post-image"
-                    src="https://www.telemundo.com/sites/nbcutelemundo/files/styles/fit-1240w/public/sites/nbcutelemundo/files/images/article/2014/08/28/hello_kitty_140920568644_4.jpg"
-                    alt="">
-                <p>Hello, Kitty!</p>
-            </article> -->
+        <!-- add post panel -->
+
+        <div id="post-panel" class="panel-lightgreen">
+            <h2>Create post</h2>
+
+            <form id="post-form" class="form">
+                <label for="image-input">Image</label>
+                <input type="url" id="image-input">
+
+                <label for="text-input">Text</label>
+                <input type="text" id="text-input">
+
+                <button type="submit">Post</button>
+                <button id="cancel-post-button">Cancel</button>
+            </form>
+        </div>
+
+
+        <!-- posts list -->
+
+        <div id="posts-list">
         </div>
     </div>
 

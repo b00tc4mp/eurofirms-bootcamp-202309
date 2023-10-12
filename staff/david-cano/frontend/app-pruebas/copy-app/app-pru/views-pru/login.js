@@ -59,7 +59,7 @@ loginForm.onsubmit = function (event) {
     // si la variable usuario encontrado es nula, alerta: las credenciales son erroneas
     if (foundUser === null) {
         alert('Wrong credentials')
-
+// y salimos de la función con return
         return
     }
 
@@ -77,10 +77,12 @@ loginForm.onsubmit = function (event) {
     loginView.style.display = 'none'
 
     // RENDER USER NAME IN HEADER
-    
+
     // declaramos una variable userNameSpan y le asignamos el elemento que tenga como id user-name-span y le decimos que escriba en ese elemento la propiedad name del usuario encontrado
     var userNameSpan = homeView.querySelector('#user-name-span')
     userNameSpan.innerText = foundUser.name
+
+    loggedInEmail = foundUser.email //???????????
 
     // RENDER POSTS
 
@@ -88,7 +90,7 @@ loginForm.onsubmit = function (event) {
     var postsList = homeView.querySelector('#posts-list')
 
     // declaramos un bucle for para que recorra el array posts que está en data.js
-    for (var i = 0; i < posts.length; i++) {
+    for (var i = posts.length -1; i >= 0; i--) {
 
         // declaramos una variable post para que vaya recogiendo las iteraciones del for en el array posts al recorrerlo
         var post = posts[i]
@@ -105,6 +107,8 @@ loginForm.onsubmit = function (event) {
         var image = document.createElement('img')
         image.setAttribute('class', 'post-image')
         image.src = post.image
+        image.alt = post.text
+        //image.setAttribute('alt', post.text)//----tiene la misma función?
 
         //declaramos una variable párrafo, para crear una etiqueta p en el html y le vamos a asignar el valor de la variable post en su propiedad text en el array posts al recorrerlo
         var paragraph = document.createElement('p')

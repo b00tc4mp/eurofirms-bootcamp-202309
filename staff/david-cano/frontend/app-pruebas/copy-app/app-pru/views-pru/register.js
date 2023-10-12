@@ -40,6 +40,36 @@ registerForm.onsubmit = function (event) {
     var email = emailInput.value
     var password = passwordInput.value
 
+
+
+// declaramos una variable usuarioEncontrado, "foundUser", y le asignamos un valor nulo, vacío
+var foundUser = null
+
+// creamos un bucle for para recorrer el array usuarios
+for (var i = 0; i < users.length; i++) {
+
+    // declaramos una variable usuario para que vaya recogiendo las iteraciones del for en el array usuarios al recorrerlo
+    var user = users[i]
+
+    // condición if, si el valor del email de un usuario, dentro del array usuarios, es estrictamente igual al valor del campo email, del login, introducido por el usuario, usuario encontrado 
+    if (user.email === email) {
+        foundUser = user
+
+        //para, ya está
+        break
+    }
+}
+
+  // si la variable usuario encontrado no es nula, alerta: las credenciales son erroneas
+  if (foundUser !== null) {
+    alert('Wrong credentials')
+// y salimos de la función con return
+    return
+}
+
+
+
+
 // ahora declaramos una variable usuario y le asignamos un valor de OBJETO vacío
     var user = {}
 

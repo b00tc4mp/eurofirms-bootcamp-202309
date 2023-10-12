@@ -1,3 +1,9 @@
+h1,
+h2 {
+    margin: 0;
+}
+
+
 .view {
     display: flex;
     flex-direction: column;
@@ -21,10 +27,15 @@
     gap: 0.25rem;
 }
 
+.panel-lightgreen {
+    background-color: lightgreen;
+}
+
 .post-image {
     max-width: 300px;
 }
-.header{
+
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;

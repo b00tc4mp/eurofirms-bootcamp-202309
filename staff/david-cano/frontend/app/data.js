@@ -1,15 +1,15 @@
 var users = []
 
-users[0] = { 
+users[0] = {
     name: 'Pepito Grillo',
     email: 'pepito@grillo.com',
-    password: '123123123' 
+    password: '123123123'
 }
 
-users[1] = { 
+users[1] = {
     name: 'Campa Nilla',
     email: 'campa@nilla.com',
-    password: '123123123' 
+    password: '123123123'
 }
 
 var posts = []
@@ -35,5 +35,11 @@ posts[2] = {
 posts[3] = {
     author: 'pepito@grillo.com',
     image: 'https://i.ebayimg.com/images/g/V9wAAOSw~e5ZU~Ls/s-l1200.webp',
-    text: 'Pikatchu!'
+    text: 'Pikachu!'
+}
+
+posts[4] = {
+    author: 'pepito@grillo.com',
+    image: 'https://i.pinimg.com/550x/64/65/90/6465907c690be529106e4ada2c94d0d6.jpg',
+    text: 'La Hormiga Atómica!'
 }
