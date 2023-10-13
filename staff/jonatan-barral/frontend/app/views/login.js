@@ -68,6 +68,33 @@ loginForm.onsubmit = function (event) {
 
     // Ocultar la vista de inicio de sesión y mostrar la vista de inicio
     loginView.style.display = 'none';
-    homeView.style.display = '';
-};
 
+
+var postList = homeView.querySelector('#post-list');
+
+for (var i=0; i < posts.length; i++){
+    var post = posts[i]
+
+    var article = document.createElement('article');
+
+    var span = document.createElement('span');
+
+    span.innerText = post.author;
+
+    var image = document.createElement('img');
+    image.setAttribute('class', 'post-image');
+    image.src = post.image;
+
+    var paragraph = document.createElement('p');
+    paragraph.innerText = post.text;
+
+    article.appendChild(span);
+    article.appendChild(image);
+    article.appendChild(paragraph);
+
+    postList.appendChild(article);
+}
+
+homeView.style.display ='';
+
+}
