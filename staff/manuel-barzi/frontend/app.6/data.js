@@ -1,9 +1,4 @@
-// databases
-
 var users = []
-var posts = []
-
-// populate some users
 
 users[0] = {
     name: 'Pepito Grillo',
@@ -17,7 +12,7 @@ users[1] = {
     password: '123123123'
 }
 
-// populate some posts
+var posts = []
 
 posts[0] = {
     author: 'pepito@grillo.com',

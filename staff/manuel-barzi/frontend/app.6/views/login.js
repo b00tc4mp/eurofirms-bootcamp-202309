@@ -1,12 +1,12 @@
 // login view
 
-loginView = document.getElementById('login-view')
+var loginView = document.getElementById('login-view')
 
 loginView.style.display = ''
 
 // navigation to register
 
-registerLink = loginView.querySelector('#register-link')
+var registerLink = loginView.querySelector('#register-link')
 
 registerLink.onclick = function (event) {
     event.preventDefault()
@@ -17,7 +17,7 @@ registerLink.onclick = function (event) {
 
 // submit login
 
-loginForm = loginView.querySelector('#login-form')
+var loginForm = loginView.querySelector('#login-form')
 
 loginForm.onsubmit = function (event) {
     event.preventDefault()
