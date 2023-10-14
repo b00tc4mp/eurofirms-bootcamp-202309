@@ -1,0 +1,89 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+.home-header-nav {
+    display: flex;
+    justify-content: space-around;
+}
+
+.search-form {
+    display: flex;
+    gap: 15px;
+}
+
+.section-posts {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.post-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 15px;
+
+}
+
+.marisa-paredes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 3px solid black;
+    border-radius: 10px;
+    padding: 15px;
+    gap: 10px;
+}
+
+.pedro-pica {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 3px solid black;
+    border-radius: 10px;
+    padding: 15px;
+    gap: 10px;
+}
+
+.recents-posts {
+    font-size: 20px;
+}
+
+.marisa-de-las-paredes {
+    font-family: Helvetica;
+}
+
+.hello-world {
+    font-size: 30px;
+}
+
+.change-password.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.change-password-container {
+    display: flex;
+    flex-direction: center;
+    padding: 10px;
+
+}
+
+.change-password-inpust-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10;
+}
+
+
+
+.off {
+    display: none;
+}
