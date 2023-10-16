@@ -32,3 +32,19 @@ registerForm.onsubmit = function (event) {
 
     console.log(name, email, password)
 }
+//Ahora vamos a register.js, vamos a añadir la var users [], esto se hace para que el usuario pueda registrarse en register con su nome, email.password, subir la información al servidor y apagar register y encender login
+
+var user = {}
+user.name = name
+user.email = email
+user.password = password
+
+users.push(user)
+
+nameImput.value = ''
+emailInput.value = ''
+passwordInput.value = ''
+
+
+registerView.style.display = 'none'
+loginView.style.display = ''
