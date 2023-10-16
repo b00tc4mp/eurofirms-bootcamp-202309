@@ -1,7 +1,7 @@
-// DATA BASE, creamos una base de datos (ficticia) con un array vacío
+// DATA BASE, creamos una base de datos (ficticia) con un array vacío para usuarios y posts
 var users = []
 
-// ingresamos 2 usuarios
+// ingresamos 2 usuarios de ejemplo
 users[0] = { 
     name: 'Pepito Grillo',
     email: 'pepito@grillo.com',
@@ -12,6 +12,7 @@ users[1] = {
     email: 'campa@nilla.com',
     password: '123123123' }
 
+ // Agregamos algunos posts de ejemplo   
 var posts = []
 
 posts[0] = {

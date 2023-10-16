@@ -1,22 +1,28 @@
+// LOGIN VIEW: Este archivo maneja la vista de inicio de sesión y las interacciones relacionadas
+
 // LOGIN VIEW, div que contiene el formulario de login
 // declaramos una variable para el div que contiene el formulario de login "loginView" con el id login-view en el html
 var loginView = document.getElementById('login-view')
 
+// Inicialmente, mostramos la vista de inicio de sesión
 // le damos un estilo display '' para que aparezca la pagina de login en pantalla
 loginView.style.display = ''
 
-// NAVIGATION TO REGISTER, enlace a la pagina de registro <a>
+// NAVIGATION TO REGISTER, enlace para navegar a la página de registro <a>
 // declaramos una variable para el enlace al registro con el id register-link en el html
 var registerLink = loginView.querySelector('#register-link')
 
+// Cuando se hace clic en el enlace de registro, ocultamos la vista de inicio y mostramos la vista de registro
 // le aplicamos el metodo onclick al enlace al registro en el formulario de login
 registerLink.onclick = function (event) {
 
-    // le decimos que deje de cargar la página por defecto
+    // Prevenimos la acción predeterminada del enlace, le decimos que deje de cargar la página por defecto
     event.preventDefault()
 
     // hacemos que desaparezca la página de login y aparezca la de registro
+    // Ocultamos la vista de inicio
     loginView.style.display = 'none';
+    // Mostramos la vista de registro
     registerView.style.display = '';
 }
 
@@ -82,6 +88,7 @@ loginForm.onsubmit = function (event) {
     var userNameSpan = homeView.querySelector('#user-name-span')
     userNameSpan.innerText = foundUser.name
 
+    //le asignamos a la variable loggedInEmail el valor del email del usuarioEncontrado (foundUser.email)
     loggedInEmail = foundUser.email //???????????
 
     // RENDER POSTS

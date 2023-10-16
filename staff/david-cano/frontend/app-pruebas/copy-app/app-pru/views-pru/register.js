@@ -1,4 +1,5 @@
 // REGISTER VIEW, div que contiene la página con el formulario de registro
+
 // declaramos una variable, "registerView", para el div que contiene el formulario de registro con el id register-view en el html
 var registerView = document.getElementById('register-view')
 
@@ -6,6 +7,7 @@ var registerView = document.getElementById('register-view')
 registerView.style.display = 'none'
 
 // NAVIGATION TO LOGIN, enlace a la pagina de login <a>
+
 // declaramos una variable para el enlace a login con el id login-link en el html
 var loginLink = registerView.querySelector('#login-link')
 
@@ -21,6 +23,7 @@ loginLink.onclick = function (event) {
 }
 
 // SUBMIT FOR REGISTER, entregar el registro, enviar el registro
+
 //declaramos una variable, "registerForm", para el formulario de registro con id register-form en el html
 var registerForm = registerView.querySelector('#register-form')
 
@@ -40,7 +43,7 @@ registerForm.onsubmit = function (event) {
     var email = emailInput.value
     var password = passwordInput.value
 
-
+    //BUSCAR USUARIO POR EMAIL PARA COMPROBAR SI YA ESTÁ REGISTRADO
 
 // declaramos una variable usuarioEncontrado, "foundUser", y le asignamos un valor nulo, vacío
 var foundUser = null
@@ -60,20 +63,21 @@ for (var i = 0; i < users.length; i++) {
     }
 }
 
-  // si la variable usuario encontrado no es nula, alerta: las credenciales son erroneas
+//SI EL USUARIO EXISTE, SI FUE ENCONTRADO, ALERTA DE ERROR
+
+  // si la variable usuario encontrado no es nula, alerta: el usuario ya existe
   if (foundUser !== null) {
-    alert('Wrong credentials')
+    alert('User already exists')
 // y salimos de la función con return
     return
 }
 
-
-
+//PARA GUARDAR LOS NUEVOS DATOS DEL USUARIO REGISTRADO
 
 // ahora declaramos una variable usuario y le asignamos un valor de OBJETO vacío
     var user = {}
 
-// le agregamos al objeto vacio usuario, "user", las propiedades nombre, email y contraseña y les asignamos los valores de los inputs nombre, email y contraseña introducidos por el usuario
+// le agregamos al objeto vacio usuario, "user", las propiedades nombre, email y contraseña y les asignamos los valores de los inputs nombre, email y contraseña introducidos por el usuario en el formulario de registro
     user.name = name
     user.email = email
     user.password = password
