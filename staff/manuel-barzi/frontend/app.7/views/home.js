@@ -67,12 +67,6 @@ postForm.onsubmit = function (event) {
 
     postPanel.style.display = 'none'
 
-    renderPosts()
-}
-
-// render posts
-
-function renderPosts() {
     var postsList = homeView.querySelector('#posts-list')
 
     postsList.innerHTML = ''
