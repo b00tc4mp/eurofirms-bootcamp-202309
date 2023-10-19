@@ -1,5 +1,5 @@
-console.log('TEXT some ')
-
+// El método some() comprueba si al menos un elemento del array cumple con la condición que se solicita
+console.log('%cTEST some', 'color: magenta; font-weight: bold;')
 
 console.log('CASE check if any fruit starts with k')
 var fruits = ['mochilo', 'gazpacho', 'pincho', 'twynky', 'kamba', 'alcachofo', 'monues', 'freson', 'gorilon']
