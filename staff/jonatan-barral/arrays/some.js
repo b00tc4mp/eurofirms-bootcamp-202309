@@ -5,4 +5,4 @@ function some(array, callback) {
         if (result) return true
     }
     return false
-}
+}   
