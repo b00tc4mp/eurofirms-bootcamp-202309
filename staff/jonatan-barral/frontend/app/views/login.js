@@ -1,100 +1,77 @@
 // login view
 
-// Obtener el elemento HTML con el id 'login-view'
-var loginView = document.getElementById('login-view');
+loginView = document.getElementById('login-view')
 
-// Mostrar la vista de inicio de sesión
-loginView.style.display = '';
+loginView.style.display = ''
 
 // navigation to register
 
-// Obtener el elemento con el id 'register-link' dentro de la vista de inicio de sesión
-var registerLink = loginView.querySelector('#register-link');
+registerLink = loginView.querySelector('#register-link')
 
-// Agregar un controlador de eventos al hacer clic en el enlace de registro
 registerLink.onclick = function (event) {
-    event.preventDefault();
+    event.preventDefault()
 
-    // Ocultar la vista de inicio de sesión y mostrar la vista de registro
-    loginView.style.display = 'none';
-    registerView.style.display = '';
-};
+    loginView.style.display = 'none'
+    registerView.style.display = ''
+}
 
 // submit login
 
-// Obtener el formulario de inicio de sesión dentro de la vista de inicio de sesión
-var loginForm = loginView.querySelector('#login-form');
+loginForm = loginView.querySelector('#login-form')
 
-// Agregar un controlador de eventos al enviar el formulario de inicio de sesión
 loginForm.onsubmit = function (event) {
-    event.preventDefault();
+    event.preventDefault()
 
-    // Obtener los campos de entrada de correo electrónico y contraseña
-    var emailInput = loginForm.querySelector('#email-input');
-    var passwordInput = loginForm.querySelector('#password-input');
+    var emailInput = loginForm.querySelector('#email-input')
+    var passwordInput = loginForm.querySelector('#password-input')
 
-    // Obtener los valores ingresados por el usuario
-    var email = emailInput.value;
-    var password = passwordInput.value;
+    var email = emailInput.value
+    var password = passwordInput.value
 
-    // Inicializar una variable para almacenar al usuario encontrado
-    var foundUser = null;   
+    // search user by email
 
-    // Recorrer la lista de usuarios para encontrar un usuario con el correo electrónico proporcionado
+    var foundUser = null
+
     for (var i = 0; i < users.length; i++) {
-        var user = users[i];
+        var user = users[i]
 
         if (user.email === email) {
-            foundUser = user;
-            break;
+            foundUser = user
+
+            break
         }
     }
 
-    // Verificar si se encontró un usuario con el correo electrónico proporcionado
+    // if user not found then error
+
     if (foundUser === null) {
-        alert('Credenciales incorrectas');
-        return;
+        alert('Wrong credentials')
+
+        return
     }
 
-    // Verificar si la contraseña proporcionada coincide con la contraseña del usuario encontrado
+    // if user password is wrong then error
+
     if (foundUser.password !== password) {
-        alert('Credenciales incorrectas');
-        return;
+        alert('Wrong credentials')
+
+        return
     }
 
-    // Limpiar los campos de entrada
-    emailInput.value = '';
-    passwordInput.value = '';
+    loginForm.reset()
 
-    // Ocultar la vista de inicio de sesión y mostrar la vista de inicio
-    loginView.style.display = 'none';
+    loggedInEmail = foundUser.email
 
+    loginView.style.display = 'none'
 
-var postList = homeView.querySelector('#post-list');
+    // render user name in header
 
-for (var i=0; i < posts.length; i++){
-    var post = posts[i]
+    var userNameSpan = homeView.querySelector('#user-name-span')
+    userNameSpan.innerText = foundUser.name
 
-    var article = document.createElement('article');
+    // render posts in body
 
-    var span = document.createElement('span');
+    renderPosts()
 
-    span.innerText = post.author;
-
-    var image = document.createElement('img');
-    image.setAttribute('class', 'post-image');
-    image.src = post.image;
-
-    var paragraph = document.createElement('p');
-    paragraph.innerText = post.text;
-
-    article.appendChild(span);
-    article.appendChild(image);
-    article.appendChild(paragraph);
-
-    postList.appendChild(article);
-}
-
-homeView.style.display ='';
-
+    homeView.style.display = ''
 }
