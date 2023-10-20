@@ -49,10 +49,15 @@
     </div>
 
     <div id="home-view">
-        <h1>Home</h1>
-        <span>Hello world</span>
-        <button id="logout-button">Logout</button>
-    </div>
+        <header class="header">
+            <h1>Home</h1>
+            <span id="user-name-span">Hello world</span>
+            <!--TODO es boton + es para abrir el formulario + q se cubre para publicar los post-->
+            <button id="post-button">+</button>
+            <button id="logout-button">Logout</button>
+
+        </header>
+        <!-- add post panel, vamos a hacer un panel que se rellena para publicar los post, se abre al pulsar el button + -->
 
 
 
@@ -60,13 +65,16 @@
 
 
 
-    <script src="data.js"></script>
 
-    <script src="views/register.js"></script>
-    <script src="views/login.js"></script>
-    <script src="views/home.js"></script>
 
-    <script src="main.js"></script>
+
+        <script src="data.js"></script>
+
+        <script src="views/register.js"></script>
+        <script src="views/login.js"></script>
+        <script src="views/home.js"></script>
+
+        <script src="main.js"></script>
 </body>
 
 </html>
