@@ -4,13 +4,13 @@ var users=[]
 users[0]={name:"Peter Parker", email:"peter@parker.com", password:"123456"}
 users[1]={name:"Mary Jane", email:"mary@jane.com", password:"456789"}
 
-// register view
+// esto es el register view
 
 var registerView = document.getElementById('register-view')
 
 registerView.style.display = 'none'
 
-// navigation to login
+// para ir al login
 
 var loginLink = registerView.querySelector('#login-link')
 
@@ -44,24 +44,24 @@ registerForm.onsubmit = function (event) {
     user.password=password
     //enviamos el objeto "user" a la base de datos llamada "users"
     users.push(user)
-    //para limpiar el formulario
+    //Esto limpia el formulario
     nameInput.value="";
     emailInput.value="";
     passwordInput.value="";
 
-    //para que desaparezca el registro y aparezca el login
+    //Esto es para que desaparezca el registro y aparezca el login
     registerView.style.display="none";
     loginView.style.display="";
 
 }
 
-// login view
+// Ventana del login
 
 var loginView = document.getElementById('login-view')
 
 loginView.style.display = ''
 
-// navigation to register
+// Para ir a register
 
 var registerLink = loginView.querySelector('#register-link')
 
@@ -85,10 +85,10 @@ loginForm.onsubmit = function (event) {
     var email = emailInput.value
     var password = passwordInput.value
 
-    //Crea una variable declarada pero no inicializada, de la cual tenemos el control
+    //Crea una variable, declarada pero no inicializada (no le asignamos el valor al declararla), de la cual tenemos el control
     var foundUser=null
 
-    //creamos un bucle para recorrer la base de datos "users"
+    //Se crea un bucle para recorrer la base de datos "users"
     for(var i=0; i<users.length;++i){
         var user=users[i]
 
@@ -116,7 +116,7 @@ loginForm.onsubmit = function (event) {
 }
 
 
-// home view
+// Pagina home
 
 var homeView = document.getElementById('home-view')
 
@@ -125,7 +125,7 @@ homeView.style.display = 'none';
 //creamos una variable para que nos traiga el elemento con el id logout-button
 var logoutButton=homeView.querySelector("#logout-button");
 logoutButton.onclick=function(){
-    //esto es para que desaparezca el home y aparezca el login
+    //para que desaparezca el home y aparezca el login
     homeView.style.display="none";
     loginView.style.display=""
 }
