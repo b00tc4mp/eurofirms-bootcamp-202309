@@ -20,7 +20,7 @@ var loginForm
 
 var homeView
 var logoutButton
-var newPostPanel
-var newPostForm
-var newPostButton
-var cancelNewPostButton
+var postPanel
+var postForm
+var postButton
+var cancelPostButton

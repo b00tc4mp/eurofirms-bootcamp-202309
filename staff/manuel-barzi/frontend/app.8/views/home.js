@@ -17,41 +17,41 @@ logoutButton.onclick = function () {
 
 // post panel
 
-newPostPanel = homeView.querySelector('#new-post-panel')
+postPanel = homeView.querySelector('#post-panel')
 
-newPostPanel.style.display = 'none'
+postPanel.style.display = 'none'
 
 // post form
 
-newPostForm = newPostPanel.querySelector('#new-post-form')
+postForm = postPanel.querySelector('#post-form')
 
 // post button
 
-newPostButton = homeView.querySelector('#new-post-button')
+postButton = homeView.querySelector('#post-button')
 
-newPostButton.onclick = function () {
-    newPostPanel.style.display = ''
+postButton.onclick = function () {
+    postPanel.style.display = ''
 }
 
 // cancel post button
 
-cancelNewPostButton = newPostForm.querySelector('#cancel-new-post-button')
+cancelPostButton = postForm.querySelector('#cancel-post-button')
 
-cancelNewPostButton.onclick = function (event) {
+cancelPostButton.onclick = function (event) {
     event.preventDefault()
 
-    newPostForm.reset()
+    postForm.reset()
 
-    newPostPanel.style.display = 'none'
+    postPanel.style.display = 'none'
 }
 
 // submit post form
 
-newPostForm.onsubmit = function (event) {
+postForm.onsubmit = function (event) {
     event.preventDefault()
 
-    var imageInput = newPostForm.querySelector('#image-input')
-    var textInput = newPostForm.querySelector('#text-input')
+    var imageInput = postForm.querySelector('#image-input')
+    var textInput = postForm.querySelector('#text-input')
 
     var image = imageInput.value
     var text = textInput.value
@@ -63,9 +63,9 @@ newPostForm.onsubmit = function (event) {
 
     posts.push(post)
 
-    newPostForm.reset()
+    postForm.reset()
 
-    newPostPanel.style.display = 'none'
+    postPanel.style.display = 'none'
 
     renderPosts()
 }
