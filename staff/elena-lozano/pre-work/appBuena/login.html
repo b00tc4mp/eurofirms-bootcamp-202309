@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="container">
+    <h1>LOGIN</h1>
+
+    <form class="container" id="login-form">
+       <!--el for del label y el id del input deben coincidir para poder relacionarse entre sí. La sintaxis vienena significar:
+
+        "etiqueta para (nombre, emilio...)"
+        "introducción de datos del tipo (texto, contraseña, fecha, url...)"
+
+        el apartado para introducir el correo-->
+
+        <label for="email">E-mail</label>
+        <input id="email" type="email">
+
+        <!--el apartado para la contraseña-->
+        <label for="password">Password</label>
+        <input id="password" type="password">
+
+        <!--el boton-->
+        <button>LOGIN</button>
+    </form>
+
+    <a href="./register.html">Register</a>
+    <script src="./login.js"></script>
+
+
+
+</body>
+</html>
