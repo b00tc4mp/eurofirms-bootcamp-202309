@@ -65,7 +65,7 @@ loginForm.onsubmit = function (event) {
     // si la variable usuario encontrado es nula, alerta: las credenciales son erroneas
     if (foundUser === null) {
         alert('Wrong credentials')
-// y salimos de la función con return
+        // y salimos de la función con return
         return
     }
 
@@ -96,7 +96,14 @@ loginForm.onsubmit = function (event) {
     // declaramos una variable para el div donde van a ir los artículos
     var postsList = homeView.querySelector('#posts-list')
 
+
+    renderPost(postsList);
+
+
+
+    
     // declaramos un bucle for para que recorra el array posts que está en data.js
+    /*
     for (var i = posts.length -1; i >= 0; i--) {
 
         // declaramos una variable post para que vaya recogiendo las iteraciones del for en el array posts al recorrerlo
@@ -129,7 +136,7 @@ loginForm.onsubmit = function (event) {
         // a la variable postList, que es el div donde van a ir los post, le agregamos como hijo la etiqueta article
         postsList.appendChild(article)
     }
-
+*/
     // aquí le decimos que aparezca el home
     homeView.style.display = ''
 }
