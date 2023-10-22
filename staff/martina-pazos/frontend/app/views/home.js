@@ -1,17 +1,66 @@
-// home view
+// register view
 
-// Obtener el elemento HTML con el id 'home-view'
-var homeView = document.getElementById('home-view');
+registerView = document.getElementById('register-view')
 
-// Ocultar la vista de inicio
-homeView.style.display = 'none';
+registerView.style.display = 'none'
 
-// Obtener el botón de cierre de sesión dentro de la vista de inicio
-var logoutButton = homeView.querySelector('#logout-button');
+// navigation to login
 
-// Agregar un controlador de eventos al hacer clic en el botón de cierre de sesión
-logoutButton.onclick = function () {
-    // Ocultar la vista de inicio y mostrar la vista de inicio de sesión
-    homeView.style.display = 'none';
-    loginView.style.display = '';
-};
+loginLink = registerView.querySelector('#login-link')
+
+loginLink.onclick = function (event) {
+    event.preventDefault()
+
+    registerView.style.display = 'none'
+    loginView.style.display = ''
+}
+
+// submit for register
+
+registerForm = registerView.querySelector('#register-form')
+
+registerForm.onsubmit = function (event) {
+    event.preventDefault()
+
+    var nameInput = registerForm.querySelector('#name-input')
+    var emailInput = registerForm.querySelector('#email-input')
+    var passwordInput = registerForm.querySelector('#password-input')
+
+    var name = nameInput.value
+    var email = emailInput.value
+    var password = passwordInput.value
+
+    // search user by email
+
+    var foundUser = null
+
+    for (var i = 0; i < users.length; i++) {
+        var user = users[i]
+
+        if (user.email === email) {
+            foundUser = user
+
+            break
+        }
+    }
+
+    // if user exists (it was found) then error
+
+    if (foundUser !== null) {
+        alert('User already exists')
+
+        return
+    }
+
+    var user = {}
+    user.name = name
+    user.email = email
+    user.password = password
+
+    users.push(user)
+
+    registerForm.reset()
+
+    registerView.style.display = 'none'
+    loginView.style.display = ''
+}

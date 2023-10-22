@@ -1,5 +1,66 @@
-var users = []
+// register view
 
-users[0] = { name: 'Pepito Grillo', email: 'pepito@grillo.com', password: '123123123' }
+registerView = document.getElementById('register-view')
 
-users[1] = { name: 'Campa Nilla', email: 'campa@nilla.com', password: '123123123' }
+registerView.style.display = 'none'
+
+// navigation to login
+
+loginLink = registerView.querySelector('#login-link')
+
+loginLink.onclick = function (event) {
+    event.preventDefault()
+
+    registerView.style.display = 'none'
+    loginView.style.display = ''
+}
+
+// submit for register
+
+registerForm = registerView.querySelector('#register-form')
+
+registerForm.onsubmit = function (event) {
+    event.preventDefault()
+
+    var nameInput = registerForm.querySelector('#name-input')
+    var emailInput = registerForm.querySelector('#email-input')
+    var passwordInput = registerForm.querySelector('#password-input')
+
+    var name = nameInput.value
+    var email = emailInput.value
+    var password = passwordInput.value
+
+    // search user by email
+
+    var foundUser = null
+
+    for (var i = 0; i < users.length; i++) {
+        var user = users[i]
+
+        if (user.email === email) {
+            foundUser = user
+
+            break
+        }
+    }
+
+    // if user exists (it was found) then error
+
+    if (foundUser !== null) {
+        alert('User already exists')
+
+        return
+    }
+
+    var user = {}
+    user.name = name
+    user.email = email
+    user.password = password
+
+    users.push(user)
+
+    registerForm.reset()
+
+    registerView.style.display = 'none'
+    loginView.style.display = ''
+}

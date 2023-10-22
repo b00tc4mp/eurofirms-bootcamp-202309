@@ -6,75 +6,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>App</title>
     <link rel="stylesheet" href="style.css">
-
 </head>
 
+<!--vamos a hacer el formulacion de register-->
+<div id="register-view">
+    <form id="register-form">
+        <label for='name'>Name</label>
+        <input type="text" id='name-input'>
+
+        <label for="email">Email</label>
+        <input type="email" id="email-input">
+
+        <label for="password">Password</label>
+        <input type="pasaword" id="password-input">
+
+        <button type="submit"></button>
+        <button type="reset"></button>
+
+    </form>
+
+    <!--desde register queremos ir a login-->
+    <a id="login-link" href="">Login</a>
+
+</div>
+
+
+
+<!--vamos a hacer el formalario para login-->
+<div id="login-view">
+    <form id="login-form">
+        <label for="email">Email</label>
+        <input type="email" id="email-input">
+
+        <label for="password">Password</label>
+        <input type="password" id="password-input">
+
+        <button type="submit"></button>
+        <button type="reset"></button>
+    </form>
+
+    <!--desde login queremos ir a register-->
+    <a id="register-link" href="">Register</a>
+</div>
+
+
+
+<!--vamos a hacer la Home-->
+<div>
+
+    <head>
+        <h1>Hello World</h1>
+        <button id="logout-button">Logout</button>
+    </head>
+</div>
+
+<!--aqui se ancla con los archivos de javascript-->
+<script src="main.js"></script>
+
+
+
 <body>
-    <div id="register-view" class="view-skyblue">
-        <h1>Register</h1>
 
-        <form id="register-form" class="form">
-
-            <label for="name-input">Name</label>
-            <input type="text" id="name-input">
-
-            <label for="email-input">E-mail</label>
-            <input type="email" id="email-input">
-
-            <label for="password-input">Password</label>
-            <input type="password" id="password-input">
-
-            <button type="submit">Register</button>
-            <button type="reset">Clear</button>
-        </form>
-
-        <a id="login-link" href="">Login</a>
-    </div>
-
-    <div id="login-view" class="view-plum">
-        <h1>Login</h1>
-
-        <form id="login-form">
-            <label for="email-input">E-mail</label>
-            <input type="email" id="email-input">
-
-            <label for="password-input">Password</label>
-            <input type="password" id="password-input">
-
-            <button type="submit">Login</button>
-            <button type="reset">Clear</button>
-        </form>
-
-        <a id="register-link" href="">Register</a>
-    </div>
-
-    <div id="home-view">
-        <header class="header">
-            <h1>Home</h1>
-            <span id="user-name-span">Hello world</span>
-            <!--TODO es boton + es para abrir el formulario + q se cubre para publicar los post-->
-            <button id="post-button">+</button>
-            <button id="logout-button">Logout</button>
-
-        </header>
-        <!-- add post panel, vamos a hacer un panel que se rellena para publicar los post, se abre al pulsar el button + -->
-
-
-
-
-
-
-
-
-
-
-        <script src="data.js"></script>
-
-        <script src="views/register.js"></script>
-        <script src="views/login.js"></script>
-        <script src="views/home.js"></script>
-
-        <script src="main.js"></script>
 </body>
 
 </html>
