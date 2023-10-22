@@ -72,32 +72,8 @@ loginForm.onsubmit = function (event) {
     var userNameSpan = homeView.querySelector('#user-name-span');
     userNameSpan.innerText = foundUser.name
 
-    var postList = homeView.querySelector('#post-list');
+    renderPosts()
 
-    for (var i = 0; i < posts.length; i++) {
-        var post = posts[i]
-        var article = document.createElement('article');
-        article.setAttribute('class', 'post-article');
-
-        var span = document.createElement('span');
-
-        span.innerText = post.author;
-
-        var image = document.createElement('img'); // <img>
-        image.setAttribute('class', 'post-image'); // <img class='post-image>
-        image.src = post.image;  // <img class='post-image' src='...url'>
-        image.alt = post.alt  // <img class='post-image' src='...url' alt='text>
-
-        var paragraph = document.createElement('p');
-        paragraph.innerText = post.text; // <p>innerText<p/>
-
-        article.appendChild(span);
-        article.appendChild(image);
-        article.appendChild(paragraph);
-
-        postList.appendChild(article);
-    }
-
+    loggedUser = foundUser.email
     homeView.style.display = '';
-
 }

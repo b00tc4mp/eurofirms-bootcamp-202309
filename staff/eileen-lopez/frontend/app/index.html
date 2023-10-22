@@ -14,9 +14,26 @@
         <h1>HOME</h1>
         <span id="user-name-span">Hello world!</span>
         <button id="logout-button">Logout</button>
+        <button id="new-post-button">+</button>
     </header>
+
+    <div id="new-post-panel">
+        <h2>Create post</h2>
+
+        <form id="new-post-form">
+            <label for="image-input">Image</label>
+            <input type="url" id="image-input">
+
+            <label for="text-input">Text</label>
+            <input type="text" id="text-input">
+
+            <button type="submit">Post</button>
+            <button type="button" id="cancel-new-post-button">Cancel</button>
+        </form>
+    </div>
         <div id="post-list"></div>
     </div>
+    
     <div id="register-view" class="view view-plum">
 
         <h1>Register</h1>
