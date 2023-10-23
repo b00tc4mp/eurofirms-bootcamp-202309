@@ -17,55 +17,59 @@ logoutButton.onclick = function () {
 
 // post panel
 
-postPanel = homeView.querySelector('#post-panel')
+newPostPanel = homeView.querySelector('#new-post-panel')
 
-postPanel.style.display = 'none'
+newPostPanel.style.display = 'none'
 
 // post form
 
-postForm = postPanel.querySelector('#post-form')
+newPostForm = newPostPanel.querySelector('#new-post-form')
 
 // post button
 
-postButton = homeView.querySelector('#post-button')
+newPostButton = homeView.querySelector('#new-post-button')
 
-postButton.onclick = function () {
-    postPanel.style.display = ''
+newPostButton.onclick = function () {
+    newPostPanel.style.display = ''
 }
 
 // cancel post button
 
-cancelPostButton = postForm.querySelector('#cancel-post-button')
+cancelPostButton = newPostForm.querySelector('#cancel-post-button')
 
 cancelPostButton.onclick = function (event) {
     event.preventDefault()
 
-    postForm.reset()
+    newPostForm.reset()
 
-    postPanel.style.display = 'none'
+    newPostPanel.style.display = 'none'
 }
 
 // submit post form
 
-postForm.onsubmit = function (event) {
+newPostForm.onsubmit = function (event) {
     event.preventDefault()
 
-    var imageInput = postForm.querySelector('#image-input')
-    var textInput = postForm.querySelector('#text-input')
+    var imageInput = newPostForm.querySelector('#image-input')
+    var imageDescriptionInput = newPostForm.querySelector('#image-description-input')
+    var textInput = newPostForm.querySelector('#text-input')
 
     var image = imageInput.value
+    var imageDescription = imageDescriptionInput.value
     var text = textInput.value
 
     var post = {}
     post.author = loggedInEmail
+
     post.image = image
+    post.imageDescription = imageDescription
     post.text = text
 
     posts.push(post)
 
-    postForm.reset()
+    newPostForm.reset()
 
-    postPanel.style.display = 'none'
+    newPostPanel.style.display = 'none'
 
     renderPosts()
 }
@@ -81,13 +85,16 @@ function renderPosts() {
         var post = posts[i]
 
         var article = document.createElement('article')
+        article.setAttribute('aria-label', 'Post')
 
         var span = document.createElement('span')
         span.innerText = post.author
-
+        span.setAttribute('aria-label', 'author')
         var image = document.createElement('img')
         image.setAttribute('class', 'post-image')
         image.src = post.image
+        image.alt = post.imageDescription
+
 
         var paragraph = document.createElement('p')
         paragraph.innerText = post.text

@@ -29,49 +29,27 @@ loginForm.onsubmit = function (event) {
     var password = passwordInput.value
 
     // search user by email
+    try {
+        authenticateUser(email, password)
+        loginForm.reset()
 
-    var foundUser = null
+        loggedInEmail = email
 
-    for (var i = 0; i < users.length; i++) {
-        var user = users[i]
+        loginView.style.display = 'none'
 
-        if (user.email === email) {
-            foundUser = user
+        // render user name in header
 
-            break
-        }
+        var userNameSpan = homeView.querySelector('#user-name-span')
+        var user = retrieveUser(email)
+        userNameSpan.innerText = user.name
+
+        // render posts in body
+
+        renderPosts()
+
+        homeView.style.display = ''
+    } catch (error) {
+        alert(error.message)
     }
 
-    // if user not found then error
-
-    if (foundUser === null) {
-        alert('Wrong credentials')
-
-        return
-    }
-
-    // if user password is wrong then error
-
-    if (foundUser.password !== password) {
-        alert('Wrong credentials')
-
-        return
-    }
-
-    loginForm.reset()
-
-    loggedInEmail = foundUser.email
-
-    loginView.style.display = 'none'
-
-    // render user name in header
-
-    var userNameSpan = homeView.querySelector('#user-name-span')
-    userNameSpan.innerText = foundUser.name
-
-    // render posts in body
-
-    renderPosts()
-
-    homeView.style.display = ''
 }

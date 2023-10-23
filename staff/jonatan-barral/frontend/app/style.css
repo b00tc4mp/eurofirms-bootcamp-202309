@@ -5,18 +5,28 @@
     gap: 1rem;
     border: solid 1px black;
     padding-bottom: 1rem;
-}     
+}
 
 .form {
     display: flex;
- flex-direction: column;
- box-sizing: content-box;
- gap: 0.25rem;
+    flex-direction: column;
+    box-sizing: content-box;
+    gap: 0.25rem;
 }
 
 .view-plum {
     background-color: plum;
 }
+
 .view-skyblue {
     background-color: skyblue;
+}
+
+.post-image {
+    width: 200px;
+}
+
+.post-article {
+    display: flex;
+    flex-direction: column;
 }
