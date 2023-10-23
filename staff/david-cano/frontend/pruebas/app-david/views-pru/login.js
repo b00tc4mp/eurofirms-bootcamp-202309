@@ -99,9 +99,9 @@ loginForm.onsubmit = function (event) {
 
     renderPost(postsList);
 
+    homeView.style.display = ''
 
 
-    
     // declaramos un bucle for para que recorra el array posts que está en data.js
     /*
     for (var i = posts.length -1; i >= 0; i--) {
@@ -138,5 +138,5 @@ loginForm.onsubmit = function (event) {
     }
 */
     // aquí le decimos que aparezca el home
-    homeView.style.display = ''
+    
 }
