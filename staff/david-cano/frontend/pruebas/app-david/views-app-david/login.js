@@ -89,15 +89,11 @@ loginForm.onsubmit = function (event) {
     userNameSpan.innerText = foundUser.name
 
     //le asignamos a la variable loggedInEmail el valor del email del usuarioEncontrado (foundUser.email)
-    loggedInEmail = foundUser.email //???????????
+    loggedInEmail = foundUser.email
 
     // RENDER POSTS
 
-    // declaramos una variable para el div donde van a ir los artículos
-    var postsList = homeView.querySelector('#posts-list')
-
-
-    renderPost(postsList);
+    renderPost();
 
     homeView.style.display = ''
 

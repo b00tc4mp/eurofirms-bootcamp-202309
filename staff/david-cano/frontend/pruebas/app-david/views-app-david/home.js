@@ -101,11 +101,8 @@ postForm.onsubmit = function (event) {
     // y le decimos que oculte el formulario de nuevos posts
     postPanel.style.display = 'none';
 
-    //declaramos una variable y le asignamos el elemento del html que tenga el id posts-list (el div donde van los posts) y lo limpiamos de posts con el innerHTML
-    var postsList = homeView.querySelector('#posts-list');
-    postsList.innerHTML = '';
 
-    renderPost(postsList);
+    renderPost();
 
 
 

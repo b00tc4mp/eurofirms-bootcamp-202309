@@ -1,7 +1,11 @@
 // Inicializamos la variable loggedInEmail como nula, vacía, al principio
 var loggedInEmail = null;
 
-function renderPost(postsList) {
+function renderPost() {
+
+    //declaramos una variable y le asignamos el elemento del html que tenga el id posts-list (el div donde van los posts) y lo limpiamos de posts con el innerHTML
+    var postsList = homeView.querySelector('#posts-list');
+    postsList.innerHTML = '';
 
     //Recorremos el array posts con un bucle for, pero a la inversa
     for (var i = posts.length - 1; i >= 0; i--) {
