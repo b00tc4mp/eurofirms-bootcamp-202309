@@ -10,73 +10,71 @@
 </head>
 
 <body>
+    <div id="home-view">
+        <header class="header">
+            <h1>Home</h1>
+            <span id="user-name-span">
+                <!--Aquí va el nombre del usuario logueado-->
+            </span>
+            <button id="post-button">Create New Post</button>
+            <button id="logout-button">Logout</button>
+        </header>
+
+        <div id="post-panel" class="panel-lightgreen">
+            <h2>Create post</h2>
+
+            <form id="post-form" class="articles form">
+                <label for="image-new-post">Image</label>
+                <input type="url" id="image-new-post">
+
+                <label for="text-new-post">Text</label>
+                <input type="text" id="text-new-post">
+
+                <button>Post</button>
+                <button type="button" id="cancel-post-button">Cancel</button>
+            </form>
+        </div>
+
+        <div id="posts-list">
+        <!-- Aquí van los posts -->
+        </div>
+    </div>
+
     <div id="register-view" class="view view-plum">
         <h1>Register</h1>
 
         <form id="register-form" class="form">
-            <label for="name-input">Name</label>
-            <input type="text" id="name-input" title="Name">
+            <label for="name-register">Name</label>
+            <input type="text" id="name-register">
 
-            <label for="email-input">E-mail</label>
-            <input type="email" id="email-input" title="E-mail">
+            <label for="email-register">E-mail</label>
+            <input type="email" id="email-register">
 
-            <label for="password-input">Password</label>
-            <input type="password" id="password-input" title="Password">
+            <label for="password-register">Password</label>
+            <input type="password" id="password-register">
 
             <button type="submit">Register</button>
             <button type="reset">Clear</button>
         </form>
 
-        <a id="login-link" href="">Login</a>
+        <a id="login-link" href="" class="color-a">Login</a>
     </div>
 
     <div id="login-view" class="view view-skyblue">
         <h1>Login</h1>
 
         <form id="login-form" class="form">
-            <label for="email-input">E-mail</label>
-            <input type="email" id="email-input" title="E-mail">
+            <label for="email-login">E-mail</label>
+            <input type="email" id="email-login">
 
-            <label for="password-input">Password</label>
-            <input type="password" id="password-input" title="Password">
+            <label for="password-login">Password</label>
+            <input type="password" id="password-login">
 
-            <button type="submit">Login</button>
+            <button type="submit" id="login-button">Login</button>
             <button type="reset">Clear</button>
         </form>
 
-        <a id="register-link" href="">Register</a>
-    </div>
-
-    <div id="home-view">
-        <header class="header">
-            <h1>Home</h1>
-            <span id="user-name-span">Hello World</span>
-            <button id="post-button">+</button>
-            <button id="logout-button">Logout</button>
-        </header>
-
-        <!-- add post panel -->
-
-        <div id="post-panel" class="panel-lightgreen">
-            <h2>Create post</h2>
-
-            <form id="post-form" class="form">
-                <label for="image-input">Image</label>
-                <input type="url" id="image-input">
-
-                <label for="text-input">Text</label>
-                <input type="text" id="text-input">
-
-                <button type="submit">Post</button>
-                <button id="cancel-post-button">Cancel</button>
-            </form>
-        </div>
-
-
-        <!-- posts list -->
-
-        <div id="posts-list">
-        </div>
+        <a id="register-link" href="" class="color-a">Register</a>
     </div>
 
     <script src="data.js"></script>
