@@ -23,9 +23,9 @@ logoutButton.onclick = function () {
 };
 //crear un boton cuando funcione el formulario para abrir el post
 var postButton = homeView.querySelector("#post-button");
-postButton.onclick = function(){
-// console.log (postButton);se quita
- postPanel.style.display =""  
+postButton.onclick = function () {
+    // console.log (postButton);se quita
+    postPanel.style.display = ""
 }
 //se crea el post panel, none para que se oculte el formulario
 var postPanel = homeView.querySelector("#post-panel");
@@ -36,58 +36,58 @@ var postForm = postPanel.querySelector("#post-form");
 //vamos a ser cancel button
 var cancelPostButton = postForm.querySelector("#cancel-post-button")
 
-cancelPostButton.onclick = function(){
-postForm.reset()
-postPanel.style.display = "none"
+cancelPostButton.onclick = function () {
+    postForm.reset()
+    postPanel.style.display = "none"
 }
 //traer el boton 
-postForm.onsubmit =function(event){
+postForm.onsubmit = function (event) {
     event.preventDefault()
-//
-var imageInput = postForm.querySelector("#image-input")
-var textInput = postForm.querySelector("#text-input")
+    //
+    var imageInput = postForm.querySelector("#image-input")
+    var textInput = postForm.querySelector("#text-input")
 
-var image = imageInput.value
-var text = textInput.value
-var post = {}
-//controlar al usuario 
-post.author = loggedInEmail
-post.image = image
-post.text = text
+    var image = imageInput.value
+    var text = textInput.value
+    var post = {}
+    //controlar al usuario 
+    post.author = loggedInEmail
+    post.image = image
+    post.text = text
 
-posts.push(post)
-postForm.reset()
-postPanel.style.display = "none"
+    posts.push(post)
+    postForm.reset()
+    postPanel.style.display = "none"
 
-var postsList = homeView.querySelector("#post-list")
-//que no se repita las imagenes quede vacio 
-postsList.innerHTML = ""
-//recorrer los posts
-for (var i = posts.length -1; i >= 0; i--){
-    var post = posts[i]
+    var postsList = homeView.querySelector("#post-list")
+    //que no se repita las imagenes quede vacio 
+    postsList.innerHTML = ""
+    //recorrer los posts
+    for (var i = posts.length - 1; i >= 0; i--) {
+        var post = posts[i]
 
-    var article = document.createElement("article")
-    article.setAttribute('class', 'post-article');
+        var article = document.createElement("article")
+        article.setAttribute('class', 'post-article');
 
-    var span = document.createElement("span")
-    span.innerText = post.author
+        var span = document.createElement("span")
+        span.innerText = post.author
 
-    var image = document.createElement("img")
-    image.setAttribute("class", "post-image")
-    image.src = post.image
-    image.alt = post.text  
+        var image = document.createElement("img")
+        image.setAttribute("class", "post-image")
+        image.src = post.image
+        image.alt = post.text
 
-    var paragraph = document.createElement("p")
-    paragraph.innerText = post.text
+        var paragraph = document.createElement("p")
+        paragraph.innerText = post.text
 
-    article.appendChild(span)
-    article.appendChild(image)
-    article.appendChild(paragraph)
+        article.appendChild(span)
+        article.appendChild(image)
+        article.appendChild(paragraph)
 
-    postsList.appendChild(article)
+        postsList.appendChild(article)
+    }
+
 }
-
- }
 
 
 

@@ -38,68 +38,84 @@ loginForm.onsubmit = function (event) {
     var password = passwordInput.value;
 
     // Inicializar una variable para almacenar al usuario encontrado
-    var foundUser = null;
+    var user = null;
 
     // Recorrer la lista de usuarios para encontrar un usuario con el correo electrónico proporcionado
-    for (var i = 0; i < users.length; i++) {
-        var user = users[i];
+    //for (var i = 0; i < users.length; i++) {
+    // var user = users[i];
 
-        if (user.email === email) {
-            foundUser = user;
-            break;
-        }
-    }
+    //  if (user.email === email) {
+    //foundUser = user;
+    //     break;
+    // }
+    // }
 
     // Verificar si se encontró un usuario con el correo electrónico proporcionado
-    if (foundUser === null) {
-        alert('Credenciales incorrectas');
-        return;
-    }
+    // if (foundUser === null) {
+    //     alert('Credenciales incorrectas');
+    //    return;
+    // }
 
     // Verificar si la contraseña proporcionada coincide con la contraseña del usuario encontrado
-    if (foundUser.password !== password) {
-        alert('Credenciales incorrectas');
-        return;
-    }
+    //  if (foundUser.password !== password) {
+    //     alert('Credenciales incorrectas');
+    //    return;
+    //}
 
     // Limpiar los campos de entrada
     emailInput.value = '';
     passwordInput.value = '';
 
-    // Ocultar la vista de inicio de sesión y mostrar la vista de inicio
-    loginView.style.display = 'none';
+    try {
+        authenticateUser(email, password)
+        loginForm.reset()
+        loggedInEmail = email
+        loginView.style.display = "none"
 
-    var userNameSpan = homeView.querySelector('#user-name-span');
-    userNameSpan.innerText = foundUser.name
+        var userNameSpan = homeView.querySelector('#user-name-span')
+        var user = retrieverUser(email)
+        userNameSpan.innerText = user.name
+        //renderPost()
+        homeView.style.display = ""
+        loginView.style.display = 'none';
 
-    loggedInEmail = foundUser.email
+        var userNameSpan = homeView.querySelector('#user-name-span');
+        userNameSpan.innerText = user.name
 
-    var postList = homeView.querySelector('#post-list');
+        loggedInEmail = user.email
 
-    for (var i = posts.length - 1; i >= 0; i--) {
-        var post = posts[i]
+        var postList = homeView.querySelector('#post-list');
 
-        var article = document.createElement('article');
-        article.setAttribute('class', 'post-article');
+        for (var i = posts.length - 1; i >= 0; i--) {
+            var post = posts[i]
 
-        var span = document.createElement('span');
-        span.innerText = post.author;
+            var article = document.createElement('article');
+            article.setAttribute('class', 'post-article');
 
-        var image = document.createElement('img'); // <img>
-        image.setAttribute('class', 'post-image'); // <img class='post-image>
-        image.src = post.image;  // <img class='post-image' src='...url'>
-        image.alt = post.text  // <img class='post-image' src='...url' alt='text>
+            var span = document.createElement('span');
+            span.innerText = post.author;
 
-        var paragraph = document.createElement('p');
-        paragraph.innerText = post.text; // <p>innerText<p/>
+            var image = document.createElement('img'); // <img>
+            image.setAttribute('class', 'post-image'); // <img class='post-image>
+            image.src = post.image;  // <img class='post-image' src='...url'>
+            image.alt = post.text  // <img class='post-image' src='...url' alt='text>
 
-        article.appendChild(span);
-        article.appendChild(image);
-        article.appendChild(paragraph);
+            var paragraph = document.createElement('p');
+            paragraph.innerText = post.text; // <p>innerText<p/>
 
-        postList.appendChild(article);
+            article.appendChild(span);
+            article.appendChild(image);
+            article.appendChild(paragraph);
+
+            postList.appendChild(article);
+        }
+
+        homeView.style.display = '';
     }
+    catch (error) {
+        alert(error.message)
+    }
+    // Ocultar la vista de inicio de sesión y mostrar la vista de inicio
 
-    homeView.style.display = '';
 
 }
