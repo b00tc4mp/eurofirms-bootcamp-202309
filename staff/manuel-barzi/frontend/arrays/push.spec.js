@@ -1,6 +1,6 @@
-console.log('%cTEST push', 'color: magenta; font-weight: bold;')
+TEST('push')
 
-console.log('CASE push horse in array [pig, goat, sheep]')
+CASE('push horse in array [pig, goat, sheep]')
 
 var farm = ['pig', 'goat', 'sheep']
 

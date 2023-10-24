@@ -1,6 +1,6 @@
-console.log('%cTEST forEach', 'color: magenta; font-weight: bold;')
+TEST('forEach')
 
-console.log('CASE print each char from [a, b, c] in console')
+CASE('print each char from [a, b, c] in console')
 
 var chars = ['a', 'b', 'c']
 
@@ -13,7 +13,7 @@ forEach(chars, printChar)
 // 'b'
 // 'c'
 
-console.log('CASE muliply each number from [10, 20, 30] and print it in console')
+CASE('muliply each number from [10, 20, 30] and print it in console')
 
 var nums = [10, 20, 30]
 
@@ -24,7 +24,7 @@ forEach(nums, function (num) {
 // 2000
 // 3000
 
-console.log('CASE print each word with length 4 from [nice, rice, hide, letter, tomato, banana, rain, off, to, from, car]')
+CASE('print each word with length 4 from [nice, rice, hide, letter, tomato, banana, rain, off, to, from, car]')
 
 var things = ['nice', 'rice', 'hide', 'letter', 'tomato', 'banana', 'rain', 'off', 'to', 'from', 'car']
 

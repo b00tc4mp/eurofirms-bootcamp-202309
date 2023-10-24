@@ -1,6 +1,6 @@
-console.log('%cTEST find', 'color: magenta; font-weight: bold;')
+TEST('find')
 
-console.log('CASE find first person with surname Garcia in array of people [Pepito Grillo, Wendy Darling, James Hook, Mer Maid, Campa Nilla, Anita Garcia, John Doe, Cruela De Vil, Andy Garcia, John Wick]')
+CASE('find first person with surname Garcia in array of people [Pepito Grillo, Wendy Darling, James Hook, Mer Maid, Campa Nilla, Anita Garcia, John Doe, Cruela De Vil, Andy Garcia, John Wick]')
 
 var people = ['Pepito Grillo', 'Wendy Darling', 'James Hook', 'Mer Maid', 'Campa Nilla', 'Anita Garcia', 'John Doe', 'Cruela De Vil', 'Andy Garcia', 'John Wick']
 
@@ -11,7 +11,7 @@ var person = find(people, function (name) {
 console.log(person)
 // Anita Garcia
 
-console.log('CASE find first product with brand Levis and color Denim in array of products')
+CASE('find first product with brand Levis and color Denim in array of products')
 
 var products = [
     {
@@ -60,7 +60,7 @@ var product = find(products, function (item) {
 console.log(product)
 // undefined
 
-console.log('CASE find email with text contrato in array of emails')
+CASE('find email with text contrato in array of emails')
 
 var emails = [
     {
