@@ -13,7 +13,7 @@ logoutButton.onclick = function () {
     var postsList = homeView.querySelector('#posts-list');
     postsList.innerHTML = '';
 
-    loggedInEmail = null;
+   // loggedInEmail = null;
 
     loginView.style.display = '';
 }
@@ -49,15 +49,18 @@ postForm.onsubmit = function (event) {
     event.preventDefault();
 
     var imageNewPost = postForm.querySelector('#image-new-post');
+    var imageDescriptionNewPost = postForm.querySelector('#image-description-new-post');
     var textNewPost = postForm.querySelector('#text-new-post');
 
     var newImage = imageNewPost.value;
+    var newImageDescription = imageDescriptionNewPost.value;
     var newText = textNewPost.value;
 
     var newPost = {};
 
     newPost.author = loggedInEmail;
     newPost.image = newImage;
+    newPost.imageDescription = newImageDescription;
     newPost.text = newText;
 
     posts.push(newPost);

@@ -41,8 +41,14 @@ for (var i = 0; i < users.length; i++) {
 }
 
 //SI EL USUARIO EXISTE, SI FUE ENCONTRADO, ALERTA DE ERROR
-  if (foundUser !== null) {
+    if (foundUser !== null) {
     alert('User already exists')
+    return
+}
+
+//SI EL FORMULARIO se deja vacio, ALERTA DE ERROR
+if (foundUser === null) {
+    alert('You must fill in the fields')
     return
 }
 
@@ -55,9 +61,7 @@ for (var i = 0; i < users.length; i++) {
 
     users.push(user)
 
-    nameInput.value = ''
-    emailInput.value = ''
-    passwordInput.value = ''
+registerForm.reset();
 
     registerView.style.display = 'none'
     loginView.style.display = ''
