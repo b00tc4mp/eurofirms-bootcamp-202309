@@ -1,8 +1,7 @@
-
 // register view
 
 // Obtener el elemento HTML con el id 'register-view'
-registerView = document.getElementById('register-view');
+var registerView = document.getElementById('register-view');
 
 // Ocultar la vista de registro
 registerView.style.display = 'none';
@@ -40,38 +39,21 @@ registerForm.onsubmit = function (event) {
     var email = emailInput.value;
     var password = passwordInput.value;
 
-    try {
-        registerUser(name, email, password)
+    // Crear un objeto de usuario con los datos ingresados
+    var user = {};
+    user.name = name;
+    user.email = email;
+    user.password = password;
 
-        registerForm.reset()
+    // Agregar el usuario al array de usuarios
+    users.push(user);
 
-        registerView.style.display = 'none';
-        loginView.style.display = '';
-    } catch (error) {
-        alert(error, message)
-    }
-}
+    // Limpiar los campos de entrada
+    nameInput.value = '';
+    emailInput.value = '';
+    passwordInput.value = '';
 
-
-
-
-
-// Crear un objeto de usuario con los datos ingresados
-//  var user = {};
-// user.name = name;
-//user.email = email;
-//user.password = password;
-
-// Agregar el usuario al array de usuarios
-//users.push(user);
-
-// Limpiar los campos de entrada
-//nameInput.value = '';
-//emailInput.value = '';
-//passwordInput.value = '';
-
-// Ocultar la vista de registro y mostrar la vista de inicio de sesión
-//registerView.style.display = 'none';
-//loginView.style.display = '';
-
-
+    // Ocultar la vista de registro y mostrar la vista de inicio de sesión
+    registerView.style.display = 'none';
+    loginView.style.display = '';
+};

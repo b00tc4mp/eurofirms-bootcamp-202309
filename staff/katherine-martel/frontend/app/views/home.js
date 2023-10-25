@@ -1,81 +1,98 @@
-// home view
+//home view
 
-// Obtener el elemento HTML con el id 'home-view'
-var homeView = document.getElementById('home-view');
+homeView = document.getElementById('home-view')
 
-// Ocultar la vista de inicio
-homeView.style.display = 'none';
+homeView.style.display = 'none'
 
-// Obtener el botón de cierre de sesión dentro de la vista de inicio
-var logoutButton = homeView.querySelector('#logout-button');
+logoutButton = homeView.querySelector('#logout-button')
 
-// Agregar un controlador de eventos al hacer clic en el botón de cierre de sesión
 logoutButton.onclick = function () {
-    // Ocultar la vista de inicio y mostrar la vista de inicio de sesión
-    homeView.style.display = 'none';
+    homeView.style.display = 'none'
 
-    var postsList = homeView.querySelector("#post-list")
-    postsList.innerHTML = ""
+    var postsList = homeView.querySelector('#posts-list')
+    postsList.innerHTML = ''
 
-    loggedInEmail = null
+    loginView.style.display = ''
 
-    loginView.style.display = '';
-};
-//crear un boton cuando funcione el formulario para abrir el post
-var postButton = homeView.querySelector("#post-button");
-postButton.onclick = function () {
-    // console.log (postButton);se quita
-    postPanel.style.display = ""
 }
-//se crea el post panel, none para que se oculte el formulario
-var postPanel = homeView.querySelector("#post-panel");
-postPanel.style.display = 'none';
-//se crea el post formulario "dentro del post panel"
-var postForm = postPanel.querySelector("#post-form");
 
-//vamos a ser cancel button
-var cancelPostButton = postForm.querySelector("#cancel-post-button")
+//post panel
 
-cancelPostButton.onclick = function () {
-    postForm.reset()
-    postPanel.style.display = "none"
+newPostPanel = homeView.querySelector('#new-post-panel')
+
+newPostPanel.style.display = 'none'
+
+//post form
+
+newPostForm = newPostPanel.querySelector('#new-post-form')
+
+//post botton
+
+newPostButton.onclick = function () {
+    newPostPanel.style.display = ''
 }
-//traer el boton 
-postForm.onsubmit = function (event) {
+//cancel post button
+
+cancelNewPostButton = newPostForm.querySelector('#cancel-new-post-button')
+
+cancelNewPostButton.onclick = function (event) {
     event.preventDefault()
-    //
-    var imageInput = postForm.querySelector("#image-input")
-    var textInput = postForm.querySelector("#text-input")
+
+    newPostForm.reset()
+
+    newPostPanel.style.display = 'none'
+}
+
+//submit post form
+
+newPostForm.onsubmit = function (event) {
+    event.preventDefault()
+
+    var imageInput = newPostform.querySelector('#image-input')
+    var imageDescriptionInput = newPostForm.querySelector('#image-description-input')
+    var textInput = newPostForm.querySelector('#text-input')
 
     var image = imageInput.value
+    var imageDescription = imageDescriptionInput.value
     var text = textInput.value
+
     var post = {}
-    //controlar al usuario 
     post.author = loggedInEmail
     post.image = image
+    post.imageDescription = imageDescription
     post.text = text
 
     posts.push(post)
-    postForm.reset()
-    postPanel.style.display = "none"
 
-    var postsList = homeView.querySelector("#post-list")
-    //que no se repita las imagenes quede vacio 
-    postsList.innerHTML = ""
-    //recorrer los posts
+    newPostForm.resert()
+
+    newPostPanel.style.display = 'none'
+
+    renderPost()
+}
+
+//render post
+
+function renderPosts(params) {
+    var postsList = homeView.querySelector('#post-list')
+
+    postsList.innerHTML = ''
+
     for (var i = posts.length - 1; i >= 0; i--) {
         var post = posts[i]
 
         var article = document.createElement("article")
-        article.setAttribute('class', 'post-article');
+        article.setAttribute('aria-label', 'post')
 
         var span = document.createElement("span")
         span.innerText = post.author
+        span.setAttribute("aria-label, author")
+
 
         var image = document.createElement("img")
         image.setAttribute("class", "post-image")
         image.src = post.image
-        image.alt = post.text
+        image.alt = post.imageDescription
 
         var paragraph = document.createElement("p")
         paragraph.innerText = post.text
@@ -86,8 +103,8 @@ postForm.onsubmit = function (event) {
 
         postsList.appendChild(article)
     }
-
 }
+
 
 
 

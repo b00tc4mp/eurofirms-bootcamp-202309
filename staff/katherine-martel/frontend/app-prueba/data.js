@@ -1,4 +1,4 @@
-ar users = []
+var users = []
 
 users[0] = {
     name: 'Pepito Grillo',
