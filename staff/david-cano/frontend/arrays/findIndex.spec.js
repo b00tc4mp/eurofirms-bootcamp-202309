@@ -6,7 +6,7 @@ console.log ("CASE find index of first element that is lower than 20")
 
 var numbers = [40, 60, 200, 15235, 13, 11, 20]
 
-
+//0
 
 var index = findIndex(numbers, function (number){
 		if(number < 20) return true

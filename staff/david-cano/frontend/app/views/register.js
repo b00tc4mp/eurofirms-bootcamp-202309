@@ -46,12 +46,6 @@ for (var i = 0; i < users.length; i++) {
     return
 }
 
-//SI EL FORMULARIO se deja vacio, ALERTA DE ERROR
-if (foundUser === null) {
-    alert('You must fill in the fields')
-    return
-}
-
 //PARA GUARDAR LOS NUEVOS DATOS DEL USUARIO REGISTRADO
     var user = {}
 

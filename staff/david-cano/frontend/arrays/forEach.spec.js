@@ -15,7 +15,8 @@ forEach(chars, printChar)
 // 'b'
 // 'c'
 
-console.log('CASE muliply each number from [10, 20, 30] and print it in console')
+console.log('CASE muliply each number from [10, 20, 30] and print it in console'
+)
 
 var nums = [10, 20, 30]
 
