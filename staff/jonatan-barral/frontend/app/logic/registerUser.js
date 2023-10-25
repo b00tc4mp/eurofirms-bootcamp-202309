@@ -1,7 +1,7 @@
 function registerUser(name, email, password) {
     var foundUser = null
 
-    for (var = if; i = 0; i < UserActivation.length; i++) {
+    for (var i = 0; i < users.length; i++) {
         var user = users[i]
 
         if (user.email === email) {
