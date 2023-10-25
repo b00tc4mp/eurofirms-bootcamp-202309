@@ -1,66 +1,107 @@
-// register view
+//home view
 
-registerView = document.getElementById('register-view')
+homeView = document.getElementById('home-view')
 
-registerView.style.display = 'none'
+homeView.style.display = 'none'
 
-// navigation to login
+logoutButton = homeView.querySelector('#logout-button')
 
-loginLink = registerView.querySelector('#login-link')
+logoutButton.onclick = function () {
+    homeView.style.display = 'none'
 
-loginLink.onclick = function (event) {
-    event.preventDefault()
+    var postsList = homeView.querySelector('#posts-list')
+    postsList.innerHTML = " "
 
-    registerView.style.display = 'none'
-    loginView.style.display = ''
+    loginView.style.display = " "
 }
 
-// submit for register
+// post panel
+newPostPanel = homeView.querySelector('#new-post-panel')
+newPostPanel.style.display = 'none'
 
-registerForm = registerView.querySelector('#register-form')
+// post form
+newPostForm = newPostPanel.querySelector('#new-post-form')
 
-registerForm.onsubmit = function (event) {
+//post button
+newPostButton = homeView.querySelector('#new-post-button')
+
+newPostButton.onclick = function () {
+    newPostPanel.style.display = ''
+}
+
+// cancel post button
+
+cancelNewPostButton = newPostButton.querySelector('#cancel-new-post-button')
+
+cancelNewPostButton = newPostForm.querySelector('#cancel-new-post-button')
+
+cancelNewPostButton.onclick = function (event) {
+
     event.preventDefault()
 
-    var nameInput = registerForm.querySelector('#name-input')
-    var emailInput = registerForm.querySelector('#email-input')
-    var passwordInput = registerForm.querySelector('#password-input')
+    newPostForm.reset()
 
-    var name = nameInput.value
-    var email = emailInput.value
-    var password = passwordInput.value
-
-    // search user by email
-
-    var foundUser = null
-
-    for (var i = 0; i < users.length; i++) {
-        var user = users[i]
-
-        if (user.email === email) {
-            foundUser = user
-
-            break
-        }
-    }
-
-    // if user exists (it was found) then error
-
-    if (foundUser !== null) {
-        alert('User already exists')
-
-        return
-    }
-
-    var user = {}
-    user.name = name
-    user.email = email
-    user.password = password
-
-    users.push(user)
-
-    registerForm.reset()
-
-    registerView.style.display = 'none'
-    loginView.style.display = ''
+    newPostPanel.style.display = 'none'
 }
+
+// submit post form
+newPostForm.onsubmit = function (event) {
+    event.preventDefault()
+
+    var imageInput = newPostForm.querySelector('#image-input')
+    var imageDescriptionInput = newPostForm.querySelector('#image-description-input')
+    var textInput = newPostForm.querySelector('#text-input')
+
+    var image = imageInput.value
+    var imageDescription = imageDescriptionInput.value
+    var text = textInput.value
+
+    var post = {}
+    post.author = loggedInEmail
+    post.image = image
+    post.imageDescription = imageDescription
+    post.text = text
+
+    posts.push(post)
+
+    newPostForm.reset()
+
+    newPostPanel.style.display = 'none'
+
+    renderPosts()
+}
+
+// render posts
+
+function renderPosts() {
+
+    var postsList = homeView.querySelector('#posts-list')
+
+    postsList.innerHTML = ''
+    for (var i = posts.length - 1; i >= 0; i--) {
+        var post = posts[i]
+
+        var article = document.createElement('article')
+        article.setAttribute('aria-label', 'Post')
+
+        var span = document.createElement('span')
+        span.innerText = post.author
+        span.setAttribute('aria-lable', 'author')
+
+        var image = document.createElement('img')
+        image.setAttribute('class', 'post-image')
+        image.src = post.image
+        image.alt = post.imageDescription
+
+        var paragraph = document.createElement('p')
+        paragraph.innerText = post.text
+
+        article.appendChild(span)
+        article.appendChild(image)
+        article.appendChild(paragraph)
+
+        postsList.appendChild(article)
+    }
+}
+
+

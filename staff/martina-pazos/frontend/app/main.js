@@ -1,66 +1,26 @@
-// register view
+// global variables
 
-registerView = document.getElementById('register-view')
+// session
 
-registerView.style.display = 'none'
+var loggedInEmail = null
 
-// navigation to login
+// register
 
-loginLink = registerView.querySelector('#login-link')
+var registerView
+var loginLink
+var registerForm
 
-loginLink.onclick = function (event) {
-    event.preventDefault()
+// login
 
-    registerView.style.display = 'none'
-    loginView.style.display = ''
-}
+var loginView
+var registerLink
+var loginForm
 
-// submit for register
+// home
 
-registerForm = registerView.querySelector('#register-form')
-
-registerForm.onsubmit = function (event) {
-    event.preventDefault()
-
-    var nameInput = registerForm.querySelector('#name-input')
-    var emailInput = registerForm.querySelector('#email-input')
-    var passwordInput = registerForm.querySelector('#password-input')
-
-    var name = nameInput.value
-    var email = emailInput.value
-    var password = passwordInput.value
-
-    // search user by email
-
-    var foundUser = null
-
-    for (var i = 0; i < users.length; i++) {
-        var user = users[i]
-
-        if (user.email === email) {
-            foundUser = user
-
-            break
-        }
-    }
-
-    // if user exists (it was found) then error
-
-    if (foundUser !== null) {
-        alert('User already exists')
-
-        return
-    }
-
-    var user = {}
-    user.name = name
-    user.email = email
-    user.password = password
-
-    users.push(user)
-
-    registerForm.reset()
-
-    registerView.style.display = 'none'
-    loginView.style.display = ''
-}
+var homeView
+var logoutButton
+var newPostPanel
+var newPostForm
+var newPostButton
+var cancelNewPostButton

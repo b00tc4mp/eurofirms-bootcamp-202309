@@ -1,66 +1,55 @@
-// register view
+// database collections
 
-registerView = document.getElementById('register-view')
+var users = []
+var posts = []
 
-registerView.style.display = 'none'
+// populate some users
 
-// navigation to login
-
-loginLink = registerView.querySelector('#login-link')
-
-loginLink.onclick = function (event) {
-    event.preventDefault()
-
-    registerView.style.display = 'none'
-    loginView.style.display = ''
+users[0] = {
+    name: 'Pepito Grillo',
+    email: 'pepito@grillo.com',
+    password: '123123123'
 }
 
-// submit for register
+users[1] = {
+    name: 'Campa Nilla',
+    email: 'campa@nilla.com',
+    password: '123123123'
+}
 
-registerForm = registerView.querySelector('#register-form')
+// populate some posts
 
-registerForm.onsubmit = function (event) {
-    event.preventDefault()
+posts[0] = {
+    author: 'pepito@grillo.com',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/1200px-SNice.svg.png',
+    imageDescription: 'Smile image',
+    text: 'Smile!'
+}
 
-    var nameInput = registerForm.querySelector('#name-input')
-    var emailInput = registerForm.querySelector('#email-input')
-    var passwordInput = registerForm.querySelector('#password-input')
+posts[1] = {
+    author: 'campa@nilla.com',
+    image: 'https://www.telemundo.com/sites/nbcutelemundo/files/styles/fit-1240w/public/sites/nbcutelemundo/files/images/article/2014/08/28/hello_kitty_140920568644_4.jpg',
+    imageDescription: 'Hello Kitty image',
+    text: 'Hello, Kitty!'
+}
 
-    var name = nameInput.value
-    var email = emailInput.value
-    var password = passwordInput.value
+posts[2] = {
+    author: 'campa@nilla.com',
+    image: 'https://m.media-amazon.com/images/I/51-qisfjMnL.jpg',
+    imageDescription: 'Doreamon image',
+    text: 'Doraemon'
+}
 
-    // search user by email
+posts[3] = {
+    author: 'pepito@grillo.com',
+    image: 'https://i.ebayimg.com/images/g/V9wAAOSw~e5ZU~Ls/s-l1200.webp',
+    imageDescription: 'Pikachu image',
+    text: 'Pikachu!'
+}
 
-    var foundUser = null
-
-    for (var i = 0; i < users.length; i++) {
-        var user = users[i]
-
-        if (user.email === email) {
-            foundUser = user
-
-            break
-        }
-    }
-
-    // if user exists (it was found) then error
-
-    if (foundUser !== null) {
-        alert('User already exists')
-
-        return
-    }
-
-    var user = {}
-    user.name = name
-    user.email = email
-    user.password = password
-
-    users.push(user)
-
-    registerForm.reset()
-
-    registerView.style.display = 'none'
-    loginView.style.display = ''
+posts[4] = {
+    author: 'pepito@grillo.com',
+    image: 'https://i.pinimg.com/550x/64/65/90/6465907c690be529106e4ada2c94d0d6.jpg',
+    imageDescription: 'Atomic ant image',
+    text: 'La Hormiga Atómica!'
 }

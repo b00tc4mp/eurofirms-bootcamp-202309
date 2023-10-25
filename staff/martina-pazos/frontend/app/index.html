@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
+<link rel="shortcut icon" href="https://b00tc4mp.com/favicon.ico" type="image/x-icon">
+
 <body>
 
     <div id="register-view" class="view view-plum">
@@ -53,24 +55,27 @@
         <header class="header">
             <h1>Home</h1>
             <span id="user-name-span">Hello World</span>
-            <button id="post-button">+</button>
+            <button id="new-post-button">+</button>
             <button id="logout-button">Logout</button>
         </header>
 
         <!-- add post panel -->
 
-        <div id="post-panel" class="panel-lightgreen">
+        <div id="new-post-panel" class="panel-lightgreen">
             <h2>Create post</h2>
 
-            <form id="post-form" class="form">
+            <form id="new-post-form" class="form">
                 <label for="image-input">Image</label>
                 <input type="url" id="image-input">
+
+                <label for="image-description-input">Image description</label>
+                <input type="text" id="image-description-input">
 
                 <label for="text-input">Text</label>
                 <input type="text" id="text-input">
 
                 <button type="submit">Post</button>
-                <button id="cancel-post-button">Cancel</button>
+                <button id="cancel-new-post-button">Cancel</button>
             </form>
         </div>
 
@@ -81,6 +86,17 @@
         </div>
     </div>
 
+    <!-- utils -->
+    <script src="utils/find.js"></script>
+
+
+    <!-- business logic -->
+    <script src="logic/authenticateUser.js"></script>
+    <script src="logic/retrieveUser.js"></script>
+    <script src="logic/registerUser.js"></script>
+
+
+    <!-- presentation -->
     <script src="data.js"></script>
 
     <script src="main.js"></script>
