@@ -1,10 +1,7 @@
-// register view
 
 registerView = document.getElementById('register-view')
 
 registerView.style.display = 'none'
-
-// navigation to login
 
 loginLink = registerView.querySelector('#login-link')
 
@@ -15,7 +12,6 @@ loginLink.onclick = function (event) {
     loginView.style.display = ''
 }
 
-// submit for register
 
 registerForm = registerView.querySelector('#register-form')
 
@@ -30,37 +26,14 @@ registerForm.onsubmit = function (event) {
     var email = emailInput.value
     var password = passwordInput.value
 
-    // search user by email
+    try {
+        registerUser(name, email, password)
 
-    var foundUser = null
+        registerForm.reset()
 
-    for (var i = 0; i < users.length; i++) {
-        var user = users[i]
-
-        if (user.email === email) {
-            foundUser = user
-
-            break
-        }
+        registerView.style.display = 'none'
+        loginView.style.display = ''
+    } catch (error) {
+        alert(error.message)
     }
-
-    // if user exists (it was found) then error
-
-    if (foundUser !== null) {
-        alert('User already exists')
-
-        return
-    }
-
-    var user = {}
-    user.name = name
-    user.email = email
-    user.password = password
-
-    users.push(user)
-
-    registerForm.reset()
-
-    registerView.style.display = 'none'
-    loginView.style.display = ''
 }
