@@ -12,7 +12,7 @@ plants.length = 5
 
 var extracted = plants.pop()
 
-crossOriginIsolated.log(extracted)
+console.log(extracted)
 // tomato
 
 console.log(plants)
