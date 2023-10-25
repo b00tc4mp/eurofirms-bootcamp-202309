@@ -1,9 +1,14 @@
-function regsiterUser(name, email, password) {
+function registerUser(name, email, password) {
+    validateText(name, 'name')
+    validateEmail(email)
+    validatePassword(password)
+
     //buscar usuario por email
+
 
     var foundUser = null
 
-    for (var i = 0; i < user.length; i++) {
+    for (var i = 0; i < users.length; i++) {
         var user = users[i]
 
         if (user.email === email) {

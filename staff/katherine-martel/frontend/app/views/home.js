@@ -26,8 +26,9 @@ newPostPanel.style.display = 'none'
 
 newPostForm = newPostPanel.querySelector('#new-post-form')
 
-//post botton
+//post button
 
+newPostButton = homeView.querySelector('#new-post-button')
 newPostButton.onclick = function () {
     newPostPanel.style.display = ''
 }
@@ -68,13 +69,13 @@ newPostForm.onsubmit = function (event) {
 
     newPostPanel.style.display = 'none'
 
-    renderPost()
+    renderPosts()
 }
 
 //render post
 
 function renderPosts(params) {
-    var postsList = homeView.querySelector('#post-list')
+    var postsList = homeView.querySelector('#posts-list')
 
     postsList.innerHTML = ''
 
@@ -86,11 +87,11 @@ function renderPosts(params) {
 
         var span = document.createElement("span")
         span.innerText = post.author
-        span.setAttribute("aria-label, author")
+        span.setAttribute("aria-label", "author")
 
 
         var image = document.createElement("img")
-        image.setAttribute("class", "post-image")
+        image.setAttribute("class", "posts-image")
         image.src = post.image
         image.alt = post.imageDescription
 

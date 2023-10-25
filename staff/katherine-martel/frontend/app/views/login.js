@@ -54,7 +54,7 @@ loginForm.onsubmit = function (event) {
 
         //renderPost
 
-        renderPost()
+        renderPosts()
         homeView.style.display = ""
 
     }

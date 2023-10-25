@@ -1,4 +1,5 @@
-ar users = []
+var users = []
+var posts = []
 
 users[0] = {
     name: 'Pepito Grillo',
@@ -12,7 +13,6 @@ users[1] = {
     password: '123123123'
 }
 
-var posts = []
 
 posts[0] = {
     author: 'pepito@grillo.com',

@@ -12,17 +12,17 @@
     <div id="home-view" class="view">
         <header class="header">
             <h1>HOME</h1>
-            <span id="user-name-span">Hello world!</span>
-            <button id="post-button">+</button>
+            <span id="user-name-span" aria-label="User name">Hello world!</span>
+            <button id="new-post-button" title="New post" aria-label="New post">+</button>
             <button id="logout-button">Logout</button>
         </header>
         <!--formulario donde se pone la imagen comentario  la class es el 
    color de fondo-->
-        <div id="post-panel" class="panel-lightgreen">
+        <div id="new-post-panel" class="panel-lightgreen">
             <h2>Create post</h2>
             <!--para que al dar click se abra el formulario pegar una imagen y 
    escribir el contenido del post-->
-            <form id="post-form" class="form">
+            <form id="new-post-form" class="form">
                 <label for="image-input">Image</label>
                 <input type="url" id="image-input">
 
@@ -30,10 +30,10 @@
                 <input type="text" id="text-input">
 
                 <button>Post</button>
-                <button type="button" id="cancel-post-button">Cancel</button>
+                <button id="cancel-new-post-button">Cancel</button>
             </form>
         </div>
-        <div id="post-list"></div>
+        <div id="posts-list" aria-label="Posts list"></div>
     </div>
     <div id="register-view" class="view view-plum">
 
@@ -48,7 +48,8 @@
             <label for="password-input">Password</label>
             <input type="password" id="password-input">
 
-            <button type="submit">Register Now</button>
+            <button class="button" type="submit">Register Now</button>
+
             <button type="reset">Clear</button>
         </form>
         <a href="" id="login-link">Login</a>
@@ -64,7 +65,7 @@
             <label for="password-input">Password</label>
             <input type="password" id="password-input">
 
-            <button type="submit" id="login-button">Login</button>
+            <button class="button" type="submit" id="login-button">Login</button>
         </form>
         <a href="" id="register-link">Register</a>
     </div>
@@ -78,7 +79,7 @@
     <!--business logic-->
     <script src="logic/authenticateUser.js"></script>
     <script src="logic/retrieveUser.js"></script>
-    <script src="registerUser.js"></script>
+    <script src="logic/registerUser.js"></script>
 
     <!--presentation-->
     <script src="main.js"></script>
