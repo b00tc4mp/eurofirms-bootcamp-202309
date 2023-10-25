@@ -1,5 +1,5 @@
 // le ponemos color para diferenciarlo en la consola
-console.log('%cTEST at', 'color: magenta; font-weight: bold;')
+console.log('%cTEST at', 'color: magenta; font-weight: bold; font-size:20px')
 //El método at() recibe la posición en la que se encuentra un valor númerico en la array.
 console.log('CASE return element in index 0 from array [10, 20, 30]')
 // primero creamos la variable
