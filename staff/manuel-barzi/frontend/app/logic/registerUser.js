@@ -1,4 +1,8 @@
-function regsiterUser(name, email, password) {
+function registerUser(name, email, password) {
+    validateText(name, 'name')
+    validateEmail(email)
+    validatePassword(password)
+
     // search user by email
 
     var foundUser = null

@@ -1,4 +1,7 @@
 function authenticateUser(email, password) {
+    validateEmail(email)
+    validatePassword(password)
+
     // search user by email
 
     var foundUser = find(users, function (user) {

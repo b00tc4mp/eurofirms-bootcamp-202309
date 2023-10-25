@@ -31,7 +31,7 @@ registerForm.onsubmit = function (event) {
     var password = passwordInput.value
 
     try {
-        regsiterUser(name, email, password)
+        registerUser(name, email, password)
 
         registerForm.reset()
 

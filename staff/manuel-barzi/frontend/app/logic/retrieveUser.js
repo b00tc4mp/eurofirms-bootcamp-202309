@@ -1,4 +1,6 @@
 function retrieveUser(email) {
+    validateEmail(email)
+
     var foundUser = find(users, function (user) {
         return user.email === email
     })
