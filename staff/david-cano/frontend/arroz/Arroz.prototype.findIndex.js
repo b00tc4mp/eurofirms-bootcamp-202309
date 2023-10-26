@@ -1,11 +1,11 @@
 Arroz.prototype.findIndex = function (callback) {
-    for(var i = 0; i < this.length; i++ ){
-var element = this[i];
-var result = callback(element);
+    for(let i = 0; i < this.length; i++ ){
+    const element = this[i];
+    let result = callback(element);
 
-if(result){
-    return i;
-}
+        if(result){
+        return i;
+        }
     }
     return -1;
 }

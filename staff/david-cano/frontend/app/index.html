@@ -1,103 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>App</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>App</title>
 
-    <link rel="stylesheet" href="style.css">
-</head>
+        <link rel="stylesheet" href="style.css">
 
-<body>
-    <div id="home-view">
-        <header class="header">
-            <h1>Home</h1>
-            <span id="user-name-span">
-                <!--Aquí va el nombre del usuario logueado-->
-            </span>
-            <button id="post-button" title="New post" aria-label="New post">Create New Post</button>
-            <button id="logout-button">Logout</button>
-        </header>
+        <link rel="shortcut icon" href="https://b00tc4mp.com/favicon.ico" type="image/x-icon">
+    </head>
 
- <!-- add post panel -->
+    <body>
+        <div id="register-view" class="view">
+            <h1>Register</h1>
 
-        <div id="post-panel">
-            <h2>Create new post</h2>
+            <form id="register-form" class="form">
+                <label class="label" for="name-input">Name</label>
+                <input class="input" type="text" id="name-input" title="Name" required>
 
-            <form id="post-form" class="articles form">
-                <label for="image-new-post">Image</label>
-                <input type="url" id="image-new-post">
+                <label class="label" for="email-input">E-mail</label>
+                <input class="input" type="email" id="email-input" title="E-mail" required>
 
-                <label for="image-description-new-post">Image description</label>
-                <input type="text" id="image-description-new-post">
+                <label class="label" for="password-input">Password</label>
+                <input class="input" type="password" id="password-input" title="Password" required>
 
-                <label for="text-new-post">Text</label>
-                <input type="text" id="text-new-post">
-
-                <button type="submit">Post</button>
-                <button type="button" id="cancel-post-button">Cancel</button>
+                <button class="button" type="submit">Register</button>
             </form>
+
+            <a id="login-link" href="">Login</a>
         </div>
 
-<!-- posts list -->
+        <div id="login-view" class="view">
+            <h1>Login</h1>
 
-        <div id="posts-list">
-        <!-- Aquí van los posts -->
+            <form id="login-form" class="form">
+                <label class="label" for="email-input">E-mail</label>
+                <input class="input" type="email" id="email-input" title="E-mail" required>
+
+                <label class="label" for="password-input">Password</label>
+                <input class="input" type="password" id="password-input" title="Password" required>
+
+                <button class="button" type="submit">Login</button>
+            </form>
+
+            <a id="register-link" href="">Register</a>
         </div>
-    </div>
 
-    <div id="register-view" class="view">
-        <h1>Register</h1>
+        <div id="home-view">
+            <header class="header" aria-label="Header">
+                <h1>Home</h1>
+                <span id="user-name-span" aria-label="User name">Hello World</span>
+                <button id="new-post-button" title="New post" aria-label="New post" class="button">+</button>
+                <button id="logout-button" class="button">Logout</button>
+            </header>
 
-        <form id="register-form" class="form">
-            <label for="name-register" class="label">Name</label>
-            <input type="text" id="name-register" class="input">
+            <!-- add post panel -->
+            <div id="new-post-panel" class="view">
+                <h2>New post</h2>
 
-            <label for="email-register" class="label">E-mail</label>
-            <input type="email" id="email-register" class="input">
+                <form id="new-post-form" class="form">
+                    <label for="image-input" class="label">Image</label>
+                    <input type="url" id="image-input" class="input" required>
 
-            <label for="password-register" class="label">Password</label>
-            <input type="password" id="password-register" class="input">
+                    <label for="image-description-input" class="label">Image description</label>
+                    <input type="text" id="image-description-input" class="input" required>
 
-            <button type="submit" class="button">Register</button>
-        </form>
+                    <label for="text-input" class="label">Text</label>
+                    <input type="text" id="text-input" class="input" required>
 
-        <a id="login-link" href="" class="color-a">Login</a>
-    </div>
+                    <button type="submit" class="button">Post</button>
+                    <button id="cancel-new-post-button" class="button">Cancel</button>
+                </form>
+            </div>
 
-    <div id="login-view" class="view">
-        <h1>Login</h1>
 
-        <form id="login-form" class="form">
-            <label for="email-login" class="label">E-mail</label>
-            <input type="email" id="email-login" class="input">
+            <!-- posts list -->
+            <div id="posts-list" aria-label="Posts list" class="view">
+                <!-- Aquí van los posts -->
+            </div>
+        </div>
 
-            <label for="password-login" class="label">Password</label>
-            <input type="password" id="password-login" class="input">
+        <!-- utils -->
+        <script src="utils/find.js"></script>
+        <script src="utils/validators.js"></script>
 
-            <button type="submit" id="login-button" class="button">Login</button>
-        </form>
+        <!-- data -->
+        <script src="data.js"></script>
 
-        <a id="register-link" href="" class="color-a">Register</a>
-    </div>
+        <!-- business logic -->
+        <script src="logic/authenticateUser.js"></script>
+        <script src="logic/retrieveUser.js"></script>
+        <script src="logic/registerUser.js"></script>
+        <script src="logic/createNewPost.js"></script>
+        <script src="logic/retrievePosts.js"></script>
 
-    <!-- utils -->
-    <script src="utils/find.js"></script>
-
-    <!-- data -->
-    <script src="data.js"></script>
-
-    <!-- business logic -->
-    <script src="logic/authenticateUser.js"></script>
-    <script src="logic/retrieveUser.js"></script>
-
-    <!-- presentation -->
-    <script src="main.js"></script>
-    <script src="views/register.js"></script>
-    <script src="views/login.js"></script>
-    <script src="views/home.js"></script>
-
-</body>
+        <!-- presentation -->
+        <script src="main.js"></script>
+        <script src="views/register.js"></script>
+        <script src="views/login.js"></script>
+        <script src="views/home.js"></script>
+    </body>
 
 </html>

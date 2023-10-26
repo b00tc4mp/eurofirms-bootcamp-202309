@@ -1,62 +1,40 @@
-// REGISTER VIEW, div que contiene la página con el formulario de registro
+//Register view
 
-var registerView = document.getElementById('register-view')
-
+registerView = document.getElementById('register-view')
 registerView.style.display = 'none'
 
-// NAVIGATION TO LOGIN, enlace a la pagina de login <a>
-var loginLink = registerView.querySelector('#login-link')
+//Navigation to login
+loginLink = registerView.querySelector('#login-link')
 
-loginLink.onclick = function (event) {
+loginLink.onclick = function (event){
     event.preventDefault()
 
     registerView.style.display = 'none'
     loginView.style.display = ''
 }
 
-// SUBMIT FOR REGISTER, entregar el registro, enviar el registro
-var registerForm = registerView.querySelector('#register-form')
+//Submit for register
+registerForm = registerView.querySelector('#register-form')
 
-registerForm.onsubmit = function (event) {
+registerForm.onsubmit = function (event){
     event.preventDefault()
 
-    var nameInput = registerForm.querySelector('#name-register')
-    var emailInput = registerForm.querySelector('#email-register')
-    var passwordInput = registerForm.querySelector('#password-register')
+    var nameInput = registerForm.querySelector('#name-input')
+    var emailInput = registerForm.querySelector('#email-input')
+    var passwordInput = registerForm.querySelector('#password-input')
 
     var name = nameInput.value
     var email = emailInput.value
     var password = passwordInput.value
 
-    //BUSCAR USUARIO POR EMAIL PARA COMPROBAR SI YA ESTÁ REGISTRADO
-var foundUser = null
+    try{
+        registerUser(name, email, password)
 
-for (var i = 0; i < users.length; i++) {
-    var user = users[i]
+        registerForm.reset()
 
-    if (user.email === email) {
-        foundUser = user
-        break
+        registerView.style.display = 'none'
+        loginView.style.display = ''
+    } catch (error){
+        alert(error.message)
     }
-}
-
-//SI EL USUARIO EXISTE, SI FUE ENCONTRADO, ALERTA DE ERROR
-    if (foundUser !== null) {
-    alert('User already exists')
-    return
-}
-
-//PARA GUARDAR LOS NUEVOS DATOS DEL USUARIO REGISTRADO
-    var user = {}
-
-    user.name = name
-    user.email = email
-    user.password = password
-
-    users.push(user)
-
-registerForm.reset();
-
-    registerView.style.display = 'none'
-    loginView.style.display = ''
 }

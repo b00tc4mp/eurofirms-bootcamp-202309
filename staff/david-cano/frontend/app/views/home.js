@@ -1,75 +1,105 @@
-// HOME VIEW, div que contiene la página de home
+//Home view
 
-var homeView = document.getElementById('home-view');
+homeView = document.getElementById('home-view')
+homeView.style.display = 'none'
 
-homeView.style.display = 'none';
+logoutButton = homeView.querySelector('#logout-button')
 
-//BOTON LOGOUT EN HEADER, en el encabezado
-var logoutButton = homeView.querySelector('#logout-button');
+logoutButton.onclick = function (){
+    homeView.style.display = 'none'
 
-logoutButton.onclick = function () {   
-    homeView.style.display = 'none';
+    var postsList = homeView.querySelector('#posts-list')
+    postsList.innerHTML = ''
 
-    var postsList = homeView.querySelector('#posts-list');
-    postsList.innerHTML = '';
-
-   // loggedInEmail = null;
-
-    loginView.style.display = '';
+    loginView.style.display = ''
 }
 
-//DIV CON EL FORMULARIO NUEVOS POSTS
-var postPanel = homeView.querySelector('#post-panel');
+//Post panel
+newPostPanel = homeView.querySelector('#new-post-panel')
 
-postPanel.style.display = 'none';
+newPostPanel.style.display = 'none'
 
-// FORMULARIO DE NUEVOS POSTS
-var postForm = postPanel.querySelector('#post-form');
+//Post form
+newPostForm = newPostPanel.querySelector('#new-post-form')
 
-// BOTON CREATE NEW POST
-var postButton = homeView.querySelector('#post-button')
+//Post button
+newPostButton = homeView.querySelector('#new-post-button')
 
-postButton.onclick = function () {
-    postPanel.style.display = '';
+newPostButton.onclick = function (){
+    newPostPanel.style.display = ''
 }
 
-//BOTON DE CANCELAR EL NUEVO POST
-var cancelPostButton = postForm.querySelector('#cancel-post-button');
+//Cancel post button
+cancelNewPostButton = newPostForm.querySelector('#cancel-new-post-button')
 
-cancelPostButton.onclick = function (event) {
-    event.preventDefault();
+cancelNewPostButton.onclick = function (event){
+    event.preventDefault()
 
-    postForm.reset();
+    newPostForm.reset()
 
-    postPanel.style.display = 'none';
+    newPostPanel.style.display = 'none'
 }
 
-// PARA SUBIR (enviar) EL FORMULARIO NUEVOS POSTS
-postForm.onsubmit = function (event) {
-    event.preventDefault();
+//Submit post form
+newPostForm.onsubmit = function (event){
+    event.preventDefault()
 
-    var imageNewPost = postForm.querySelector('#image-new-post');
-    var imageDescriptionNewPost = postForm.querySelector('#image-description-new-post');
-    var textNewPost = postForm.querySelector('#text-new-post');
+    var imageInput = newPostForm.querySelector('#image-input')
+    var imageDescriptionInput = newPostForm.querySelector('#image-description-input')
+    var textInput = newPostForm.querySelector('#text-input')
 
-    var newImage = imageNewPost.value;
-    var newImageDescription = imageDescriptionNewPost.value;
-    var newText = textNewPost.value;
+    var image = imageInput.value
+    var imageDescription = imageDescriptionInput.value
+    var text = textInput.value
 
-    var newPost = {};
+    try{
+        createNewPost(loggedInEmail, image, imageDescription, text)
 
-    newPost.author = loggedInEmail;
-    newPost.image = newImage;
-    newPost.imageDescription = newImageDescription;
-    newPost.text = newText;
+        newPostForm.reset()
 
-    posts.push(newPost);
+        newPostPanel.style.display = 'none'
 
-    postForm.reset();
-
-    postPanel.style.display = 'none';
-
-    renderPost();
-
+        renderPosts()
+    } catch (error){
+        alert(error.message)
+    }
 }
 
+//Render posts
+function renderPosts(){
+    try{
+        var posts = retrievePosts(loggedInEmail)
+
+        var postsList = homeView.querySelector('#posts-list')
+
+        postsList.innerHTML = ''
+
+        for (var i = posts.length - 1; i >= 0; i--){
+            var post = posts[i]
+
+            var article = document.createElement('article')
+            article.setAttribute('aria-label', 'Post')
+            article.setAttribute('class', 'article')
+
+            var h3 = document.createElement('h3')
+            h3.innerText = post.author
+            h3.setAttribute('aria-label', 'author')
+
+            var image = document.createElement('img')
+            image.setAttribute('class', 'post-image')
+            image.src = post.image
+            image.alt = post.imageDescription
+
+            var paragraph = document.createElement('p')
+            paragraph.innerText = post.text
+
+            article.appendChild(h3)
+            article.appendChild(image)
+            article.appendChild(paragraph)
+
+            postsList.appendChild(article)
+        }
+    } catch (error){
+        alert(error.message)
+    }
+}

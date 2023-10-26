@@ -7,7 +7,7 @@ console.log('CASE find first person with surname Garcia in array of people [Pepi
 var people = ['Pepito Grillo', 'Wendy Darling', 'James Hook', 'Mer Maid', 'Campa Nilla', 'Anita Garcia', 'John Doe', 'Cruela De Vil', 'Andy Garcia', 'John Wick']
 
 var person = find(people, function (name) {
-    return name.includes('Garcia')
+    return name.includes('García')
 })
 
 console.log(person)
@@ -62,7 +62,7 @@ var product = find(products, function (item) {
 console.log(product)
 // undefined
 
-console.log('CASE find from')
+console.log('CASE find from emails')
 
 var emails = [
     {

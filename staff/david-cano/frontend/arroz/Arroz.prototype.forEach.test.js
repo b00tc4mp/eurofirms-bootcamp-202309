@@ -49,9 +49,9 @@ things[9] = 'from';
 things[10] = 'car';
 things.length = 11;
 
-things.forEach(function (things) {
-    if (things.length === 4)
-    console.log(things)
+things.forEach(function (thing) {
+    if (thing.length === 4)
+    console.log(thing)
 })
 
 // nice

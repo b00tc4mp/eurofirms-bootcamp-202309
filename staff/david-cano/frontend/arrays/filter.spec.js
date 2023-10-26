@@ -56,7 +56,7 @@ console.log(redProduct)
 // { brand: 'Levis', model: '501', color: 'Denim', id: 'LEV-234' }
 
 
-console.log('CASE find email with text contrato in array of emails')
+console.log('CASE find email with new Date > date of emails')
 
 var emails = [
     {
@@ -114,3 +114,4 @@ var evenNumbers = filter(numbers, function(element) {
 
 // Mostramos el arreglo de números pares obtenidos.
 console.log("Números pares:", evenNumbers);
+//Números pares: (3) [2, 4, 6]

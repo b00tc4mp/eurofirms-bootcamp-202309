@@ -21,11 +21,8 @@ console.log('Comprobando si al menos un número es par en el nuevo objeto number
 // Llamamos a la función `some` con el array y la función de devolución de llamada.
 var hasEvenNumber = numbersSome.some( inside);
 
-if (hasEvenNumber) {
-    console.log("Al menos un número par fue encontrado en numbersSome.");
-} else {
-    console.log("No se encontró ningún número par en numbersSome.");
-}
+console.log(hasEvenNumber);
+//true
 
 CASE('Example II use function some');
 
@@ -43,14 +40,11 @@ function inside(element) {
     return element % 2 === 0;
 }
 
-console.log('Comprobando si al menos un número es par en el nuevo objeto numbersSome: {1, 2, 3, 4, 5, 6}');
+console.log('Comprobando si al menos un número es par en el nuevo objeto numbersSome: {1, 3, 5, 7, 9, 11}');
 
 // Llamamos a la función `some` con el array y la función de devolución de llamada.
 var hasEvenNumber = numbersSome.some( inside);
 
-if (hasEvenNumber) {
-    console.log("Al menos un número par fue encontrado en numbersSome.");
-} else {
-    console.log("No se encontró ningún número par en numbersSome.");
-}
+console.log(hasEvenNumber);
+//false
 

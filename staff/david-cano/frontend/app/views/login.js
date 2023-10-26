@@ -1,51 +1,51 @@
-// LOGIN VIEW, div que contiene el formulario de login
-var loginView = document.getElementById('login-view');
+//Login view
 
-loginView.style.display = '';
+loginView = document.getElementById('login-view')
+loginView.style.display = ''
 
-// NAVIGATION TO REGISTER, enlace para navegar a la página de registro <a>
-var registerLink = loginView.querySelector('#register-link');
+//Navigation to register
+registerLink = loginView.querySelector('#register-link')
 
-registerLink.onclick = function (event) {
-    event.preventDefault();
+registerLink.onclick = function (event){
+    event.preventDefault()
 
-    loginView.style.display = 'none';
-    registerView.style.display = '';
+    loginView.style.display = 'none'
+    registerView.style.display = ''
 }
 
-// SUBMIT FOR LOGIN, entregar el login, enviar el login
-var loginForm = loginView.querySelector('#login-form');
+//Submit login
+loginForm = loginView.querySelector('#login-form')
 
-loginForm.onsubmit = function (event) {
-    event.preventDefault();
+loginForm.onsubmit = function (event){
+    event.preventDefault()
 
-    var emailInput = loginForm.querySelector('#email-login');
-    var passwordInput = loginForm.querySelector('#password-login');
+    var emailInput = loginForm.querySelector('#email-input')
+    var passwordInput = loginForm.querySelector('#password-input')
 
-    var email = emailInput.value;
-    var password = passwordInput.value;
+    var email = emailInput.value
+    var password = passwordInput.value
 
-    try {
-        authenticateUser(email, password);
+    try{
+        authenticateUser(email, password)
 
-        loginForm.reset();
+        loginForm.reset()
 
-        loggedInEmail = email;
+        loggedInEmail = email
 
-        loginView.style.display = 'none';
+        loginView.style.display = 'none'
 
-    // RENDER USER NAME IN HEADER
-    var userNameSpan = homeView.querySelector('#user-name-span');
-    var user = retrieveUser(email);
-    userNameSpan.innerText = user.name;
+    //Render user name in header
+        var userNameSpan = homeView.querySelector('#user-name-span')
 
-    // RENDER POSTS
+        var user = retrieveUser(email)
 
-    renderPost();
+        userNameSpan.innerText = user.name
 
-    homeView.style.display = '';
+    //Render posts in body
+        renderPosts()
 
-} catch (error){
-    alert(error.message);
-}
+        homeView.style.display = ''
+    } catch (error){
+        alert(error.message)
+    }
 }
