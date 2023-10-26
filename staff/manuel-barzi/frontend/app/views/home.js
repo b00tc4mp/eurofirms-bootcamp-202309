@@ -86,9 +86,9 @@ function renderPosts() {
         var article = document.createElement('article')
         article.setAttribute('aria-label', 'Post')
 
-        var span = document.createElement('span')
-        span.innerText = post.author
-        span.setAttribute('aria-label', 'author')
+        var h3 = document.createElement('h3')
+        h3.innerText = post.author
+        h3.setAttribute('aria-label', 'author')
 
         var image = document.createElement('img')
         image.setAttribute('class', 'post-image')
@@ -98,7 +98,7 @@ function renderPosts() {
         var paragraph = document.createElement('p')
         paragraph.innerText = post.text
 
-        article.appendChild(span)
+        article.appendChild(h3)
         article.appendChild(image)
         article.appendChild(paragraph)
 
