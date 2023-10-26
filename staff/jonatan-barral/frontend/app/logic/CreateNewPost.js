@@ -16,6 +16,4 @@ function createNewPost(email, image, imageDescription, text) {
     post.text = text
 
     posts.push(post)
-
-
-}
+}   
