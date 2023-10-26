@@ -4,6 +4,6 @@ function retrieveUser(email) {
     })
 
     if (foundUser === undefined)
-        throw new Error('wrong error')
+        throw new Error('wrong credentials')
     return foundUser
 }
