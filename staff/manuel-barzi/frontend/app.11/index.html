@@ -17,13 +17,13 @@
 
         <form id="register-form" class="form">
             <label class="label" for="name-input">Name</label>
-            <input class="input" type="text" id="name-input" title="Name" required>
+            <input class="input" type="text" id="name-input" title="Name">
 
             <label class="label" for="email-input">E-mail</label>
-            <input class="input" type="email" id="email-input" title="E-mail" required>
+            <input class="input" type="email" id="email-input" title="E-mail">
 
             <label class="label" for="password-input">Password</label>
-            <input class="input" type="password" id="password-input" title="Password" required>
+            <input class="input" type="password" id="password-input" title="Password">
 
             <button class="button" type="submit">Register</button>
         </form>
@@ -36,10 +36,10 @@
 
         <form id="login-form" class="form">
             <label class="label" for="email-input">E-mail</label>
-            <input class="input" type="email" id="email-input" title="E-mail" required>
+            <input class="input" type="email" id="email-input" title="E-mail">
 
             <label class="label" for="password-input">Password</label>
-            <input class="input" type="password" id="password-input" title="Password" required>
+            <input class="input" type="password" id="password-input" title="Password">
 
             <button class="button" type="submit">Login</button>
         </form>
@@ -62,13 +62,13 @@
 
             <form id="new-post-form" class="form">
                 <label for="image-input" class="label">Image</label>
-                <input type="url" id="image-input" class="input" required>
+                <input type="url" id="image-input" class="input">
 
                 <label for="image-description-input" class="label">Image description</label>
-                <input type="text" id="image-description-input" class="input" required>
+                <input type="text" id="image-description-input" class="input">
 
                 <label for="text-input" class="label">Text</label>
-                <input type="text" id="text-input" class="input" required>
+                <input type="text" id="text-input" class="input">
 
                 <button type="submit" class="button">Post</button>
                 <button id="cancel-new-post-button" class="button">Cancel</button>
@@ -108,8 +108,6 @@
     <script src="logic/authenticateUser.js"></script>
     <script src="logic/retrieveUser.js"></script>
     <script src="logic/registerUser.js"></script>
-    <script src="logic/createNewPost.js"></script>
-    <script src="logic/retrievePosts.js"></script>
 
     <!-- presentation -->
     <script src="main.js"></script>
