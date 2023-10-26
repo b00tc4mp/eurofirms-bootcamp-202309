@@ -13,3 +13,8 @@ function validatePassword(password) {
     validateText(password, 'password')
     if (password.length < 8) throw new RangeError('password length is lower than 8')
 }
+
+function validateUrl(url, explain) {
+    validateText(url, explain)
+    if (!url.startsWith('http')) throw new Error(explain + ' is not valid')
+}
