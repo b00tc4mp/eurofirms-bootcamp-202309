@@ -16,10 +16,6 @@ h2 {
     padding-bottom: 1rem;
 }
 
-.label {
-    align-self: flex-start;
-}
-
 .form {
     display: flex;
     flex-direction: column;

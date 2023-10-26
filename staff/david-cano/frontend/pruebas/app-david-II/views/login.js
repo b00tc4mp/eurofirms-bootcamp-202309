@@ -7,7 +7,7 @@ loginView.style.display = ''
 var registerLink = loginView.querySelector('#register-link');
 
 registerLink.onclick = function (event){
-    event.preventDefault();
+    event.preventDefault()
 
     loginView.style.display = 'none'
     registerView.style.display = ''
@@ -19,11 +19,11 @@ var loginForm = loginView.querySelector('#login-form')
 loginForm.onsubmit = function (event){
     event.preventDefault()
 
-    var emailLogin = loginForm.querySelector('#email-login')
-    var passwordLogin = loginForm.querySelector('#password-login')
+    var emailInput = loginForm.querySelector('#email-login')
+    var passwordInput = loginForm.querySelector('#password-login')
 
-    var email = emailLogin.value
-    var password = passwordLogin.value
+    var email = emailInput.value
+    var password = passwordInput.value
 
     try{
         authenticateUser(email, password)

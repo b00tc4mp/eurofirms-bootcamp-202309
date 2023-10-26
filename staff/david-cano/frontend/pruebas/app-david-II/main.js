@@ -3,7 +3,7 @@ var loggedInEmail = null
 
 function renderPost(){
     try{
-        var posts = retrievePost(loggedInEmail)
+        var posts = retrievePosts(loggedInEmail)
 
     var postsList = homeView.querySelector('#posts-list')
     postsList.innerHTML = ''

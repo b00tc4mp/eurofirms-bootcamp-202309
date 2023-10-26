@@ -13,8 +13,6 @@ logoutButton.onclick = function (){
     var postsList = homeView.querySelector('#posts-list');
     postsList.innerHTML = ''
 
-    // loggedInEmail = null;
-
     loginView.style.display = ''
 }
 
@@ -56,16 +54,8 @@ postForm.onsubmit = function (event){
     var newImageDescription = imageDescriptionNewPost.value
     var newText = textNewPost.value
 
-    /*var newPost = {};
-    newPost.author = loggedInEmail;
-    newPost.image = newImage;
-    newPost.imageDescription = newImageDescription;
-    newPost.text = newText;*/
-
     try{
-        createNewPost(loggedInEmail, image, imageDescription, text)
-
-        //posts.push(newPost);
+        createNewPost(loggedInEmail, newImage, newImageDescription, newText)
 
         postForm.reset()
 
