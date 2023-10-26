@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>App</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -49,39 +49,40 @@
         <header class="header" aria-label="Header">
             <h1>Home</h1>
             <span id="user-name-span" aria-label="User name">Hello World</span>
-            <button id="new-post-button" title="New post" aria-label="New post">+</button>
-            <button id="logout-button">Logout</button>
+            <button id="new-post-button" title="New post" aria-label="New post" class="button">+</button>
+            <button id="logout-button" class="button">Logout</button>
         </header>
 
         <!-- add post panel -->
 
-        <div id="new-post-panel" class="panel-lightgreen">
+        <div id="new-post-panel" class="view">
             <h2>New post</h2>
 
             <form id="new-post-form" class="form">
-                <label for="image-input">Image</label>
-                <input type="url" id="image-input">
+                <label for="image-input" class="label">Image</label>
+                <input type="url" id="image-input" class="input" required>
 
-                <label for="image-description-input">Image description</label>
-                <input type="text" id="image-description-input">
+                <label for="image-description-input" class="label">Image description</label>
+                <input type="text" id="image-description-input" class="input" required="">
 
-                <label for="text-input">Text</label>
-                <input type="text" id="text-input">
+                <label for="text-input" class="label">Text</label>
+                <input type="text" id="text-input" class="input" required>
 
-                <button type="submit">Post</button>
-                <button id="cancel-new-post-button">Cancel</button>
+                <button type="submit" class="button">Post</button>
+                <button id="cancel-new-post-button" class="button">Cancel</button>
             </form>
         </div>
 
 
         <!-- posts list -->
 
-        <div id="posts-list" aria-label="Posts list">
+        <div id="posts-list" aria-label="Posts list" class="view">
         </div>
     </div>
 
     <!-- utils -->
     <script src="utils/find.js"></script>
+    <script src="utils/validators.js"></script>
 
     <!-- data -->
     <script src="data.js"></script>
@@ -89,6 +90,9 @@
     <!-- business logic -->
     <script src="logic/authenticateUser.js"></script>
     <script src="logic/retrieveUser.js"></script>
+    <script src="logic/registerUser.js"></script>
+    <script src="logic/createNewPost.js"></script>
+    <script src="logic/retrievePosts.js"></script>
 
     <!-- presentation -->
     <script src="main.js"></script>

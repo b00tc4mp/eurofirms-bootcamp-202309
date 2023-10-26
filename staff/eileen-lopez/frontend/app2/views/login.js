@@ -7,7 +7,7 @@ registerLink = loginView.querySelector('#register-link')
 registerLink.onclick = function (event) {
     event.preventDefault()
 
-    loginView.style.display =''
+    loginView.style.display ='none'
     registerView.style.display = ''
 }
 
@@ -17,7 +17,7 @@ loginForm.onsubmit = function (event) {
     event.preventDefault()
 
     var emailInput = loginForm.querySelector('#email-input')
-    var passwordInput = loginForm.querySelector('#email-input')
+    var passwordInput = loginForm.querySelector('#password-input')
 
     var email = emailInput.value
     var password = passwordInput.value
@@ -35,7 +35,7 @@ loginForm.onsubmit = function (event) {
 
         var user = retrieveUser(email)
 
-        userNameSpan.innerText = user.userNameSpan
+        userNameSpan.innerText = user.name
         
         renderPosts()
 

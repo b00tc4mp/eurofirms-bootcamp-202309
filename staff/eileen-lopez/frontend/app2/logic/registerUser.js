@@ -1,18 +1,13 @@
 function registerUser(name, email, password) {
+    validateText(name, 'name')
+    validateEmail(email)
+    validatePassword(password)
 
-    var foundUser = null
+    var foundUser = find(users, function (user) {
+        return user.email === email
+    }) 
 
-    for (var i = 0; i < users.length; i++) {
-        var user = users[i]
-
-        if (user.email === email) {
-            foundUser = user
-
-            break
-        }
-    }
-
-    if (foundUser !== null)
+    if (foundUser !== undefined)
         throw new Error ('User already exists')
 
     var user = {}
