@@ -1,4 +1,3 @@
-
 homeView = document.getElementById('home-view')
 
 homeView.style.display = 'none'
@@ -14,25 +13,17 @@ logoutButton.onclick = function () {
     loginView.style.display = ''
 }
 
-
-
 newPostPanel = homeView.querySelector('#new-post-panel')
 
 newPostPanel.style.display = 'none'
 
-
-
 newPostForm = newPostPanel.querySelector('#new-post-form')
-
-
 
 newPostButton = homeView.querySelector('#new-post-button')
 
 newPostButton.onclick = function () {
     newPostPanel.style.display = ''
 }
-
-
 
 cancelNewPostButton = newPostForm.querySelector('#cancel-new-post-button')
 
@@ -43,8 +34,6 @@ cancelNewPostButton.onclick = function (event) {
 
     newPostPanel.style.display = 'none'
 }
-
-
 
 newPostForm.onsubmit = function (event) {
     event.preventDefault()
@@ -70,8 +59,6 @@ newPostForm.onsubmit = function (event) {
     }
 }
 
-
-
 function renderPosts() {
     try {
         var posts = retrievePosts(loggedInEmail)
@@ -87,7 +74,6 @@ function renderPosts() {
             article.setAttribute('aria-label', 'Post')
             var h3 = document.createElement('h3')
             h3.innerText = post.author //The aria-level label is removed due to compatibility issues with the screen reader and the h3 tag.
-
 
             var image = document.createElement('img')
             image.setAttribute('class', 'post-image')

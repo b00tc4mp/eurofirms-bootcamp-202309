@@ -1,4 +1,3 @@
-
 registerView = document.getElementById('register-view')
 
 registerView.style.display = 'none'
@@ -11,7 +10,6 @@ loginLink.onclick = function (event) {
     registerView.style.display = 'none'
     loginView.style.display = ''
 }
-
 
 registerForm = registerView.querySelector('#register-form')
 

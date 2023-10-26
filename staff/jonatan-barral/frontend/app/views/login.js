@@ -1,10 +1,6 @@
-// login view
-
 loginView = document.getElementById('login-view')
 
 loginView.style.display = ''
-
-// navigation to register
 
 registerLink = loginView.querySelector('#register-link')
 
@@ -14,8 +10,6 @@ registerLink.onclick = function (event) {
     loginView.style.display = 'none'
     registerView.style.display = ''
 }
-
-// submit login
 
 loginForm = loginView.querySelector('#login-form')
 
@@ -37,13 +31,9 @@ loginForm.onsubmit = function (event) {
 
         loginView.style.display = 'none'
 
-        // render user name in header
-
         var userNameSpan = homeView.querySelector('#user-name-span')
         var user = retrieveUser(email)
         userNameSpan.innerText = user.name
-
-        // render posts in body
 
         renderPosts()
 
@@ -51,5 +41,4 @@ loginForm.onsubmit = function (event) {
     } catch (error) {
         alert(error.message)
     }
-
 }
