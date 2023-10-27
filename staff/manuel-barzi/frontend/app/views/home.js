@@ -108,7 +108,7 @@ function renderPosts() {
             // else
             //     likeButton.innerText = '🩶'
 
-            likeButton.innerText = liked ? '❤️' : '🩶'
+            likeButton.innerText = (liked ? '❤️' : '🩶') + ' ' + post.likes.length + ' likes'
 
             function createLikeButtonOnClick(postIndex) {
                 return function () { // closure
