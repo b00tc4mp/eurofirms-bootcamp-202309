@@ -4,10 +4,31 @@ function validateText(text, explain) {
 }
 
 function validateEmail(email) {
-    validateText(email, 'email')
-    if (!email.includes('@')) throw new Error('email is not valid')
-    if (!email.includes('.')) throw new Error('email is not valid')
+    validateText(email, 'email');
+    var atIndex = email.indexOf('@')
+    var dotIndex = email.lastIndexOf('.')
+
+    if (atIndex === -1) {
+        throw new Error('Email is not valid: Missing "@" symbol');
+    } else if (dotIndex === -1) {
+        throw new Error('Email is not valid: Missing "." symbol');
+    } else if (atIndex >= dotIndex) {
+        throw new Error('Email is not valid: "@" should appear before "."');
+    }
+
+    var username = email.slice(0, atIndex);
+    var domain = email.slice(atIndex + 1, dotIndex);
+    var topLevelDomain = email.slice(dotIndex + 1);
+
+    if (username.length === 0) {
+        throw new Error('Email is not valid: Username is missing');
+    } else if (domain.length === 0) {
+        throw new Error('Email is not valid: Domain is missing');
+    } else if (topLevelDomain.length === 0) {
+        throw new Error('Email is not valid: Top-level domain is missing')
+    }
 }
+
 
 function validatePassword(password) {
     validateText(password, 'password')
