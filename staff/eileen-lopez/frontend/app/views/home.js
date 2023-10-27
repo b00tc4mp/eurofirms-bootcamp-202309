@@ -1,34 +1,36 @@
-// home view
+homeView = document.getElementById('home-view')
 
-// Obtener el elemento HTML con el id 'home-view'
-var homeView = document.getElementById('home-view');
+homeView.style.display = 'none'
 
-// Ocultar la vista de inicio
-homeView.style.display = 'none';
+logoutButton = homeView.querySelector('#logout-button')
 
-// Obtener el botón de cierre de sesión dentro de la vista de inicio
-var logoutButton = homeView.querySelector('#logout-button');
+logoutButton.onclick = function() {
+    homeView.style.display = 'none'
 
-// Agregar un controlador de eventos al hacer clic en el botón de cierre de sesión
-logoutButton.onclick = function () {
-    // Ocultar la vista de inicio y mostrar la vista de inicio de sesión
-    homeView.style.display = 'none';
-    loginView.style.display = '';
-};
+    var postsList =homeView.querySelector('#posts-list')
+    postsList.innerHTML = ''
 
-var newPostPanel = homeView.querySelector('#new-post-panel');
+    loginView.style.display = ''
+}
+
+newPostPanel = homeView.querySelector('#new-post-panel')
+
 newPostPanel.style.display = 'none'
 
-var newPostButton = homeView.querySelector('#new-post-button');
+newPostForm = newPostPanel.querySelector('#new-post-form')
+
+newPostButton = homeView.querySelector('#new-post-button')
+
 newPostButton.onclick = function () {
     newPostPanel.style.display = ''
 }
 
-var newPostForm = newPostPanel.querySelector('#new-post-form')
+cancelNewPostButton = newPostForm.querySelector('#cancel-new-post-button')
 
-var CancelNewPostButton = newPostForm.querySelector('#cancel-new-post-button')
-CancelNewPostButton.onclick = function () {
-    newPostForm.reset()
+cancelNewPostButton.onclick = function (event) {
+    event.preventDefault ()
+
+    newPostForm.reset ()
 
     newPostPanel.style.display = 'none'
 }
@@ -36,51 +38,77 @@ CancelNewPostButton.onclick = function () {
 newPostForm.onsubmit = function (event) {
     event.preventDefault()
 
-    var newImagePost = newPostForm.querySelector('#image-input');
-    var newTextPost = newPostForm.querySelector('#text-input');
+    var imageInput = newPostForm.querySelector('#image-input')
+    var imageDescriptionInput = newPostForm.querySelector('#image-description-input')
+    var textInput = newPostForm.querySelector('#text-input')
 
-    var imageValue = newImagePost.value;
-    var textValue = newTextPost.value;
+    var image = imageInput.value
+    var imageDescription = imageDescriptionInput.value
+    var text = textInput.value
 
-    var newPost = {}
-    newPost.image = imageValue
-    newPost.text = textValue
-    newPost.author = loggedUser
+    try {
+        createNewPost (loggedInEmail, image, imageDescription, text)
 
-    posts.push(newPost)
-    newPostForm.reset()
+        newPostForm.reset()
 
-    renderPosts()
+        newPostPanel.style.display ='none'
 
-    newPostPanel.style.display = 'none'
+        renderPosts()
+   } catch (error) {
+        alert(error.message)
+   }
 }
 
-function renderPosts() {
-    var postList = homeView.querySelector('#post-list');
+function renderPosts(){
+    try{
+        var posts = retrievePosts(loggedInEmail)
 
-    postList.innerHTML = ''
+        var postsList = homeView.querySelector('#posts-list')
 
-    for (var i = posts.length - 1; i >= 0; i--) {
-        var post = posts[i]
-        var article = document.createElement('article');
-        article.setAttribute('class', 'post-article');
+        postsList.innerHTML = ''
 
-        var span = document.createElement('span');
+        for (var i = posts.length -1; i >= 0; i--) {
+            var post = posts[i]
 
-        span.innerText = post.author;
+            var article = document.createElement('article')
+            article.setAttribute('aria-label', 'post')
 
-        var image = document.createElement('img'); // <img>
-        image.setAttribute('class', 'post-image'); // <img class='post-image>
-        image.src = post.image;  // <img class='post-image' src='...url'>
-        image.alt = post.alt  // <img class='post-image' src='...url' alt='text>
+            var h3 = document.createElement('h3')
+            h3.innerText = post.author
 
-        var paragraph = document.createElement('p');
-        paragraph.innerText = post.text; // <p>innerText<p/>
+            var image = document.createElement('img')
+            image.setAttribute('class', 'post-image')
+            image.src = post.image
+            image.alt = post.imageDescription
 
-        article.appendChild(span);
-        article.appendChild(image);
-        article.appendChild(paragraph);
+            var paragraph = document.createElement('p')
+            paragraph.innerText=post.text
 
-        postList.appendChild(article);
+            var likeButton = document.createElement('button')
+            likeButton.setAttribute('class', 'button')
+
+            var liked = post.likes.includes(loggedInEmail)
+
+            likeButton.innerText = liked ? '♥︎'  + ' ' + post.likes.length + ' likes' : '♡' + ' ' + post.likes.length + ' likes'
+
+            function createLikeButtonOnClick(postIndex) {
+                return function () {
+                    toggleLikePost(loggedInEmail, postIndex)
+
+                    renderPosts()
+                }
+            }
+
+            likeButton.onclick = createLikeButtonOnClick(i)
+
+            article.appendChild(h3)
+            article.appendChild(image)
+            article.appendChild(paragraph)
+            article.appendChild(likeButton)
+
+            postsList.appendChild(article)
+        }
+    } catch (error) {
+        alert(error.message)
     }
 }
