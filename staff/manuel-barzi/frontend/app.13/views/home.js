@@ -81,7 +81,7 @@ function renderPosts() {
 
         postsList.innerHTML = ''
 
-        for (var i = posts.length - 1; i > -1; i--) {
+        for (var i = posts.length - 1; i >= 0; i--) {
             var post = posts[i]
 
             var article = document.createElement('article')
@@ -99,32 +99,9 @@ function renderPosts() {
             var paragraph = document.createElement('p')
             paragraph.innerText = post.text
 
-            var likeButton = document.createElement('button')
-            likeButton.setAttribute('class', 'button')
-
-            var liked = post.likes.includes(loggedInEmail)
-
-            // if (liked)
-            //     likeButton.innerText = '❤️'
-            // else
-            //     likeButton.innerText = '🩶'
-
-            likeButton.innerText = liked ? '❤️' : '🩶'
-
-            function createLikeButtonOnClick(postIndex) {
-                return function () { // closure
-                    toggleLikePost(loggedInEmail, postIndex)
-
-                    renderPosts()
-                }
-            }
-
-            likeButton.onclick = createLikeButtonOnClick(i)
-
             article.appendChild(h3)
             article.appendChild(image)
             article.appendChild(paragraph)
-            article.appendChild(likeButton)
 
             postsList.appendChild(article)
         }
