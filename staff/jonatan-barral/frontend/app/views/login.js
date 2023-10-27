@@ -22,7 +22,6 @@ loginForm.onsubmit = function (event) {
     var email = emailInput.value
     var password = passwordInput.value
 
-    // search user by email
     try {
         authenticateUser(email, password)
         loginForm.reset()
