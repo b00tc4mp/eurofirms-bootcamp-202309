@@ -89,7 +89,6 @@ function renderPosts() {
 
             var h3 = document.createElement('h3')
             h3.innerText = post.author
-            h3.setAttribute('aria-label', 'author')
 
             var image = document.createElement('img')
             image.setAttribute('class', 'post-image')
