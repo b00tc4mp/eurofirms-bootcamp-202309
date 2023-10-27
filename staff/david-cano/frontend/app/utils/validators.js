@@ -18,3 +18,7 @@ function validateUrl(url, explain){
     validateText(url, explain)
     if(!url.startsWith('http')) throw new Error(explain + ' is not valid')
 }
+
+function validateNumber(number, explain){
+    if(typeof number !== 'number') throw new TypeError(explain + ' is not a number')
+}
