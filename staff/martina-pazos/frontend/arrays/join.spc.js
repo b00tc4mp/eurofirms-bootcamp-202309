@@ -17,3 +17,5 @@ var animalsString = join(animals, '-')
 
 console.log(animalsString)
 // Tiger-Lion-Cat
+
+

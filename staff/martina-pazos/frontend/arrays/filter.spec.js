@@ -22,7 +22,3 @@ var filtered = filter(names, function (name) {
 })
 console.log(filtered)
 // [Martina, Ignacio, Jonatan]
-
-
-
-
