@@ -8,3 +8,4 @@ function includes(array, searchElement) {
 
     return false
 }
+

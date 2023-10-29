@@ -1,8 +1,7 @@
-
-______________________________________________________
-TEST('Arroz prototype includes')
+TEST('Arroz constructor')
 
 CASE('check arroz nums2 includes 40')
+//El método includes() determina si una matriz incluye un determinado elemento, devuelve true o false según corresponda.
 
 const nums2 = new Arroz
 nums2[0] = 10
@@ -65,3 +64,24 @@ const existsElephant = animals2.includes('elephant')
 
 console.log(existsElephant)
 // false
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

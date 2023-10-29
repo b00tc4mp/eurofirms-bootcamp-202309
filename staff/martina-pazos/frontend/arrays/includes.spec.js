@@ -37,3 +37,11 @@ var exists = includes(animals, 'elephant')
 
 console.log(exists)
 // false
+
+
+
+
+
+
+
+

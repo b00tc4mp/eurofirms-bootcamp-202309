@@ -47,3 +47,10 @@ var element = at(chars, -1)
 
 console.log(element)
 // 'c'
+
+
+
+
+
+
+
