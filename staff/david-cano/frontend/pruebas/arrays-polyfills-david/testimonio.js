@@ -5,5 +5,5 @@ function TEST(title) {
 }
 
 function CASE(title) {
-    console.log('%cCASE ' + title, 'color: purple; font-weight: bold; font-size: 1rem;')
+    console.log('%cCASE ' + title, 'color: blue;')
 }

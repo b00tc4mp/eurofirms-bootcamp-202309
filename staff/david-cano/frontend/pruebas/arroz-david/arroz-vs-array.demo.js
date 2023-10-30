@@ -7,7 +7,7 @@ n[1] = 'world';
 n[2] = '!';
 n.length = 3;
 
-n.forEach(function (element){
+n.forEach(function (element) {
     console.log(element);
 })
 
@@ -18,16 +18,16 @@ m[0] = 'hello';
 m[1] = 'World';
 m[2] = '!';
 
-m.forEach(function (element){
+m.forEach(function (element) {
     console.log(element);
 })
 
-//VM1377:1 with Arroz
-//VM1377:11 Hello
-//VM1377:11 world
-//VM1377:11 !
+// VM1377:1 with Arroz
+// VM1377:11 Hello
+// VM1377:11 world
+// VM1377:11 !
 
-//VM1377:14 with Array
-//VM1377:24 hello
-//VM1377:24 World
-//VM1377:24 !
+// VM1377:14 with Array
+// VM1377:24 hello
+// VM1377:24 World
+// VM1377:24 !

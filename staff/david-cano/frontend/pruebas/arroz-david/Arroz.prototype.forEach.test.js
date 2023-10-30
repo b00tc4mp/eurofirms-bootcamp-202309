@@ -1,0 +1,61 @@
+TEST('Arroz prototype forEach')
+
+CASE('print each char from chars')
+
+const chars = new Arroz;
+chars[0] = 'a';
+chars[1] = 'b';
+chars[2] = 'c';
+chars.length = 3;
+
+function printChar(char) {
+    console.log(char);
+}
+
+chars.forEach(printChar);
+//'a'
+//'b'
+//'c'
+
+CASE(' multiply each number from nums and print it')
+
+const nums = new Arroz;
+nums[0] = 10;
+nums[1] = 20;
+nums[2] = 30;
+nums.length = 3;
+
+nums.forEach(function (num) {
+    console.log(num * 100);
+})
+
+//1000
+//2000
+//3000
+
+CASE('print each word with length 4 from things')
+
+const things = new Arroz;
+things[0] = 'nice';
+things[1] = 'rice';
+things[2] = 'hide';
+things[3] = 'letter';
+things[4] = 'tomato';
+things[5] = 'banana';
+things[6] = 'rain';
+things[7] = 'off';
+things[8] = 'to';
+things[9] = 'from';
+things[10] = 'car';
+things.length = 11;
+
+things.forEach(function (thing) {
+    if (thing.length === 4)
+    console.log(thing)
+})
+
+// nice
+// rice
+// hide
+// rain
+// from

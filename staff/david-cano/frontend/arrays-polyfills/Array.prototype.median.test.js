@@ -1,10 +1,10 @@
-TEST('Árray prototype median')
+TEST('Array prototype median')
 
 CASE('calculate the median value on the array [10,20,30,40,50]')
 
-const numbers = [10, 20, 30, 40, 50]
+var numbers = [10, 20, 30, 40, 50]
 
-const result = numbers.median()
+var result = numbers.median()
 
 console.log(result)
 //30
@@ -12,18 +12,29 @@ console.log(result)
 
 CASE('return NaN on array with a string [10,20, hola mundo, 40,50]')
 
-const items = [10, 20, 'hola mundo', 40, 50]
+var items = [10, 20, 'hola mundo', 40, 50]
 
-const result2 = numbers.median()
+var result2 = items.median()
 
 console.log(result2)
 //NaN
 
 CASE('return NaN on array with a string [10,20, "30", 40,50]')
 
-const numbers2 = [10, 20, '30', 40, 50]
+var numbers2 = [20.2, 20.8, '30.5', 60.3, 80.4]
 
-const result3 = numbers.median()
+var result3 = numbers2.median()
 
 console.log(result3)
-//30
+//42.440000000000005
+
+CASE('return NaN on array with a string [10.5, 20, "30.2", 40, "hola mundo",50.9')
+
+var example = [10.5, 20, '30.2', 40, 'hola mundo', 50.9]
+
+var result4 = example.median()
+
+console.log(result4)
+//NaN
+//Si quitamos el 'hola mundo' nos devuelve 30.32
+
