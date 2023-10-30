@@ -19,7 +19,7 @@ var result2 = items.median()
 console.log(result2)
 //NaN
 
-CASE('return NaN on array with a string [10,20, "30", 40,50]')
+CASE('return 42,44 on array with a string [20.2, 20.8, "30.5", 60.3, 80.4]')
 
 var numbers2 = [20.2, 20.8, '30.5', 60.3, 80.4]
 
