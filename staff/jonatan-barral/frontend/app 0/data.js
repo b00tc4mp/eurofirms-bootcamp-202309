@@ -1,8 +1,6 @@
-// Declaración de las colecciones de la base de datos
 var users = []; // Colección de usuarios
 var posts = []; // Colección de publicaciones
 
-// Llenando la colección de usuarios con algunos ejemplos
 users[0] = {
     name: 'Pepito Grillo',
     email: 'pepito@grillo.com',
@@ -15,38 +13,42 @@ users[1] = {
     password: '123123123'
 }
 
-// Llenando la colección de publicaciones con algunos ejemplos
 posts[0] = {
     author: 'pepito@grillo.com',
     image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/1200px-SNice.svg.png',
-    imageDescription: "Carita sonriente",
-    text: '¡Sonríe!'
+    imageDescription: 'Smile image',
+    text: 'Smile!',
+    likes: []
 }
 
 posts[1] = {
     author: 'campa@nilla.com',
     image: 'https://www.telemundo.com/sites/nbcutelemundo/files/styles/fit-1240w/public/sites/nbcutelemundo/files/images/article/2014/08/28/hello_kitty_140920568644_4.jpg',
-    imageDescription: "Gatita desagradable",
-    text: '¡Hola, Kitty!'
+    imageDescription: 'Hello Kitty image',
+    text: 'Hello, Kitty!',
+    likes: []
 }
 
 posts[2] = {
     author: 'campa@nilla.com',
     image: 'https://m.media-amazon.com/images/I/51-qisfjMnL.jpg',
-    imageDescription: "Gato cosmico",
-    text: 'Doraemon'
+    imageDescription: 'Doreamon image',
+    text: 'Doraemon',
+    likes: ['pepito@grillo.com']
 }
 
 posts[3] = {
     author: 'pepito@grillo.com',
     image: 'https://i.ebayimg.com/images/g/V9wAAOSw~e5ZU~Ls/s-l1200.webp',
-    imageDescription: "Pokemon Picachu",
-    text: '¡Pikachu!'
+    imageDescription: 'Pikachu image',
+    text: 'Pikachu!',
+    likes: ['campa@nilla.com']
 }
 
 posts[4] = {
     author: 'pepito@grillo.com',
     image: 'https://i.pinimg.com/550x/64/65/90/6465907c690be529106e4ada2c94d0d6.jpg',
-    imageDescription: "Hormiga Atómica",
-    text: '¡La Hormiga Atómica!'
+    imageDescription: 'Atomic ant image',
+    text: 'La Hormiga Atómica!',
+    likes: []
 }

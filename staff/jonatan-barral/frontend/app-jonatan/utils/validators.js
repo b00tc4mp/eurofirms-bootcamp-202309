@@ -12,7 +12,7 @@ function validateEmail(email) {
         throw new Error('Email is not valid: Missing "@" symbol');
     } else if (dotIndex === -1) {
         throw new Error('Email is not valid: Missing "." symbol');
-    } else if (atIndex >= dotIndex) {
+    } else if (atIndex > dotIndex) {
         throw new Error('Email is not valid: "@" should appear before "."');
     }
 

@@ -3,7 +3,6 @@ function registerUser(name, email, password) {
     validateEmail(email)
     validatePassword(password)
 
-
     var foundUser = null
 
     for (var i = 0; i < users.length; i++) {
@@ -15,7 +14,6 @@ function registerUser(name, email, password) {
             break
         }
     }
-
 
     if (foundUser !== null)
         throw new Error('User already exists')
