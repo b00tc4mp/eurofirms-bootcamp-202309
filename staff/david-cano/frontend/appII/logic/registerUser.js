@@ -3,14 +3,12 @@ function registerUser(name, email, password){
     validateEmail(email)
     validatePassword(password)
 
-    // search user by email
-
+    //Search user by email
     var foundUser = find(users, function (user){
         return user.email === email
     })
 
-    // if user found then error
-
+    //If user found then error
     if(foundUser !== undefined)
         throw new Error('User already exists')
 

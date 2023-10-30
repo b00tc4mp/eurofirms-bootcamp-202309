@@ -1,106 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>App</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App</title>
 
-        <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 
-        <link rel="shortcut icon" href="https://b00tc4mp.com/favicon.ico" type="image/x-icon">
-    </head>
+    <link rel="shortcut icon" href="https://b00tc4mp.com/favicon.ico" type="image/x-icon">
+</head>
 
-    <body>
-        <div id="register-view" class="view">
-            <h1>Register</h1>
+<body>
+    <div id="root"></div>
 
-            <form id="register-form" class="form">
-                <label class="label" for="name-input">Name</label>
-                <input class="input" type="text" id="name-input" title="Name" required>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.development.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
 
-                <label class="label" for="email-input">E-mail</label>
-                <input class="input" type="email" id="email-input" title="E-mail" required>
+<!-- utils -->
+    <script src="utils/find.js"></script>
+    <script src="utils/validators.js"></script>
 
-                <label class="label" for="password-input">Password</label>
-                <input class="input" type="password" id="password-input" title="Password" required>
+<!-- data -->
+    <script src="data.js"></script>
 
-                <button class="button" type="submit">Register</button>
-            </form>
+<!-- business logic -->
+    <script src="logic/authenticateUser.js"></script>
+    <script src="logic/retrieveUser.js"></script>
+    <script src="logic/registerUser.js"></script>
+    <script src="logic/createNewPost.js"></script>
+    <script src="logic/retrievePosts.js"></script>
+    <script src="logic/toggleLikePost.js"></script>
 
-            <a id="login-link" href="">Login</a>
-        </div>
-
-        <div id="login-view" class="view">
-            <h1>Login</h1>
-
-            <form id="login-form" class="form">
-                <label class="label" for="email-input">E-mail</label>
-                <input class="input" type="email" id="email-input" title="E-mail" required>
-
-                <label class="label" for="password-input">Password</label>
-                <input class="input" type="password" id="password-input" title="Password" required>
-
-                <button class="button" type="submit">Login</button>
-            </form>
-
-            <a id="register-link" href="">Register</a>
-        </div>
-
-        <div id="home-view">
-            <header class="header" aria-label="Header">
-                <h1>Home</h1>
-                <span id="user-name-span" aria-label="User name">Hello World</span>
-                <button id="new-post-button" title="New post" aria-label="New post" class="button">+</button>
-                <button id="logout-button" class="button">Logout</button>
-            </header>
-
-            <!-- add post panel -->
-            <div id="new-post-panel" class="view">
-                <h2>New post</h2>
-
-                <form id="new-post-form" class="form">
-                    <label for="image-input" class="label">Image</label>
-                    <input type="url" id="image-input" class="input" required>
-
-                    <label for="image-description-input" class="label">Image description</label>
-                    <input type="text" id="image-description-input" class="input" required>
-
-                    <label for="text-input" class="label">Text</label>
-                    <input type="text" id="text-input" class="input" required>
-
-                    <button type="submit" class="button">Post</button>
-                    <button id="cancel-new-post-button" class="button">Cancel</button>
-                </form>
-            </div>
-
-
-            <!-- posts list -->
-            <div id="posts-list" aria-label="Posts list" class="view">
-                <!-- Aquí van los posts -->
-            </div>
-        </div>
-
-        <!-- utils -->
-        <script src="utils/find.js"></script>
-        <script src="utils/validators.js"></script>
-
-        <!-- data -->
-        <script src="data.js"></script>
-
-        <!-- business logic -->
-        <script src="logic/authenticateUser.js"></script>
-        <script src="logic/retrieveUser.js"></script>
-        <script src="logic/registerUser.js"></script>
-        <script src="logic/createNewPost.js"></script>
-        <script src="logic/retrievePosts.js"></script>
-        <script src="logic/toggleLikePost.js"></script>
-
-        <!-- presentation -->
-        <script src="main.js"></script>
-        <script src="views/register.js"></script>
-        <script src="views/login.js"></script>
-        <script src="views/home.js"></script>
-    </body>
+<!-- presentation -->
+    <script src="main.jsx" type="text/babel"></script>
+</body>
 
 </html>

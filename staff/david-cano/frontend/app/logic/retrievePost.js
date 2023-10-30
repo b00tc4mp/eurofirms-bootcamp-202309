@@ -1,5 +1,7 @@
-function retrieveUser(email){
+function retrievePosts(email){
     validateEmail(email)
+
+    // search user by email
 
     var foundUser = find(users, function (user){
         return user.email === email
@@ -8,7 +10,7 @@ function retrieveUser(email){
     // if user not found then error
 
     if(foundUser === undefined)
-        throw new Error('Wrong credentials')
+        throw new Error('User not found')
 
-    return foundUser
+    return posts
 }

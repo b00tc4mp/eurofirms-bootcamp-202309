@@ -6,8 +6,7 @@ function toggleLikePost(email, postIndex){
         return user.email === email
     })
 
-    // if user not found then error
-
+    //If user not found then error
     if(foundUser === undefined)
         throw new Error('Wrong credentials')
 

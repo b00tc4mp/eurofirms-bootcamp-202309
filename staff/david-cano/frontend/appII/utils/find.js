@@ -4,6 +4,7 @@ function find(array, callback){
 
         var result = callback(element)
 
-        if(result) return element
+        if(result) 
+        return element
     }
 }
