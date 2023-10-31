@@ -60,3 +60,7 @@ h2 {
     align-items: center;
     background-color: khaki;
 }
+
+#new-post-panel {
+    margin-top: 20px;
+}
