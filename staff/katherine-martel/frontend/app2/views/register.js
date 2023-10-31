@@ -48,7 +48,7 @@ registerForm.onsubmit = function (event) {
         registerView.style.display = 'none';
         loginView.style.display = '';
     } catch (error) {
-        alert(error, message)
+        alert(error.message)
     }
 }
 

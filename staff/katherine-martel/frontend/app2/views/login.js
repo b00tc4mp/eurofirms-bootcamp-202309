@@ -1,7 +1,7 @@
 // login view
 
 // Obtener el elemento HTML con el id 'login-view'
-var loginView = document.getElementById('login-view');
+loginView = document.getElementById('login-view');
 
 // Mostrar la vista de inicio de sesión
 loginView.style.display = '';
@@ -48,13 +48,14 @@ loginForm.onsubmit = function (event) {
 
         var userNameSpan = homeView.querySelector('#user-name-span')
 
-        var user = retrieverUser(email)
+        var user = retrieveUser(email)
 
         userNameSpan.innerText = user.name
 
         //renderPost
 
         renderPosts()
+
         homeView.style.display = ""
 
     }
