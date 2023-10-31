@@ -16,10 +16,10 @@ function Login() {
 
         <form id="login-form" className="form" onSubmit={handleSubmit}>
             <label className="label" htmlFor="email-input">E-mail</label>
-            <input className="input" type="email" id="email-input" title="E-mail" required />
+            <input className="input" type="email" id="email-input" title="E-mail" required></input>
 
             <label className="label" htmlFor="password-input">Password</label>
-            <input className="input" type="password" id="password-input" title="Password" required />
+            <input className="input" type="password" id="password-input" title="Password" required></input>
 
             <button className="button" type="submit">Login</button>
         </form>
@@ -34,13 +34,13 @@ function Register() {
 
         <form id="register-form" className="form">
             <label className="label" htmlFor="name-input">Name</label>
-            <input className="input" type="text" id="name-input" title="Name" required />
+            <input className="input" type="text" id="name-input" title="Name" required></input>
 
             <label className="label" htmlFor="email-input">E-mail</label>
-            <input className="input" type="email" id="email-input" title="E-mail" required />
+            <input className="input" type="email" id="email-input" title="E-mail" required></input>
 
             <label className="label" htmlFor="password-input">Password</label>
-            <input className="input" type="password" id="password-input" title="Password" required />
+            <input className="input" type="password" id="password-input" title="Password" required></input>
 
             <button className="button" type="submit">Register</button>
         </form>
@@ -63,13 +63,13 @@ function Home() {
 
             <form id="new-post-form" className="form">
                 <label htmlFor="image-input" className="label">Image</label>
-                <input type="url" id="image-input" className="input" required />
+                <input type="url" id="image-input" className="input" required></input>
 
                 <label htmlFor="image-description-input" className="label">Image description</label>
-                <input type="text" id="image-description-input" className="input" required />
+                <input type="text" id="image-description-input" className="input" required></input>
 
                 <label htmlFor="text-input" className="label">Text</label>
-                <input type="text" id="text-input" className="input" required />
+                <input type="text" id="text-input" className="input" required></input>
 
                 <button type="submit" className="button">Post</button>
                 <button id="cancel-new-post-button" className="button">Cancel</button>
@@ -81,7 +81,7 @@ function Home() {
                 <h3>peter@pan.com</h3>
                 <img className="post-image"
                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/1200px-SNice.svg.png"
-                    alt="" />
+                    alt=""></img>
                 <p>Smile!</p>
             </article>
 
@@ -89,25 +89,12 @@ function Home() {
                 <h3>wendy@darling.com</h3>
                 <img className="post-image"
                     src="https://www.telemundo.com/sites/nbcutelemundo/files/styles/fit-1240w/public/sites/nbcutelemundo/files/images/article/2014/08/28/hello_kitty_140920568644_4.jpg"
-                    alt="" />
+                    alt=""></img>
                 <p>Hello, Kitty!</p>
             </article>
         </div>
     </div>
 }
 
-function Logo() {
-    return <svg version="1.1"
-        width="30" height="30"
-        xmlns="http://www.w3.org/2000/svg">
-
-        <rect width="30" height="30" fill="tomato" />
-
-        <circle cx="15" cy="15" r="8" fill="yellow" />
-
-        <polygon points="25,6 5,40 45,40" class="triangle" fill="dodgerblue" />
-    </svg>
-}
-
 var root = ReactDOM.createRoot(document.getElementById('root'))
-root.render([<Logo />, <Login />, <Register />, <Home />])
+root.render([<Login />, <Register />, <Home />])
