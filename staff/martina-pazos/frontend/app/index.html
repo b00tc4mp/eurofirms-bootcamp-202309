@@ -38,11 +38,11 @@
         <h1>Login</h1>
 
         <form id="login-form" class="form">
-            <label for="email-input">E-mail</label>
-            <input type="email" id="email-input" title="E-mail">
+            <label for="email-input" class="label">E-mail</label>
+            <input type="email" id="email-input" class="input" title="E-mail">
 
-            <label for="password-input">Password</label>
-            <input type="password" id="password-input" title="Password">
+            <label for="password-input" class="label">Password</label>
+            <input type="password" id="password-input" class="input" title="Password">
 
             <button type="submit">Login</button>
             <button type="reset">Clear</button>
@@ -55,27 +55,27 @@
         <header class="header">
             <h1>Home</h1>
             <span id="user-name-span">Hello World</span>
-            <button id="new-post-button">+</button>
-            <button id="logout-button">Logout</button>
+            <button id="new-post-button" class="button">+</button>
+            <button id="logout-button" class="button">Logout</button>
         </header>
 
         <!-- add post panel -->
 
-        <div id="new-post-panel" class="panel-lightgreen">
-            <h2>Create post</h2>
+        <div id="new-post-panel" class="view">
+            <h2>New post</h2>
 
             <form id="new-post-form" class="form">
-                <label for="image-input">Image</label>
-                <input type="url" id="image-input">
+                <label for="image-input" class="label">Image</label>
+                <input type="url" id="image-input" class="input">
 
-                <label for="image-description-input">Image description</label>
-                <input type="text" id="image-description-input">
+                <label for="image-description-input" class="label">Image description</label>
+                <input type="text" id="image-description-input" class="input">
 
                 <label for="text-input">Text</label>
-                <input type="text" id="text-input">
+                <input type="text" id="text-input" class="input">
 
-                <button type="submit">Post</button>
-                <button id="cancel-new-post-button">Cancel</button>
+                <button type="submit" class="button">Post</button>
+                <button id="cancel-new-post-button" class="button">Cancel</button>
             </form>
         </div>
 

@@ -7,3 +7,5 @@ function filter(array, callback) {
     }
 
 }
+// filter(array, function) replica nuestra
+// array.filter(function) nativo de js

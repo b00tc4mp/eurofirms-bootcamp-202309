@@ -1,3 +1,5 @@
+// esto sale de la home, se hace para validar el email del usuario de la app (ctas más medidas de seguridad protejan los datos, es mejor )
+
 function retrievePosts(email) {
     validateEmail(email)
 

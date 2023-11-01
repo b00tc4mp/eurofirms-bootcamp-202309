@@ -1,10 +1,12 @@
+//se basa en home, es la validación de los datos (email, image, descripcion... ), del usuario para poder publicar un post 
+
 function createNewPost(email, image, imageDescription, text) {
     validateEmail(email)
     validateUrl(image, 'image url')
     validateText(imageDescription, 'image decription')
     validateText('text)')
 
-    // search user by email
+    // search user by email. Recordemos el método find: el método find() devuelve el valor del primer elemento del array que cumple la función de prueba proporcionada.
 
     var foundUser = find(user, function (user) {
 

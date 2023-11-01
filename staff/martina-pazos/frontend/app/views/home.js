@@ -1,4 +1,4 @@
-//home view
+// home view. Esto es para crear la lógica de createNewUser 
 
 homeView = document.getElementById('home-view')
 
@@ -10,19 +10,23 @@ logoutButton.onclick = function () {
     homeView.style.display = 'none'
 
     var postsList = homeView.querySelector('#posts-list')
-    postsList.innerHTML = " "
+    postsList.innerHTML = ''
 
-    loginView.style.display = " "
+    loginView.style.display = ''
 }
 
 // post panel
+
 newPostPanel = homeView.querySelector('#new-post-panel')
+
 newPostPanel.style.display = 'none'
 
 // post form
+
 newPostForm = newPostPanel.querySelector('#new-post-form')
 
-//post button
+// post button
+
 newPostButton = homeView.querySelector('#new-post-button')
 
 newPostButton.onclick = function () {
@@ -31,12 +35,9 @@ newPostButton.onclick = function () {
 
 // cancel post button
 
-cancelNewPostButton = newPostButton.querySelector('#cancel-new-post-button')
-
 cancelNewPostButton = newPostForm.querySelector('#cancel-new-post-button')
 
 cancelNewPostButton.onclick = function (event) {
-
     event.preventDefault()
 
     newPostForm.reset()
@@ -44,7 +45,8 @@ cancelNewPostButton.onclick = function (event) {
     newPostPanel.style.display = 'none'
 }
 
-// submit post form
+// submit post form. Esto se hace para la crear la lógica y validar el usuario mediante email (try). Para controlar la lógica de RetrievaUser
+
 newPostForm.onsubmit = function (event) {
     event.preventDefault()
 
@@ -56,52 +58,76 @@ newPostForm.onsubmit = function (event) {
     var imageDescription = imageDescriptionInput.value
     var text = textInput.value
 
-    var post = {}
-    post.author = loggedInEmail
-    post.image = image
-    post.imageDescription = imageDescription
-    post.text = text
+    try {
+        createNewPost(loggedInEmail, image, imageDescription, text)
 
-    posts.push(post)
+        newPostForm.reset()
 
-    newPostForm.reset()
+        newPostPanel.style.display = 'none'
 
-    newPostPanel.style.display = 'none'
-
-    renderPosts()
+        renderPosts()
+    } catch (error) {
+        alert(error.message)
+    }
 }
 
 // render posts
 
 function renderPosts() {
+    try {
+        var posts = retrievePosts(loggedInEmail)
 
-    var postsList = homeView.querySelector('#posts-list')
+        var postsList = homeView.querySelector('#posts-list')
 
-    postsList.innerHTML = ''
-    for (var i = posts.length - 1; i >= 0; i--) {
-        var post = posts[i]
+        postsList.innerHTML = ''
 
-        var article = document.createElement('article')
-        article.setAttribute('aria-label', 'Post')
+        for (var i = posts.length - 1; i > -1; i--) {
+            var post = posts[i]
 
-        var span = document.createElement('span')
-        span.innerText = post.author
-        span.setAttribute('aria-lable', 'author')
+            var article = document.createElement('article')
+            article.setAttribute('aria-label', 'Post')
 
-        var image = document.createElement('img')
-        image.setAttribute('class', 'post-image')
-        image.src = post.image
-        image.alt = post.imageDescription
+            var h3 = document.createElement('h3')
+            h3.innerText = post.author
 
-        var paragraph = document.createElement('p')
-        paragraph.innerText = post.text
+            var image = document.createElement('img')
+            image.setAttribute('class', 'post-image')
+            image.src = post.image
+            image.alt = post.imageDescription
 
-        article.appendChild(span)
-        article.appendChild(image)
-        article.appendChild(paragraph)
+            var paragraph = document.createElement('p')
+            paragraph.innerText = post.text
 
-        postsList.appendChild(article)
+            var likeButton = document.createElement('button')
+            likeButton.setAttribute('class', 'button')
+
+            var liked = post.likes.includes(loggedInEmail)
+
+            // if (liked)
+            //     likeButton.innerText = '❤️'
+            // else
+            //     likeButton.innerText = '🩶'
+
+            likeButton.innerText = (liked ? '❤️' : '🩶') + ' ' + post.likes.length + ' likes'
+
+            function createLikeButtonOnClick(postIndex) {
+                return function () { // closure
+                    toggleLikePost(loggedInEmail, postIndex)
+
+                    renderPosts()
+                }
+            }
+
+            likeButton.onclick = createLikeButtonOnClick(i)
+
+            article.appendChild(h3)
+            article.appendChild(image)
+            article.appendChild(paragraph)
+            article.appendChild(likeButton)
+
+            postsList.appendChild(article)
+        }
+    } catch (error) {
+        alert(error.message)
     }
 }
-
-

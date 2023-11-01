@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+* {
+    font-family: Inter;
+}
+
 h1,
 h2 {
     margin: 0;
@@ -12,23 +18,38 @@ h2 {
     padding-bottom: 1rem;
 }
 
-.view-skyblue {
-    background-color: skyblue;
-}
-
-.view-plum {
-    background-color: plum;
-}
-
 .form {
     display: flex;
     flex-direction: column;
     box-sizing: content-box;
-    gap: 0.25rem;
+    gap: .5rem;
+    align-items: center;
 }
 
-.panel-lightgreen {
-    background-color: lightgreen;
+.label {
+    align-self: flex-start;
+}
+
+.input {
+    background-color: lightgray;
+    border-width: 0;
+    border-radius: 5px;
+    line-height: 1.5rem;
+    padding-left: 5px;
+}
+
+.button {
+    background-color: lightgray;
+    border-width: 0;
+    border-radius: 5px;
+    line-height: 1.5rem;
+    padding-left: 5px;
+}
+
+.post {
+
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .post-image {
@@ -39,5 +60,8 @@ h2 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: khaki;
+}
+
+#new-post-panel {
+    margin-top: 20px;
 }
