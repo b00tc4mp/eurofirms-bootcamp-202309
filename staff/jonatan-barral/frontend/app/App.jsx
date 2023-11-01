@@ -11,12 +11,16 @@ function App() {
         setView('login')
     }
 
+    function handleShowHome() {
+        setView('home')
+    }
+
     return <>
         <Logo />
 
-        {view === 'login' ? <Login onRegisterClick={handleShowRegister} /> : null}
+        {view === 'login' ? <Login onRegisterClick={handleShowRegister} onLoggedIn={handleShowHome} /> : null}
 
-        {view === 'register' ? <Register onLoginClick={handleShowLogin} /> : null}
+        {view === 'register' ? <Register onNavigateToLogin={handleShowLogin} /> : null}
 
         {view === 'home' ? <Home /> : null}
     </>

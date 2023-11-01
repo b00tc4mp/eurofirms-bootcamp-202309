@@ -2,14 +2,21 @@ function Login(props) {
     function handleLoginSubmit(event) {
         event.preventDefault()
 
-        const emailInput = event.target.querySelector('#email-input')
-        const passwordInput = event.target.querySelector('#password-input')
+        try {
+            const emailInput = event.target.querySelector('#email-input')
+            const passwordInput = event.target.querySelector('#password-input')
 
-        const email = emailInput.value
-        const password = passwordInput.value
+            const email = emailInput.value
+            const password = passwordInput.value
 
-        console.log('TODO login', email, password)
+            authenticateUser(email, password)
+
+            props.onLoggedIn()
+        } catch (error) {
+            alert(error.message)
+        }
     }
+
 
     function handleRegisterClick(event) {
         event.preventDefault()
