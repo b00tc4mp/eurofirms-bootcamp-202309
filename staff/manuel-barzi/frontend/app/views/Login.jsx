@@ -11,7 +11,7 @@ function Login(props) {
         try {
             authenticateUser(email, password)
 
-            loggeInEmail = email
+            loggedInEmail = email
 
             props.onSuccess()
         } catch (error) {

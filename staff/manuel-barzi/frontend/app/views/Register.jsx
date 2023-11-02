@@ -10,7 +10,13 @@ function Register(props) {
         const email = emailInput.value
         const password = passwordInput.value
 
-        console.log('TODO register', name, email, password)
+        try {
+            registerUser(name, email, password)
+
+            props.onSuccess()
+        } catch (error) {
+            alert(error.message)
+        }
     }
 
     function handleLoginClick(event) {
