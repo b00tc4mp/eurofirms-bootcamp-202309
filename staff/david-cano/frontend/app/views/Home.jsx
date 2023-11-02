@@ -1,12 +1,48 @@
-function Home(){
+function Home(props){
+    const viewState = React.useState(null)
+    const view = viewState[0]
+    const setView = viewState[1]
+
+    let name = null
+
+    try {
+        const user = retrieveUser(loggedInEmail)
+
+        name = user.name
+    } catch (error) {
+        alert(error.message)
+    }
+
+    let post = null
+
+    try {
+        posts = retrievePosts(loggedInEmail)
+    } catch (error) {
+        alert(error.message)
+    }
+
+    function handleLogoutClick() {
+        loggedInEmail = null
+
+        props.onLogout()
+    }
+
+    function handleNewPostClick() {
+        setView('new-post')
+    }
+
+    function handleNewPostCancelClick() {
+        setView(null)
+    }
     return <div>
         <header className="header" aria-label="Header">
             <h1>Home</h1>
-            <span id="user-name-span" aria-label="User name">Hello World</span>
-            <button id="new-post-button" title="New post" aria-label="New post" className="button">+</button>
-            <button id="logout-button" className="button">Logout</button>
+            <span id="user-name-span" aria-label="User name">{name}</span>
+            <button id="new-post-button" title="New post" aria-label="New post" className="button" onClick = {handleNewPostClick}>+</button>
+            <button id="logout-button" className="button" onClick = {handleLogoutClick}>Logout</button>
         </header>
 
+    {view === 'new-post' ?
         <div id="new-post-panel" className="view">
             <h2>New post</h2>
 
@@ -21,26 +57,25 @@ function Home(){
                 <input type="text" id="text-input" className="input" required />
 
                 <button type="submit" className="button">Post</button>
-                <button id="cancel-new-post-button" className="button">Cancel</button>
+                <button id="cancel-new-post-button" className="button" onClick = {handleNewPostCancelClick}>Cancel</button>
             </form>
-        </div>
-
+        </div> : null}
+    
+    { posts !== null ?
         <div id="posts-list" aria-label="Posts list" className="view">
-            <article>
-                <h3>peter@pan.com</h3>
-                <img className="post-image"
-                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/1200px-SNice.svg.png"
-                    alt="" />
-                <p>Smile!</p>
-            </article>
+        
+        {posts.map(function (post, index) {
+            const liked = post.likes.includes(loggedInEmail)
 
-            <article>
-                <h3>wendy@darling.com</h3>
-                <img className="post-image"
-                    src="https://www.telemundo.com/sites/nbcutelemundo/files/styles/fit-1240w/public/sites/nbcutelemundo/files/images/article/2014/08/28/hello_kitty_140920568644_4.jpg"
-                    alt="" />
-                <p>Hello, Kitty!</p>
+            return <article key = {index}>
+                <h3>{post.author}</h3>
+                <img className = "post-image" src={post.image} alt={post.imageDescription} />
+                <p>{post.text}</p>
+                <button>{(liked ? '😍' : '😒') + ' ' + post.likes.length + 'likes'}</button>
             </article>
-        </div>
+            
+        })}
+
+        </div> : null}
     </div>
 }

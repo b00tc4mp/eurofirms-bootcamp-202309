@@ -10,11 +10,11 @@ function Login(props) {
 
         authenticateUser(email, password)
 
+        loggedInEmail = email
+
         props.onLoggedIn()
 
-
-
-        console.log('TODO login', email, password)
+       // console.log('TODO login', email, password)
 
         }catch (error){
             alert(error.message)

@@ -14,8 +14,6 @@ function Register(props) {
 
             props.onNavigateToLogin()
 
-            console.log('TODO register', name, email, password)
-
         }
         catch (error) {
             alert(error.message)

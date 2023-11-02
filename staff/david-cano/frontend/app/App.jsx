@@ -22,6 +22,6 @@ function App(){
 
         {view === 'register' ? <Register onNavigateToLogin = {handleShowLogin} /> : null}
 
-        {view === 'home' ? <Home /> : null}
+        {view === 'home' ? <Home onLogout = {handleShowLogin} /> : null}
     </>
 }
