@@ -1,16 +1,10 @@
-function Home(props) {
-    function handleLogout() {
-        loggeInEmail = null
-
-        props.onLogout()
-    }
-
+function Home() {
     return <div>
         <header className="header" aria-label="Header">
             <h1>Home</h1>
             <span id="user-name-span" aria-label="User name">Hello World</span>
             <button id="new-post-button" title="New post" aria-label="New post" className="button">+</button>
-            <button className="button" onClick={handleLogout}>Logout</button>
+            <button id="logout-button" className="button">Logout</button>
         </header>
 
         <div id="new-post-panel" className="view">
@@ -31,7 +25,7 @@ function Home(props) {
             </form>
         </div>
 
-        <div id="posts-list" aria-label="Posts list" className="view">
+        <div id="posts-list" aria-label="Posts list" class="view">
             <article>
                 <h3>peter@pan.com</h3>
                 <img className="post-image"
