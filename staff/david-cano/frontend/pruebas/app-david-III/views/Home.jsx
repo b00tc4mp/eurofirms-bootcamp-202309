@@ -1,14 +1,14 @@
 function Home(props) {
-    const viewState = React.useState(false)
+    const viewState = React.useState(null)
     const view = viewState[0]
     const setView = viewState[1]
 
     function handleNewPostClick() {
-        setView(true);
+        setView('new-post');
     }
 
     function handleCancelNewPost() {
-        setView(false);
+        setView(null);
     }
 
     function handleLogoutClick(event) {
@@ -33,7 +33,7 @@ function Home(props) {
     
             props.onPostClick()
 
-            setView(false);
+            setView(null);
     
             console.log(newImage, newImageDescription, newText)
         } catch (error) {
@@ -52,7 +52,7 @@ function Home(props) {
                 <button id="logout-button" className="button" onClick = {handleLogoutClick}>Logout</button>
             </header>
 
-            {view ? (
+            {view === 'new-post' ? (
                 <div id="new-post-panel" className="view">
                     <h2>New post</h2>
                     <form id="new-post-form" className="form" onSubmit={handleNewPostSubmit}>
