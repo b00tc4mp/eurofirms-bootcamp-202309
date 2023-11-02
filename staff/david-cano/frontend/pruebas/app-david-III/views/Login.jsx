@@ -16,7 +16,6 @@ function Login(props) {
 // Llama a la función proporcionada en las propiedades "onLoggedIn" para notificar que el usuario ha iniciado sesión.
         props.onLoggedIn()
  // Imprime un mensaje en la consola con información de depuración.
-        console.log('TODO login', email, password)
 
         }catch (error){
             // En caso de error, muestra una alerta con el mensaje de error.

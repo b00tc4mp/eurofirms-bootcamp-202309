@@ -16,7 +16,6 @@ function Register(props) {
 // Llama a la función proporcionada en las propiedades "onNavigateToLogin" para redirigir al usuario a la página de inicio de sesión.
             props.onNavigateToLogin()
 // Imprime un mensaje en la consola con información de depuración.
-            console.log('TODO register', name, email, password)
 
         }
         catch (error) {

@@ -25,6 +25,6 @@ function App(){
 
         {view === 'register' ? <Register onNavigateToLogin = {handleShowLogin} /> : null}
 
-        {view === 'home' ? <Home  onLogoutClick = {handleShowLogin} onPostClick = {handleShowHome}/> : null}
+        {view === 'home' ? <Home  onLogoutClick = {handleShowLogin} onPostClick = {handleShowHome} onLikeClick = {handleShowHome} /> : null}
     </>
 }
