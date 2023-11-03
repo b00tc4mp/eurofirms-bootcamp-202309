@@ -58,3 +58,7 @@ h2 {
 #new-post-panel {
     margin-top: 20px;
 }
+
+audio {
+    display : none;
+}
