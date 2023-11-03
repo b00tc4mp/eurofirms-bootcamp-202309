@@ -1,13 +1,7 @@
 function Home(props) {
-    console.log('Home')
-
     const viewState = React.useState(null)
     const view = viewState[0]
     const setView = viewState[1]
-
-    const timestampState = React.useState(null)
-    //const timestamp = timestampState[0]
-    const setTimestamp = timestampState[1]
 
     let name = null
 
@@ -41,36 +35,6 @@ function Home(props) {
         setView(null)
     }
 
-    function handleNewPostSubmit(event) {
-        event.preventDefault()
-
-        const imageInput = event.target.querySelector('#image-input')
-        const imageDescriptionInput = event.target.querySelector('#image-description-input')
-        const textInput = event.target.querySelector('#text-input')
-
-        const image = imageInput.value
-        const imageDescription = imageDescriptionInput.value
-        const text = textInput.value
-
-        try {
-            createNewPost(loggedInEmail, image, imageDescription, text)
-
-            setView(null)
-        } catch (error) {
-            alert(error.message)
-        }
-    }
-
-    function handlePostLikeClick(postIndex) {
-        try {
-            toggleLikePost(loggedInEmail, postIndex)
-
-            setTimestamp(Date.now())
-        } catch (error) {
-            alert(error.message)
-        }
-    }
-
     return <div>
         <header className="header" aria-label="Header">
             <h1>Home</h1>
@@ -82,7 +46,7 @@ function Home(props) {
         {view === 'new-post' ? <div className="view">
             <h2>New post</h2>
 
-            <form className="form" onSubmit={handleNewPostSubmit}>
+            <form className="form">
                 <label htmlFor="image-input" className="label">Image</label>
                 <input type="url" id="image-input" className="input" required />
 
@@ -98,12 +62,8 @@ function Home(props) {
         </div> : null}
 
         {posts !== null ? <div aria-label="Posts list" className="view">
-            {posts.toReversed().map(function (post, index, posts) {
+            {posts.map(function (post, index) {
                 const liked = post.likes.includes(loggedInEmail)
-
-                function handleBeforePostLikeClick() {
-                    handlePostLikeClick(posts.length - 1 - index)
-                }
 
                 return <article key={index} className="post">
                     <h3>{post.author}</h3>
@@ -112,7 +72,7 @@ function Home(props) {
                         alt={post.imageDescription}
                         title={post.imageDescription} />
                     <p>{post.text}</p>
-                    <button className="button" onClick={handleBeforePostLikeClick}>{(liked ? '❤️' : '🩶') + ' ' + post.likes.length + ' likes'}</button>
+                    <button>{(liked ? '❤️' : '🩶') + ' ' + post.likes.length + ' likes'}</button>
                 </article>
             })}
         </div> : null}
