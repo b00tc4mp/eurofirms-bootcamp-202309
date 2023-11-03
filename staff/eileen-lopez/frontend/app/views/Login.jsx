@@ -1,4 +1,6 @@
 function Login(props){
+console.log('Login')
+
     function handleLoginSubmit(event) {
         event.preventDefault()
 
@@ -7,7 +9,13 @@ function Login(props){
         const email = emailInput.value
         const password = passwordInput.value
 
-        console.log(email, password)
+        try{
+            authenticateUser(email, password)
+            loggedInEmail = email
+            props.onSuccess()
+        } catch (error) {
+            alert(error.message)
+        }
     }
 
     function handleRegisterClick(event){

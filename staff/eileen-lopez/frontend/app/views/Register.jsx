@@ -1,8 +1,10 @@
 function Register(props) {
+    console.log('Register')
+
     function handleRegisterSubmit(event) {
         event.preventDefault()
        
-        try {
+
             const nameInput = event.target.querySelector('#name-input')
             const emailInput = event.target.querySelector('#email-input')
             const passwordInput = event.target.querySelector('#password-input')
@@ -11,15 +13,14 @@ function Register(props) {
             const email = emailInput.value
             const password = passwordInput.value
             
-            registerUser(name, email, password)
+            try {
+                registerUser(name, email, password)
             
-            props.onNavigateToLogin()
-
+                props.onSuccess()
+            } catch (error) {
+                alert(error.message)
+            }
         }
-        catch (error) {
-            alert(error.message)
-        }
-    }
 
     function handleLoginClick(event) {
         event.preventDefault()
