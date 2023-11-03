@@ -61,15 +61,16 @@ function Home(props) {
             </form>
         </div> : null}
 
-        {posts !== null ? <div id="posts-list" aria-label="Posts list" className="view">
+        {posts !== null ? <div aria-label="Posts list" className="view">
             {posts.map(function (post, index) {
                 const liked = post.likes.includes(loggedInEmail)
 
-                return <article key={index}>
+                return <article key={index} className="post">
                     <h3>{post.author}</h3>
                     <img className="post-image"
                         src={post.image}
-                        alt={post.imageDescription} />
+                        alt={post.imageDescription}
+                        title={post.imageDescription} />
                     <p>{post.text}</p>
                     <button>{(liked ? '❤️' : '🩶') + ' ' + post.likes.length + ' likes'}</button>
                 </article>
