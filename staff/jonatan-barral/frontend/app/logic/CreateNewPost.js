@@ -14,6 +14,7 @@ function createNewPost(email, image, imageDescription, text) {
     post.image = image
     post.imageDescription = imageDescription
     post.text = text
+    post.likes = []
 
     posts.push(post)
 }   

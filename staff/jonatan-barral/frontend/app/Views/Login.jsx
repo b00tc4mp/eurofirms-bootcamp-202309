@@ -10,7 +10,7 @@ function Login(props) {
             const password = passwordInput.value
 
             authenticateUser(email, password)
-
+            loggedInEmail = email
             props.onLoggedIn()
         } catch (error) {
             alert(error.message)
