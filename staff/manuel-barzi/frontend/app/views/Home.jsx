@@ -22,7 +22,7 @@ function Home(props) {
     }
 
     function handleLogoutClick() {
-        loggeInEmail = null
+        loggedInEmail = null
 
         props.onLogout()
     }
