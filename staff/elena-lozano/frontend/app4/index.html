@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--esto hace aparcer la opción de registrarse-->
+    <div id="register-view">
+        <h1>Register</h1>
+        
+        <form id="register-form">
+            <!--la casilla para meter el nombre-->
+            <label for="name-input">Name</label>
+            <input type="text" id="name-input" required>
+            <!--la casilla para meter el emilio-->
+            <label for="email-input">E-mail</label>
+            <input type="email" id="email-input" required>
+            <!--la casilla para meter la contraseña-->
+            <label for="password-input">Password</label>
+            <input type="password" id="password-input" required>
+            <!--los botones para enviar la info introducida o limpiarla-->
+            <button type="submit">Register</button>
+            <button type="reset">Clear</button>
+        </form>
+<!--para registrarse-->
+        <a href="" id="login-link">Login</a>
+    </div>
+
+    <div id="login-view">
+        <h1>Login</h1>
+        <form id="login-form">
+            <label for="email-input">E-mail</label>
+            <input type="email" id="email-input">
+
+            <label for="password-input">Password</label>
+            <input type="password" id="password-input">
+
+            <button type="submit">Login</button>
+            <button type="reset">Clear</button>
+
+        </form>
+
+        <a href="" id="register-link">Register</a>
+    </div>
+
+    <div id="home-view">
+        <h1>Home</h1>
+        <button>Logout</button>
+    </div>
+
+    <script src="main.js"></script>
+
+</body>
+</html>

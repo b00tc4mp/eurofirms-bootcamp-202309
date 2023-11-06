@@ -1,7 +1,5 @@
 TEST("Arroz prototype forEach")
-
 CASE("print each char from chars")
-
 
 //Aqui definimos el las características del prototype de Arroz
 

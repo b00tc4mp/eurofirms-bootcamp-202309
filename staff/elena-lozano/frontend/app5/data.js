@@ -29,7 +29,7 @@ posts[0] = {
     author: "pepito@grillo.com",
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/1200px-SNice.svg.png",
     imageDescription: "Smile image",
-    text: "Smile, please! I'ts free!",
+    text: "Smile!",
     likes: []
 }
 
@@ -53,7 +53,7 @@ posts[3] = {
     author: "pepito@grillo.com",
     image: "https://i.pinimg.com/236x/f4/95/52/f49552c63e353a6c2b73eada2f8f4671.jpg",
     imageDescription: "Pikachu image",
-    text: "Pikaaa!",
+    text: "Pikachu!",
     likes: []
 }
 
@@ -61,7 +61,7 @@ posts[4] = {
     author: "pepito@grillo.com",
     image: "https://i.pinimg.com/550x/64/65/90/6465907c690be529106e4ada2c94d0d6.jpg",
     imageDescription: "Atomic ant image",
-    text: "¡La Hormiga Atómica!",
+    text: "La Hormiga Atómica!",
     likes: []
 }
 

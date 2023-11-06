@@ -1,6 +1,8 @@
+//Allows users to like posts and see the likes of the other users
+
 function toggleLikePost(email, postIndex) {
     validateEmail(email)
-    validateNumber(postIndex, "post index")
+    validateNumber(postIndex, 'post index')
 
     var foundUser = find(users, function (user) {
         return user.email === email
@@ -9,10 +11,10 @@ function toggleLikePost(email, postIndex) {
     // if user not found then error
 
     if (foundUser === undefined)
-        throw new Error("Wrong credentials")
+        throw new Error('Wrong credentials')
 
     if (postIndex >= posts.length)
-        throw new RangeError("Post index is out of range")
+        throw new RangeError('Post index is out of range')
 
     var post = posts[postIndex]
 

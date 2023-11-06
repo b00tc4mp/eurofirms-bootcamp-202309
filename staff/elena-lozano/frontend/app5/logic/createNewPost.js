@@ -10,7 +10,7 @@ function createNewPost(email, image, imageDescription, text) {
         return user.email === email
     })
 
-    // if user not found then error
+    // if user is not founded, then error
 
     if (foundUser === undefined)
         throw new Error("User not found")

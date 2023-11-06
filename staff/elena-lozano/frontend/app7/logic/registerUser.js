@@ -9,7 +9,7 @@ function registerUser(name, email, password) {
         return user.email === email
     })
 
-    // if user found then error
+    // if user is not founded, then error
 
     if (foundUser !== undefined)
         throw new Error("User already exists")
