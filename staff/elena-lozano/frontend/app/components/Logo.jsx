@@ -5,6 +5,8 @@ function Logo() {
     const tweetAudioRef = React.useRef()
 
     function handleMouseOverLogo() {
+
+    //EL INFAME SONIDO DEL CABALLO
         // console.log("mouse over!")
 
         // const horseAudio = document.querySelector("#horse-audio")
@@ -27,12 +29,6 @@ function Logo() {
 
             <polygon points="25,6 5,40 45,40" fill="dodgerblue" />
         </svg>
-
-        <audio id="horse-audio" controls ref={horseAudioRef}>
-            <source src="https://www.w3schools.com/html/horse.ogg" type="audio/ogg" />
-            <source src="https://www.w3schools.com/html/horse.mp3" type="audio/mpeg" />
-            Your browser does not support the audio element.
-        </audio>
 
         <audio id="tweet-audio" controls ref={tweetAudioRef}>
             <source src="https://cdn.freesound.org/previews/418/418107_6078577-lq.mp3" type="audio/mpeg" />
