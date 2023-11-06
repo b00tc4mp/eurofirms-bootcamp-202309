@@ -1,4 +1,4 @@
-function createNewPost(email, image, imageDescription, text){
+function editPost(loggedInEmail, image, imageDescription, text){
     validateEmail(email)
     validateUrl(image, 'image url')
     validateText(imageDescription, 'image description')
@@ -6,18 +6,12 @@ function createNewPost(email, image, imageDescription, text){
 
     // search user by email
 
-    var foundUser = find(users, function (user){
-        return user.email === email
-    })
-
-    // if user not found then error
-
-    if(foundUser === undefined)
-        throw new Error('User not found')
+    if (loggedInEmail !== post.author) {
+        throw new Error ('you can only delete your own posts')
+    }
 
     var post = {}
-    post.id = createId()
-    post.author = email
+    post.author = loggedInEmaily
     post.image = image
     post.imageDescription = imageDescription
     post.text = text

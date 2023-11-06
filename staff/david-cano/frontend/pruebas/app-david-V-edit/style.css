@@ -87,3 +87,7 @@ h2 {
 audio {
     display: none;
 }
+
+.button-article{
+    display: flex;
+}

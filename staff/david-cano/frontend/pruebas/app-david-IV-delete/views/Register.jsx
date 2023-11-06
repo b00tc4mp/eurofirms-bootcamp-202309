@@ -20,7 +20,12 @@ function Register(props) {
         }
         catch (error) {
             // En caso de error, muestra una alerta con el mensaje de error.
-            alert(error.message)
+            Swal.fire({
+                title:'Error!',
+                text: 'do you want to continue',
+                icon: 'error',
+                confirmButtonText: 'Exit'
+            })
         }
         
     }
