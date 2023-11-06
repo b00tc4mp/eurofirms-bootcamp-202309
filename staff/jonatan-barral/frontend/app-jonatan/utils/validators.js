@@ -8,26 +8,19 @@ function validateEmail(email) {
     var atIndex = email.indexOf('@')
     var dotIndex = email.lastIndexOf('.')
 
-    if (atIndex === -1) {
-        throw new Error('Email is not valid: Missing "@" symbol');
-    } else if (dotIndex === -1) {
-        throw new Error('Email is not valid: Missing "." symbol');
-    } else if (atIndex > dotIndex) {
-        throw new Error('Email is not valid: "@" should appear before "."');
-    }
+    var isInvalidEmail = atIndex === -1 || dotIndex === -1 || atIndex > dotIndex
+
+    if (isInvalidEmail) throw new Error('Invalid email format')
 
     var username = email.slice(0, atIndex);
     var domain = email.slice(atIndex + 1, dotIndex);
     var topLevelDomain = email.slice(dotIndex + 1);
 
-    if (username.length === 0) {
-        throw new Error('Email is not valid: Username is missing');
-    } else if (domain.length === 0) {
-        throw new Error('Email is not valid: Domain is missing');
-    } else if (topLevelDomain.length === 0) {
-        throw new Error('Email is not valid: Top-level domain is missing')
-    }
+    var isInvalidEmailFormat = username.length < 3 || domain.length < 2 || topLevelDomain.length < 2
+
+    if (isInvalidEmailFormat) throw new Error('Invalid email format')
 }
+
 
 
 function validatePassword(password) {
@@ -60,4 +53,8 @@ function validatePassword(password) {
 function validateUrl(url, explain) {
     validateText(url, explain)
     if (!url.startsWith('http')) throw new Error(explain + ' is not valid')
+}
+
+function validateNumber(number, explain) {
+    if (typeof number !== 'number') throw new TypeError(explain + ' is not a number')
 }
