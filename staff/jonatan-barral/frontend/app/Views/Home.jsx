@@ -58,9 +58,9 @@ function Home(props) {
         }
     }
 
-    function handlePostLikeClick(postIndex) {
+    function handlePostLikeClick(postId) {
         try {
-            toggleLikePost(loggedInEmail, postIndex)
+            toggleLikePost(loggedInEmail, postId)
 
             setTimestamp(Date.now())
         } catch (error) {
@@ -99,10 +99,10 @@ function Home(props) {
                 const liked = post.likes.includes(loggedInEmail)
 
                 function handleBeforePostLikeClick() {
-                    handlePostLikeClick(posts.length - 1 - index)
+                    handlePostLikeClick(post.id)
                 }
 
-                return <article key={index} className="post">
+                return <article key={post.id} className="post">
                     <h3>{post.author}</h3>
                     <img className="post-image"
                         src={post.image}

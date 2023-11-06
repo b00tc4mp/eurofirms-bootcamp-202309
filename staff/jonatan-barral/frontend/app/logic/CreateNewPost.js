@@ -10,6 +10,7 @@ function createNewPost(email, image, imageDescription, text) {
     if (foundUser === undefined) throw new Error('User not found')
 
     var post = {}
+    post.id = createId()
     post.author = email
     post.image = image
     post.imageDescription = imageDescription
