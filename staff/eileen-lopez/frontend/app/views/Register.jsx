@@ -4,7 +4,6 @@ function Register(props) {
     function handleRegisterSubmit(event) {
         event.preventDefault()
        
-
             const nameInput = event.target.querySelector('#name-input')
             const emailInput = event.target.querySelector('#email-input')
             const passwordInput = event.target.querySelector('#password-input')
