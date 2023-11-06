@@ -61,9 +61,9 @@ function Home(props) {
         }
     }
 
-    function handlePostLikeClick(postId) {
+    function handlePostLikeClick(postIndex) {
         try {
-            toggleLikePost(loggedInEmail, postId)
+            toggleLikePost(loggedInEmail, postIndex)
 
             setTimestamp(Date.now())
         } catch (error) {
@@ -98,14 +98,14 @@ function Home(props) {
         </div> : null}
 
         {posts !== null ? <div aria-label="Posts list" className="view">
-            {posts.toReversed().map(function (post) {
+            {posts.toReversed().map(function (post, index, posts) {
                 const liked = post.likes.includes(loggedInEmail)
 
                 function handleBeforePostLikeClick() {
-                    handlePostLikeClick(post.id)
+                    handlePostLikeClick(posts.length - 1 - index)
                 }
 
-                return <article key={post.id} className="post">
+                return <article key={index} className="post">
                     <h3>{post.author}</h3>
                     <img className="post-image"
                         src={post.image}
