@@ -1,6 +1,6 @@
-function toggleLikePost(email, postIndex) {
+function toggleLikePost(email, postId) {
     validateEmail(email)
-    validateNumber(postIndex, 'post index')
+    validateText(postId, 'post id')
 
     var foundUser = find(users, function (user) {
         return user.email === email
@@ -9,12 +9,15 @@ function toggleLikePost(email, postIndex) {
     // if user not found then error
 
     if (foundUser === undefined)
-        throw new Error('Wrong credentials')
+        throw new Error('User not found')
 
-    if (postIndex >= posts.length)
-        throw new RangeError('Post index is out of range')
+    var post = find(posts, function (post) {
+        return post.id === postId
+    })
 
-    var post = posts[postIndex]
+    if (post === undefined)
+        throw new Error('Post noy found')
+
 
     var emailIndex = post.likes.indexOf(email)
 

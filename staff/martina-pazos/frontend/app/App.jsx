@@ -1,3 +1,6 @@
+
+// esta parte maneja toda la app
+
 function App() {
     console.log('App')
 
@@ -17,8 +20,12 @@ function App() {
         setView('home')
     }
 
+
+
+    // no entiendo las funciones de view
     return <>
-        <Logo />
+
+
 
         {view === 'login' ? <Login onSuccess={handleHomeShow} onRegisterClick={handleRegisterShow} /> : null}
 

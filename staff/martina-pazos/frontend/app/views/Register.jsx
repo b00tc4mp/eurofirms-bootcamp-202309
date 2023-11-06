@@ -1,3 +1,6 @@
+////esto es lo que aparece en el Register  de la APP. Aceptan entradas arbitrarias (llamadas "props") y devuelven elementos de React que describen lo que debería aparecer en la pantalla. Handle en inglés significa manejar.
+
+
 function Register(props) {
     function handleRegisterSubmit(event) {
         event.preventDefault()
@@ -9,6 +12,9 @@ function Register(props) {
         const name = nameInput.value
         const email = emailInput.value
         const password = passwordInput.value
+
+
+        //La construcción try... catch permite manejar errores de tiempo de ejecución. Literalmente permite “intentar (try)” ejecutar el código y “atrapar (catch)” errores que pueden ocurrir en él.
 
         try {
             registerUser(name, email, password)
@@ -44,6 +50,11 @@ function Register(props) {
             <button className="button" type="submit">Register</button>
         </form>
 
+
+
+
         <a onClick={handleLoginClick} href="">Login</a>
     </div>
 }
+
+// pq se hace así en onClick         

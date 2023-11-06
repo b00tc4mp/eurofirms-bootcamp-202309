@@ -1,3 +1,8 @@
+////esto es lo que aparece en el Login  de la APP. Aceptan entradas arbitrarias (llamadas "props") y devuelven elementos de React que describen lo que debería aparecer en la pantalla. Handle en inglés significa manejar.
+//El método map() es un método iterativo.Llama a una función callbackFn proporcionada una vez para cada elemento de una matriz y construye una nueva matriz a partir de los resultados. Recordemos el includes:El método includes() determina si una matriz incluye un determinado elemento, devuelve true o false según corresponda.
+
+
+
 function Login(props) {
     function handleLoginSubmit(event) {
         event.preventDefault()
@@ -7,6 +12,8 @@ function Login(props) {
 
         const email = emailInput.value
         const password = passwordInput.value
+
+        //La construcción try... catch permite manejar errores de tiempo de ejecución.Literalmente permite “intentar(try)” ejecutar el código y “atrapar(catch)” errores que pueden ocurrir en él.
 
 
         try {
@@ -19,6 +26,8 @@ function Login(props) {
             alert(error.message)
         }
     }
+
+    //onSuccess(en éxito)
 
     function handleRegisterClick(event) {
         event.preventDefault()
@@ -42,3 +51,5 @@ function Login(props) {
         <a onClick={handleRegisterClick} href="">Register</a>
     </div>
 }
+
+// revisada hasta 9/11
