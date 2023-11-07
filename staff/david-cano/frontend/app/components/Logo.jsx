@@ -1,5 +1,4 @@
 function Logo() {
-    console.log('Logo')
 
     const horseAudioRef = React.useRef()
     const tweetAudioRef = React.useRef()

@@ -1,25 +1,23 @@
-function toggleLikePost(email, postId){
-    validateEmail(email)
-    validateNumber(postId, 'post id')
+function toggleLikePost(userId, postId) {
+    validateText(userId, 'user id')
+    validateText(postId, 'post id')
 
-    var foundUser = find(users, function (user){
-        return user.email === email
-    })
+    const user = db.findUserById(userId)
 
-    if (foundUser === undefined)
+    if (!user)
         throw new Error('User not found')
 
-        var post = find(posts, function (post) {
-            return post.id === postId
-        })
-    
-        if (post === undefined)
-            throw new Error('Post not found')
+    const post = db.findPostById(postId)
 
-    var emailIndex = post.likes.indexOf(email)
+    if (!post)
+        throw new Error('Post not found')
 
-    if(emailIndex < 0)
-        post.likes.push(email)
+    const index = post.likes.indexOf(userId)
+
+    if (index < 0)
+        post.likes.push(userId)
     else
-        post.likes.splice(emailIndex, 1)
+        post.likes.splice(index, 1)
+
+    db.updatePost(post)
 }

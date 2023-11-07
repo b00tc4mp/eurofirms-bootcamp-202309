@@ -8,9 +8,7 @@ function Login(props) {
         const email = emailInput.value
         const password = passwordInput.value
 
-        authenticateUser(email, password)
-
-        loggedInEmail = email
+        sessionUserId = authenticateUser(email, password)
 
         props.onLoggedIn()
 

@@ -1,5 +1,4 @@
 function Home(props){
-    console.log('Home')
 
     const viewState = React.useState(null)
     const view = viewState[0]
@@ -11,23 +10,23 @@ function Home(props){
     let name = null
 
     try {
-        const user = retrieveUser(loggedInEmail)
+        const user = retrieveUser(sessionUserId)
 
         name = user.name
     } catch (error) {
         alert(error.message)
     }
 
-    let post = null
+    let posts = null
 
     try {
-        posts = retrievePosts(loggedInEmail)
+        posts = retrievePosts(sessionUserId)
     } catch (error) {
         alert(error.message)
     }
 
     function handleLogoutClick() {
-        loggedInEmail = null
+        sessionUserId = null
 
         props.onLogout()
     }
@@ -52,7 +51,7 @@ function Home(props){
         const text = textInput.value
 
         try {
-            createNewPost(loggedInEmail, image, imageDescription, text)
+            createNewPost(sessionUserId, image, imageDescription, text)
 
             setView(null)
         } catch (error) {
@@ -62,7 +61,7 @@ function Home(props){
 
     function handlePostLikeClick(postId) {
         try {
-            toggleLikePost(loggedInEmail, postId)
+            toggleLikePost(sessionUserId, postId)
 
             setTimestamp(Date.now())
         } catch (error) {
@@ -99,8 +98,6 @@ function Home(props){
     
     { posts !== null ? <div id="posts-list" aria-label="Posts list" className="view">    
         {posts.toReversed().map(function (post) {
-            const liked = post.likes.includes(loggedInEmail)
-
             function handleBeforePostLikeClick() {
                 handlePostLikeClick(post.id)
             }
@@ -108,7 +105,7 @@ function Home(props){
                 <h3>{post.author}</h3>
                 <img className = "post-image" src={post.image} alt={post.imageDescription} title={post.imageDescription} />
                 <p>{post.text}</p>
-                <button className = 'button' onClick = {handleBeforePostLikeClick}>{(liked ? '😍' : '😒') + ' ' + post.likes.length + 'likes'}</button>
+                <button className = 'button' onClick = {handleBeforePostLikeClick}>{(post.liked ? '😍' : '😒') + ' ' + post.likes.length + 'likes'}</button>
             </article>
             
         })}
