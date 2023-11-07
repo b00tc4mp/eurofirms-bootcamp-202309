@@ -1,22 +1,22 @@
 function Login(props) {
+
     function handleLoginSubmit(event) {
         event.preventDefault()
 
+        const emailInput = event.target.querySelector('#email-input')
+        const passwordInput = event.target.querySelector('#password-input')
+
+        const email = emailInput.value
+        const password = passwordInput.value
+
         try {
-            const emailInput = event.target.querySelector('#email-input')
-            const passwordInput = event.target.querySelector('#password-input')
+            sessionUserId = authenticateUser(email, password)
 
-            const email = emailInput.value
-            const password = passwordInput.value
-
-            authenticateUser(email, password)
-            loggedInEmail = email
-            props.onLoggedIn()
+            props.onSuccess()
         } catch (error) {
             alert(error.message)
         }
     }
-
 
     function handleRegisterClick(event) {
         event.preventDefault()

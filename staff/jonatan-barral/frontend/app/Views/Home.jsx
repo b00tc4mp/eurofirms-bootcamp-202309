@@ -1,15 +1,18 @@
 function Home(props) {
+    console.log('Home')
+
     const viewState = React.useState(null)
     const view = viewState[0]
     const setView = viewState[1]
 
     const timestampState = React.useState(null)
+    //const timestamp = timestampState[0]
     const setTimestamp = timestampState[1]
 
     let name = null
 
     try {
-        const user = retrieveUser(loggedInEmail)
+        const user = retrieveUser(sessionUserId)
 
         name = user.name
     } catch (error) {
@@ -19,13 +22,13 @@ function Home(props) {
     let posts = null
 
     try {
-        posts = retrievePosts(loggedInEmail)
+        posts = retrievePosts(sessionUserId)
     } catch (error) {
         alert(error.message)
     }
 
     function handleLogoutClick() {
-        loggedInEmail = null
+        sessionUserId = null
 
         props.onLogout()
     }
@@ -50,7 +53,7 @@ function Home(props) {
         const text = textInput.value
 
         try {
-            createNewPost(loggedInEmail, image, imageDescription, text)
+            createNewPost(sessionUserId, image, imageDescription, text)
 
             setView(null)
         } catch (error) {
@@ -60,7 +63,7 @@ function Home(props) {
 
     function handlePostLikeClick(postId) {
         try {
-            toggleLikePost(loggedInEmail, postId)
+            toggleLikePost(sessionUserId, postId)
 
             setTimestamp(Date.now())
         } catch (error) {
@@ -96,7 +99,6 @@ function Home(props) {
 
         {posts !== null ? <div id="posts-list" aria-label="Posts list" className="view">
             {posts.toReversed().map(function (post, index) {
-                const liked = post.likes.includes(loggedInEmail)
 
                 function handleBeforePostLikeClick() {
                     handlePostLikeClick(post.id)
@@ -109,7 +111,7 @@ function Home(props) {
                         alt={post.imageDescription}
                         title={post.imageDescription} />
                     <p>{post.text}</p>
-                    <button className="button" onClick={handleBeforePostLikeClick}>{(liked ? '❤️' : '🩶') + ' ' + post.likes.length + ' likes'}</button>
+                    <button className="button" onClick={handleBeforePostLikeClick}>{(post.liked ? '❤️' : '🩶') + ' ' + post.likes.length + ' likes'}</button>
                 </article>
             })}
         </div> : null}

@@ -1,21 +1,13 @@
-function createNewPost(email, image, imageDescription, text) {
-    validateEmail(email)
-    validateUrl(image, 'image URL')
-    validateText(imageDescription, 'Image description')
-    validateText(text, 'Text')
+function createNewPost(userId, image, imageDescription, text) {
+    validateText(userId, 'user id')
+    validateUrl(image, 'image url')
+    validateText(imageDescription, 'image description')
+    validateText(text, 'text')
 
-    var foundUser = find(users, function (user) {
-        return user.email === email
-    })
-    if (foundUser === undefined) throw new Error('User not found')
+    const user = db.findUserById(userId)
 
-    var post = {}
-    post.id = createId()
-    post.author = email
-    post.image = image
-    post.imageDescription = imageDescription
-    post.text = text
-    post.likes = []
+    if (!user)
+        throw new Error('User not found')
 
-    posts.push(post)
-}   
+    db.createPost(userId, image, imageDescription, text)
+}

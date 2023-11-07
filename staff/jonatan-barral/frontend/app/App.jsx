@@ -18,7 +18,7 @@ function App() {
     return <>
         <Logo />
 
-        {view === 'login' ? <Login onRegisterClick={handleShowRegister} onLoggedIn={handleShowHome} /> : null}
+        {view === 'login' ? <Login onRegisterClick={handleShowRegister} onSuccess={handleShowHome} /> : null}
 
         {view === 'register' ? <Register onNavigateToLogin={handleShowLogin} /> : null}
 

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="register-view" class="view view-plum">
+        <h1>Register</h1>
+
+        <form id="register-form" class="form">
+            <label for="name-input">Name</label>
+            <input type="text" id="name-input" title="Name">
+
+            <label for="email-input">E-mail</label>
+            <input id="email-input" title="E-mail">
+
+            <label for="password-input">Password</label>
+            <input type="password" id="password-input" title="Password">
+
+            <button type="submit">Register</button>
+        </form>
+
+        <a id="login-link" href="">Login</a>
+    </div>
+
+    <div id="login-view" class="view view-skyblue">
+        <h1>Login</h1>
+
+        <form id="login-form" class="form">
+            <label for="email-input">E-mail</label>
+            <input type="email" id="email-input" title="E-mail">
+
+            <label for="password-input">Password</label>
+            <input type="password" id="password-input" title="Password">
+
+            <button type="submit">Login</button>
+
+        </form>
+
+        <a id="register-link" href="">Register</a>
+    </div>
+
+    <div id="home-view">
+        <header class="header">
+            <h1>Home</h1>
+            <span id="user-name-span">Hello World</span>
+            <button id="new-post-button" title="New post" aria-label="New post">+</button>
+            <button id="logout-button">Logout</button>
+        </header>
+
+        <!-- add post panel -->
+
+        <div id="new-post-panel" class="panel-lightgreen">
+            <h2>Create post</h2>
+
+            <form id="new-post-form" class="form">
+                <label for="image-input">Image</label>
+                <input type="url" id="image-input">
+
+                <label for="image-description-input">Image description</label>
+                <input type="text" id="image-description-input">
+
+                <label for="text-input">Text</label>
+                <input type="text" id="text-input">
+
+                <button type="submit">Post</button>
+                <button id="cancel-new-post-button">Cancel</button>
+            </form>
+        </div>
+
+
+        <!-- posts list -->
+
+        <div id="posts-list">
+        </div>
+    </div>
+
+    <script src="utils/find.js"></script>
+    <script src="utils/validators.js"></script>
+    <script src="data.js"></script>
+
+    <script src="logic/authenticateUser.js"></script>
+    <script src="logic/retrieveUser.js"></script>
+    <script src="logic/retrievePost.js">    </script>
+    <script src="logic/registerUser.js"></script>
+    <script src="logic/CreateNewPost.js"></script>
+
+    <script src="main.js"></script>
+    <script src="views/register.js"></script>
+    <script src="views/login.js"></script>
+    <script src="views/home.js"></script>
+</body>
+
+</html>

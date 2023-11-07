@@ -3,25 +3,10 @@ function registerUser(name, email, password) {
     validateEmail(email)
     validatePassword(password)
 
-    var foundUser = null
+    const user = db.findUserByEmail(email)
 
-    for (var i = 0; i < users.length; i++) {
-        var user = users[i]
-
-        if (user.email === email) {
-            foundUser = user
-
-            break
-        }
-    }
-
-    if (foundUser !== null)
+    if (user)
         throw new Error('User already exists')
 
-    var user = {}
-    user.name = name
-    user.email = email
-    user.password = password
-
-    users.push(user)
+    db.createUser(name, email, password)
 }

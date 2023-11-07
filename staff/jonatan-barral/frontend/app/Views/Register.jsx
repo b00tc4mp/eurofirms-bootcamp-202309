@@ -1,33 +1,31 @@
 function Register(props) {
+    console.log('Register')
+
     function handleRegisterSubmit(event) {
         event.preventDefault()
 
+        const nameInput = event.target.querySelector('#name-input')
+        const emailInput = event.target.querySelector('#email-input')
+        const passwordInput = event.target.querySelector('#password-input')
+
+        const name = nameInput.value
+        const email = emailInput.value
+        const password = passwordInput.value
+
         try {
-            const nameInput = event.target.querySelector('#name-input')
-            const emailInput = event.target.querySelector('#email-input')
-            const passwordInput = event.target.querySelector('#password-input')
-
-            const name = nameInput.value
-            const email = emailInput.value
-            const password = passwordInput.value
-
             registerUser(name, email, password)
 
-            props.onNavigateToLogin()
-
-        }
-        catch (error) {
+            props.onSuccess()
+        } catch (error) {
             alert(error.message)
         }
     }
-
 
     function handleLoginClick(event) {
         event.preventDefault()
 
         props.onLoginClick()
     }
-
 
     return <div id="register-view" className="view view-plum">
         <h1>Register</h1>
