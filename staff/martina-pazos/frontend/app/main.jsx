@@ -1,4 +1,4 @@
-let loggedInEmail = null
+let sessionUserId = null
 
 console.log('root')
 

@@ -17,9 +17,7 @@ function Login(props) {
 
 
         try {
-            authenticateUser(email, password)
-
-            loggedInEmail = email
+            sessionUserId = authenticateUser(email, password)
 
             props.onSuccess()
         } catch (error) {

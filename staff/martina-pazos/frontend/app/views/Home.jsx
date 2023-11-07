@@ -20,7 +20,7 @@ function Home(props) {
     //La construcción try... catch permite manejar errores de tiempo de ejecución. Literalmente permite “intentar (try)” ejecutar el código y “atrapar (catch)” errores que pueden ocurrir en él.
 
     try {
-        const user = retrieveUser(loggedInEmail)
+        const user = retrieveUser(sessionUserId)
 
         name = user.name
     } catch (error) {
@@ -30,7 +30,7 @@ function Home(props) {
     let posts = null
 
     try {
-        posts = retrievePosts(loggedInEmail)
+        posts = retrievePosts(sessionUserId)
     } catch (error) {
         alert(error.message)
     }
@@ -39,7 +39,7 @@ function Home(props) {
     // maneja el boton de logout
 
     function handleLogoutClick() {
-        loggedInEmail = null
+        sessionUserId = null
 
         props.onLogout()
     }
@@ -70,7 +70,7 @@ function Home(props) {
         const text = textInput.value
 
         try {
-            createNewPost(loggedInEmail, image, imageDescription, text)
+            createNewPost(sessionUserId, image, imageDescription, text)
 
             setView(null)
         } catch (error) {
@@ -82,7 +82,7 @@ function Home(props) {
 
     function handlePostLikeClick(postId) {
         try {
-            toggleLikePost(loggedInEmail, postId)
+            toggleLikePost(sessionUserId, postId)
 
             setTimestamp(Date.now())
         } catch (error) {
@@ -118,8 +118,6 @@ function Home(props) {
 
         {posts !== null ? <div aria-label="Posts list" className="view">
             {posts.toReversed().map(function (post) {
-                const liked = post.likes.includes(loggedInEmail)
-
                 function handleBeforePostLikeClick() {
                     handlePostLikeClick(post.id)
                 }
@@ -131,7 +129,7 @@ function Home(props) {
                         alt={post.imageDescription}
                         title={post.imageDescription} />
                     <p>{post.text}</p>
-                    <button className="button" onClick={handleBeforePostLikeClick}>{(liked ? '❤️' : '🩶') + ' ' + post.likes.length + ' likes'}</button>
+                    <button className="button" onClick={handleBeforePostLikeClick}>{(post.liked ? '❤️' : '🩶') + ' ' + post.likes.length + ' likes'}</button>
                 </article>
             })}
         </div> : null}

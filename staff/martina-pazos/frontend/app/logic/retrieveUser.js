@@ -1,13 +1,12 @@
-function retrieveUser(email) {
-    var foundUser = find(users, function (user) {
-        return user.email === email
-    })
+function retrieveUser(userId) {
+    validateText(userId, 'user id')
 
-    // if user not found then error
+    const user = db.findUserById(userId)
 
-    if (foundUser === undefined)
-        throw new Error('Wrong credentials')
 
-    return foundUser
+    if (!user)
+        throw new Error('User not found')
+
+    return user
 }
 
