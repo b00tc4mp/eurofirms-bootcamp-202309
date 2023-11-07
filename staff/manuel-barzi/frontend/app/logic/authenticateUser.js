@@ -4,9 +4,11 @@ function authenticateUser(email, password) {
 
     const user = db.findUserByEmail(email)
 
-    if (user === undefined)
+    if (!user)
         throw new Error('Wrong credentials')
 
     if (user.password !== password)
         throw new Error('Wrong credentials')
+
+    return user.id
 }

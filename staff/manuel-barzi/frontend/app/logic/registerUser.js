@@ -5,7 +5,7 @@ function registerUser(name, email, password) {
 
     const user = db.findUserByEmail(email)
 
-    if (user !== undefined)
+    if (user)
         throw new Error('User already exists')
 
     db.createUser(name, email, password)

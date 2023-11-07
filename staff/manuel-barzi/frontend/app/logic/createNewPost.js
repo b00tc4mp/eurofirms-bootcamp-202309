@@ -6,6 +6,8 @@ function createNewPost(userId, image, imageDescription, text) {
 
     const user = db.findUserById(userId)
 
-    if (user === null)
+    if (!user)
         throw new Error('User not found')
+
+    db.createPost(userId, image, imageDescription, text)
 }

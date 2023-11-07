@@ -4,20 +4,20 @@ function toggleLikePost(userId, postId) {
 
     const user = db.findUserById(userId)
 
-    if (user === null)
+    if (!user)
         throw new Error('User not found')
 
     const post = db.findPostById(postId)
 
-    if (post === null)
+    if (!post)
         throw new Error('Post not found')
 
-    const userIdIndex = post.likes.indexOf(userId)
+    const index = post.likes.indexOf(userId)
 
-    if (userIdIndex < 0)
-        post.likes.push(userIdIndex)
+    if (index < 0)
+        post.likes.push(userId)
     else
-        post.likes.splice(userIdIndex, 1)
+        post.likes.splice(index, 1)
 
     db.updatePost(post)
 }

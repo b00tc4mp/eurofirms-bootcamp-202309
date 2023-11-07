@@ -3,7 +3,7 @@ function retrieveUser(userId) {
 
     const user = db.findUserById(userId)
 
-    if (user === null)
+    if (!user)
         throw new Error('User not found')
 
     return user
