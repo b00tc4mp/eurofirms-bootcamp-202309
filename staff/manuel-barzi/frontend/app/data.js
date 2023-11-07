@@ -1,7 +1,9 @@
 // database collections
 
-var users = []
-var posts = []
+const db = {
+    users: [],
+    posts: []
+}
 
 // create ids
 
@@ -9,63 +11,36 @@ function createId() {
     return Math.floor((Math.random() * 1000000000000000000)).toString(36)
 }
 
-// populate some users
+// data models
 
-users[0] = {
-    name: 'Pepito Grillo',
-    email: 'pepito@grillo.com',
-    password: '123123123'
+function User(id, name, email, password) {
+    this.id = id
+    this.name = name
+    this.email = email
+    this.password = password
 }
 
-users[1] = {
-    name: 'Campa Nilla',
-    email: 'campa@nilla.com',
-    password: '123123123'
+function Post(id, author, image, imageDescription, text, likes) {
+    this.id = id
+    this.author = author
+    this.image = image
+    this.imageDescription = imageDescription
+    this.text = text
+    this.likes = likes
 }
 
-// populate some posts
+// populate
 
-posts[0] = {
-    id: createId(),
-    author: 'pepito@grillo.com',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/1200px-SNice.svg.png',
-    imageDescription: 'Smile image',
-    text: 'Smile!',
-    likes: []
-}
+db.users[0] = new User(createId(), 'Pepito Grillo', 'pepito@grillo.com', '123123123')
 
-posts[1] = {
-    id: createId(),
-    author: 'campa@nilla.com',
-    image: 'https://www.telemundo.com/sites/nbcutelemundo/files/styles/fit-1240w/public/sites/nbcutelemundo/files/images/article/2014/08/28/hello_kitty_140920568644_4.jpg',
-    imageDescription: 'Hello Kitty image',
-    text: 'Hello, Kitty!',
-    likes: []
-}
+db.users[1] = new User(createId(), 'Campa Nilla', 'campa@nilla.com', '123123123')
 
-posts[2] = {
-    id: createId(),
-    author: 'campa@nilla.com',
-    image: 'https://m.media-amazon.com/images/I/51-qisfjMnL.jpg',
-    imageDescription: 'Doreamon image',
-    text: 'Doraemon',
-    likes: ['pepito@grillo.com']
-}
+db.posts[0] = new Post(createId(), db.users[0].id, 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/1200px-SNice.svg.png', 'Smile image', 'Smile!', [])
 
-posts[3] = {
-    id: createId(),
-    author: 'pepito@grillo.com',
-    image: 'https://i.ebayimg.com/images/g/V9wAAOSw~e5ZU~Ls/s-l1200.webp',
-    imageDescription: 'Pikachu image',
-    text: 'Pikachu!',
-    likes: ['campa@nilla.com']
-}
+db.posts[1] = new Post(createId(), db.users[1].id, 'https://www.telemundo.com/sites/nbcutelemundo/files/styles/fit-1240w/public/sites/nbcutelemundo/files/images/article/2014/08/28/hello_kitty_140920568644_4.jpg', 'Hello Kitty image', 'Hello, Kitty!', [])
 
-posts[4] = {
-    id: createId(),
-    author: 'pepito@grillo.com',
-    image: 'https://i.pinimg.com/550x/64/65/90/6465907c690be529106e4ada2c94d0d6.jpg',
-    imageDescription: 'Atomic ant image',
-    text: 'La Hormiga Atómica!',
-    likes: []
-}
+db.posts[2] = new Post(createId(), db.users[1].id, 'https://m.media-amazon.com/images/I/51-qisfjMnL.jpg', 'Doreamon image', 'Doraemon', [db.users[0].id])
+
+db.posts[3] = new Post(createId(), db.users[0].id, 'https://i.ebayimg.com/images/g/V9wAAOSw~e5ZU~Ls/s-l1200.webp', 'Pikachu image', 'Pikachu!', [db.users[1].id])
+
+db.posts[4] = new Post(createId(), db.users[0].id, 'https://i.pinimg.com/550x/64/65/90/6465907c690be529106e4ada2c94d0d6.jpg', 'Atomic ant image', 'La Hormiga Atómica!', [])
