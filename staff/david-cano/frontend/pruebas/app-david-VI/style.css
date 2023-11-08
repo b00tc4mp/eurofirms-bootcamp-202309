@@ -43,7 +43,6 @@ h2 {
     border-radius: 5px;
     line-height: 1.5rem;
     padding-left: 5px;
-    margin: 2px;
 }
 
 .post-image {
@@ -62,12 +61,4 @@ h2 {
 
 audio {
     display : none;
-}
-
-.post{
-    padding: 0.5rem;
-}
-
-.post:hover{
-    background-color: rgb(237, 237, 237);
 }

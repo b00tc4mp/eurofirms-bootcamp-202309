@@ -5,13 +5,13 @@ function validateText(text, explain){
 
 function validateEmail(email){
     validateText(email, 'email')
-    if(!email.includes('@')) throw new Error('email is not valid')
-    if(!email.includes('.')) throw new Error('email is not valid')
+    if(!email.includes('@')) throw new Error('Email is not valid')
+    if(!email.includes('.')) throw new Error('Email is not valid')
 }
 
 function validatePassword(password){
     validateText(password, 'password')
-    if(password.length < 8) throw new RangeError('password length is lower than 8')
+    if(password.length < 8) throw new RangeError('Password length is lower than 8')
 }
 
 function validateUrl(url, explain){
