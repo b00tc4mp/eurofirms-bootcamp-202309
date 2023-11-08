@@ -6,11 +6,12 @@ function generateId() {
 }
 
 // data models. Con un constructor, asignamos atributos a cada elemento
-function User(id, name, email, password) {
+function User(id, name, email, password, saved) {
     this.id = id
     this.name = name
     this.email = email
     this.password = password
+    this.saved = saved
 }
 
 function Post(id, author, image, imageDescription, text, likes) {
@@ -24,7 +25,7 @@ function Post(id, author, image, imageDescription, text, likes) {
 
 //esta funcion es para clonar a los usuarios de la db
 function cloneUser(user) {
-    return new User(user.id, user.name, user.email, user.password)
+    return new User(user.id, user.name, user.email, user.password, [...user.saved])
 }
 
 // esta funcion es para clonar los post de la db
@@ -54,7 +55,7 @@ const db = {
     },
 
     createUser: function (name, email, password) {
-        const user = new User(generateId(), name, email, password)
+        const user = new User(generateId(), name, email, password, [])
 
         this.users, push(user)
     },
@@ -77,11 +78,35 @@ const db = {
         })
     },
 
+    updateUser: function (user) {
+        const userId = user.id
+
+        const userIndex = this.users.findIndex(function (user) {
+            return user.id === userId
+        })
+
+        if (userIndex < 0)
+            throw new Error('user not found')
+
+        this.users[userIndex] = cloneUser(user)
+
+    },
+
+
+    getPosts: function () {
+        return this.posts.map(function (post) {
+            return clonePost(post)
+        })
+    },
+
 
     createPost: function (userId, image, imageDescription, text) {
         const post = new Post(generateId(), userId, image, imageDescription, text, [])
+
         this.posts.push(post)
     },
+
+
 
     findPostById: function (id) {
         const post = this.posts.find(function (post) {
@@ -107,15 +132,28 @@ const db = {
             throw new Error('post not found')
 
         this.posts[postIndex] = clonePost(post)
+    },
+
+    // es la función para borrar un post. Es un 1 pq elimina un post del index de la array.
+
+    removePostById: function (id) {
+        const postIndex = this.posts.findIndex(function (post) {
+            return post.id === id
+        })
+
+        if (postIndex < 0)
+            throw new Error('post not found')
+
+        this.posts.splice(postIndex, 1)
     }
 }
 
 // populate 
 
 
-db.users[0] = new User(generateId(), 'Pepito Grillo', 'pepito@grillo.com', '123123123')
+db.users[0] = new User(generateId(), 'Pepito Grillo', 'pepito@grillo.com', '123123123', [])
 
-db.users[1] = new User(generateId(), 'Campa Nilla', 'campa@nilla.com', '123123123')
+db.users[1] = new User(generateId(), 'Campa Nilla', 'campa@nilla.com', '123123123', [])
 
 //post
 
@@ -134,6 +172,8 @@ db.posts[3] = new Post(generateId(), db.users[0].id,
 db.posts[4] = new Post(generateId(), db.users[1].id, 'https://i.pinimg.com/550x/64/65/90/6465907c690be529106e4ada2c94d0d6.jpg', 'Atomic ant image', 'La Hormiga Atómica!', [])
 
 db.posts[5] = new Post(generateId(), db.users[0].id, 'https://coolandthebag.com/cdn/shop/products/BD-Mafalda-une-collection-engagee-3.jpg?v=1601570071', 'Mafalda screaming BASTA!', 'Mafalda', [])
+
+db.users[0].saved.push(db.posts[2].id)
 
 
 
