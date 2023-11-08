@@ -71,26 +71,6 @@ function Home(props) {
         }
     }
 
-    function handlePostDeleteClick(postId) {
-        try {
-            deletePost(sessionUserId, postId)
-
-            setTimestamp(Date.now())
-        } catch (error) {
-            alert(error.message)
-        }
-    }
-
-    function handlePostSaveClick(postId) {
-        try {
-            toggleSavePost(sessionUserId, postId)
-
-            setTimestamp(Date.now())
-        } catch (error) {
-            alert(error.message)
-        }
-    }
-
     return <div>
         <header className="header" aria-label="Header">
             <h1>Home</h1>
@@ -123,32 +103,14 @@ function Home(props) {
                     handlePostLikeClick(post.id)
                 }
 
-                function handleBeforePostDeleteClick() {
-                    const confirmed = confirm('Delete post?')
-
-                    if (confirmed)
-                        handlePostDeleteClick(post.id)
-                }
-
-                function handleBeforePostSaveClick() {
-                    handlePostSaveClick(post.id)
-                }
-
                 return <article key={post.id} className="post">
-                    <h3>{post.author.name}</h3>
-
+                    <h3>{post.author}</h3>
                     <img className="post-image"
                         src={post.image}
                         alt={post.imageDescription}
                         title={post.imageDescription} />
-
                     <p>{post.text}</p>
-
                     <button className="button" onClick={handleBeforePostLikeClick}>{(post.liked ? '❤️' : '🩶') + ' ' + post.likes.length + ' likes'}</button>
-
-                    <button className="button" onClick={handleBeforePostSaveClick}>{(post.saved ? '⭐️' : '✩')}</button>
-
-                    {post.author.id === sessionUserId ? <button className="button" onClick={handleBeforePostDeleteClick}>Delete</button> : null}
                 </article>
             })}
         </div> : null}

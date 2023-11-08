@@ -81,16 +81,6 @@ function Home(props) {
         }
     }
 
-    function handlePostSaveClick(postId) {
-        try {
-            toggleSavePost(sessionUserId, postId)
-
-            setTimestamp(Date.now())
-        } catch (error) {
-            alert(error.message)
-        }
-    }
-
     return <div>
         <header className="header" aria-label="Header">
             <h1>Home</h1>
@@ -130,10 +120,6 @@ function Home(props) {
                         handlePostDeleteClick(post.id)
                 }
 
-                function handleBeforePostSaveClick() {
-                    handlePostSaveClick(post.id)
-                }
-
                 return <article key={post.id} className="post">
                     <h3>{post.author.name}</h3>
 
@@ -145,8 +131,6 @@ function Home(props) {
                     <p>{post.text}</p>
 
                     <button className="button" onClick={handleBeforePostLikeClick}>{(post.liked ? '❤️' : '🩶') + ' ' + post.likes.length + ' likes'}</button>
-
-                    <button className="button" onClick={handleBeforePostSaveClick}>{(post.saved ? '⭐️' : '✩')}</button>
 
                     {post.author.id === sessionUserId ? <button className="button" onClick={handleBeforePostDeleteClick}>Delete</button> : null}
                 </article>

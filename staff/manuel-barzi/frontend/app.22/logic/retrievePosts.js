@@ -9,16 +9,11 @@ function retrievePosts(userId) {
     const posts = db.getPosts()
 
     posts.forEach(function (post) {
-        const author = db.findUserById(post.author)
+        const user = db.findUserById(post.author)
 
-        post.author = {
-            id: author.id,
-            name: author.name
-        }
+        post.author = user.name
 
         post.liked = post.likes.includes(userId)
-
-        post.saved = user.saved.includes(post.id)
     })
 
     return posts
