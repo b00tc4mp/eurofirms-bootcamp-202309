@@ -9,15 +9,7 @@ function Home(props) {
     //const timestamp = timestampState[0]
     const setTimestamp = timestampState[1]
 
-    let name = null
-
-    try {
-        const user = retrieveUser(sessionUserId)
-
-        name = user.name
-    } catch (error) {
-        alert(error.message)
-    }
+   
 
     let posts = null
 
@@ -92,12 +84,7 @@ function Home(props) {
     }
 
     return <div>
-        <header className="header" aria-label="Header">
-            <h1>Home</h1>
-            <span aria-label="User name">{name}</span>
-            <button title="New post" aria-label="New post" className="button" onClick={handleNewPostClick}>+</button>
-            <button className="button" onClick={handleLogoutClick}>Logout</button>
-        </header>
+        <Header onNewPostClick={handleNewPostClick} onLogoutClick={handleLogoutClick} />
 
         {view === 'new-post' ? <div className="view">
             <h2>New post</h2>
