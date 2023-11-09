@@ -18,11 +18,11 @@ function registerUser(name, email, password) {
 }
 
 /*
-En este código, la función registerUserrecibe un name(nombre), un emaily una passwordcomo parámetros de entrada. A continuación, realice los siguientes pasos:
+En este código, la función registerUserrecibe un name(nombre), un email y una password como parámetros de entrada. A continuación, realiza los siguientes pasos:
 
-Validar el formato del nombre : Se llama a la función validateTextpara comprobar si el formato del namees válido. Esto asegura que nameel formato sea adecuado.
+Validar el formato del nombre : Se llama a la función validateText para comprobar si el formato del name es válido. Esto asegura que name el formato sea adecuado.
 
-Validar el formato del correo electrónico : Se llama a la función validateEmailpara comprobar si el formato del emailes válido. Esto asegura que emailel formato sea correcto.
+Validar el formato del correo electrónico : Se llama a la función validateEmail para comprobar si el formato del emailes válido. Esto asegura que emailel formato sea correcto.
 
 Validar el formato de la contraseña : Se llama a la función validatePasswordpara comprobar si el formato de la passwordes válido. Esto asegura que la passwordcumple con los criterios requeridos, como longitud mínima o requisitos específicos de caracteres.
 
