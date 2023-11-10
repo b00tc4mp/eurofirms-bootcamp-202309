@@ -3,17 +3,8 @@ function registerUser(name, email, password) {
     validateEmail(email)
     validatePassword(password)
 
-    var foundUser = find(users, function (user) {
-        return user.email === email
-    }) 
-
-    if (foundUser !== undefined)
+    const user = db.findUserByEmail(email)
+    if (user)
         throw new Error ('User already exists')
-
-    var user = {}
-    user.name = name
-    user.email = email
-    user.password = password
-
-    users.push(user)
+    db.createUser(name, email, password)
 }

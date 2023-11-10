@@ -1,4 +1,5 @@
-let loggedInEmail = null
+//let sessionUserId = null
+let sessionUserId = db.users[0].id
 
 console.log('root')
 

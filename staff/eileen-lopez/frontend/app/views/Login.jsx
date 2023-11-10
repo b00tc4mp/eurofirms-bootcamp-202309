@@ -1,7 +1,7 @@
 function Login(props){
 console.log('Login')
 
-    function handleLoginSubmit(event) {
+    function handleLoginSubmit(event) {
         event.preventDefault()
 
         const emailInput = event.target.querySelector('#email-input')
@@ -10,8 +10,7 @@ console.log('Login')
         const password = passwordInput.value
 
         try{
-            authenticateUser(email, password)
-            loggedInEmail = email
+            sessionUserId = authenticateUser(email, password)
             props.onSuccess()
         } catch (error) {
             alert(error.message)

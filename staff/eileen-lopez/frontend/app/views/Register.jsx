@@ -24,7 +24,7 @@ function Register(props) {
     function handleLoginClick(event) {
         event.preventDefault()
 
-        props.onNavigateToLogin()
+        props.onLoginClick()
     }
 
     return <div className="view">
