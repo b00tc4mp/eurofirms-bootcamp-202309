@@ -78,6 +78,12 @@ const db = {
         this.users[userIndex] = cloneUser(user)
     },
 
+    getUsers: function () {
+        return this.users.map(function (user) {
+            return cloneUser(user)
+        })
+    },
+
     getPosts: function () {
         return this.posts.map(function (post) {
             return clonePost(post)

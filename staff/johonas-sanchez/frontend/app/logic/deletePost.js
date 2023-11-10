@@ -15,5 +15,17 @@ function deletePost(userId, postId) {
     if (post.author !== userId)
         throw new Error('Post doest not belong to user')
 
+        const users = db.getUsers()
+
+    users.forEach(function (user) {
+        const index = user.saved.indexOf(post.id)
+
+        if (index > -1) {
+            user.saved.splice(index, 1)
+
+            db.updateUser(user)
+        }
+    })
+
     db.removePostById(postId)
 }
