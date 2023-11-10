@@ -1,4 +1,3 @@
-
 function toggleSavePost(userId, postId) {
     validateText(userId, 'user id')
     validateText(postId, 'post id')

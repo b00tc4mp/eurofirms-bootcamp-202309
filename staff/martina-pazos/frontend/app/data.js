@@ -89,7 +89,6 @@ const db = {
             throw new Error('user not found')
 
         this.users[userIndex] = cloneUser(user)
-
     },
 
 

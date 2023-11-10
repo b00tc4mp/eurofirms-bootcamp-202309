@@ -7,7 +7,7 @@ function deletePost(userId, postId) {
     if (!user)
         throw new Error('user not found')
 
-    const users = db.findPostById(postId)
+    const post = db.findPostById(postId)
 
     if (!post)
         throw new Error('Post not found')
@@ -16,6 +16,5 @@ function deletePost(userId, postId) {
         throw new Error('Post doest not belong to user')
 
     db.removePostById(postId)
-
 }
-
+//tengo que terminar codigo por el de manu

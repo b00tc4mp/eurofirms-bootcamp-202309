@@ -1,4 +1,4 @@
-//esto es lo que aparece en la Home de la APP. En el header (cabecera), esta hola mundo, boton para nuevo post (+), boton de logout, nombre de los usuarios que esta usando la app en ese momento.Aceptan entradas arbitrarias (llamadas "props") y devuelven elementos de React que describen lo que debería aparecer en la pantalla. Handle en inglés significa manejar.
+//esto es lo que aparece en la Home de la APP. En el header (cabecera), esta hola mundo, boton para nuevo post (+), boton de logout, nombre de los usuarios que esta usando la app en ese momento, los post saved o favoritos.Aceptan entradas arbitrarias (llamadas "props") y devuelven elementos de React que describen lo que debería aparecer en la pantalla. Handle en inglés significa manejar.
 //El método map() es un método iterativo.Llama a una función callbackFn proporcionada una vez para cada elemento de una matriz y construye una nueva matriz a partir de los resultados. Recordemos el includes:El método includes() determina si una matriz incluye un determinado elemento, devuelve true o false según corresponda.
 
 
@@ -14,6 +14,12 @@ function Home(props) {
     const timestampState = React.useState(null)
     //const timestamp = timestampState[0]
     const setTimestamp = timestampState[1]
+
+    const savedState = React.useState(null)
+    const saved = savedState[0]
+    const setSaved = savedState[1]
+    //TODO const [saved, setSaved] = React.useState(null)
+
 
     let name = null
 
@@ -88,28 +94,53 @@ function Home(props) {
         try {
             toggleLikePost(sessionUserId, postId)
 
+
+            if (view === 'saved') {
+                const saved = retrieveSavedPosts(sessionUserId)
+
+                setSaved(saved)
+
+                return
+
+            }
+
             setTimestamp(Date.now())
         } catch (error) {
             alert(error.message)
         }
     }
 
-    //esta es la funcion para eliminar un post, sólo lo puede eliminar el usuario que lo publico
+    // maneja los eleminación de los post
 
     function handlePostDeleteClick(postId) {
         try {
             deletePost(sessionUserId, postId)
 
+            if (view === 'saved') {
+
+                const saved = retrieveSavedPosts(sessionUserId)
+
+
+                setSaved(saved)
+
+                return
+            }
             setTimestamp(Date.now())
         } catch (error) {
             alert(error.message)
         }
     }
-
 
     function handlePostSaveClick(postId) {
         try {
             toggleSavePost(sessionUserId, postId)
+            if (view === 'saved') {
+                const saved = retrieveSavedPosts(sessionUserId)
+
+                setSaved(saved)
+
+                return
+            }
 
             setTimestamp(Date.now())
         } catch (error) {
@@ -117,13 +148,30 @@ function Home(props) {
         }
     }
 
+    function handleSavedClick(event) {
+        event.preventDefault()
 
+        try {
+            const saved = retrieveSavedPosts(sessionUserId)
 
+            setSaved(saved)
+            setView('saved')
+        } catch (error) {
+            alert(error.message)
+        }
+    }
+
+    function handleHomeClick(event) {
+        event.preventDefault()
+
+        setView(null)
+    }
     return <div>
         <header className="header" aria-label="Header">
-            <h1>Home</h1>
+            <h1><a href="" onClick={handleHomeClick}>Home</a></h1>
             <span aria-label="User name">{name}</span>
             <button title="New post" aria-label="New post" className="button" onClick={handleNewPostClick}>+</button>
+            <a href="" onClick={handleSavedClick}>Saved</a>
             <button className="button" onClick={handleLogoutClick}>Logout</button>
         </header>
 
@@ -146,11 +194,12 @@ function Home(props) {
             </form>
         </div> : null}
 
-        {posts !== null ? <div aria-label="Posts list" className="view">
-            {posts.toReversed().map(function (post) {
+        {(view === null || view === 'new-post') && posts !== null ? <div aria-label="Posts list" className=" view">
+            {posts.map(function (post) {
                 function handleBeforePostLikeClick() {
                     handlePostLikeClick(post.id)
                 }
+
 
                 function handleBeforePostDeleteClick() {
                     const confirmed = confirm('Delete post?')
@@ -176,14 +225,49 @@ function Home(props) {
 
                     <button className="button" onClick={handleBeforePostLikeClick}>{(post.liked ? '❤️' : '🩶') + ' ' + post.likes.length + ' likes'}</button>
 
-
                     <button className="button" onClick={handleBeforePostSaveClick}>{(post.saved ? '⭐️' : '✩')} </button>
                     {post.author.id === sessionUserId ? <button className="button" onClick={handleBeforePostDeleteClick}>Delete</button> : null}
 
                 </article>
             })}
         </div> : null}
-    </div>
+
+        {
+            view === 'saved' ? <div aria-label="Saved list" className="view">
+                {saved.map(function (post) {
+                    function handleBeforePostLikeClick() {
+                        handlePostLikeClick(post.id)
+                    }
+
+                    function handleBeforePostDeleteClick() {
+                        const confirmed = confirm('Delete post?')
+
+                        if (confirmed)
+                            handlePostDeleteClick(post.id)
+                    }
+
+                    function handleBeforePostSaveClick() {
+                        handlePostSaveClick(post.id)
+                    }
+
+                    return <article key={post.id} className="post">
+                        <h3>{post.author.name}</h3>
+
+                        <img className="post-image"
+                            src={post.image}
+                            alt={post.imageDescription}
+                            title={post.imageDescription} />
+
+                        <p>{post.text}</p>
+
+                        <button className="button" onClick={handleBeforePostLikeClick}>{(post.liked ? '❤️' : '🩶') + ' ' + post.likes.length + ' likes'}</button>
+
+                        <button className="button" onClick={handleBeforePostSaveClick}>{(post.saved ? '⭐️' : '✩')}</button>
+
+                        {post.author.id === sessionUserId ? <button className="button" onClick={handleBeforePostDeleteClick}>Delete</button> : null}
+                    </article>
+                })}
+            </div> : null
+        }
+    </div >
 }
-
-

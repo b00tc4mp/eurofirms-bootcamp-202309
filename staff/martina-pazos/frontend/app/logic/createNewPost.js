@@ -3,7 +3,7 @@
 function createNewPost(userId, image, imageDescription, text) {
     validateText(userId, 'user id')
     validateUrl(image, 'image url')
-    validateText(imageDescription, 'image decription')
+    validateText(imageDescription, 'image description')
     validateText('text)')
 
     // search user by email. Recordemos el método find: el método find() devuelve el valor del primer elemento del array que cumple la función de prueba proporcionada.
@@ -13,10 +13,10 @@ function createNewPost(userId, image, imageDescription, text) {
 
 
     //if user no found ther error
-    if (!User)
+    if (!user)
         throw new Error('User not found')
 
-    db.createNewPost(userId, image, imageDescription, text)
+    db.createPost(userId, image, imageDescription, text)
 
 }
 
