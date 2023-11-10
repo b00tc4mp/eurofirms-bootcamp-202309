@@ -2,11 +2,12 @@ function generateId() {
     return Math.floor((Math.random() * 1000000000000000000)).toString(36)
 }
 
-function User(id, name, email, password) {
+function User(id, name, email, password, saved) {
     this.id = id
     this.name = name
     this.email = email
     this.password = password
+    this.saved = saved
 }
 
 function Post(id, author, image, imageDescription, text, likes) {
@@ -19,7 +20,7 @@ function Post(id, author, image, imageDescription, text, likes) {
 }
 
 function cloneUser(user) {
-    return new User(user.id, user.name, user.email, user.password)
+    return new User(user.id, user.name, user.email, user.password, [...user.saved])
 }
 
 function clonePost(post) {
@@ -41,7 +42,7 @@ const db = {
     },
 
     createUser: function (name, email, password) {
-        const user = new User(generateId(), name, email, password)
+        const user = new User(generateId(), name, email, password, [])
 
         this.users.push(user)
     },
@@ -89,12 +90,23 @@ const db = {
             throw new Error('post not found')
 
         this.posts[postIndex] = clonePost(post)
+    },
+
+    removePostById: function (id) {
+        const postIndex = this.posts.findIndex(function (post) {
+            return post.id === id
+        })
+
+        if (postIndex < 0)
+            throw new Error('post not found')
+
+        this.posts.splice(postIndex, 1)
     }
 }
 
-db.users[0] = new User(generateId(), 'Pepito Grillo', 'pepito@grillo.com', '123123123')
+db.users[0] = new User(generateId(), 'Pepito Grillo', 'pepito@grillo.com', '123123123', [])
 
-db.users[1] = new User(generateId(), 'Campa Nilla', 'campa@nilla.com', '123123123')
+db.users[1] = new User(generateId(), 'Campa Nilla', 'campa@nilla.com', '123123123', [])
 
 db.posts[0] = new Post(generateId(), db.users[0].id, 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/1200px-SNice.svg.png', 'Smile image', 'Smile!', [])
 
@@ -105,3 +117,5 @@ db.posts[2] = new Post(generateId(), db.users[1].id, 'https://m.media-amazon.com
 db.posts[3] = new Post(generateId(), db.users[0].id, 'https://i.ebayimg.com/images/g/V9wAAOSw~e5ZU~Ls/s-l1200.webp', 'Pikachu image', 'Pikachu!', [db.users[1].id])
 
 db.posts[4] = new Post(generateId(), db.users[0].id, 'https://i.pinimg.com/550x/64/65/90/6465907c690be529106e4ada2c94d0d6.jpg', 'Atomic ant image', 'La Hormiga Atómica!', [])
+
+db.users[0].saved.push(db.posts[2].id)
