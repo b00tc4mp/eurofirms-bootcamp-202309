@@ -114,9 +114,13 @@ function Home(props) {
         <header className="header" aria-label="Header">
             <h1>Home</h1>
             <span id="user-name-span" aria-label="User name">{name}</span>
+
             <button id="new-post-button" title="New post" aria-label="New post" className="button" onClick={handleNewPostClick}>+</button>
+
             {view === 'posts-list' ? <button title="Save posts list" aria-label="Save posts list" className="button" onClick={handleShowSavePostsList}>Save Posts List</button> : null }
+
             {view === 'save-posts-list' ? <button id="new-post-button" title="Posts list" aria-label="Posts list" className="button" onClick={handleShowPostsList}>Posts List</button> : null }
+            
             <button id="logout-button" className="button" onClick={handleLogoutClick}>Logout</button>
         </header>
 
