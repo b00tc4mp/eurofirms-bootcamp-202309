@@ -1,7 +1,4 @@
-//let sessionUserId = null
-
-//Auto-login
-let sessionUserId = db.users[0].id
+let loggedInEmail = null
 
 console.log("root")
 

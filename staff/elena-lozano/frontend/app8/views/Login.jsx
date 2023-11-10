@@ -11,7 +11,9 @@ function Login(props) {
         const password = passwordInput.value
 
         try {
-            sessionUserId = authenticateUser(email, password)
+            authenticateUser(email, password)
+
+            loggedInEmail = email
 
             props.onSuccess()
         } catch (error) {

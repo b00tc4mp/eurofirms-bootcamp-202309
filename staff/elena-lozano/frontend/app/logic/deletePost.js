@@ -1,4 +1,4 @@
-function toggleLikePost(userId, postId) {
+function deletePost(userId, postId) {
     validateText(userId, "user id")
     validateText(postId, "post id")
 
@@ -12,12 +12,8 @@ function toggleLikePost(userId, postId) {
     if (!post)
         throw new Error("Post not found")
 
-    const index = post.likes.indexOf(userId)
+    if (post.author !== userId)
+        throw new Error("Post doest not belong to user")
 
-    if (index < 0)
-        post.likes.push(userId)
-    else
-        post.likes.splice(index, 1)
-
-    db.updatePost(post)
+    db.removePostById(postId)
 }

@@ -1,7 +1,6 @@
-function toggleLikePost(userId, postId) {
+function toggleSavePost(userId, postId) {
     validateText(userId, "user id")
     validateText(postId, "post id")
-
     const user = db.findUserById(userId)
 
     if (!user)
@@ -12,12 +11,12 @@ function toggleLikePost(userId, postId) {
     if (!post)
         throw new Error("Post not found")
 
-    const index = post.likes.indexOf(userId)
+    const index = user.saved.indexOf(postId)
 
     if (index < 0)
-        post.likes.push(userId)
+        user.saved.push(postId)
     else
-        post.likes.splice(index, 1)
+        user.saved.splice(index, 1)
 
-    db.updatePost(post)
+    db.updateUser(user)
 }
