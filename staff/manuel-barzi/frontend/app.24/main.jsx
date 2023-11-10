@@ -1,5 +1,4 @@
-//let sessionUserId = null
-let sessionUserId = db.users[0].id
+let sessionUserId = null
 
 console.log('root')
 

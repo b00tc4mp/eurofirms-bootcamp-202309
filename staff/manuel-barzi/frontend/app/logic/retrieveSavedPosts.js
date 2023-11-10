@@ -1,4 +1,4 @@
-function retrievePosts(userId) {
+function retrieveSavedPosts(userId) {
     validateText(userId, 'user id')
 
     const user = db.findUserById(userId)
@@ -6,7 +6,9 @@ function retrievePosts(userId) {
     if (!user)
         throw new Error('User not found')
 
-    const posts = db.getPosts().reverse()
+    const posts = db.getPosts().reverse().filter(function (post) {
+        return user.saved.includes(post.id)
+    })
 
     posts.forEach(function (post) {
         const author = db.findUserById(post.author)

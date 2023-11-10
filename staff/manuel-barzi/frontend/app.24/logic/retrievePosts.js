@@ -6,7 +6,7 @@ function retrievePosts(userId) {
     if (!user)
         throw new Error('User not found')
 
-    const posts = db.getPosts().reverse()
+    const posts = db.getPosts()
 
     posts.forEach(function (post) {
         const author = db.findUserById(post.author)
