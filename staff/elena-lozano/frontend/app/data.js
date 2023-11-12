@@ -1,4 +1,4 @@
-// generate ids
+// generate ids and users
 
 function generateId() {
     return Math.floor((Math.random() * 1000000000000000000)).toString(36)
@@ -131,7 +131,7 @@ const db = {
     }
 }
 
-// populate
+// some posts
 
 db.users[0] = new User(generateId(), "Pepito Grillo", "pepito@grillo.com", "123123123", [])
 

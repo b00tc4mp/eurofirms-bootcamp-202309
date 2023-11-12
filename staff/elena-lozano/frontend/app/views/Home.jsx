@@ -12,7 +12,7 @@ function Home(props) {
     const savedState = React.useState(null)
     const saved = savedState[0]
     const setSaved = savedState[1]
-    // TODO const [saved, setSaved] = React.useState(null)
+
 
     let name = null
 
@@ -237,5 +237,11 @@ function Home(props) {
                 </article>
             })}
         </div> : null}
+
+        <footer className="footer" aria-label="Footer">
+
+        </footer>
+
+
     </div>
 }
