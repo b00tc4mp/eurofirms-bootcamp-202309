@@ -222,6 +222,8 @@ function Home(props) {
                     <button className="button" onClick={handleBeforePostLikeClick}>{(post.liked ? '♥︎' : '♡') + ' ' + post.likes.length + ' likes'}</button>
 
                     <button className="button" onClick={handleBeforePostSaveClick}>{(post.saved ? '★' : '☆')}</button>
+
+                    {post.author.id === sessionUserId ? <button className="button" onClick={handleBeforePostDeleteClick}>Delete</button> : null}
                 </article>
             })}
         </div> :null}
