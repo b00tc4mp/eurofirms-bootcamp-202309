@@ -1,52 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>App</title>
-
-    <link rel="stylesheet" href="style.css">
-
-    <link rel="shortcut icon" href="https://b00tc4mp.com/favicon.ico" type="image/x-icon">
-</head>
-
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React</title>
+  </head>
+  <body>
     <div id="root"></div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.development.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.development.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
-
-    <!-- utils -->
-    <script src="utils/validators.js"></script>
-
-    <!-- data -->
-    <script src="data/helpers.js"></script>
-    <script src="data/models.js"></script>
-    <script src="data/managers.js"></script>
-    <script src="data/populate.js"></script>
-
-    <!-- business logic -->
-    <script src="logic/authenticateUser.js"></script>
-    <script src="logic/retrieveUser.js"></script>
-    <script src="logic/registerUser.js"></script>
-    <script src="logic/createNewPost.js"></script>
-    <script src="logic/retrievePosts.js"></script>
-    <script src="logic/toggleLikePost.js"></script>
-    <script src="logic/deletePost.js"></script>
-    <script src="logic/toggleSavePost.js"></script>
-    <script src="logic/retrieveSavedPosts.js"></script>
-
-    <!-- presentation -->
-    <script src="components/Logo.jsx" type="text/babel"></script>
-
-    <script src="views/Login.jsx" type="text/babel"></script>
-    <script src="views/Register.jsx" type="text/babel"></script>
-    <script src="views/Home.jsx" type="text/babel"></script>
-
-    <script src="App.jsx" type="text/babel"></script>
-    <script src="main.jsx" type="text/babel"></script>
-</body>
-
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
