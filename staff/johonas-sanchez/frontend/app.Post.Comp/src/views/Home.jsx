@@ -148,7 +148,7 @@ function Home(props) {
     }
 
     return <div>
-        <Header/>
+        <Header onNewPostClick={handleNewPostClick} onLogoutClick={handleLogoutClick}/>
         
         {view === 'new-post' ? <div className="view">
             <h2>New post</h2>
