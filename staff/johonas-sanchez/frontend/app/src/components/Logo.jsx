@@ -1,4 +1,4 @@
-import React from "react";
+import React from "../../../app.Post.Comp/node_modules/@types/react/ts5.0";
 
 function Logo() {
     console.log('Logo')
