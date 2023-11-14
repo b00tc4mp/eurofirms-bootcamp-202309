@@ -1,24 +1,19 @@
 //esto es lo que aparece en la Home de la APP. En el header (cabecera), esta hola mundo, boton para nuevo post (+), boton de logout, nombre de los usuarios que esta usando la app en ese momento, los post saved o favoritos.Aceptan entradas arbitrarias (llamadas "props") y devuelven elementos de React que describen lo que debería aparecer en la pantalla. Handle en inglés significa manejar.
 //El método map() es un método iterativo.Llama a una función callbackFn proporcionada una vez para cada elemento de una matriz y construye una nueva matriz a partir de los resultados. Recordemos el includes:El método includes() determina si una matriz incluye un determinado elemento, devuelve true o false según corresponda.
 
-
+import { useState } from 'react'
+import retrieveUser from "../logic/retrieveUser"
+import retrievePosts from "../logic/retrievePost"
 
 function Home(props) {
     console.log('Home')
 
-    const viewState = React.useState(null)
-    const view = viewState[0]
-    const setView = viewState[1]
+    //son los estados
+    const [view, setView] = useState(null)
 
+    const [timestamp, setTimestamp] = useState(null)
 
-    const timestampState = React.useState(null)
-    //const timestamp = timestampState[0]
-    const setTimestamp = timestampState[1]
-
-    const savedState = React.useState(null)
-    const saved = savedState[0]
-    const setSaved = savedState[1]
-    //TODO const [saved, setSaved] = React.useState(null)
+    const [saved, setSaved] = useState(null)
 
 
     let name = null
@@ -49,7 +44,7 @@ function Home(props) {
     // maneja el boton de logout
 
     function handleLogoutClick() {
-        sessionUserId = null
+        //sessionUserId = null
 
         props.onLogout()
     }
@@ -80,7 +75,7 @@ function Home(props) {
         const text = textInput.value
 
         try {
-            createNewPost(sessionUserId, image, imageDescription, text)
+            //createNewPost(sessionUserId, image, imageDescription, text)
 
             setView(null)
         } catch (error) {
@@ -92,13 +87,13 @@ function Home(props) {
 
     function handlePostLikeClick(postId) {
         try {
-            toggleLikePost(sessionUserId, postId)
+            //toggleLikePost(sessionUserId, postId)
 
 
             if (view === 'saved') {
-                const saved = retrieveSavedPosts(sessionUserId)
+                // const saved = retrieveSavedPosts(sessionUserId)
 
-                setSaved(saved)
+                // setSaved(saved)
 
                 return
 
@@ -114,14 +109,14 @@ function Home(props) {
 
     function handlePostDeleteClick(postId) {
         try {
-            deletePost(sessionUserId, postId)
+            //deletePost(sessionUserId, postId)
 
             if (view === 'saved') {
 
-                const saved = retrieveSavedPosts(sessionUserId)
+                // const saved = retrieveSavedPosts(sessionUserId)
 
 
-                setSaved(saved)
+                //setSaved(saved)
 
                 return
             }
@@ -133,11 +128,11 @@ function Home(props) {
 
     function handlePostSaveClick(postId) {
         try {
-            toggleSavePost(sessionUserId, postId)
+            //toggleSavePost(sessionUserId, postId)
             if (view === 'saved') {
-                const saved = retrieveSavedPosts(sessionUserId)
+                //const saved = retrieveSavedPosts(sessionUserId)
 
-                setSaved(saved)
+                //setSaved(saved)
 
                 return
             }
@@ -152,9 +147,9 @@ function Home(props) {
         event.preventDefault()
 
         try {
-            const saved = retrieveSavedPosts(sessionUserId)
+            // const saved = retrieveSavedPosts(sessionUserId)
 
-            setSaved(saved)
+            // setSaved(saved)
             setView('saved')
         } catch (error) {
             alert(error.message)
@@ -271,3 +266,5 @@ function Home(props) {
         }
     </div >
 }
+
+export default Home
