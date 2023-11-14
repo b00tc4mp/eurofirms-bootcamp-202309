@@ -128,15 +128,11 @@ function Home(props) {
         }
     }
 
-    function handleHomeClick (event) {
-        event.preventDefault()
-
+    function handleHomeClick () {
         setView(null)
     }
 
-    function handleSavedClick (event) {
-        event.preventDefault()
-
+    function handleSavedClick () {
         try {
             const saved = retrieveSavedPosts(sessionUserId)
 
@@ -148,7 +144,7 @@ function Home(props) {
     }
 
     return <div>
-        <Header onNewPostClick={handleNewPostClick} onLogoutClick={handleLogoutClick}/>
+        <Header onNewPostClick={handleNewPostClick} onLogoutClick={handleLogoutClick} onSavedClick={handleSavedClick} onHomeClick={handleHomeClick} />
         
         {view === 'new-post' ? <div className="view">
             <h2>New post</h2>

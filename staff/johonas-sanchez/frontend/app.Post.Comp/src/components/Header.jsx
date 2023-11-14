@@ -1,6 +1,6 @@
 import retrieveUser from '../logic/retrieveUser';
 
-function Header(props) {
+function Header({onLogoutClick, onHomeClick, onSavedClick, onNewPostClick}) {
     let name = null;
   
     try {
@@ -12,30 +12,23 @@ function Header(props) {
     }
   
     function handleNewPostClick() {
-      props.onNewPostClick();
+      onNewPostClick();
     }
   
     function handleLogoutClick() {
-      props.onLogoutClick();
+      onLogoutClick();
     }
 
     function handleHomeClick (event) {
       event.preventDefault()
 
-      setView(null)
+      onHomeClick()
   }
 
   function handleSavedClick (event) {
     event.preventDefault()
 
-    try {
-        const saved = retrieveSavedPosts(sessionUserId)
-
-        setSaved(saved)
-        setView('saved')
-    } catch (error) {
-        alert(error.message)
-    }
+    onSavedClick()
 }
 
     return (
