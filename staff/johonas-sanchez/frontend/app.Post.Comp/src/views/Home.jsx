@@ -8,6 +8,8 @@ import toggleSavePost from '../logic/toggleSavePost';
 import deletePost from '../logic/deletePost';
 import retrieveSavedPosts from '../logic/retrieveSavedPosts';
 
+import Header from "../components/Header";
+
 
 function Home(props) {
     console.log('Home')
@@ -146,14 +148,8 @@ function Home(props) {
     }
 
     return <div>
-        <header className="header" aria-label="Header">
-            <h1><a href="" onClick={handleHomeClick}>Home</a></h1>
-            <span aria-label="User name">{name}</span>
-            <button title="New post" aria-label="New post" className="button" onClick={handleNewPostClick}>+</button>
-            <a href="" onClick={handleSavedClick}>Saved</a>
-            <button className="button" onClick={handleLogoutClick}>Logout</button>
-        </header>
-
+        <Header/>
+        
         {view === 'new-post' ? <div className="view">
             <h2>New post</h2>
 
