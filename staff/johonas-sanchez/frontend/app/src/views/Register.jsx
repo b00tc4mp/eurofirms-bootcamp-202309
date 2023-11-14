@@ -1,19 +1,21 @@
-import authenticateUser from "../logic/authenticateUser";
+import registerUser from '../logic/registerUser';
 
-function Login(props) {
-    console.log('Login')
+function Register(props) {
+    console.log('Register')
 
-    function handleLoginSubmit(event) {
+    function handleRegisterSubmit(event) {
         event.preventDefault()
 
+        const nameInput = event.target.querySelector('#name-input')
         const emailInput = event.target.querySelector('#email-input')
         const passwordInput = event.target.querySelector('#password-input')
 
+        const name = nameInput.value
         const email = emailInput.value
         const password = passwordInput.value
 
         try {
-            window.sessionUserId =  authenticateUser(email, password)
+            registerUser(name, email, password)
 
             props.onSuccess()
         } catch (error) {
@@ -21,27 +23,30 @@ function Login(props) {
         }
     }
 
-    function handleRegisterClick(event) {
+    function handleLoginClick(event) {
         event.preventDefault()
 
-        props.onRegisterClick()
+        props.onLoginClick()
     }
 
     return <div className="view">
-        <h1>Login</h1>
+        <h1>Register</h1>
 
-        <form className="form" onSubmit={handleLoginSubmit}>
+        <form className="form" onSubmit={handleRegisterSubmit}>
+            <label className="label" htmlFor="name-input">Name</label>
+            <input className="input" type="text" id="name-input" title="Name" required />
+
             <label className="label" htmlFor="email-input">E-mail</label>
             <input className="input" type="email" id="email-input" title="E-mail" required />
 
             <label className="label" htmlFor="password-input">Password</label>
             <input className="input" type="password" id="password-input" title="Password" required />
 
-            <button className="button" type="submit">Login</button>
+            <button className="button" type="submit">Register</button>
         </form>
 
-        <a onClick={handleRegisterClick} href="">Register</a>
+        <a onClick={handleLoginClick} href="">Login</a>
     </div>
 }
 
-export default Login;
+export default Register;
