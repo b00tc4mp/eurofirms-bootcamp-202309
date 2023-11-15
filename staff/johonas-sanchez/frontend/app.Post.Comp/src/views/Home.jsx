@@ -147,7 +147,7 @@ function Home(props) {
     return <div>
         <Header onNewPostClick={handleNewPostClick} onLogoutClick={handleLogoutClick} onSavedClick={handleSavedClick} onHomeClick={handleHomeClick} />
         
-        {view === 'new-post' ? <NewPost onNewPostCancelClick={handleNewPostCancelClick} onNewPostSubmit={}/> : null}
+        {view === 'new-post' ? <NewPost onNewPostCancelClick={handleNewPostCancelClick}/> : null}
 
         {(view === null || view === 'new post') && posts !== null ? <div aria-label="Posts list" className="view">
             {posts.map(function (post) {
