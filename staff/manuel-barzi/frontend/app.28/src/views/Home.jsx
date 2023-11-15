@@ -6,8 +6,6 @@ import toggleLikePost from '../logic/toggleLikePost'
 import toggleSavePost from '../logic/toggleSavePost'
 import retrieveSavedPosts from '../logic/retrieveSavedPosts'
 import deletePost from '../logic/deletePost'
-import Button from '../components/Button'
-import Link from '../components/Link'
 
 function Home(props) {
     console.log('Home')
@@ -145,15 +143,11 @@ function Home(props) {
 
     return <div>
         <header className="header" aria-label="Header">
-            <h1><Link onClick={handleHomeClick}>Home</Link></h1>
-
+            <h1><a href="" onClick={handleHomeClick}>Home</a></h1>
             <span aria-label="User name">{name}</span>
-
-            <Button title="New post" aria-label="New post (+)" onClick={handleNewPostClick}>+</Button>
-
-            <Link onClick={handleSavedClick}>Saved</Link>
-
-            <Button onClick={handleLogoutClick}>Logout</Button>
+            <button title="New post" aria-label="New post" className="button" onClick={handleNewPostClick}>+</button>
+            <a href="" onClick={handleSavedClick}>Saved</a>
+            <button className="button" onClick={handleLogoutClick}>Logout</button>
         </header>
 
         {view === 'new-post' ? <div className="view">
@@ -169,8 +163,8 @@ function Home(props) {
                 <label htmlFor="text-input" className="label">Text</label>
                 <input type="text" id="text-input" className="input" required />
 
-                <Button type="submit">Post</Button>
-                <Button onClick={handleNewPostCancelClick}>Cancel</Button>
+                <button type="submit" className="button">Post</button>
+                <button className="button" onClick={handleNewPostCancelClick}>Cancel</button>
             </form>
         </div> : null}
 
@@ -201,11 +195,11 @@ function Home(props) {
 
                     <p>{post.text}</p>
 
-                    <Button onClick={handleBeforePostLikeClick}>{(post.liked ? '❤️' : '🩶') + ' ' + post.likes.length + ' likes'}</Button>
+                    <button className="button" onClick={handleBeforePostLikeClick}>{(post.liked ? '❤️' : '🩶') + ' ' + post.likes.length + ' likes'}</button>
 
-                    <Button onClick={handleBeforePostSaveClick}>{(post.saved ? '⭐️' : '✩')}</Button>
+                    <button className="button" onClick={handleBeforePostSaveClick}>{(post.saved ? '⭐️' : '✩')}</button>
 
-                    {post.author.id === sessionUserId ? <Button onClick={handleBeforePostDeleteClick}>Delete</Button> : null}
+                    {post.author.id === sessionUserId ? <button className="button" onClick={handleBeforePostDeleteClick}>Delete</button> : null}
                 </article>
             })}
         </div> : null}
@@ -237,11 +231,11 @@ function Home(props) {
 
                     <p>{post.text}</p>
 
-                    <Button onClick={handleBeforePostLikeClick}>{(post.liked ? '❤️' : '🩶') + ' ' + post.likes.length + ' likes'}</Button>
+                    <button className="button" onClick={handleBeforePostLikeClick}>{(post.liked ? '❤️' : '🩶') + ' ' + post.likes.length + ' likes'}</button>
 
-                    <Button onClick={handleBeforePostSaveClick}>{(post.saved ? '⭐️' : '✩')}</Button>
+                    <button className="button" onClick={handleBeforePostSaveClick}>{(post.saved ? '⭐️' : '✩')}</button>
 
-                    {post.author.id === sessionUserId ? <Button onClick={handleBeforePostDeleteClick}>Delete</Button> : null}
+                    {post.author.id === sessionUserId ? <button className="button" onClick={handleBeforePostDeleteClick}>Delete</button> : null}
                 </article>
             })}
         </div> : null}
