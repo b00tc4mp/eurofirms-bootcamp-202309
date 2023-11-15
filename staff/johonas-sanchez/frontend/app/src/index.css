@@ -47,6 +47,18 @@ h2 {
     margin: 2px;
 }
 
+.button-tomato:hover {
+    background-color: tomato;
+    color: white;
+}
+
+.link:hover {
+    padding: 2px;
+    background-color: red;
+    color: white;
+    text-decoration: none;
+}
+
 .post {
     padding: 0.5rem;
 }
