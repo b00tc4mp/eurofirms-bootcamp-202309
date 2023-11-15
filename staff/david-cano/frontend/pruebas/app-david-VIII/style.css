@@ -1,14 +1,18 @@
+/* Importar la fuente 'Inter' desde Google Fonts con pesos 400 y 700 y mostrarla */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
+/* Aplicar la fuente 'Inter' a todos los elementos en el documento */
 * {
     font-family: Inter;
 }
 
+/* Eliminar el margen predeterminado para los encabezados h1 y h2 */
 h1,
 h2 {
     margin: 0;
 }
 
+/* Estilo para la clase 'view' que representa una vista o sección */
 .view {
     display: flex;
     flex-direction: column;
@@ -17,6 +21,7 @@ h2 {
     padding-bottom: 1rem;
 }
 
+/* Estilo para los formularios */
 .form {
     display: flex;
     flex-direction: column;
@@ -25,10 +30,12 @@ h2 {
     align-items: center;
 }
 
+/* Estilo para las etiquetas de los formularios */
 .label {
     align-self: flex-start;
 }
 
+/* Estilo para los campos de entrada en los formularios */
 .input {
     background-color: lightgray;
     border-width: 0;
@@ -37,6 +44,7 @@ h2 {
     padding-left: 5px;
 }
 
+/* Estilo para los botones en los formularios */
 .button {
     background-color: lightgray;
     border-width: 0;
@@ -46,28 +54,34 @@ h2 {
     margin: 2px;
 }
 
+/* Estilo para las imágenes de las publicaciones */
 .post-image {
     max-width: 300px;
 }
 
+/* Estilo para la cabecera de la página */
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
+/* Estilo específico para el panel de nuevas publicaciones */
 #new-post-panel {
     margin-top: 20px;
 }
 
+/* Ocultar elementos de audio en la página */
 audio {
-    display : none;
+    display: none;
 }
 
-.post{
+/* Estilo para las publicaciones en la página */
+.post {
     padding: 0.5rem;
 }
 
-.post:hover{
+/* Estilo para resaltar una publicación al pasar el ratón por encima */
+.post:hover {
     background-color: rgb(237, 237, 237);
 }
