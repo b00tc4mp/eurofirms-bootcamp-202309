@@ -1,7 +1,8 @@
 import registerUser from '../logic/registerUser'
+import Button from '../Components/Button'
+import Link from '../Components/Link'
 
 function Register(props) {
-    console.log('Register')
 
     function handleRegisterSubmit(event) {
         event.preventDefault()
@@ -42,10 +43,10 @@ function Register(props) {
             <label htmlFor="password-input">Password</label>
             <input type="password" id="password-input" title="Password" />
 
-            <button type="submit">Register</button>
+            <Button type="submit">Register</Button>
         </form>
 
-        <a href="" onClick={handleLoginClick}>Login</a>
+        <Link onClick={handleLoginClick}>Login</Link>
     </div>
 }
 

@@ -1,4 +1,6 @@
 import authenticateUser from '../logic/authenticateUser'
+import Link from '../Components/Link'
+import Button from '../Components/Button'
 
 function Login(props) {
 
@@ -36,11 +38,11 @@ function Login(props) {
             <label htmlFor="password-input">Password</label>
             <input type="password" id="password-input" title="Password"></input>
 
-            <button type="submit">Login</button>
+            <Button type="submit">Login</Button>
 
         </form>
 
-        <a href="" onClick={handleRegisterClick}>Register</a>
+        <Link onClick={handleRegisterClick}>Register</Link>
     </div>
 }
 

@@ -1,5 +1,6 @@
 import { clonePost, cloneUser } from "./helpers"
 import { User, Post } from './models'
+import { generateId } from "./helpers"
 
 const db = {
     users: [],

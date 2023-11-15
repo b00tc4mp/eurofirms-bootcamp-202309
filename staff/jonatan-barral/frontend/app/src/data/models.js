@@ -1,3 +1,4 @@
+import { generateId } from "./helpers"
 
 function User(id, name, email, password, saved) {
     this.id = id
@@ -19,4 +20,4 @@ function Post(id, author, image, imageDescription, text, likes) {
 export {
     Post,
     User
-}
+}   
