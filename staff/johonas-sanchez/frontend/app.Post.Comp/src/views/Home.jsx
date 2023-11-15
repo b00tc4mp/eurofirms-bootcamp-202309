@@ -9,6 +9,7 @@ import deletePost from '../logic/deletePost';
 import retrieveSavedPosts from '../logic/retrieveSavedPosts';
 
 import Header from "../components/Header";
+import NewPost from "../components/NewPost";
 
 
 function Home(props) {
@@ -146,23 +147,7 @@ function Home(props) {
     return <div>
         <Header onNewPostClick={handleNewPostClick} onLogoutClick={handleLogoutClick} onSavedClick={handleSavedClick} onHomeClick={handleHomeClick} />
         
-        {view === 'new-post' ? <div className="view">
-            <h2>New post</h2>
-
-            <form className="form" onSubmit={handleNewPostSubmit}>
-                <label htmlFor="image-input" className="label">Image</label>
-                <input type="url" id="image-input" className="input" required />
-
-                <label htmlFor="image-description-input" className="label">Image description</label>
-                <input type="text" id="image-description-input" className="input" required />
-
-                <label htmlFor="text-input" className="label">Text</label>
-                <input type="text" id="text-input" className="input" required />
-
-                <button type="submit" className="button">Post</button>
-                <button className="button" onClick={handleNewPostCancelClick}>Cancel</button>
-            </form>
-        </div> : null}
+        {view === 'new-post' ? <NewPost onNewPostCancelClick={handleNewPostCancelClick} onNewPostSubmit={}/> : null}
 
         {(view === null || view === 'new post') && posts !== null ? <div aria-label="Posts list" className="view">
             {posts.map(function (post) {
