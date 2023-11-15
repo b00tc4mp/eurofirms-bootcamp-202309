@@ -1,6 +1,11 @@
 import { useState } from 'react'
 import retrieveUser from '../logic/retrieveUser'
 import retrievePosts from '../logic/retrievePosts'
+import createNewPost from '../logic/createNewPost'
+import toggleLikePost from '../logic/toggleLikePost'
+import toggleSavePost from '../logic/toggleSavePost'
+import retrieveSavedPosts from '../logic/retrieveSavedPosts'
+import deletePost from '../logic/deletePost'
 
 function Home(props) {
     console.log('Home')
@@ -30,7 +35,7 @@ function Home(props) {
     }
 
     function handleLogoutClick() {
-        // sessionUserId = null
+        window.sessionUserId = null
 
         props.onLogout()
     }
@@ -55,7 +60,7 @@ function Home(props) {
         const text = textInput.value
 
         try {
-            // createNewPost(sessionUserId, image, imageDescription, text)
+            createNewPost(window.sessionUserId, image, imageDescription, text)
 
             setView(null)
         } catch (error) {
@@ -65,12 +70,12 @@ function Home(props) {
 
     function handlePostLikeClick(postId) {
         try {
-            // toggleLikePost(sessionUserId, postId)
+            toggleLikePost(window.sessionUserId, postId)
 
             if (view === 'saved') {
-                // const saved = retrieveSavedPosts(sessionUserId)
+                const saved = retrieveSavedPosts(window.sessionUserId)
 
-                // setSaved(saved)
+                setSaved(saved)
 
                 return
             }
@@ -83,12 +88,12 @@ function Home(props) {
 
     function handlePostDeleteClick(postId) {
         try {
-            // deletePost(sessionUserId, postId)
+            deletePost(sessionUserId, postId)
 
             if (view === 'saved') {
-                // const saved = retrieveSavedPosts(sessionUserId)
+                const saved = retrieveSavedPosts(window.sessionUserId)
 
-                // setSaved(saved)
+                setSaved(saved)
 
                 return
             }
@@ -101,12 +106,12 @@ function Home(props) {
 
     function handlePostSaveClick(postId) {
         try {
-            // toggleSavePost(sessionUserId, postId)
+            toggleSavePost(window.sessionUserId, postId)
 
             if (view === 'saved') {
-                // const saved = retrieveSavedPosts(sessionUserId)
+                const saved = retrieveSavedPosts(window.sessionUserId)
 
-                // setSaved(saved)
+                setSaved(saved)
 
                 return
             }
@@ -121,9 +126,9 @@ function Home(props) {
         event.preventDefault()
 
         try {
-            // const saved = retrieveSavedPosts(sessionUserId)
+            const saved = retrieveSavedPosts(window.sessionUserId)
 
-            // setSaved(saved)
+            setSaved(saved)
             setView('saved')
         } catch (error) {
             alert(error.message)
