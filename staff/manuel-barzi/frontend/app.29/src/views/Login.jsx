@@ -1,9 +1,6 @@
 import authenticateUser from '../logic/authenticateUser'
-
 import Button from '../components/Button'
 import Link from '../components/Link'
-import Input from '../components/Input'
-import Label from '../components/Label'
 
 function Login(props) {
     console.log('Login')
@@ -36,11 +33,11 @@ function Login(props) {
         <h1>Login</h1>
 
         <form className="form" onSubmit={handleLoginSubmit}>
-            <Label htmlFor="email-input">E-mail</Label>
-            <Input type="email" id="email-input" title="E-mail" required />
+            <label className="label" htmlFor="email-input">E-mail</label>
+            <input className="input" type="email" id="email-input" title="E-mail" required />
 
-            <Label htmlFor="password-input">Password</Label>
-            <Input type="password" id="password-input" title="Password" required />
+            <label className="label" htmlFor="password-input">Password</label>
+            <input className="input" type="password" id="password-input" title="Password" required />
 
             {/* <button className="button" type="submit">Login</button> */}
             <Button type="submit">Login</Button>

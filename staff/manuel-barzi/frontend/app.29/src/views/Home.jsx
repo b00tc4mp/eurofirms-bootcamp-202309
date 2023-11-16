@@ -1,5 +1,4 @@
 import { useState } from 'react'
-
 import retrieveUser from '../logic/retrieveUser'
 import retrievePosts from '../logic/retrievePosts'
 import createNewPost from '../logic/createNewPost'
@@ -7,11 +6,8 @@ import toggleLikePost from '../logic/toggleLikePost'
 import toggleSavePost from '../logic/toggleSavePost'
 import retrieveSavedPosts from '../logic/retrieveSavedPosts'
 import deletePost from '../logic/deletePost'
-
 import Button from '../components/Button'
 import Link from '../components/Link'
-import Input from '../components/Input'
-import Label from '../components/Label'
 
 function Home(props) {
     console.log('Home')
@@ -164,14 +160,14 @@ function Home(props) {
             <h2>New post</h2>
 
             <form className="form" onSubmit={handleNewPostSubmit}>
-                <Label htmlFor="image-input">Image</Label>
-                <Input type="url" id="image-input" required />
+                <label htmlFor="image-input" className="label">Image</label>
+                <input type="url" id="image-input" className="input" required />
 
-                <Label htmlFor="image-description-input">Image description</Label>
-                <Input type="text" id="image-description-input" required />
+                <label htmlFor="image-description-input" className="label">Image description</label>
+                <input type="text" id="image-description-input" className="input" required />
 
-                <Label htmlFor="text-input">Text</Label>
-                <Input type="text" id="text-input" required />
+                <label htmlFor="text-input" className="label">Text</label>
+                <input type="text" id="text-input" className="input" required />
 
                 <Button type="submit">Post</Button>
                 <Button onClick={handleNewPostCancelClick}>Cancel</Button>

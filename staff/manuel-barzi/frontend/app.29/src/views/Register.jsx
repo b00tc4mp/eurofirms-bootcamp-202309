@@ -1,9 +1,6 @@
 import registerUser from '../logic/registerUser'
-
 import Button from '../components/Button'
 import Link from '../components/Link'
-import Input from '../components/Input'
-import Label from '../components/Label'
 
 function Register(props) {
     console.log('Register')
@@ -38,14 +35,14 @@ function Register(props) {
         <h1>Register</h1>
 
         <form className="form" onSubmit={handleRegisterSubmit}>
-            <Label htmlFor="name-input">Name</Label>
-            <Input type="text" id="name-input" title="Name" required />
+            <label className="label" htmlFor="name-input">Name</label>
+            <input className="input" type="text" id="name-input" title="Name" required />
 
-            <Label htmlFor="email-input">E-mail</Label>
-            <Input type="email" id="email-input" title="E-mail" required />
+            <label className="label" htmlFor="email-input">E-mail</label>
+            <input className="input" type="email" id="email-input" title="E-mail" required />
 
-            <Label htmlFor="password-input">Password</Label>
-            <Input type="password" id="password-input" title="Password" required />
+            <label className="label" htmlFor="password-input">Password</label>
+            <input className="input" type="password" id="password-input" title="Password" required />
 
             <Button type="submit">Register</Button>
         </form>
