@@ -1,30 +1,30 @@
-function changeEmail(sessionUserId, newEmail, password) {
+function changeEmail(userId, email, newEmail, password) {
+    validateText(userId)
+    validateEmail(email)
     validateEmail(newEmail)
     validatePassword(password)
 
-    const user = db.findUserByEmail(newEmail)
+    if (email === newEmail)
+        throw new Error('new email must be different than the actual')
 
-    if (user)
-        throw new Error('User already exists')
+    const user = db.findUserById(userId)
 
+    if (!user)
+        throw new Error('User dont found')
 
+    if (user.email !== email)
+        throw new Error('Wrong credentials')
 
-    if (!user) {
-        throw new Error('User not found');
-    }
+    if (user.password !== password)
+        throw new Error('Wrong credentials')
 
-    if (user.password !== password) {
-        throw new Error('Wrong password');
-    }
+    const userWithNewEmail = db.findUserByEmail(newEmail)
 
-    const existingNewEmail = db.findUserByEmail(newEmail)
-    if (existingNewEmail && existingNewEmail.id !== userId) {
+    if (userWithNewEmail) {
         throw new Error('Email already in use');
     }
 
     user.email = newEmail;
 
     db.updateUser(user);
-
-    return 'Email changed successfully';
 }

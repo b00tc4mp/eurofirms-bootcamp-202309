@@ -4,10 +4,6 @@ function Home(props) {
     const view = viewState[0]
     const setView = viewState[1]
 
-    const settingsViewState = React.useState(null)
-    const settingsView = settingsViewState[0]
-    const setSettingsView = settingsViewState[1]
-
     const timestampState = React.useState(null)
     const setTimestamp = timestampState[1]
 
@@ -140,84 +136,14 @@ function Home(props) {
         setView(null)
     }
 
-    function handleSettingsClick(event) {
-        event.preventDefault();
-
-        setView('settings');
-    }
-
-    function handleChangeEmailClick() {
-        setSettingsView('change-email')
-    }
-
-    function handleChangeEmailCancelClick() {
-        setSettingsView(null)
-    }
-
-    function handleChangeEmailSubmit(event) {
-        event.preventDefault()
-
-        const emailInput = event.target.querySelector('#email-input')
-        const newEmailImput = event.target.querySelector('#new-email-input')
-        const passwordInput = event.target.querySelector('#password-input')
-
-        const email = emailInput.value
-        const newEmail = newEmailImput.value
-        const password = passwordInput.value
-
-        try {
-            changeEmail(sessionUserId, email, newEmail, password)
-            alert('email changed succesfully')
-
-            setSettingsView(null)
-
-            setView(null)
-        } catch (error) {
-            alert(error.message)
-        }
-    }
-
-
-    function handleChangePasswordClick() {
-        setSettingsView('change-password')
-    }
-
-    function handleChangePasswordCancelClick() {
-        setSettingsView(null)
-    }
-
-    function handleChangePasswordSubmit(event) {
-        event.preventDefault()
-
-        const oldPasswordInput = event.target.querySelector('#old-password-input')
-        const newPasswordInput = event.target.querySelector('#new-password-input')
-        const repeatPasswordInput = event.target.querySelector('#repeat-password-input')
-
-        const oldPassword = oldPasswordInput.value
-        const newPassword = newPasswordInput.value
-        const repeatNewPassword = repeatPasswordInput.value
-
-        try {
-            changePassword(sessionUserId, oldPassword, newPassword, repeatNewPassword)
-
-            alert('Change password succesfully')
-
-            setSettingsView(null)
-
-            setView(null)
-        } catch (error) {
-            alert(error.message)
-        }
-
-    }
-
     return <div>
         <header className="header" aria-label="Header">
+            <h1><a href="" onClick={handleHomeClick}>Home</a></h1>
             <span aria-label="User name">{name}</span>
             <button title="New post" aria-label="New post" className="button" onClick={handleNewPostClick}>+</button>
+            <a href="" onClick={handleSavedClick}>Saved</a>
             <button className="button" onClick={handleLogoutClick}>Logout</button>
         </header>
-
 
         {view === 'new-post' ? <div className="view">
             <h2>New post</h2>
@@ -308,57 +234,5 @@ function Home(props) {
                 </article>
             })}
         </div> : null}
-
-        {view === 'settings' ? <div aria-label="Settings" className="view">
-            <div className="header" aria-label="Header">
-                <button title="Change email" aria-label="Change email" className="button" onClick={handleChangeEmailClick}>Change your email address</button>
-                <button title="Change password" aria-label="Change password" className="button" onClick={handleChangePasswordClick}>Change your password</button>
-            </div>
-
-            {settingsView === 'change-email' ? <div className="view">
-                <h2>Change your email</h2>
-
-                <form className="form" onSubmit={handleChangeEmailSubmit}>
-                    <label htmlFor="email-input">E-mail</label>
-                    <input type="email" id="email-input" title="E-mail"></input>
-
-                    <label htmlFor="new-email-input">New E-mail</label>
-                    <input type="email" id="new-email-input" title="E-mail"></input>
-
-                    <label htmlFor="password-input">Password</label>
-                    <input type="password" id="password-input" title="Password"></input>
-
-
-                    <button type="submit" className="button">Change</button>
-                    <button className="button" onClick={handleChangeEmailCancelClick}>Cancel</button>
-                </form>
-            </div> : null}
-
-            {settingsView === 'change-password' ? <div className="view">
-                <h2>Change your password</h2>
-
-                <form className="form" onSubmit={handleChangePasswordSubmit}>
-
-                    <label htmlFor="old-password-input">Old password</label>
-                    <input type="password" id="old-password-input" title="Password"></input>
-
-                    <label htmlFor="new-password-input">New password</label>
-                    <input type="password" id="new-password-input" title="Password"></input>
-
-                    <label htmlFor="repeat-password-input">Repeat new password</label>
-                    <input type="password" id="repeat-password-input" title="Password"></input>
-
-                    <button type="submit" className="button">Change</button>
-                    <button className="button" onClick={handleChangePasswordCancelClick}>Cancel</button>
-                </form>
-            </div> : null}
-
-        </div> : null}
-
-        <footer className="footer" aria-label="Footter">
-            <a onClick={handleHomeClick}>Home</a>
-            <a onClick={handleSettingsClick}>Settings</a>
-            <a onClick={handleSavedClick}>Saved</a>
-        </footer>
     </div>
 }
