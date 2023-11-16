@@ -9,14 +9,14 @@ h2 {
     margin: 0;
 }
 
-
-.view {
+.container {
     display: flex;
     flex-direction: column;
+  }
+  
+  .container-center {
     align-items: center;
-    gap: 1rem;
-    padding-bottom: 1rem;
-}
+  }
 
 .form {
     display: flex;

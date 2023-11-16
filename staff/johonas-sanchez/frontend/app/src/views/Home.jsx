@@ -1,16 +1,21 @@
-import { useState } from "react";
+import { useState } from 'react'
 
-import retrievePosts from '../logic/retrievePosts';
-import retrieveUser from '../logic/retrieveUser';
-import createNewPost from '../logic/createNewPost';
-import toggleLikePost from '../logic/toggleLikePost';
-import toggleSavePost from '../logic/toggleSavePost';
-import deletePost from '../logic/deletePost';
-import retrieveSavedPosts from '../logic/retrieveSavedPosts';
+import retrieveUser from '../logic/retrieveUser'
+import retrievePosts from '../logic/retrievePosts'
+import createNewPost from '../logic/createNewPost'
+import toggleLikePost from '../logic/toggleLikePost'
+import toggleSavePost from '../logic/toggleSavePost'
+import retrieveSavedPosts from '../logic/retrieveSavedPosts'
+import deletePost from '../logic/deletePost'
 
-import Button from "../components/Button";
-import Link from "../components/Link";
+import Button from '../components/Button'
+import Link from '../components/Link'
+import Field from '../components/Field'
+import Form from '../components/Form'
+import Container from '../components/Container'
+import Post from '../components/Post'
 
+import Logo from '../components/Logo'
 
 function Home(props) {
     console.log('Home')
@@ -21,12 +26,10 @@ function Home(props) {
 
     const [saved, setSaved] = useState(null)
 
-    // TODO const [saved, setSaved] = React.useState(null)
-
     let name = null
 
     try {
-        const user = retrieveUser(sessionUserId)
+        const user = retrieveUser(window.sessionUserId)
 
         name = user.name
     } catch (error) {
@@ -36,13 +39,13 @@ function Home(props) {
     let posts = null
 
     try {
-        posts = retrievePosts(sessionUserId)
+        posts = retrievePosts(window.sessionUserId)
     } catch (error) {
         alert(error.message)
     }
 
     function handleLogoutClick() {
-        sessionUserId = null
+        window.sessionUserId = null
 
         props.onLogout()
     }
@@ -58,16 +61,16 @@ function Home(props) {
     function handleNewPostSubmit(event) {
         event.preventDefault()
 
-        const imageInput = event.target.querySelector('#image-input')
-        const imageDescriptionInput = event.target.querySelector('#image-description-input')
-        const textInput = event.target.querySelector('#text-input')
+        const imageInput = event.target.querySelector('#image-field')
+        const imageDescriptionInput = event.target.querySelector('#image-description-field')
+        const textInput = event.target.querySelector('#text-field')
 
         const image = imageInput.value
         const imageDescription = imageDescriptionInput.value
         const text = textInput.value
 
         try {
-            createNewPost(sessionUserId, image, imageDescription, text)
+            createNewPost(window.sessionUserId, image, imageDescription, text)
 
             setView(null)
         } catch (error) {
@@ -77,10 +80,10 @@ function Home(props) {
 
     function handlePostLikeClick(postId) {
         try {
-            toggleLikePost(sessionUserId, postId)
+            toggleLikePost(window.sessionUserId, postId)
 
             if (view === 'saved') {
-                const saved = retrieveSavedPosts(sessionUserId)
+                const saved = retrieveSavedPosts(window.sessionUserId)
 
                 setSaved(saved)
 
@@ -98,7 +101,7 @@ function Home(props) {
             deletePost(sessionUserId, postId)
 
             if (view === 'saved') {
-                const saved = retrieveSavedPosts(sessionUserId)
+                const saved = retrieveSavedPosts(window.sessionUserId)
 
                 setSaved(saved)
 
@@ -113,10 +116,10 @@ function Home(props) {
 
     function handlePostSaveClick(postId) {
         try {
-            toggleSavePost(sessionUserId, postId)
+            toggleSavePost(window.sessionUserId, postId)
 
             if (view === 'saved') {
-                const saved = retrieveSavedPosts(sessionUserId)
+                const saved = retrieveSavedPosts(window.sessionUserId)
 
                 setSaved(saved)
 
@@ -129,17 +132,11 @@ function Home(props) {
         }
     }
 
-    function handleHomeClick (event) {
-        event.preventDefault()
-
-        setView(null)
-    }
-
-    function handleSavedClick (event) {
+    function handleSavedClick(event) {
         event.preventDefault()
 
         try {
-            const saved = retrieveSavedPosts(sessionUserId)
+            const saved = retrieveSavedPosts(window.sessionUserId)
 
             setSaved(saved)
             setView('saved')
@@ -148,105 +145,52 @@ function Home(props) {
         }
     }
 
-    return <div>
+    function handleHomeClick(event) {
+        event.preventDefault()
+
+        setView(null)
+    }
+
+    return <Container>
         <header className="header" aria-label="Header">
-            <h1><Link onClick={handleHomeClick}>Home</Link></h1>
+            <Link onClick={handleHomeClick}><Logo /></Link>
+
             <span aria-label="User name">{name}</span>
-            <Button title="New post" aria-label="New post" onClick={handleNewPostClick}>+</Button>
+
+            <Button title="New post" aria-label="New post (+)" onClick={handleNewPostClick}>+</Button>
+
             <Link onClick={handleSavedClick}>Saved</Link>
-            <Button className="button" onClick={handleLogoutClick}>Logout</Button>
+
+            <Button onClick={handleLogoutClick}>Logout</Button>
         </header>
 
-        {view === 'new-post' ? <div className="view">
+        {view === 'new-post' ? <Container align="center">
             <h2>New post</h2>
 
-            <form className="form" onSubmit={handleNewPostSubmit}>
-                <label htmlFor="image-input" className="label">Image</label>
-                <input type="url" id="image-input" className="input" required />
+            <Form onSubmit={handleNewPostSubmit}>
+                <Field type="url" id="image-field" required>Image</Field>
 
-                <label htmlFor="image-description-input" className="label">Image description</label>
-                <input type="text" id="image-description-input" className="input" required />
+                <Field type="text" id="image-description-field" required>Image description</Field>
 
-                <label htmlFor="text-input" className="label">Text</label>
-                <input type="text" id="text-input" className="input" required />
+                <Field type="text" id="text-field" required>Text</Field>
 
                 <Button type="submit">Post</Button>
                 <Button onClick={handleNewPostCancelClick}>Cancel</Button>
-            </form>
-        </div> : null}
+            </Form>
+        </Container> : null}
 
-        {(view === null || view === 'new post') && posts !== null ? <div aria-label="Posts list" className="view">
+        {(view === null || view === 'new-post') && posts !== null ? <Container align="center" aria-label="Posts list">
             {posts.map(function (post) {
-                function handleBeforePostLikeClick() {
-                    handlePostLikeClick(post.id)
-                }
-
-                function handleBeforePostDeleteClick() {
-                    const confirmed = confirm('Delete post?')
-
-                    if (confirmed)
-                        handlePostDeleteClick(post.id)
-                }
-
-                function handleBeforePostSaveClick() {
-                    handlePostSaveClick(post.id)
-                }
-
-                return <article key={post.id} className="post">
-                    <h3>{post.author.name}</h3>
-
-                    <img className="post-image"
-                        src={post.image}
-                        alt={post.imageDescription}
-                        title={post.imageDescription} />
-
-                    <p>{post.text}</p>
-
-                    <Button onClick={handleBeforePostLikeClick}>{(post.liked ? '❤️' : '🩶') + ' ' + post.likes.length + ' likes'}</Button>
-
-                    <Button onClick={handleBeforePostSaveClick}>{(post.saved ? '⭐️' : '✩')}</Button>
-
-                    {post.author.id === sessionUserId ? <Button onClick={handleBeforePostDeleteClick}>Delete</Button> : null}
-                </article>
+                return <Post post={post} onLikeClick={handlePostLikeClick} onSaveClick={handlePostSaveClick} onDeleteClick={handlePostDeleteClick} />
             })}
-        </div> : null}
-        
-        {view === 'saved' && saved !== null ? <div aria-label="Saved list" className="view">
+        </Container> : null}
+
+        {view === 'saved' && saved !== null ? <Container align="center" aria-label="Saved list">
             {saved.map(function (post) {
-                function handleBeforePostLikeClick() {
-                    handlePostLikeClick(post.id)
-                }
-
-                function handleBeforePostDeleteClick() {
-                    const confirmed = confirm('Delete post?')
-
-                    if (confirmed)
-                        handlePostDeleteClick(post.id)
-                }
-
-                function handleBeforePostSaveClick() {
-                    handlePostSaveClick(post.id)
-                }
-
-                return <article key={post.id} className="post">
-                    <h3>{post.author.name}</h3>
-
-                    <img className="post-image"
-                        src={post.image}
-                        alt={post.imageDescription}
-                        title={post.imageDescription} />
-
-                    <p>{post.text}</p>
-
-                    <Button onClick={handleBeforePostLikeClick}>{(post.liked ? '❤️' : '🩶') + ' ' + post.likes.length + ' likes'}</Button>
-
-                    <Button onClick={handleBeforePostSaveClick}>{(post.saved ? '⭐️' : '✩')}</Button>
-
-                    {post.author.id === sessionUserId ? <Button onClick={handleBeforePostDeleteClick}>Delete</Button> : null}
-                </article>
+                return <Post post={post} onLikeClick={handlePostLikeClick} onSaveClick={handlePostSaveClick} onDeleteClick={handlePostDeleteClick} />
             })}
-        </div> : null}
-    </div>
+        </Container> : null}
+    </Container>
 }
 
-export default Home;
+export default Home

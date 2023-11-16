@@ -25,14 +25,13 @@ function App() {
   }
 
   return <>
-      <Logo />
 
       {view === 'login' ? <Login onSuccess={handleHomeShow} onRegisterClick={handleRegisterShow} /> : null}
 
       {view === 'register' ? <Register onSuccess={handleLoginShow} onLoginClick={handleLoginShow} /> : null}
 
       {view === 'home' ? <Home onLogout={handleLoginShow} /> : null}
-      {/* {view === 'home' ? <div><h1>Hola Mundo</h1></div>: null} */}
+      
   </>
 }
 
