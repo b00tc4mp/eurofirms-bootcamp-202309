@@ -12,8 +12,6 @@ import Button from '../components/Button'
 import Link from '../components/Link'
 import Field from '../components/Field'
 import Form from '../components/Form'
-import Container from '../components/Container'
-import Post from '../components/Post'
 
 import Logo from '../components/Logo'
 
@@ -151,7 +149,7 @@ function Home(props) {
         setView(null)
     }
 
-    return <Container>
+    return <div>
         <header className="header" aria-label="Header">
             <Link onClick={handleHomeClick}><Logo /></Link>
 
@@ -164,7 +162,7 @@ function Home(props) {
             <Button onClick={handleLogoutClick}>Logout</Button>
         </header>
 
-        {view === 'new-post' ? <Container align="center">
+        {view === 'new-post' ? <div className="view">
             <h2>New post</h2>
 
             <Form onSubmit={handleNewPostSubmit}>
@@ -177,20 +175,80 @@ function Home(props) {
                 <Button type="submit">Post</Button>
                 <Button onClick={handleNewPostCancelClick}>Cancel</Button>
             </Form>
-        </Container> : null}
+        </div> : null}
 
-        {(view === null || view === 'new-post') && posts !== null ? <Container align="center" aria-label="Posts list">
+        {(view === null || view === 'new-post') && posts !== null ? <div aria-label="Posts list" className="view">
             {posts.map(function (post) {
-                return <Post post={post} onLikeClick={handlePostLikeClick} onSaveClick={handlePostSaveClick} onDeleteClick={handlePostDeleteClick} />
-            })}
-        </Container> : null}
+                function handleBeforePostLikeClick() {
+                    handlePostLikeClick(post.id)
+                }
 
-        {view === 'saved' && saved !== null ? <Container align="center" aria-label="Saved list">
-            {saved.map(function (post) {
-                return <Post post={post} onLikeClick={handlePostLikeClick} onSaveClick={handlePostSaveClick} onDeleteClick={handlePostDeleteClick} />
+                function handleBeforePostDeleteClick() {
+                    const confirmed = confirm('Delete post?')
+
+                    if (confirmed)
+                        handlePostDeleteClick(post.id)
+                }
+
+                function handleBeforePostSaveClick() {
+                    handlePostSaveClick(post.id)
+                }
+
+                return <article key={post.id} className="post">
+                    <h3>{post.author.name}</h3>
+
+                    <img className="post-image"
+                        src={post.image}
+                        alt={post.imageDescription}
+                        title={post.imageDescription} />
+
+                    <p>{post.text}</p>
+
+                    <Button onClick={handleBeforePostLikeClick}>{(post.liked ? '❤️' : '🩶') + ' ' + post.likes.length + ' likes'}</Button>
+
+                    <Button onClick={handleBeforePostSaveClick}>{(post.saved ? '⭐️' : '✩')}</Button>
+
+                    {post.author.id === sessionUserId ? <Button onClick={handleBeforePostDeleteClick}>Delete</Button> : null}
+                </article>
             })}
-        </Container> : null}
-    </Container>
+        </div> : null}
+
+        {view === 'saved' && saved !== null ? <div aria-label="Saved list" className="view">
+            {saved.map(function (post) {
+                function handleBeforePostLikeClick() {
+                    handlePostLikeClick(post.id)
+                }
+
+                function handleBeforePostDeleteClick() {
+                    const confirmed = confirm('Delete post?')
+
+                    if (confirmed)
+                        handlePostDeleteClick(post.id)
+                }
+
+                function handleBeforePostSaveClick() {
+                    handlePostSaveClick(post.id)
+                }
+
+                return <article key={post.id} className="post">
+                    <h3>{post.author.name}</h3>
+
+                    <img className="post-image"
+                        src={post.image}
+                        alt={post.imageDescription}
+                        title={post.imageDescription} />
+
+                    <p>{post.text}</p>
+
+                    <Button onClick={handleBeforePostLikeClick}>{(post.liked ? '❤️' : '🩶') + ' ' + post.likes.length + ' likes'}</Button>
+
+                    <Button onClick={handleBeforePostSaveClick}>{(post.saved ? '⭐️' : '✩')}</Button>
+
+                    {post.author.id === sessionUserId ? <Button onClick={handleBeforePostDeleteClick}>Delete</Button> : null}
+                </article>
+            })}
+        </div> : null}
+    </div>
 }
 
 export default Home

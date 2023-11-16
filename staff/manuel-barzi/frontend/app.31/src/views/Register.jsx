@@ -4,7 +4,6 @@ import Button from '../components/Button'
 import Link from '../components/Link'
 import Field from '../components/Field'
 import Form from '../components/Form'
-import Container from '../components/Container'
 
 import Logo from '../components/Logo'
 
@@ -37,7 +36,7 @@ function Register(props) {
         props.onLoginClick()
     }
 
-    return <Container align="center">
+    return <div className="view">
         <Logo />
 
         <h1>Register</h1>
@@ -53,7 +52,7 @@ function Register(props) {
         </Form>
 
         <Link onClick={handleLoginClick}>Login</Link>
-    </Container>
+    </div>
 }
 
 export default Register
