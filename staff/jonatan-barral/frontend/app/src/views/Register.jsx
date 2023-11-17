@@ -1,6 +1,10 @@
 import registerUser from '../logic/registerUser'
-import Button from '../Components/Button'
-import Link from '../Components/Link'
+
+import Logo from "../components/Logo"
+import Link from '../components/Link'
+import Field from '../components/Field'
+import Form from "../components/Form"
+import Button from '../components/Button'
 
 function Register(props) {
 
@@ -30,24 +34,21 @@ function Register(props) {
         props.onLoginClick()
     }
 
-    return <div id="register-view" className="view view-plum">
+    return <Container id="register-view">
         <h1>Register</h1>
 
-        <form id="register-form" className="form" onSubmit={handleRegisterSubmit}>
-            <label htmlFor="name-input">Name</label>
-            <input type="text" id="name-input" title="Name" />
+        <Form id="register-form" onSubmit={handleRegisterSubmit}>
+            <Field type="text" id="name-field" title="Name" required>Name</Field>
 
-            <label htmlFor="email-input">E-mail</label>
-            <input type="email" id="email-input" title="E-mail" />
+            <Field type="email" id="email-field" title="E-mail" required>E-mail</Field>
 
-            <label htmlFor="password-input">Password</label>
-            <input type="password" id="password-input" title="Password" />
+            <Field type="password" id="password-field" title="Password" required>Password</Field>
 
             <Button type="submit">Register</Button>
-        </form>
+        </Form>
 
         <Link onClick={handleLoginClick}>Login</Link>
-    </div>
+    </Container >
 }
 
 export default Register

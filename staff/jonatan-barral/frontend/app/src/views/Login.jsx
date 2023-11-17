@@ -1,14 +1,19 @@
 import authenticateUser from '../logic/authenticateUser'
-import Link from '../Components/Link'
-import Button from '../Components/Button'
+
+import Logo from '../components/Logo'
+import Container from "../components/Container"
+import Link from '../components/Link'
+import Field from "../components/Field"
+import Form from '../components/Form'
+import Button from '../components/Button'
 
 function Login(props) {
 
     function handleLoginSubmit(event) {
         event.preventDefault()
 
-        const emailInput = event.target.querySelector('#email-input')
-        const passwordInput = event.target.querySelector('#password-input')
+        const emailInput = event.target.querySelector('#email-field')
+        const passwordInput = event.target.querySelector('#password-field')
 
         const email = emailInput.value
         const password = passwordInput.value
@@ -28,22 +33,24 @@ function Login(props) {
         props.onRegisterClick()
     }
 
-    return <div className="view view-skyblue">
+    return <Container align="center">
+        <Logo />
+
         <h1>Login</h1>
 
-        <form id="login-form" className="form" onSubmit={handleLoginSubmit}>
-            <label htmlFor="email-input">E-mail</label>
-            <input type="email" id="email-input" title="E-mail"></input>
+        <Form id="login-form" onSubmit={handleLoginSubmit}>
 
-            <label htmlFor="password-input">Password</label>
-            <input type="password" id="password-input" title="Password"></input>
+            <Field type="email" id="email-field" title="E-mail" required>E-mail</Field>
+
+            <Field type="password" id="password-field" title="Password" required>Password</Field>
+
 
             <Button type="submit">Login</Button>
 
-        </form>
+        </Form>
 
         <Link onClick={handleRegisterClick}>Register</Link>
-    </div>
+    </Container>
 }
 
 export default Login

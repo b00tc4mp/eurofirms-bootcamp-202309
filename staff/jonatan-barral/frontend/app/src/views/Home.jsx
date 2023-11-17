@@ -1,4 +1,5 @@
 import { useState } from 'react'
+
 import retrieveUser from '../logic/retrieveUser'
 import retrievePosts from '../logic/retrievePosts'
 import retrieveSavedPosts from '../logic/retrieveSavedPosts'
@@ -6,8 +7,14 @@ import createNewPost from '../logic/CreateNewPost'
 import deletePost from '../logic/deletePost'
 import toggleLikePost from '../logic/toggleLikePost'
 import toggleSavePost from '../logic/toggleSavePost'
-import Link from '../Components/Link'
-import Button from '../Components/Button'
+
+import Link from '../components/Link'
+import Button from '../components/Button'
+import Field from "../components/Field"
+import Form from "../components/Form"
+import Container from '../components/CONTAINER.JSX'
+import Post from "../components/Post"
+import SavedPost from "../components/SavedPost"
 
 function Home(props) {
 
@@ -52,9 +59,9 @@ function Home(props) {
     function handleNewPostSubmit(event) {
         event.preventDefault()
 
-        const imageInput = event.target.querySelector('#image-input')
-        const imageDescriptionInput = event.target.querySelector('#image-description-input')
-        const textInput = event.target.querySelector('#text-input')
+        const imageInput = event.target.querySelector('#image-field')
+        const imageDescriptionInput = event.target.querySelector('#image-description-field')
+        const textInput = event.target.querySelector('#text-field')
 
         const image = imageInput.value
         const imageDescription = imageDescriptionInput.value
@@ -142,7 +149,7 @@ function Home(props) {
         setView(null)
     }
 
-    return <div>
+    return <Container>
         <header className="header" aria-label="Header">
             <h1><Link onClick={handleHomeClick}>Home</Link></h1>
             <span aria-label="User name">{name}</span>
@@ -151,95 +158,33 @@ function Home(props) {
             <Button onClick={handleLogoutClick}>Logout</Button>
         </header>
 
-        {view === 'new-post' ? <div className="view">
+        {view === 'new-post' ? <Container align="center">
             <h2>New post</h2>
 
-            <form className="form" onSubmit={handleNewPostSubmit}>
-                <label htmlFor="image-input" className="label">Image</label>
-                <input type="url" id="image-input" className="input" required />
+            <Form onSubmit={handleNewPostSubmit}>
+                <Field type="url" id="image-field" required>Image</Field>
 
-                <label htmlFor="image-description-input" className="label">Image description</label>
-                <input type="text" id="image-description-input" className="input" required />
+                <Field type="text" id="image-description-field" required>Image description</Field>
 
-                <label htmlFor="text-input" className="label">Text</label>
-                <input type="text" id="text-input" className="input" required />
+                <Field type="text" id="text-field" required>Text</Field>
 
                 <Button type="submit">Post</Button>
                 <Button onClick={handleNewPostCancelClick}>Cancel</Button>
-            </form>
-        </div> : null}
+            </Form>
+        </Container> : null}
 
-        {(view === null || view === 'new-post') && posts !== null ? <div aria-label="Posts list" className="view">
+        {(view === null || view === 'new-post') && posts !== null ? <Container align="center" aria-label="Posts list">
             {posts.map(function (post) {
-                function handleBeforePostLikeClick() {
-                    handlePostLikeClick(post.id)
-                }
-
-                function handleBeforePostDeleteClick() {
-                    const confirmed = confirm('Delete post?')
-
-                    if (confirmed)
-                        handlePostDeleteClick(post.id)
-                }
-
-                function handleBeforePostSaveClick() {
-                    handlePostSaveClick(post.id)
-                }
-
-                return <article key={post.id} className="post">
-                    <h3>{post.author.name}</h3>
-
-                    <img className="post-image"
-                        src={post.image}
-                        alt={post.imageDescription}
-                        title={post.imageDescription} />
-
-                    <p>{post.text}</p>-
-                    <Button onClick={handleBeforePostLikeClick}>{(post.liked ? '❤️' : '🩶') + ' ' + post.likes.length + ' likes'}</Button>
-
-                    <Button title="Save" aria-label="Save" onClick={handleBeforePostSaveClick}>{(post.saved ? '⭐️' : '✩')}</Button>
-
-                    {post.author.id === sessionUserId ? <Button title="Delete" aria-label="Delete" onClick={handleBeforePostDeleteClick}>Delete</Button> : null}
-                </article>
+                return <Post post={post} onLikeClick={handlePostLikeClick} onSaveClick={handlePostSaveClick} onDeleteClick={handlePostDeleteClick} />
             })}
-        </div> : null}
+        </Container> : null}
 
-        {view === 'saved' ? <div aria-label="Saved list" className="view">
+        {view === 'saved' && saved !== null ? <Container align="center" aria-label="Saved list">
             {saved.map(function (post) {
-                function handleBeforePostLikeClick() {
-                    handlePostLikeClick(post.id)
-                }
-
-                function handleBeforePostDeleteClick() {
-                    const confirmed = confirm('Delete post?')
-
-                    if (confirmed)
-                        handlePostDeleteClick(post.id)
-                }
-
-                function handleBeforePostSaveClick() {
-                    handlePostSaveClick(post.id)
-                }
-
-                return <article key={post.id} className="post">
-                    <h3>{post.author.name}</h3>
-
-                    <img className="post-image"
-                        src={post.image}
-                        alt={post.imageDescription}
-                        title={post.imageDescription} />
-
-                    <p>{post.text}</p>
-
-                    <Button onClick={handleBeforePostLikeClick}>{(post.liked ? '❤️' : '🩶') + ' ' + post.likes.length + ' likes'}</Button>
-
-                    <Button title="Unsave" aria-label="Unsave" onClick={handleBeforePostSaveClick}>{(post.saved ? '⭐️' : '✩')}</Button>
-
-                    {post.author.id === sessionUserId ? <Button title="Delete" aria-label="Delete" onClick={handleBeforePostDeleteClick}>Delete</Button> : null}
-                </article>
+                return <SavedPost post={post} onLikeClick={handlePostLikeClick} onSaveClick={handlePostSaveClick} onDeleteClick={handlePostDeleteClick} />
             })}
-        </div> : null}
-    </div>
+        </Container> : null}
+    </Container>
 }
 
 export default Home
