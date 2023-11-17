@@ -3,10 +3,7 @@ import { useState } from 'react'
 import retrieveUser from '../logic/retrieveUser'
 import retrievePosts from '../logic/retrievePosts'
 import createNewPost from '../logic/createNewPost'
-import toggleLikePost from '../logic/toggleLikePost'
-import toggleSavePost from '../logic/toggleSavePost'
 import retrieveSavedPosts from '../logic/retrieveSavedPosts'
-import deletePost from '../logic/deletePost'
 
 import Button from '../components/Button'
 import Link from '../components/Link'
@@ -78,58 +75,30 @@ function Home(props) {
         }
     }
 
-    function handlePostLikeClick(postId) {
-        try {
-            toggleLikePost(window.sessionUserId, postId)
-
-            if (view === 'saved') {
+    function refreshPosts() {
+        if (view === null || view === 'new-post')
+            setTimestamp(Date.now())
+        else if (view === 'saved')
+            try {
                 const saved = retrieveSavedPosts(window.sessionUserId)
 
                 setSaved(saved)
-
-                return
+            } catch (error) {
+                alert(error.message)
             }
-
-            setTimestamp(Date.now())
-        } catch (error) {
-            alert(error.message)
-        }
     }
 
-    function handlePostDeleteClick(postId) {
-        try {
-            deletePost(sessionUserId, postId)
 
-            if (view === 'saved') {
-                const saved = retrieveSavedPosts(window.sessionUserId)
+    function handlePostLikeClick() {
+        refreshPosts()
+    }
 
-                setSaved(saved)
-
-                return
-            }
-
-            setTimestamp(Date.now())
-        } catch (error) {
-            alert(error.message)
-        }
+    function handlePostDeleteClick() {
+        refreshPosts()
     }
 
     function handlePostSaveClick(postId) {
-        try {
-            toggleSavePost(window.sessionUserId, postId)
-
-            if (view === 'saved') {
-                const saved = retrieveSavedPosts(window.sessionUserId)
-
-                setSaved(saved)
-
-                return
-            }
-
-            setTimestamp(Date.now())
-        } catch (error) {
-            alert(error.message)
-        }
+        refreshPosts()
     }
 
     function handleSavedClick(event) {
@@ -181,13 +150,13 @@ function Home(props) {
 
         {(view === null || view === 'new-post') && posts !== null ? <Container align="center" aria-label="Posts list">
             {posts.map(function (post) {
-                return <Post post={post} onLikeClick={handlePostLikeClick} onSaveClick={handlePostSaveClick} onDeleteClick={handlePostDeleteClick} />
+                return <Post key={post.id} post={post} onLikeClick={handlePostLikeClick} onSaveClick={handlePostSaveClick} onDeleteClick={handlePostDeleteClick} />
             })}
         </Container> : null}
 
         {view === 'saved' && saved !== null ? <Container align="center" aria-label="Saved list">
             {saved.map(function (post) {
-                return <Post post={post} onLikeClick={handlePostLikeClick} onSaveClick={handlePostSaveClick} onDeleteClick={handlePostDeleteClick} />
+                return <Post key={post.id} post={post} onLikeClick={handlePostLikeClick} onSaveClick={handlePostSaveClick} onDeleteClick={handlePostDeleteClick} />
             })}
         </Container> : null}
     </Container>
