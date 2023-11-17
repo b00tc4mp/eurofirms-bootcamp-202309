@@ -75,16 +75,29 @@ function Home(props) {
         }
     }
 
+    function refreshPosts() {
+        if (view === null || view === 'new-post')
+            setTimestamp(Date.now())
+        else if (view === 'saved')
+            try {
+                const saved = retrieveSavedPosts(window.sessionUserId)
+
+                setSaved(saved)
+            } catch (error) {
+                alert(error.message)
+            }
+    }
+
     function handlePostLikeClick() {
-        setTimestamp(Date.now())
+        refreshPosts()
     }
 
     function handlePostDeleteClick() {
-        setTimestamp(Date.now())
+        refreshPosts()
     }
 
     function handlePostSaveClick(postId) {
-        setTimestamp(Date.now())
+        refreshPosts()
     }
 
     function handleSavedClick(event) {
