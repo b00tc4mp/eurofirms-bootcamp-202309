@@ -1,23 +1,27 @@
 import authenticateUser from '../logic/authenticateUser'
+
 import Button from '../components/Button'
 import Link from '../components/Link'
+import Field from '../components/Field'
+import Form from '../components/Form'
+import Container from '../components/Container'
 
+import Logo from '../components/Logo'
 
 function Login(props) {
     function handleLoginSubmit(event) {
         event.preventDefault()
 
-        
-            const emailInput = event.target.querySelector('#email-input')
-            const passwordInput = event.target.querySelector('#password-input')
+        const emailInput = event.target.querySelector('#email-field')
+        const passwordInput = event.target.querySelector('#password-field')
 
-            const email = emailInput.value
-            const password = passwordInput.value
-            try {
+        const email = emailInput.value
+        const password = passwordInput.value
+        try {
             window.sessionUserId = authenticateUser(email, password)
 
             props.onSuccess()
-            
+
         } catch (error) {
             alert(error.message)
         }
@@ -29,21 +33,22 @@ function Login(props) {
         props.onRegisterClick()
     }
 
-    return <div className="view">
+    return <Container align="center">
+        <Logo />
+
         <h1>Login</h1>
 
-        <form className="form" onSubmit={handleLoginSubmit}>
-            <label className="label" htmlFor="email-input">E-mail</label>
-            <input className="input" type="email" id="email-input" title="E-mail" required />
+        <Form onSubmit={handleLoginSubmit}>
+            
+            <Field type="email" id="email-field" title="E-mail" required>E-mail</Field>
 
-            <label className="label" htmlFor="password-input">Password</label>
-            <input className="input" type="password" id="password-input" title="Password" required />
+            <Field type="password" id="password-field" title="Password" required>Password</Field>
 
             <Button type="submit">Login</Button>
-        </form>
+        </Form>
 
-        <Link onClick={handleRegisterClick} href="">Register</Link>
-    </div>
+        <Link onClick={handleRegisterClick}>Register</Link>
+    </Container>
 }
 
 export default Login

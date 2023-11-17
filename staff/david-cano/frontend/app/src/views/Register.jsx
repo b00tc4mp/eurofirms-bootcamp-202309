@@ -1,15 +1,20 @@
 import registerUser from '../logic/registerUser'
+
 import Button from '../components/Button'
 import Link from '../components/Link'
+import Field from '../components/Field'
+import Form from '../components/Form'
+import Container from '../components/Container'
 
+import Logo from '../components/Logo'
 
 function Register(props) {
     function handleRegisterSubmit(event) {
         event.preventDefault()
         try {
-            const nameInput = event.target.querySelector('#name-input')
-            const emailInput = event.target.querySelector('#email-input')
-            const passwordInput = event.target.querySelector('#password-input')
+            const nameInput = event.target.querySelector('#name-field')
+            const emailInput = event.target.querySelector('#email-field')
+            const passwordInput = event.target.querySelector('#password-field')
 
             const name = nameInput.value
             const email = emailInput.value
@@ -21,7 +26,7 @@ function Register(props) {
         } catch (error) {
             alert(error.message)
         }
-        
+
     }
 
     function handleLoginClick(event) {
@@ -30,24 +35,23 @@ function Register(props) {
         props.onLoginClick()
     }
 
-    return <div className="view">
+    return <Container align='center'>
+        <Logo />
+
         <h1>Register</h1>
 
-        <form className="form" onSubmit={handleRegisterSubmit}>
-            <label className="label" htmlFor="name-input">Name</label>
-            <input className="input" type="text" id="name-input" title="Name" required />
+        <Form onSubmit={handleRegisterSubmit}>
+            <Field type="text" id="name-field" title="Name" required>Name</Field>
 
-            <label className="label" htmlFor="email-input">E-mail</label>
-            <input className="input" type="email" id="email-input" title="E-mail" required />
+            <Field type="email" id="email-field" title="E-mail" required>E-mail</Field>
 
-            <label className="label" htmlFor="password-input">Password</label>
-            <input className="input" type="password" id="password-input" title="Password" required />
+            <Field type="password" id="password-field" title="Password" required>Password</Field>
 
             <Button type="submit">Register</Button>
-        </form>
+        </Form>
 
-        <Link onClick={handleLoginClick} href="">Login</Link>
-    </div>
+        <Link onClick={handleLoginClick}>Login</Link>
+    </Container>
 }
 
 export default Register

@@ -84,11 +84,3 @@ h2 {
 audio {
     display: none;
 }
-
-.post {
-    padding: 0.5rem;
-}
-
-.post:hover {
-    background-color: rgb(237, 237, 237);
-}

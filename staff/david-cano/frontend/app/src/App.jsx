@@ -1,6 +1,5 @@
 import Login from "./views/Login"
 import React from "react"
-import Logo from "./components/Logo"
 import Register from "./views/Register"
 import Home from "./views/Home"
 
@@ -22,13 +21,13 @@ function App() {
     }
 
     return <>
-        {<Logo />}
 
         {view === 'login' ? <Login  onSuccess={handleShowHome} onRegisterClick={handleShowRegister} /> : null}
 
         {view === 'register' ? <Register onSuccess={handleShowLogin}  onLoginClick = {handleShowLogin}/> : null}
 
         {view === 'home' ? <Home onLogout={handleShowLogin} /> : null}
+
     </>
 }
 

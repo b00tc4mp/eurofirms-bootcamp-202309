@@ -7,16 +7,19 @@ import toggleSavePost from '../logic/toggleSavePost'
 import retrieveSavedPosts from '../logic/retrieveSavedPosts'
 import deletePost from '../logic/deletePost'
 import Button from '../components/Button'
-import Link from '../components/Link'
+import Header from '../components/Header.jsx'
+import NewPostForm from '../components/NewPostForm.jsx'
+import Post from '../components/Post.jsx'
+import SavedPosts from '../components/SavedPosts.jsx'
 
 function Home(props) {
+    console.log('Home')
 
     const [view, setView] = useState(null)
 
     const [timestamp, setTimestamp] = useState(null)
 
     const [saved, setSaved] = useState(null)
-    // TODO const [saved, setSaved] = React.useState(null)
 
     let name = null
 
@@ -90,7 +93,7 @@ function Home(props) {
 
     function handlePostDeleteClick(postId) {
         try {
-            deletePost(window.sessionUserId, postId)
+            deletePost(sessionUserId, postId)
 
             if (view === 'saved') {
                 const saved = retrieveSavedPosts(window.sessionUserId)
@@ -143,106 +146,61 @@ function Home(props) {
         setView(null)
     }
 
-
     return <div>
-        <header className="header" aria-label="Header">
-            <h1><Link onClick={handleHomeClick}>Home</Link></h1>
-            <span id="user-name-span" aria-label="User name">{name}</span>
-            <Button title="New post" aria-label="New post (+)" className="button" onClick={handleNewPostClick}>+</Button>
-            <Link onClick={handleSavedClick}>Saved</Link>
-            <Button onClick={handleLogoutClick}>Logout</Button>
-        </header>
+        <Header
+            onHomeClick={handleHomeClick}
+            onNewPostClick={handleNewPostClick}
+            onSavedClick={handleSavedClick}
+            onLogoutClick={handleLogoutClick}
+            userName={name}
+        />
 
         {view === 'new-post' ?
-            <div className="view">
-                <h2>New post</h2>
-
-                <form id="new-post-form" className="form" onSubmit={handleNewPostSubmit}>
-                    <label htmlFor="image-input" className="label">Image</label>
-                    <input type="url" id="image-input" className="input" required />
-
-                    <label htmlFor="image-description-input" className="label">Image description</label>
-                    <input type="text" id="image-description-input" className="input" required />
-
-                    <label htmlFor="text-input" className="label">Text</label>
-                    <input type="text" id="text-input" className="input" required />
-
-                    <Button type="submit">Post</Button>
-                    <Button onClick={handleNewPostCancelClick}>Cancel</Button>
-                </form>
-            </div> : null}
+            <NewPostForm onSubmit={handleNewPostSubmit} onCancelClick={handleNewPostCancelClick} />
+            : null}
 
         {(view === null || view === 'new-post') && posts !== null ? <div aria-label="Posts list" className="view">
             {posts.map(function (post) {
+                // Función para manejar el clic en "Me gusta"
                 function handleBeforePostLikeClick() {
-                    handlePostLikeClick(post.id)
+                    handlePostLikeClick(post.id);
                 }
 
+                // Función para manejar el clic en "Eliminar"
                 function handleBeforePostDeleteClick() {
-                    const confirmed = confirm('Are you sure you want to delete the post?')
+                    const confirmed = window.confirm('Are you sure you want to delete the post?');
 
                     if (confirmed)
-                        handlePostDeleteClick(post.id)
+                        handlePostDeleteClick(post.id);
                 }
 
+                // Función para manejar el clic en "Guardar"
                 function handleBeforePostSaveClick() {
-                    handlePostSaveClick(post.id)
+                    handlePostSaveClick(post.id);
                 }
 
-                return <article key={post.id} className='post'>
-                    <h3>{post.author.name}</h3>
-
-                    <img className="post-image" src={post.image} alt={post.imageDescription} title={post.imageDescription} />
-
-                    <p>{post.text}</p>
-
-                    <Button onClick={handleBeforePostLikeClick}>{(post.liked ? '😍' : '😒') + ' ' + post.likes.length + 'likes'}</Button>
-
-                    <Button onClick={handleBeforePostSaveClick}>{(post.saved ? '⭐' : '✡️')}</Button>
-
-                    {post.author.id === window.sessionUserId ? <Button onClick={handleBeforePostDeleteClick}>Delete post</Button> : null}
-
-                </article>
-
+                return (
+                    <Post
+                        key={post.id}
+                        post={post}
+                        onLikeClick={handleBeforePostLikeClick}
+                        onDeleteClick={handleBeforePostDeleteClick}
+                        onSaveClick={handleBeforePostSaveClick}
+                        sessionUserId={window.sessionUserId}
+                    />
+                );
             })}
-
         </div> : null}
 
-        {view === 'saved' && saved !== null ? <div aria-label="Saved list" className="view">
-            {saved.map(function (post) {
-                function handleBeforePostLikeClick() {
-                    handlePostLikeClick(post.id)
-                }
-
-                function handleBeforePostDeleteClick() {
-                    const confirmed = confirm('Are you sure you want to delete the post?')
-
-                    if (confirmed)
-                        handlePostDeleteClick(post.id)
-                }
-
-                function handleBeforePostSaveClick() {
-                    handlePostSaveClick(post.id)
-                }
-
-                return <article key={post.id} className='post'>
-                    <h3>{post.author.name}</h3>
-
-                    <img className="post-image" src={post.image} alt={post.imageDescription} title={post.imageDescription} />
-
-                    <p>{post.text}</p>
-
-                    <Button onClick={handleBeforePostLikeClick}>{(post.liked ? '😍' : '😒') + ' ' + post.likes.length + 'likes'}</Button>
-
-                    <Button onClick={handleBeforePostSaveClick}>{(post.saved ? '⭐' : '✡️')}</Button>
-
-                    {post.author.id === window.sessionUserId ? <Button onClick={handleBeforePostDeleteClick}>Delete post</Button> : null}
-
-                </article>
-
-            })}
-
-        </div> : null}
+        {view === 'saved' && saved !== null ? (
+            <SavedPosts
+                savedPosts={saved}
+                onLikeClick={handlePostLikeClick}
+                onDeleteClick={handlePostDeleteClick}
+                onSaveClick={handlePostSaveClick}
+                sessionUserId={window.sessionUserId}
+            />
+        ) : null}
     </div>
 }
 
