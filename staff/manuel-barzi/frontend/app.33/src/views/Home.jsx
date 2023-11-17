@@ -3,7 +3,10 @@ import { useState } from 'react'
 import retrieveUser from '../logic/retrieveUser'
 import retrievePosts from '../logic/retrievePosts'
 import createNewPost from '../logic/createNewPost'
+import toggleLikePost from '../logic/toggleLikePost'
+import toggleSavePost from '../logic/toggleSavePost'
 import retrieveSavedPosts from '../logic/retrieveSavedPosts'
+import deletePost from '../logic/deletePost'
 
 import Button from '../components/Button'
 import Link from '../components/Link'
@@ -75,16 +78,58 @@ function Home(props) {
         }
     }
 
-    function handlePostLikeClick() {
-        setTimestamp(Date.now())
+    function handlePostLikeClick(postId) {
+        try {
+            toggleLikePost(window.sessionUserId, postId)
+
+            if (view === 'saved') {
+                const saved = retrieveSavedPosts(window.sessionUserId)
+
+                setSaved(saved)
+
+                return
+            }
+
+            setTimestamp(Date.now())
+        } catch (error) {
+            alert(error.message)
+        }
     }
 
-    function handlePostDeleteClick() {
-        setTimestamp(Date.now())
+    function handlePostDeleteClick(postId) {
+        try {
+            deletePost(sessionUserId, postId)
+
+            if (view === 'saved') {
+                const saved = retrieveSavedPosts(window.sessionUserId)
+
+                setSaved(saved)
+
+                return
+            }
+
+            setTimestamp(Date.now())
+        } catch (error) {
+            alert(error.message)
+        }
     }
 
     function handlePostSaveClick(postId) {
-        setTimestamp(Date.now())
+        try {
+            toggleSavePost(window.sessionUserId, postId)
+
+            if (view === 'saved') {
+                const saved = retrieveSavedPosts(window.sessionUserId)
+
+                setSaved(saved)
+
+                return
+            }
+
+            setTimestamp(Date.now())
+        } catch (error) {
+            alert(error.message)
+        }
     }
 
     function handleSavedClick(event) {
@@ -136,13 +181,13 @@ function Home(props) {
 
         {(view === null || view === 'new-post') && posts !== null ? <Container align="center" aria-label="Posts list">
             {posts.map(function (post) {
-                return <Post key={post.id} post={post} onLikeClick={handlePostLikeClick} onSaveClick={handlePostSaveClick} onDeleteClick={handlePostDeleteClick} />
+                return <Post post={post} onLikeClick={handlePostLikeClick} onSaveClick={handlePostSaveClick} onDeleteClick={handlePostDeleteClick} />
             })}
         </Container> : null}
 
         {view === 'saved' && saved !== null ? <Container align="center" aria-label="Saved list">
             {saved.map(function (post) {
-                return <Post key={post.id} post={post} onLikeClick={handlePostLikeClick} onSaveClick={handlePostSaveClick} onDeleteClick={handlePostDeleteClick} />
+                return <Post post={post} onLikeClick={handlePostLikeClick} onSaveClick={handlePostSaveClick} onDeleteClick={handlePostDeleteClick} />
             })}
         </Container> : null}
     </Container>

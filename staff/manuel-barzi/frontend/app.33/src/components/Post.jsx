@@ -1,46 +1,24 @@
-import toggleLikePost from '../logic/toggleLikePost'
-import deletePost from '../logic/deletePost'
-import toggleSavePost from '../logic/toggleSavePost'
-
-import Button from './Button'
+import Button from "./Button"
 
 function Post(props) {
     const post = props.post
 
     function handleLikeClick() {
-        try {
-            toggleLikePost(window.sessionUserId, post.id)
-
-            props.onLikeClick()
-        } catch (error) {
-            alert(error.message)
-        }
+        props.onLikeClick(post.id)
     }
 
     function handleDeleteClick() {
         const confirmed = confirm('Delete post?')
 
         if (confirmed)
-            try {
-                deletePost(sessionUserId, post.id)
-
-                props.onDeleteClick()
-            } catch (error) {
-                alert(error.message)
-            }
+            props.onDeleteClick(post.id)
     }
 
     function handleSaveClick() {
-        try {
-            toggleSavePost(window.sessionUserId, post.id)
-
-            props.onSaveClick()
-        } catch (error) {
-            alert(error.message)
-        }
+        props.onSaveClick(post.id)
     }
 
-    return <article className="post">
+    return <article key={post.id} className="post">
         <h3>{post.author.name}</h3>
 
         <img className="post-image"
