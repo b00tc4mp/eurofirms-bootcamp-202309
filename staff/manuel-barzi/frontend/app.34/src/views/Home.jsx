@@ -10,7 +10,7 @@ import Link from '../components/Link'
 import Field from '../components/Field'
 import Form from '../components/Form'
 import Container from '../components/Container'
-import Posts from '../components/Posts'
+import Post from '../components/Post'
 
 import Logo from '../components/Logo'
 
@@ -134,11 +134,17 @@ function Home(props) {
             </Form>
         </Container> : null}
 
-        {(view === null || view === 'new-post') && posts !== null ? <Posts posts={posts} onLikeClick={handlePostLikeClick} onSaveClick={handlePostSaveClick} onDeleteClick={handlePostDeleteClick} />
-            : null}
+        {(view === null || view === 'new-post') && posts !== null ? <Container align="center" aria-label="Posts list">
+            {posts.map(function (post) {
+                return <Post key={post.id} post={post} onLikeClick={handlePostLikeClick} onSaveClick={handlePostSaveClick} onDeleteClick={handlePostDeleteClick} />
+            })}
+        </Container> : null}
 
-        {view === 'saved' && saved !== null ? <Posts posts={saved} onLikeClick={handlePostLikeClick} onSaveClick={handlePostSaveClick} onDeleteClick={handlePostDeleteClick} />
-            : null}
+        {view === 'saved' && saved !== null ? <Container align="center" aria-label="Saved list">
+            {saved.map(function (post) {
+                return <Post key={post.id} post={post} onLikeClick={handlePostLikeClick} onSaveClick={handlePostSaveClick} onDeleteClick={handlePostDeleteClick} />
+            })}
+        </Container> : null}
     </Container>
 }
 
