@@ -1,17 +1,20 @@
 function retrievePosts(email) {
     validateEmail(email)
 
-    //search user by email
+    const user = db.findUserById(userId)
 
-    var foundUser = find(users, function (user) {
-        return user.email === email
+    if (!user)
+        throw new Error('User not found')
+
+    const posts = db.getPosts()
+
+    posts.forEach(function (post) {
+        const user = db.findUserById(post.author)
+
+        post.author = user.name
+
+        post.liked = post.likes.includes(userId)
     })
-
-
-    //if user not found then error
-
-    if (foundUser === undefined)
-        throw new Error('user not found')
 
     return posts
 }

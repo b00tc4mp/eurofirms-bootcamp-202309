@@ -2,14 +2,15 @@ function authenticateUser(email, password) {
     validateEmail(email)
     validatePassword(password)
 
-    const user = db.findUserByEmail(email)
+    var foundUser = find(users, function (user) {
+        return user.email === email
+    })
 
-    if (!user)
+    if (foundUser === undefined)
         throw new Error('wrong credentials')
 
-    if (user.password !== password)
+    if (foundUser.password !== password)
         throw new Error('wrong credentials')
 
-    return user.id
 }
 
