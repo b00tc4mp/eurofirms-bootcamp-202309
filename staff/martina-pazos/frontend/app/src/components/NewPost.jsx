@@ -1,7 +1,7 @@
-import Container from '../components/Container'
-import Field from '../components/Field'
-import Form from '../components/Form'
-import Button from '../components/Button'
+import Container from './Container'
+import Field from './Field'
+import Form from './Form'
+import Button from './Button'
 
 import createNewPost from '../logic/createNewPost'
 
