@@ -1,18 +1,18 @@
 import { useState } from 'react'
 
+import retrieveSavedPosts from '../logic/retrieveSavedPosts'
+
 import Posts from './Posts'
 
-import retrieveMyPosts from '../logic/retrieveMyPosts'
-
-function MyPosts() {
-    console.log('MyPosts')
+function SavedPosts() {
+    console.log('SavedPosts')
 
     const [timestamp, setTimestamp] = useState(null)
 
     let posts = null
 
     try {
-        posts = retrieveMyPosts(window.sessionUserId)
+        posts = retrieveSavedPosts(window.sessionUserId)
     } catch (error) {
         alert(error.message)
     }
@@ -36,4 +36,4 @@ function MyPosts() {
     return <Posts posts={posts} onLikeClick={handleLikeClick} onSaveClick={handleSaveClick} onDeleteClick={handleDeleteClick} />
 }
 
-export default MyPosts
+export default SavedPosts
