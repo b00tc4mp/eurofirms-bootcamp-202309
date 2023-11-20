@@ -11,7 +11,6 @@ import Field from '../components/Field'
 import Form from '../components/Form'
 import Container from '../components/Container'
 import Posts from '../components/Posts'
-import MyPosts from '../components/MyPosts'
 
 import Logo from '../components/Logo'
 
@@ -120,12 +119,6 @@ function Home(props) {
         setView(null)
     }
 
-    function handleMyPostsClick(event) {
-        event.preventDefault()
-
-        setView('my-posts')
-    }
-
     return <Container>
         <header className="header" aria-label="Header">
             <Link onClick={handleHomeClick}><Logo /></Link>
@@ -135,8 +128,6 @@ function Home(props) {
             <Button title="New post" aria-label="New post (+)" onClick={handleNewPostClick}>+</Button>
 
             <Link onClick={handleSavedClick}>Saved</Link>
-
-            <Link onClick={handleMyPostsClick}>My posts</Link>
 
             <Button onClick={handleLogoutClick}>Logout</Button>
         </header>
@@ -161,8 +152,6 @@ function Home(props) {
 
         {view === 'saved' && saved !== null ? <Posts posts={saved} onLikeClick={handlePostLikeClick} onSaveClick={handlePostSaveClick} onDeleteClick={handlePostDeleteClick} />
             : null}
-
-        {view === 'my-posts' ? <MyPosts /> : null}
     </Container>
 }
 
