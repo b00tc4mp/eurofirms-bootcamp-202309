@@ -1,5 +1,5 @@
-import { validateText } from '../utils/validators';
-import db from '../data/managers';
+import { validateText } from '../utils/validators'
+import db from '../data/managers'
 
 function toggleSavePost(userId, postId) {
     validateText(userId, 'user id')
@@ -25,4 +25,4 @@ function toggleSavePost(userId, postId) {
     db.updateUser(user)
 }
 
-export default toggleSavePost;
+export default toggleSavePost

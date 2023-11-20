@@ -10,8 +10,10 @@ import Link from '../components/Link'
 import Field from '../components/Field'
 import Form from '../components/Form'
 import Container from '../components/Container'
-import Posts from '../components/Posts'
 import MyPosts from '../components/MyPosts'
+import SavedPosts from '../components/SavedPosts'
+import AllPosts from '../components/AllPosts'
+
 
 import Logo from '../components/Logo'
 
@@ -156,11 +158,9 @@ function Home(props) {
             </Form>
         </Container> : null}
 
-        {(view === null || view === 'new-post') && posts !== null ? <Posts posts={posts} onLikeClick={handlePostLikeClick} onSaveClick={handlePostSaveClick} onDeleteClick={handlePostDeleteClick} />
-            : null}
+        {view === null || view === 'new-post' ? <AllPosts /> : null}
 
-        {view === 'saved' && saved !== null ? <Posts posts={saved} onLikeClick={handlePostLikeClick} onSaveClick={handlePostSaveClick} onDeleteClick={handlePostDeleteClick} />
-            : null}
+        {view === 'saved' ? <SavedPosts /> : null}
 
         {view === 'my-posts' ? <MyPosts /> : null}
     </Container>
