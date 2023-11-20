@@ -45,19 +45,41 @@ h2 {
   line-height: 1.5rem;
   padding-left: 5px;
   margin: 2px;
+  border: 1px solid transparent;
 }
 
-.post {
-  padding: 0.5rem;
+
+.button:hover {
+  border-color: black;
 }
 
-.post:hover {
-  background-color: rgb(237, 237, 237);
+link {
+  padding: 5rem, 5rem;
+}
+
+link-hover {
+  background-color: yellow;
+}
+
+post {
+  padding: 0, 6 rem;
+
 }
 
 .post-image {
   max-width: 300px;
 }
+
+
+post-hover {
+  background-color: rgb(237, 237, 237);
+}
+
+post-image {
+  max-width: 300px;
+}
+
+
 
 .header {
   display: flex;

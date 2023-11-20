@@ -2,6 +2,8 @@ import React from "react"
 import Login from "./view/Login"
 import Register from "./view/Register"
 import Home from "./view/Home"
+
+
 function App() {
   console.log('App')
 
@@ -29,8 +31,6 @@ function App() {
 
   // Renderiza el contenido principal de la aplicación.
   return <>
-
-
     {view === 'login' ? <Login onSuccess={handleHomeShow} onRegisterClick={handleRegisterShow} /> : null}
 
     {view === 'register' ? <Register onSuccess={handleLoginShow} onLoginClick={handleLoginShow} /> : null}
