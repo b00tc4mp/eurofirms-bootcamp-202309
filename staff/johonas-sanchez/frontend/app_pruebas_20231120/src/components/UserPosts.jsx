@@ -1,18 +1,18 @@
 import { useState } from 'react'
+import retrieveUserPosts from '../logic/retrieveUserPosts'
 
 import Posts from './Posts'
 
-import retrieveMyPosts from '../logic/retrieveMyPosts'
 
-function MyPosts() {
-    console.log('MyPosts')
+function UserPosts(props) {
+    console.log('UserPosts')
 
     const [timestamp, setTimestamp] = useState(null)
 
     let posts = null
 
     try {
-        posts = retrieveMyPosts(window.sessionUserId)
+        posts = retrieveUserPosts(sessionUserId, props.userId)
     } catch (error) {
         alert(error.message)
     }
@@ -36,4 +36,4 @@ function MyPosts() {
     return <Posts posts={posts} userPosts={true} onLikeClick={handleLikeClick} onSaveClick={handleSaveClick} onDeleteClick={handleDeleteClick} />
 }
 
-export default MyPosts
+export default UserPosts

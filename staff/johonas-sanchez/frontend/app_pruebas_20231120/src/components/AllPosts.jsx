@@ -4,7 +4,7 @@ import Posts from '../components/Posts'
 
 import retrievePosts from '../logic/retrievePosts'
 
-function AllPosts() {
+function AllPosts(props) {
     console.log('AllPosts')
 
     const [timestamp, setTimestamp] = useState(null)
@@ -33,7 +33,7 @@ function AllPosts() {
         refreshPosts()
     }
 
-    return <Posts posts={posts} onLikeClick={handleLikeClick} onSaveClick={handleSaveClick} onDeleteClick={handleDeleteClick} />
+    return <Posts posts={posts} onUserClick={props.onUserClick} onLikeClick={handleLikeClick} onSaveClick={handleSaveClick} onDeleteClick={handleDeleteClick} />
 }
 
 export default AllPosts

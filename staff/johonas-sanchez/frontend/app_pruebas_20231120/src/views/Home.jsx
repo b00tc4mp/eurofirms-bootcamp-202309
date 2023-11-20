@@ -9,6 +9,7 @@ import MyPosts from '../components/MyPosts'
 import SavedPosts from '../components/SavedPosts'
 import AllPosts from '../components/AllPosts'
 import NewPost from '../components/NewPost'
+import UserPosts from '../components/UserPosts'
 
 import Logo from '../components/Logo'
 
@@ -16,6 +17,8 @@ function Home(props) {
     console.log('Home')
 
     const [view, setView] = useState(null)
+
+    const [postAuthorId, setPostAuthorId] = useState(null)
 
     let name = null
 
@@ -63,6 +66,12 @@ function Home(props) {
         setView('my-posts')
     }
 
+    function handleUserClick(userId) {
+        setPostAuthorId(userId)
+        
+        setView('user-posts')
+    }
+
     return <Container>
         <header className="header" aria-label="Header">
             <Link onClick={handleHomeClick}><Logo /></Link>
@@ -80,11 +89,13 @@ function Home(props) {
 
         {view === 'new-post' ? <NewPost onNewPostSubmit={handleNewPostSubmit} onNewPostCancelClick={handleNewPostCancelClick} /> : null}
 
-        {view === null || view === 'new-post' ? <AllPosts /> : null}
+        {view === null || view === 'new-post' ? <AllPosts onUserClick={handleUserClick}/> : null}
 
         {view === 'saved' ? <SavedPosts /> : null}
 
         {view === 'my-posts' ? <MyPosts /> : null}
+
+        {view === 'user-posts' ? <UserPosts userId={postAuthorId}/> : null}
     </Container>
 }
 

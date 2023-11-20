@@ -3,6 +3,7 @@ import deletePost from '../logic/deletePost'
 import toggleSavePost from '../logic/toggleSavePost'
 
 import Button from './Button'
+import Link from './Link'
 
 function Post(props) {
     const post = props.post
@@ -39,9 +40,15 @@ function Post(props) {
             alert(error.message)
         }
     }
+
+    function handleUserClick(event) {
+        event.preventDefault()
+
+        props.onUserClick(post.author.id)
+    }
     
     return <article key={post.id} className="post">
-        <h3>{post.author.name}</h3>
+        <h3>{props.userPosts ? post.author.name : <Link onClick={handleUserClick}>{post.author.name}</Link>}</h3>
 
         <img className="post-image"
             src={post.image}
