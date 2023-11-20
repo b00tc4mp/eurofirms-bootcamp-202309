@@ -1,19 +1,14 @@
 import { useState } from 'react'
 
 import retrieveUser from '../logic/retrieveUser'
-import retrievePosts from '../logic/retrievePosts'
-import createNewPost from '../logic/createNewPost'
-import retrieveSavedPosts from '../logic/retrieveSavedPosts'
 
 import Button from '../components/Button'
 import Link from '../components/Link'
-import Field from '../components/Field'
-import Form from '../components/Form'
 import Container from '../components/Container'
 import MyPosts from '../components/MyPosts'
 import SavedPosts from '../components/SavedPosts'
 import AllPosts from '../components/AllPosts'
-
+import NewPost from '../components/NewPost'
 
 import Logo from '../components/Logo'
 
@@ -22,24 +17,12 @@ function Home(props) {
 
     const [view, setView] = useState(null)
 
-    const [timestamp, setTimestamp] = useState(null)
-
-    const [saved, setSaved] = useState(null)
-
     let name = null
 
     try {
         const user = retrieveUser(window.sessionUserId)
 
         name = user.name
-    } catch (error) {
-        alert(error.message)
-    }
-
-    let posts = null
-
-    try {
-        posts = retrievePosts(window.sessionUserId)
     } catch (error) {
         alert(error.message)
     }
@@ -58,62 +41,14 @@ function Home(props) {
         setView(null)
     }
 
-    function handleNewPostSubmit(event) {
-        event.preventDefault()
-
-        const imageInput = event.target.querySelector('#image-field')
-        const imageDescriptionInput = event.target.querySelector('#image-description-field')
-        const textInput = event.target.querySelector('#text-field')
-
-        const image = imageInput.value
-        const imageDescription = imageDescriptionInput.value
-        const text = textInput.value
-
-        try {
-            createNewPost(window.sessionUserId, image, imageDescription, text)
-
-            setView(null)
-        } catch (error) {
-            alert(error.message)
-        }
-    }
-
-    function refreshPosts() {
-        if (view === null || view === 'new-post')
-            setTimestamp(Date.now())
-        else if (view === 'saved')
-            try {
-                const saved = retrieveSavedPosts(window.sessionUserId)
-
-                setSaved(saved)
-            } catch (error) {
-                alert(error.message)
-            }
-    }
-
-    function handlePostLikeClick() {
-        refreshPosts()
-    }
-
-    function handlePostDeleteClick() {
-        refreshPosts()
-    }
-
-    function handlePostSaveClick(postId) {
-        refreshPosts()
+    function handleNewPostSubmit() {
+        setView(null)
     }
 
     function handleSavedClick(event) {
         event.preventDefault()
 
-        try {
-            const saved = retrieveSavedPosts(window.sessionUserId)
-
-            setSaved(saved)
-            setView('saved')
-        } catch (error) {
-            alert(error.message)
-        }
+        setView('saved')
     }
 
     function handleHomeClick(event) {
@@ -143,20 +78,7 @@ function Home(props) {
             <Button onClick={handleLogoutClick}>Logout</Button>
         </header>
 
-        {view === 'new-post' ? <Container align="center">
-            <h2>New post</h2>
-
-            <Form onSubmit={handleNewPostSubmit}>
-                <Field type="url" id="image-field" required>Image</Field>
-
-                <Field type="text" id="image-description-field" required>Image description</Field>
-
-                <Field type="text" id="text-field" required>Text</Field>
-
-                <Button type="submit">Post</Button>
-                <Button onClick={handleNewPostCancelClick}>Cancel</Button>
-            </Form>
-        </Container> : null}
+        {view === 'new-post' ? <NewPost onNewPostSubmit={handleNewPostSubmit} onNewPostCancelClick={handleNewPostCancelClick} /> : null}
 
         {view === null || view === 'new-post' ? <AllPosts /> : null}
 
