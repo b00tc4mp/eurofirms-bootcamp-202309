@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Buena</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <!--this DIV contains the HOME PAGE, which appears after log in-->
+    <div id="home-view">
+        <!--HEADER of the HOME PAGE-->
+        <header class="header">
+            <h1>HOME</h1>
+            <span id="user-name-span">
+                <!--here goes the USER NAME-->
+                Hola, caracola
+            </span>
+            <button id="new-post-button">+</button>
+            <button id="logout-button">Logout</button>
+        </header>
+        <!--the FORM for create a new post (in lightgreen color)-->
+        <div id="post-panel" class="panel-lightgreen">
+            <h2>New post</h2>
+
+            <form id="new-post-form" class="form">
+                <!--imput for the picture (URL)-->
+                <label for="image-input">Imagen</label>
+                <input type="url" id="image-input">
+                <!--imput for the text-->
+                <label for="text-input">Add your text</label>
+                <input type="text" id="text-input">
+                <!--submit button-->
+                <button type="submit">ADD NEW POST</button>
+                <!--if you change your mind...-->
+                <button id="cancel-new-post-button">
+                    CANCEL
+                </button>
+            </form>
+            <!--end of the POST FORM-->
+        </div>
+        <!--here goes the POSTS LIST-->
+        <div id="posts-list"></div>
+        <!--end of the HOME PAGE-->
+    </div>
+
+    <!--REGISTER (in plum color)-->
+    <div id="register-view" class="view view-plum">
+        <h1>REGISTER</h1>
+        <form id="register-form" class="form">
+            <!--name-->
+            <label for="name-register">Name</label>
+            <input type="text" id="name-register">
+            <!--e-mail-->
+            <label for="email-register">E-mail</label>
+            <input type="email" id="email-register">
+            <!--password-->
+            <label for="password-register">Password</label>
+            <input type="password" id="password-register">
+            <!--send your info-->
+            <button type="submit" id="register-button">REGISTER</button>
+            <!--for clear all fields-->
+            <button type="reset" id="clear-button">CLEAR</button>
+        </form>
+    <!--end of the REGISTER-->
+    </div>
+    <!--LOGIN (in lightblue color)-->
+    <div id="login-view" class="view view-skyblue">
+        <h1>LOGIN</h1>
+        <form id="login-form" class="form">
+
+            <label for="email-login">E-mail</label>
+            <input type="email" id="email-login">
+
+            <label for="password-login">Password</label>
+            <input type="password" id="password-login">
+
+            <button type="submit" id="login-button">LOGIN</button>
+            <button type="reset" id="clear-button">CLEAR</button>
+
+        </form>
+
+       <!--end of the LOGIN--> 
+    </div>
+
+    <script src="./data.js"></script>
+    <script src="./register.js"></script>
+    <script src="./login.js"></script>
+    <script src="./home.js"></script>
+    <script src="./main.js"></script>
+
+    
+</body>
+</html>

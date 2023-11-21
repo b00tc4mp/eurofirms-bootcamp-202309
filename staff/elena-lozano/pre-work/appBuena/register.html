@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="container">
+    
+    <h1>REGISTER</h1>
+<!--el for del label y el id del input deben coincidir para poder relacionarse entre sí-->
+    <form class="container" id="register-form">
+        <!--el apartado para introducir el nombre-->
+        <laber for="name">Name</laber>
+        <input id="name" type="text">
+
+        <!--el apartado para introducir el correo-->
+        <label for="email">E-Mail</label>
+        <input id="email" type="email">
+
+        <!--el apartado para la contraseña-->
+        <label for="password">Password</label>
+        <input id="password" type="password">
+
+        <!--esto es el botón para enviar los datos introducidos a la base de datos-->
+        <button>REGISTER</button>
+
+    </form>
+    <a href="./login.html">Login</a>
+    <script src="./register.js"></script>
+    
+</body>
+</html>
