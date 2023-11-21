@@ -2,7 +2,7 @@ import toggleLikePost from "../logic/toggleLikePost"
 import toggleSavePost from "../logic/toggleSavePost"
 import deletePost from "../logic/deletePost"
 
-import Button from "../components/Button"
+import Button from "./Button"
 
 function Post(props) {
     const post = props.post
