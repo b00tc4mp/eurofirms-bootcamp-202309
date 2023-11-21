@@ -1,6 +1,8 @@
 import authenticateUser from "../logic/authenticateUser";
+import Button from "../components/Button";
+import Link from "../components/Link";
 
-export default function Login(props) {
+function Login(props) {
     console.log('Login')
 
     function handleLoginSubmit(event) {
@@ -13,7 +15,7 @@ export default function Login(props) {
         const password = passwordInput.value
 
         try {
-            authenticateUser(email, password)
+            window.sessionUserId = authenticateUser(email, password)
 
             props.onSuccess()
         } catch (error) {
@@ -37,9 +39,12 @@ export default function Login(props) {
             <label className="label" htmlFor="password-input">Password</label>
             <input className="input" type="password" id="password-input" title="Password" required />
 
-            <button className="button" type="submit">Login</button>
+            {<button className="button" type="submit">Login</button>}
+            <Button type="submit">Login</Button>
         </form>
 
-        <a onClick={handleRegisterClick} href="">Register</a>
+        <Link onClick={handleRegisterClick}>Register</Link>
     </div>
 }
+
+export default Login
