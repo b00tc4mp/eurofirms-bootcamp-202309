@@ -1,10 +1,11 @@
+import { prepareFieldForTemplates } from 'generator-jhipster/utils/field'
 import { useState } from 'react'
 
 import retrieveSavedPosts from '../logic/retrieveSavedPosts'
 
 import Posts from './Posts'
 
-function SavedPosts() {
+function SavedPosts(props) {
     console.log('SavedPosts')
 
     const [timestamp, setTimestamp] = useState(null)
@@ -33,7 +34,7 @@ function SavedPosts() {
         refreshPosts()
     }
 
-    return <Posts posts={posts} onLikeClick={handleLikeClick} onSaveClick={handleSaveClick} onDeleteClick={handleDeleteClick} />
+    return <Posts posts={posts} onLikeClick={handleLikeClick} onSaveClick={handleSaveClick} onDeleteClick={handleDeleteClick} onUserClick={props.onUserClick} />
 }
 
 export default SavedPosts

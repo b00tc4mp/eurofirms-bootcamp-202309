@@ -91,7 +91,7 @@ function Home(props) {
 
         {view === null || view === 'new-post' ? <AllPosts onUserClick={handleUserClick}/> : null}
 
-        {view === 'saved' ? <SavedPosts /> : null}
+        {view === 'saved' ? <SavedPosts onUserClick={handleUserClick}/> : null}
 
         {view === 'my-posts' ? <MyPosts /> : null}
 
