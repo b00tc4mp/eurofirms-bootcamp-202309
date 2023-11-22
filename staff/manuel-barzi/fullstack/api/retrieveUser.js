@@ -1,30 +1,23 @@
-const fs = require('fs')
+const loadUsers = require('./helpers/loadUsers')
 
-function retrieveUser(userId) {
-    const text = fs.readFileSync('./users.csv').toString()
+function retrieveUser(userId, callback) {
+    // TODO validate input
 
-    const lines = text.split('\n')
+    loadUsers(function (error, users) {
+        if (error) {
+            callback(error)
 
-    const users = []
+            return
+        }
 
-    for (let i = 1; i < lines.length; i++) {
-        const line = lines[i]
+        const user = users.find(function (user) {
+            return user.id === userId
+        })
 
-        const values = line.split(',')
+        if (!user) throw new Error('user not found')
 
-        const [id, name, email, password] = values
-
-        const user = { id, name, email, password }
-
-        users.push(user)
-    }
-
-    const user = users.find(function (user) {
-        return user.id === userId
+        callback(null, user)
     })
-
-    return user
 }
 
-// export default retrieveUser
 module.exports = retrieveUser

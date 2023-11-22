@@ -1,4 +1,13 @@
 const retrieveUser = require('./retrieveUser')
 
-const user = retrieveUser('4p5528xhpso0')
-console.log(user)
+retrieveUser('75wpgclmg280', function (error, user) {
+    if (error) {
+        console.error(error)
+
+        return
+    }
+
+    console.log(user)
+})
+
+console.log('hola retrieveUser')
