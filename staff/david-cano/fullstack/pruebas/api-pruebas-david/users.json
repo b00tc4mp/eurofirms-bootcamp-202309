@@ -1,0 +1,86 @@
+[
+    {
+        "id": "46lhfnkefx00",
+        "name": "Pepito Grillo",
+        "email": "pepito@grillo.com",
+        "password": "123123123"
+    },
+    {
+        "id": "4gx5vfmve8e0",
+        "name": "Campa Nilla",
+        "email": "campa@nilla.com",
+        "password": "123123123"
+    },
+    {
+        "id": "3ddlqkwxnxu0",
+        "name": "James Hook",
+        "email": "james@hook.com",
+        "password": "123123123"
+    },
+    {
+        "id": "6rtnaeajeq40",
+        "name": "Peter Pan",
+        "email": "peter@pan.com",
+        "password": "123123123"
+    },
+    {
+        "id": "4p5528xhpso0",
+        "name": "Wendy Darling",
+        "email": "wendy@darling.com",
+        "password": "123123123"
+    },
+    {
+        "id": "36xw70d15hi0",
+        "name": "Ada Love",
+        "email": "ada@love.com",
+        "password": "123123123"
+    },
+    {
+        "id": "1fxqiemabpr4",
+        "name": "Pin Ocho",
+        "email": "pin@ocho.com",
+        "password": "123123123"
+    },
+    {
+        "id": "75wpgclmg280",
+        "name": "Mario Bros",
+        "email": "mario@bros.com",
+        "password": "123123123"
+    },
+    {
+        "id": "7k7ygfplsug0",
+        "name": "Super Man",
+        "email": "super@man.com",
+        "password": "123123123"
+    },
+    {
+        "id": "60ky7yn2r5k0",
+        "name": "Spider Man",
+        "email": "spider@man.com",
+        "password": "123123123"
+    },
+    {
+        "id": "29iusp88ejgg",
+        "name": "Super Mario",
+        "email": "super@mario.com",
+        "password": "123123123"
+    },
+    {
+        "id": "1w42lj15omg0",
+        "name": "Iron Man",
+        "email": "iron@man.com",
+        "password": "123123123"
+    },
+    {
+        "id": "nx95l38zvz4",
+        "name": "Bar Man",
+        "email": "bar@man.com",
+        "password": "123123123"
+    },
+    {
+        "id": "5m5qtl7r31o0",
+        "name": "Bat Man",
+        "email": "bat@man.com",
+        "password": "123123123"
+    }
+]
