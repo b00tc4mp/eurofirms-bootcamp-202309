@@ -8,7 +8,7 @@ function loadUsers(callback) {
             return
         }
 
-        const data = content.toString()
+        const data = - content.toString()
 
         const users = JSON.parse(data)
 
