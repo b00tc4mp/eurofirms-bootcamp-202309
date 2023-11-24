@@ -1,7 +1,6 @@
-const generateId = require('../data/generateId')
-const loadUsers = require('../data/loadUsers')
-const saveUsers = require('../data/saveUsers')
 const { validateText, validateEmail, validatePassword, validateFunction } = require('./helpers/validators')
+
+const { User } = require('../data/models')
 
 function registerUser(name, email, password, callback) {
     validateText(name, 'name')
@@ -9,42 +8,17 @@ function registerUser(name, email, password, callback) {
     validatePassword(password, 'password')
     validateFunction(callback, 'callback')
 
-    loadUsers(function (error, users) {
-        if (error) {
-            callback(error)
-
-            return
-        }
-
-        let user = users.find(function (user) {
-            return user.email === email
-        })
-
-        if (user) {
-            callback(new Error('user already exists'))
-
-            return
-        }
-
-        user = {
-            id: generateId(),
-            name,
-            email,
-            password
-        }
-
-        users.push(user)
-
-        saveUsers(users, function (error) {
-            if (error) {
-                callback(error)
+    User.create({ name, email, password })
+        .then(() => callback(null))
+        .catch(error => {
+            if (error.code === 11000) {
+                callback(new Error('user already exists'))
 
                 return
             }
 
-            callback(null)
+            callback(error)
         })
-    })
 }
 
 module.exports = registerUser
