@@ -14,7 +14,7 @@ function retrieveMyPosts(userId, callback) {
                 return
             }
 
-            Post.find({ author: user._id }).select('-__v -likes').lean()
+            Post.find({ author: userId }).select('-__v -likes').lean()
                 .then(posts => {
                     posts.forEach(post => {
                         post.id = post._id.toString()
@@ -26,13 +26,8 @@ function retrieveMyPosts(userId, callback) {
                         };
                     })
 
-                    if (posts.length === 0) {
-                        callback(null, { message: 'You have not published any post yet' });
-                    } 
-                    else {
-                        callback(null, posts);
-                    }
-                    
+                    callback(null, posts)
+
                 })
         })
         .catch(error => console.error(error))
