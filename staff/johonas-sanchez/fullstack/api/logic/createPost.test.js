@@ -1,18 +1,17 @@
 const mongoose = require('mongoose')
-
-const registerUser = require('./registerUser')
+const createPost = require('./createPost')
 
 mongoose.connect('mongodb://127.0.0.1:27017/test')
     .then(() => {
         try {
-            registerUser('Bat Man', 'bat@man.com', '123123123', error => {
+            createPost('6564a0ab3a6687b8a0150b30', 'https://wallpapers.com/images/hd/cute-minion-happy-bob-v1x9tfcn0rznkvvd.jpg', 'iron image', 'hello iron', error => {
                 if (error) {
                     console.error(error)
 
                     return
                 }
 
-                console.log('user registered')
+                console.log('created')
             })
         } catch (error) {
             console.error(error)

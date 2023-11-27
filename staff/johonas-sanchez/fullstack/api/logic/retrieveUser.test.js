@@ -1,18 +1,17 @@
 const mongoose = require('mongoose')
 
-const registerUser = require('./registerUser')
+const retrieveUser = require('./retrieveUser')
 
 mongoose.connect('mongodb://127.0.0.1:27017/test')
     .then(() => {
         try {
-            registerUser('Bat Man', 'bat@man.com', '123123123', error => {
+            retrieveUser('655f610eb233e2167c987171', (error, user) => {
                 if (error) {
                     console.error(error)
-
                     return
                 }
 
-                console.log('user registered')
+                console.log(user)
             })
         } catch (error) {
             console.error(error)
