@@ -24,6 +24,9 @@ function retrievePosts(userId, callback) {
                             post.author.id = post.author._id.toString()
                             delete post.author._id
                         }
+
+                        post.likes = post.likes.map(like => like._id.toString())
+
                     })
 
                     callback(null, posts)
