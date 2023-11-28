@@ -26,11 +26,12 @@ function retrievePost(userId, postId, callback) {
                     post.id = post._id.toString()
                     delete post._id
 
-                    if (post.author._id) {
-                        post.author.id = post.author._id.toString()
-                        delete post.author._id
-                    }
+                    post.author.id = post.author._id.toString()
+                    delete post.author._id
 
+                    const postLikesString = post.likes.map(like => like.toString())
+                    post.likes = postLikesString
+                    
                     callback(null, post)
 
                 })

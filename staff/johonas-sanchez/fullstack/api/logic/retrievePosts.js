@@ -25,7 +25,7 @@ function retrievePosts(userId, callback) {
                             delete post.author._id
                         }
 
-                        const postLikesString = post.likes.map(like => like._id.toString())
+                        const postLikesString = post.likes.map(like => like.toString())
                         
                         post.likes = postLikesString
                     })

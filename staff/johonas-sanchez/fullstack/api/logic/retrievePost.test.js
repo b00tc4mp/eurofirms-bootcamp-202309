@@ -5,7 +5,7 @@ const retrievePost = require('./retrievePost')
 mongoose.connect('mongodb://127.0.0.1:27017/test')
     .then(() => {
         try {
-            retrievePost('6564b6d433a8f988fa8ff839', '6564a291c52bd297d79d6b77', (error, post) => {
+            retrievePost('6564b6d433a8f988fa8ff839', '6564b08b9cc4017d542537b9', (error, post) => {
                 if (error) {
                     console.error(error)
 
