@@ -4,7 +4,7 @@ const { User, Post } = require('../data/models')
 
 function toggleSavePost(userId, postId, callback) {
     validateText(userId, 'userId')
-    validateText(userId, 'userId')
+    validateText(postId, 'postId')
     validateFunction(callback, 'callback')
 
     User.findById(userId)
