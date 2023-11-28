@@ -2,7 +2,7 @@ const { validateText, validateFunction } = require('./helpers/validators')
 
 const { User, Post } = require('../data/models')
 
-function retrievePosts(userId, callback) {
+function retrieveMyPosts(userId, callback) {
     validateText(userId, 'userId')
     validateFunction(callback, 'callback')
 
@@ -14,7 +14,7 @@ function retrievePosts(userId, callback) {
                 return
             }
 
-            Post.find().select('-__v').populate('author', 'name').lean()
+            Post.find({ author: userId }).select('-__v').populate('author', 'name').lean()
                 .then(posts => {
                     posts.forEach(post => {
                         post.id = post._id.toString()
@@ -32,4 +32,4 @@ function retrievePosts(userId, callback) {
         })
         .catch(error => callback(error))
 }
-module.exports = retrievePosts
+module.exports = retrieveMyPosts
