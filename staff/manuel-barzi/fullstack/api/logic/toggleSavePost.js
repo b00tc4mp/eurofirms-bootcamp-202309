@@ -10,21 +10,30 @@ function toggleSavePost(userId, postId, callback) {
     User.findById(userId)
         .then(user => {
             if (!user) {
-                callback(new Error('User not found'))
+                callback(new Error('user not found'))
 
                 return
             }
 
-            const index = user.saved.findIndex(postObjectId => postObjectId.toString() === postId)
+            Post.findById(postId)
+                .then(post => {
+                    if (!post) {
+                        callback(new Error('post not found'))
 
-            if (index < 0)
-                user.saved.push(postId)
-            else
-                user.saved.splice(index, 1)
+                        return
+                    }
 
-            user.save()
-                .then(() => callback(null))
-                .catch(error => callback(error))
+                    const index = user.saved.findIndex(postObjectId => postObjectId.toString() === postId)
+
+                    if (index < 0)
+                        user.saved.push(postId)
+                    else
+                        user.saved.splice(index, 1)
+
+                    user.save()
+                        .then(() => callback(null))
+                        .catch(error => callback(error))
+                })
         })
         .catch(error => callback(error))
 }

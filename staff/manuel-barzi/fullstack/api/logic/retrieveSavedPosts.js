@@ -9,7 +9,7 @@ function retrieveSavedPosts(userId, callback) {
     User.findById(userId)
         .then(user => {
             if (!user) {
-                callback(new Error('User not found'))
+                callback(new Error('user not found'))
 
                 return
             }
