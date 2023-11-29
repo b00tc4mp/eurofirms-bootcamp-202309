@@ -69,7 +69,7 @@ mongoose.connect('mongodb://127.0.0.1/api')
 
         // Implement createPost endpoint
 
-        api.post('/posts/createpost', jsonBodyParser, (req, res) => {
+        api.post('/posts', jsonBodyParser, (req, res) => {
             const body = req.body
 
             const { userId, image, imageDescription, text } = body
