@@ -2,8 +2,8 @@ const express = require('express')
 const mongoose = require('mongoose')
 
 const registerUser = require('./logic/registerUser')
-
 const authenticateUser = require('./logic/authenticateUser')
+const createPost = require('./logic/createPost')
 
 mongoose.connect('mongodb://127.0.0.1/api')
     .then(() => {
@@ -61,6 +61,28 @@ mongoose.connect('mongodb://127.0.0.1/api')
                     }
 
                     res.json(userId)
+                })
+            } catch (error) {
+                res.status(400).json({ error: error.message })
+            }
+        })
+
+        // Implement createPost endpoint
+
+        api.post('/posts/createpost', jsonBodyParser, (req, res) => {
+            const body = req.body
+
+            const { userId, image, imageDescription, text } = body
+
+            try {
+                createPost(userId, image, imageDescription, text, error => {
+                    if (error) {
+                        res.status(400).json({ error: error.message })
+
+                        return
+                    }
+
+                    res.status(201).send()
                 })
             } catch (error) {
                 res.status(400).json({ error: error.message })
