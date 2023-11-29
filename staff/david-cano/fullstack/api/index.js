@@ -65,7 +65,7 @@ mongoose.connect('mongodb://127.0.0.1/api')
         })
 
         api.post('/users', (req, res) => {
-            const userId = req.headers.authorization
+            const userId = req.headers.authorization.slice(7)
 
             try {
                 retrieveUser(userId, (error, user) => {
