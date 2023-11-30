@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const registerUser = require('./logic/registerUser')
 const authenticateUser = require('./logic/authenticateUser')
 const createPost = require('./logic/createPost')
+const retrievePosts = require('./logic/retrievePosts')
 
 mongoose.connect('mongodb://127.0.0.1/api')
     .then(() => {
@@ -83,6 +84,27 @@ mongoose.connect('mongodb://127.0.0.1/api')
                     }
 
                     res.status(201).send()
+                })
+            } catch (error) {
+                res.status(400).json({ error: error.message })
+            }
+        })
+
+
+        // Implement retrievePosts endpoint
+
+        api.get('/posts', (req, res) => {
+            const userId = req.headers.authorization.slice(7) // Para que nos quede el sin el Bearer
+
+            try {
+                retrievePosts(userId, (error, posts) => {
+                    if (error) {
+                        res.status(400).json({ error: error.message })
+
+                        return
+                    }
+
+                    res.json(posts)
                 })
             } catch (error) {
                 res.status(400).json({ error: error.message })
