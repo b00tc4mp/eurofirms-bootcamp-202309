@@ -1,0 +1,26 @@
+.casilla {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 24px;
+}
+
+.casilla-blanca {
+    color: #f0d9b5;
+    background-color: #f0d9b5;
+}
+
+.casilla-negra {
+    color: #b58863;
+    background-color: #b58863;
+}
+
+/* Estilo para el tablero en sí */
+#tablero {
+    display: grid;
+    grid-template-columns: repeat(8, 50px);
+    grid-template-rows: repeat(8, 50px);
+}
+
+
