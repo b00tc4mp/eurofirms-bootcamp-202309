@@ -1,28 +1,19 @@
 const mongoose = require('mongoose')
-
-const registerUser = require('./registerUser')
+const deletePost = require('./deletePost')
 
 mongoose.connect('mongodb://127.0.0.1:27017/test')
     .then(() => {
         try {
-            registerUser('Shakti Maan', 'shakti@maan.com', '123123123', error => {
-
+            deletePost('añadir mi id', 'añadir mi id', error => {
                 if (error) {
                     console.error(error)
 
                     return
                 }
 
-                console.log('user registered')
+                console.log('deleted')
             })
-
         } catch (error) {
             console.error(error)
         }
     })
-
-
-
-
-
-

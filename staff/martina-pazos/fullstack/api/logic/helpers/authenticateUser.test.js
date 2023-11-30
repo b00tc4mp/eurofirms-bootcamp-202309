@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const authenticateUser = require('./auntheticateUser')
+const authenticateUser = require('./authenticateUser')
 
 mongoose.connect('mongodb://127.0.0.1:27097/test')
     .then(() => {
