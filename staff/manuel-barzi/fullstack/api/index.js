@@ -2,6 +2,8 @@ const express = require('express')
 const mongoose = require('mongoose')
 
 const registerUser = require('./logic/registerUser')
+const authenticateUser = require('./logic/authenticateUser')
+const retrieveUser = require('./logic/retrieveUser')
 
 mongoose.connect('mongodb://127.0.0.1/api')
     .then(() => {
@@ -43,7 +45,42 @@ mongoose.connect('mongodb://127.0.0.1/api')
             }
         })
 
-        // TODO implement authenticate endpoint
+        api.post('/users/auth', jsonBodyParser, (req, res) => {
+            const body = req.body
+
+            const { email, password } = body
+
+            try {
+                authenticateUser(email, password, (error, userId) => {
+                    if (error) {
+                        res.status(400).json({ error: error.message })
+                        return
+                    }
+
+                    res.json(userId)
+                })
+            } catch (error) {
+                res.status(400).json({ error: error.message })
+            }
+        })
+
+        api.get('/users', (req, res) => {
+            const userId = req.headers.authorization.slice(7)
+
+            try {
+                retrieveUser(userId, (error, user) => {
+                    if (error) {
+                        res.status(400).json({ error: error.message })
+
+                        return
+                    }
+
+                    res.json(user)
+                })
+            } catch (error) {
+                res.status(400).json({ error: error.message })
+            }
+        })
 
         api.listen(4000, () => console.log('API listening on port 4000'))
     })
