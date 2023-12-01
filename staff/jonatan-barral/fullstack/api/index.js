@@ -3,6 +3,15 @@ const express = require('express')
 const mongoose = require('mongoose')
 
 const registerUser = require('./logic/registerUser')
+const autenticateUser = require('./logic/autenticateUser')
+const retrieveUser = require('./logic/retrieveUser')
+const createPost = require('./logic/createPost')
+const deletePost = require('./logic/deletePost')
+const retrievePosts = require('./logic/retrievePosts')
+const retrieveMyPosts = require('./logic/retrieveMyPosts')
+const retrieveSavedPosts = require('./logic/retrieveSavedPosts')
+const toggleLikePost = require('./logic/toggleLikePost')
+const toggleSavePost = require('./logic/toggleSavePost')
 
 mongoose.connect('mongodb://127.0.0.1/api')
     .then(() => {
@@ -44,9 +53,8 @@ mongoose.connect('mongodb://127.0.0.1/api')
             }
         })
 
-        api.post('/users/authenticate', jsonBodyParser, (req, res) => {
+        api.post('/users/auth', jsonBodyParser, (req, res) => {
             const body = req.body
-
             const { email, password } = body
 
             try {
@@ -57,6 +65,117 @@ mongoose.connect('mongodb://127.0.0.1/api')
                     }
 
                     res.json(userId)
+                })
+            } catch (error) {
+                res.status(400).json({ error: error.message })
+            }
+        })
+
+        api.get('/users', (req, res) => {
+            const userId = req.headers.authorication.slice(7)
+
+            try {
+                retrieveUser(userId, (error, user) => {
+                    if (error) {
+                        res.status(400).json({ error: error.message })
+
+                        return
+                    }
+
+                    res.json(user)
+                })
+            } catch (error) {
+                res.status(400).json({ error: error.message })
+            }
+        })
+
+        api.post('/posts', jsonBodyParser, (req, res) => {
+            const userId = req.headers.authorization.slice(7)
+            const body = req.body
+            const { image, imageDescription, text } = body
+
+            try {
+                createPost(userId, image, imageDescription, text, error => {
+                    if (error) {
+                        res.status(400).json({ error: error.message })
+
+                        return
+                    }
+
+                    res.status(201).send()
+                })
+            } catch (error) {
+                res.status(400).json({ error: error.message })
+            }
+        })
+
+        api.get('/posts', (req, res) => {
+            const userId = req.headers.authorization.slice(7)
+
+            try {
+                retrievePosts(userId, (error, posts) => {
+                    if (error) {
+                        res.status(400).json({ error: error.message })
+
+                        return
+                    }
+
+                    res.json(posts)
+                })
+            } catch (error) {
+                res.status(400).json({ error: error.message })
+            }
+        })
+
+        api.get('/posts/user', (req, res) => {
+            const userId = req.headers.authorization.slice(7)
+
+            try {
+                retrieveMyPosts(userId, (error, posts) => {
+                    if (error) {
+                        res.status(400).json({ error: error.message })
+
+                        return
+                    }
+
+                    res.json(posts)
+                })
+            } catch (error) {
+                res.status(400).json({ error: error.message })
+            }
+        })
+
+        api.get('/posts/saved', (req, res) => {
+            const userId = req.headers.authorization.slice(7)
+
+            try {
+                retrieveSavePosts(userId, (error, posts) => {
+                    if (error) {
+                        res.status(400).json({ error: error.message })
+
+                        return
+                    }
+
+                    res.json(posts)
+                })
+            } catch (error) {
+                res.status(400).json({ error: error.message })
+            }
+        })
+
+        api.patch('/posts/:postId/likes', (req, res) => {
+            const userId = req.headers.authorization.slice(7)
+            const postId = req.params.postId
+
+            try {
+                toggleLikePost(userId, postId, error => {
+                    if (error) {
+                        res.status(400).json({ error: error.message })
+
+                        return
+                    }
+
+                    res.status(204).send()
                 })
             } catch (error) {
                 res.status(400).json({ error: error.message })
