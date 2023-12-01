@@ -19,19 +19,20 @@ function updateUserPassword(
   validatePassword(repeatNewPassword, "repeat new password")
   validateFunction(callback, "callback")
 
-  if (newPassword !== repeatNewPassword) throw new Error("your password do not match")
+  if (newPassword !== repeatNewPassword)
+    throw new Error("your password do not match")
 
-  User.findById( userId ).then((user) => {
+  User.findById(userId).then((user) => {
     if (!user) {
       callback(new Error("user not found"))
 
-      return
+      return;
     }
 
     if (user.password !== password) {
-        callback(new Error("wrong credentials"))
+      callback(new Error("wrong credentials"))
 
-        return
+      return
     }
 
     user.password = newPassword
@@ -43,8 +44,8 @@ function updateUserPassword(
       })
       .catch((error) => {
         callback(error)
-      });
-  });
+      })
+  })
 }
 
 module.exports = updateUserPassword
