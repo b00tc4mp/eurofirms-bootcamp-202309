@@ -11,90 +11,91 @@ const retrieveUser = require("./logic/retrieveUser")
 const retrieveMyPosts = require("./logic/retrieveMyPosts")
 const toggleSavePost = require("./logic/toggleSavePost")
 const retrieveSavedPosts = require("./logic/retrieveSavedPosts")
+const updateUserPassword = require("./logic/updateUserPassword")
 
 mongoose.connect("mongodb://127.0.0.1/api").then(() => {
-  const api = express();
+  const api = express()
 
   api.get("/helloworld", (req, res) => {
-    res.send("Hello, World!");
-  });
+    res.send("Hello, World!")
+  })
 
   api.get("/holamundo", (req, res) => {
-    res.send("Hola, Mundo!");
-  });
+    res.send("Hola, Mundo!")
+  })
 
   api.get("/hello", (req, res) => {
-    const name = req.query.name;
+    const name = req.query.name
 
-    res.send(`Hello, ${name}!`);
-  });
+    res.send(`Hello, ${name}!`)
+  })
 
-  const jsonBodyParser = express.json();
+  const jsonBodyParser = express.json()
 
   api.post("/users", jsonBodyParser, (req, res) => {
-    const body = req.body;
+    const body = req.body
 
-    const { name, email, password } = body;
+    const { name, email, password } = body
 
     try {
       registerUser(name, email, password, (error) => {
         if (error) {
-          res.status(400).json({ error: error.message });
+          res.status(400).json({ error: error.message })
 
-          return;
+          return
         }
 
-        res.status(201).send();
-      });
+        res.status(201).send()
+      })
     } catch (error) {
-      res.status(400).json({ error: error.message });
+      res.status(400).json({ error: error.message })
     }
-  });
+  })
 
   // Implement authenticate endpoint
 
   api.post("/users/authenticate", jsonBodyParser, (req, res) => {
-    const body = req.body;
+    const body = req.body
 
-    const { email, password } = body;
+    const { email, password } = body
 
     try {
       authenticateUser(email, password, (error, userId) => {
         if (error) {
-          res.status(400).json({ error: error.message });
+          res.status(400).json({ error: error.message })
 
-          return;
+          return
         }
 
-        res.json(userId);
-      });
+        res.json(userId)
+      })
     } catch (error) {
-      res.status(400).json({ error: error.message });
+      res.status(400).json({ error: error.message })
     }
-  });
+  })
 
   // Implement createPost endpoint
 
   api.post("/posts", jsonBodyParser, (req, res) => {
-    const userId = req.headers.authorization.slice(7);
-    const body = req.body;
+    const userId = req.headers.authorization.slice(7)
+    const body = req.body
 
-    const { image, imageDescription, text } = body;
+    const { image, imageDescription, text } = body
 
     try {
       createPost(userId, image, imageDescription, text, (error) => {
         if (error) {
-          res.status(400).json({ error: error.message });
+          res.status(400).json({ error: error.message })
 
-          return;
+          return
         }
 
         res.status(201).send();
-      });
+      })
     } catch (error) {
-      res.status(400).json({ error: error.message });
+      res.status(400).json({ error: error.message })
     }
-  });
+  })
 
   // Implement retrievePosts endpoint
 
@@ -104,143 +105,175 @@ mongoose.connect("mongodb://127.0.0.1/api").then(() => {
     try {
       retrievePosts(userId, (error, posts) => {
         if (error) {
-          res.status(400).json({ error: error.message });
+          res.status(400).json({ error: error.message })
 
-          return;
+          return
         }
 
-        res.json(posts);
-      });
+        res.json(posts)
+      })
     } catch (error) {
-      res.status(400).json({ error: error.message });
+      res.status(400).json({ error: error.message })
     }
-  });
+  })
 
   // Implement toggleLikePost endpoint
 
   api.patch("/posts/:postId/likes", (req, res) => {
-    const userId = req.headers.authorization.slice(7);
-    const postId = req.params.postId;
+    const userId = req.headers.authorization.slice(7)
+    const postId = req.params.postId
 
     try {
       toggleLikePost(userId, postId, (error) => {
         if (error) {
-          res.status(400).json({ error: error.message });
+          res.status(400).json({ error: error.message })
 
-          return;
+          return
         }
 
-        res.status(204).send();
-      });
+        res.status(204).send()
+      })
     } catch (error) {
-      res.status(400).json({ error: error.message });
+      res.status(400).json({ error: error.message })
     }
-  });
+  })
 
   // Implement deletePost endpoint
 
   api.delete("/posts/:postId", (req, res) => {
-    const userId = req.headers.authorization.slice(7);
-    const postId = req.params.postId;
+    const userId = req.headers.authorization.slice(7)
+    const postId = req.params.postId
 
     try {
       deletePost(userId, postId, (error) => {
         if (error) {
-          res.status(400).json({ error: error.message });
+          res.status(400).json({ error: error.message })
 
-          return;
+          return
         }
 
         res.status(204).send();
       });
     } catch (error) {
-      res.status(400).json({ error: error.message });
+      res.status(400).json({ error: error.message })
     }
-  });
+  })
 
   // Implement retrieveUser endpoint
 
   api.get("/users", (req, res) => {
-    const userId = req.headers.authorization.slice(7);
+    const userId = req.headers.authorization.slice(7)
 
     try {
       retrieveUser(userId, (error, user) => {
         if (error) {
-          res.status(400).json({ error: error.message });
+          res.status(400).json({ error: error.message })
 
-          return;
+          return
         }
 
-        res.json(user);
+        res.json(user)
       });
     } catch (error) {
-      res.status(400).json({ error: error.message });
+      res.status(400).json({ error: error.message })
     }
-  });
+  })
 
   // Implement retrieveMyPosts endpoint
 
   api.get("/posts/user", (req, res) => {
-    const userId = req.headers.authorization.slice(7);
+    const userId = req.headers.authorization.slice(7)
 
     try {
       retrieveMyPosts(userId, (error, posts) => {
         if (error) {
-          res.status(400).json({ error: error.message });
+          res.status(400).json({ error: error.message })
 
-          return;
+          return
         }
 
-        res.json(posts);
+        res.json(posts)
       });
     } catch (error) {
-      res.status(400).json({ error: error.message });
+      res.status(400).json({ error: error.message })
     }
-  });
+  })
   
 
   // Implement toggleSavePost endpoint
 
   api.patch("/posts/:postId/saved", (req, res) => {
-    const userId = req.headers.authorization.slice(7);
+    const userId = req.headers.authorization.slice(7)
     const postId = req.params.postId;
 
     try {
       toggleSavePost(userId, postId, (error) => {
         if (error) {
-          res.status(400).json({ error: error.message });
+          res.status(400).json({ error: error.message })
 
-          return;
+          return
         }
 
-        res.status(204).send();
-      });
+        res.status(204).send()
+      })
     } catch (error) {
-      res.status(400).json({ error: error.message });
+      res.status(400).json({ error: error.message })
     }
-  });
+  })
 
 
   // Implement retrieveSavedPosts endpoint
 
   api.get("/posts/saved", (req, res) => {
-    const userId = req.headers.authorization.slice(7);
+    const userId = req.headers.authorization.slice(7)
 
     try {
       retrieveSavedPosts(userId, (error, posts) => {
         if (error) {
-          res.status(400).json({ error: error.message });
+          res.status(400).json({ error: error.message })
 
-          return;
+          return
         }
 
-        res.json(posts);
-      });
+        res.json(posts)
+      })
     } catch (error) {
-      res.status(400).json({ error: error.message });
+      res.status(400).json({ error: error.message })
     }
-  });
+  })
 
 
-  api.listen(4000, () => console.log("API listening on port 4000"));
-});
+  // Implement udateUserPassword endpoint
+
+  api.patch("/users/password", jsonBodyParser, (req, res) => {
+    const userId = req.headers.authorization.slice(7)
+
+    const body = req.body
+    const {password, newPassword, repeatNewPassword} = body
+
+    try {
+      updateUserPassword(userId, password, newPassword, repeatNewPassword, (error) => {
+        if (error) {
+          res.status(400).json({ error: error.message })
+
+          return
+        }
+
+        res.status(204).send()
+      })
+    } catch (error) {
+      res.status(400).json({ error: error.message })
+    }
+  })
+
+  
+  api.listen(4000, () => console.log("API listening on port 4000"))
+
+})
+
+
+
+
+
+
+

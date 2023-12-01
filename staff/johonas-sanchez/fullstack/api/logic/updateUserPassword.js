@@ -2,9 +2,9 @@ const {
   validateText,
   validatePassword,
   validateFunction,
-} = require("./helpers/validators");
+} = require("./helpers/validators")
 
-const { User } = require("../data/models");
+const { User } = require("../data/models")
 
 function updateUserPassword(
   userId,
@@ -13,17 +13,19 @@ function updateUserPassword(
   repeatNewPassword,
   callback
 ) {
-  validateText(userId, "userId");
-  validatePassword(password, "password");
-  validatePassword(newPassword, "new password");
-  validatePassword(repeatNewPassword, "repeat new password");
-  validateFunction(callback, "callback");
+  validateText(userId, "userId")
+  validatePassword(password, "password")
+  validatePassword(newPassword, "new password")
+  validatePassword(repeatNewPassword, "repeat new password")
+  validateFunction(callback, "callback")
+
+  if (newPassword !== repeatNewPassword) throw new Error("your password do not match")
 
   User.findById( userId ).then((user) => {
     if (!user) {
-      callback(new Error("user not found"));
+      callback(new Error("user not found"))
 
-      return;
+      return
     }
 
     if (user.password !== password) {
@@ -32,23 +34,17 @@ function updateUserPassword(
         return
     }
 
-    if (newPassword !== repeatNewPassword) {
-      callback(new Error("your password do not match"));
-
-      return;
-    }
-
-    user.password = newPassword;
+    user.password = newPassword
 
     user
       .save()
       .then(() => {
-        callback(null);
+        callback(null)
       })
       .catch((error) => {
-        callback(error);
+        callback(error)
       });
   });
 }
 
-module.exports = updateUserPassword;
+module.exports = updateUserPassword
