@@ -1,0 +1,39 @@
+*{
+    box-sizing: border-box;
+}
+
+.chessboard{
+border: 5px solid black;
+height: 500px;
+width: 500px;
+}
+.chessboard-white{
+    border: 5px solid white;
+    height:100%;
+    width:100%;
+}
+.columns-container{
+    border: 8px solid black;
+    height:100%;
+    width:100%;
+    display: flex;
+}
+
+.blocks-container{
+    display: flex;
+    flex-direction: column;
+    width: 12.5%;
+    height: 100%;
+}
+
+.white-block{
+    width: 100%;
+    height: 12.5%;
+    background-color: white;
+}
+
+.black-block{
+    width: 100%;
+    height: 12.5%;
+    background-color: black;
+}

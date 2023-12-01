@@ -1,0 +1,49 @@
+*{
+    box-sizing: border-box;
+}
+
+tbody{
+    width: 100%;
+}
+
+.main-container{
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.chessboard{
+    border: 5px solid black;
+    height: 500px;
+    width: 500px;
+}
+.white-border{
+    border: 5px solid white;
+    height:100%;
+    width:100%;
+}
+.table-container{
+    border: 8px solid black;
+    height:100%;
+    width:100%;
+    display: flex;
+}
+
+.blocks-container{
+    display: flex;
+    width: 100%;
+    height: 12.5%;
+}
+
+.white-block{
+    width: 12.5%;
+    height: 100%;
+    background-color: white;
+}
+
+.black-block{
+    width: 12.5%;
+    height: 100%;
+    background-color: black;
+}
