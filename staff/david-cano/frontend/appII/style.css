@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+* {
+    font-family: Inter;
+}
+
+h1,
+h2 {
+    margin: 0;
+}
+
+
+.view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 1rem;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    box-sizing: content-box;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.label {
+    align-self: flex-start;
+}
+
+.input {
+    background-color: lightgray;
+    border-width: 0;
+    border-radius: 5px;
+    line-height: 1.5rem;
+    padding-left: 5px;
+}
+
+.button {
+    background-color: lightgray;
+    border-width: 0;
+    border-radius: 5px;
+    line-height: 1.5rem;
+    padding-left: 5px;
+}
+
+.post-image {
+    max-width: 300px;
+    padding: 20px;
+    margin-top: 10px;
+    border-radius: 25%;
+    box-sizing: border-box;
+    width: 95%;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: aqua;
+    border-radius: 10%;
+    padding: 10px;
+}
+
+#new-post-panel {
+    margin-top: 20px;
+}
+
+.article{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border: ridge 15px aqua;
+    margin: 20px;
+    border-radius: 25px;
+}

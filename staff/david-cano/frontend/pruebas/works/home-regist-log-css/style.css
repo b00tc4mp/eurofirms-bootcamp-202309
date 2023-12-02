@@ -1,0 +1,4 @@
+/* Clase off, hace desaparecer al elemento que la lleve*/
+.off {
+    display: none;
+}

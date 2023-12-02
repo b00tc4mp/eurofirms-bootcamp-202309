@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App-David-II</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="https://b00tc4mp.com/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <div id="home-view">
+        <header class="header">
+            <h1>Home</h1>
+            <span id="user-name-span" aria-label="user name">
+                <!--Aquí va el nombre del usuario logueado-->
+            </span>
+            <button id="post-button" title="New post" aria-label="New post" class="button">+ New Post</button>
+            <button id="logout-button" class="button">Logout</button>
+        </header>
+
+ <!-- add post panel -->
+
+        <div id="post-panel">
+            <h2>Create new post</h2>
+
+            <form id="post-form" class="articles form">
+                <label for="image-new-post">Image</label>
+                <input type="url" id="image-new-post" class="input" required>
+
+                <label for="image-description-new-post">Image description</label>
+                <input type="text" id="image-description-new-post" class="input" required>
+
+                <label for="text-new-post">Text</label>
+                <input type="text" id="text-new-post" class="input" required>
+
+                <button type="submit" class="button">Post</button>
+                <button type="button" id="cancel-post-button" class="button">Cancel</button>
+            </form>
+        </div>
+
+<!-- posts list -->
+
+        <div id="posts-list" aria-label="Posts list" class="view">
+        <!-- Aquí van los posts -->
+        </div>
+    </div>
+
+    <div id="register-view" class="view">
+        <h1>Register</h1>
+
+        <form id="register-form" class="form">
+            <label for="name-register">Name</label>
+            <input type="text" id="name-register" class="input" required>
+
+            <label for="email-register">E-mail</label>
+            <input type="email" id="email-register" class="input" required>
+
+            <label for="password-register">Password</label>
+            <input type="password" id="password-register" class="input" required>
+
+            <button type="submit" class="button">Register</button>
+        </form>
+
+        <a id="login-link" href="" class="color-a">Login</a>
+    </div>
+
+    <div id="login-view" class="view">
+        <h1>Login</h1>
+
+        <form id="login-form" class="form">
+            <label for="email-login">E-mail</label>
+            <input type="email" id="email-login" class="input" required>
+
+            <label for="password-login">Password</label>
+            <input type="password" id="password-login" class="input" required>
+
+            <button type="submit" id="login-button" class="button">Login</button>
+        </form>
+
+        <a id="register-link" href="" class="color-a">Register</a>
+    </div>
+
+    <!-- utils -->
+    <script src="utils/find.js"></script>
+    <script src="utils/validators.js"></script>
+
+    <!-- data -->
+    <script src="data.js"></script>
+
+    <!-- business logic -->
+    <script src="logic/authenticateUser.js"></script>
+    <script src="logic/retrieveUser.js"></script>
+    <script src="logic/registerUser.js"></script>
+    <script src="logic/retrievePosts.js"></script>
+    <script src="logic/createNewPost.js"></script>
+
+    <!-- presentation -->
+    <script src="main.js"></script>
+    <script src="views/register.js"></script>
+    <script src="views/login.js"></script>
+    <script src="views/home.js"></script>
+
+</body>
+
+</html>
