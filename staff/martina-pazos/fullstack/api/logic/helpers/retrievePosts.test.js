@@ -5,7 +5,7 @@ const retrievePosts = require('./retrievePosts')
 mongoose.connect('mongodb://127.0.0.1:27017/test')
     .then(() => {
         try {
-            retrievePosts('655f3392c4f051cfaca67b5f', (error, posts) => {
+            retrievePosts('tengo q traer mi id', (error, posts) => {
                 if (error) {
                     console.error(error)
 
@@ -18,3 +18,5 @@ mongoose.connect('mongodb://127.0.0.1:27017/test')
             console.error(error)
         }
     })
+
+
