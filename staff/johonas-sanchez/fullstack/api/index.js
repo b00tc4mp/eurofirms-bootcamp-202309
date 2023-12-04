@@ -131,7 +131,7 @@ api.use('*', cors)
 
   // Implement retrievePost endpoint
 
-  api.get("/posts/:postId/user", (req, res) => {
+  api.get("/posts/:postId", (req, res) => {
     const userId = req.headers.authorization.slice(7); // Para que nos quede el userId sin el Bearer
     const postId = req.params.postId
 
