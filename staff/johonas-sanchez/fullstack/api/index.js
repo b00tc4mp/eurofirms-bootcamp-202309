@@ -5,6 +5,7 @@ const registerUser = require("./logic/registerUser")
 const authenticateUser = require("./logic/authenticateUser")
 const createPost = require("./logic/createPost")
 const retrievePosts = require("./logic/retrievePosts")
+const retrievePost = require("./logic/retrievePost")
 const toggleLikePost = require("./logic/toggleLikePost")
 const deletePost = require("./logic/deletePost")
 const retrieveUser = require("./logic/retrieveUser")
@@ -122,6 +123,27 @@ api.use('*', cors)
         }
 
         res.json(posts)
+      })
+    } catch (error) {
+      res.status(400).json({ error: error.message })
+    }
+  })
+
+  // Implement retrievePost endpoint
+
+  api.get("/posts/:postId/user", (req, res) => {
+    const userId = req.headers.authorization.slice(7); // Para que nos quede el userId sin el Bearer
+    const postId = req.params.postId
+
+    try {
+      retrievePost(userId, postId, (error, post) => {
+        if (error) {
+          res.status(400).json({ error: error.message })
+
+          return
+        }
+
+        res.json(post)
       })
     } catch (error) {
       res.status(400).json({ error: error.message })

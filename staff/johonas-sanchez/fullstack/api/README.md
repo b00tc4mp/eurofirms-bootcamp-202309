@@ -170,6 +170,39 @@ $ curl -H 'Authorization: Bearer 65684bc8dc4ef0943016343d' localhost:4000/posts 
 [{"author":{"name":"Wendy Darling","id":"65684bc8dc4ef0943016343d"},"image":"https://thispersondoesnotexist.com","imageDescription":"Unknown person","text":"Who is this?","likes":[],"id":"65686c275ef8e443ccc48336"}]
 ```
 
+### Retrieve post
+
+```
+Request: GET /posts/:postId/post 'Authorization: Bearer userId'
+Response: 200 { id, author: { id, name }, image, imageDescription, text, likes }
+```
+
+Examples:
+
+```sh
+$ curl -H 'Authorization: Bearer 656ddc296fc21579c1675d6e' localhost:4000/posts/656def1b6fc21579c1675e11/user -v
+
+> GET /posts/656def1b6fc21579c1675e11/user HTTP/1.1
+> Host: localhost:4000
+> User-Agent: curl/8.1.2
+> Accept: */*
+> Authorization: Bearer 656ddc296fc21579c1675d6e
+> 
+< HTTP/1.1 200 OK
+< X-Powered-By: Express
+< Access-Control-Allow-Origin: *
+< Access-Control-Allow-Methods: *
+< Access-Control-Allow-Headers: *
+< Content-Type: application/json; charset=utf-8
+< Content-Length: 249
+< ETag: W/"f9-C+SSPb/2r2zeAADO+1zcEn3Tsuc"
+< Date: Mon, 04 Dec 2023 16:48:20 GMT
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+
+{"author":{"name":"Ga Yo","id":"656ddc296fc21579c1675d6e"},"image":"https://wallpapers.com/images/hd/cute-minion-happy-bob-v1x9tfcn0rznkvvd.jpg","imageDescription":"bat image 1","text":"hello iron 1 fetch","likes":[],"id":"656def1b6fc21579c1675e11"}
+```
+
 ### Toggle like post
 
 ```
