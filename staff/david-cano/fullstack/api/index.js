@@ -11,6 +11,8 @@ const retrieveSavedPosts = require("./logic/retrieveSavedPosts")
 const toggleSavePost = require("./logic/toggleSavePost")
 const retrieveMyPosts = require("./logic/retrieveMyPosts")
 const deletePost = require("./logic/deletePost")
+const updateUserPassword = require("./logic/updateUserPassword")
+const updateUserEmail = require("./logic/updateUserEmail")
 
 mongoose.connect('mongodb://127.0.0.1/api')
     .then(() => {
@@ -230,6 +232,27 @@ mongoose.connect('mongodb://127.0.0.1/api')
 
             try {
                 updateUserPassword(userId, password, newPassword, repeatNewPassword, (error) => {
+                    if (error) {
+                        res.status(400).json({ error: error.message })
+
+                        return
+                    }
+
+                    res.status(204).send()
+                })
+            } catch (error) {
+                res.status(400).json({ error: error.message })
+            }
+        })
+
+        api.patch("/users/email", jsonBodyParser, (req, res) => {
+            const userId = req.headers.authorization.slice(7)
+
+            const body = req.body
+            const { password, email, newEmail, repeatNewEmail } = body
+
+            try {
+                updateUserEmail(userId, password, email, newEmail, repeatNewEmail, (error) => {
                     if (error) {
                         res.status(400).json({ error: error.message })
 
