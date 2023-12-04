@@ -14,7 +14,7 @@ $ pnpm start
 
 ## Endpoints
 
-#### Register a user
+### Register a user
 
 ```
 Request: POST /users { name, email, password }
@@ -81,7 +81,7 @@ curl -H 'Content-Type: application/json' -d '{ "name": "Peter Pan", "email": "pe
 {"error":"user already exists"}
 ```
 
-## Authenticate a user
+### Authenticate a user
 
 ```
 Request: POST /users/auth { email, password }
@@ -112,7 +112,7 @@ $ curl -H 'Content-Type: application/json' -d '{ "email": "wendy@darling.com", "
 "65684bc8dc4ef0943016343d"
 ```
 
-## Create a post
+### Create a post
 
 ```
 Request: POST /posts 'Authorization: Bearer userId' { image, imageDescription, text }
@@ -140,7 +140,7 @@ $ curl -H 'Authorization: Bearer 65684bc8dc4ef0943016343d' -H 'Content-Type: app
 < Content-Length: 0
 ```
 
-## Retrieve posts
+### Retrieve posts
 
 ```
 Request: GET /posts 'Authorization: Bearer userId'
@@ -170,7 +170,7 @@ $ curl -H 'Authorization: Bearer 65684bc8dc4ef0943016343d' localhost:4000/posts 
 [{"author":{"name":"Wendy Darling","id":"65684bc8dc4ef0943016343d"},"image":"https://thispersondoesnotexist.com","imageDescription":"Unknown person","text":"Who is this?","likes":[],"id":"65686c275ef8e443ccc48336"}]
 ```
 
-## Toggle like post
+### Toggle like post
 
 ```
 Request: PATCH /posts/postId/likes 'Authorization: Bearer userId'
@@ -195,7 +195,7 @@ $ curl -H 'Authorization: Bearer 65684bc8dc4ef0943016343d' -X PATCH localhost:40
 < Keep-Alive: timeout=5
 ```
 
-## Delete post
+### Delete post
 
 ```
 Request: DELETE /posts/postId 'Authorization: Bearer userId'
@@ -220,7 +220,7 @@ $ curl -H 'Authorization: Bearer 656748b08dbd4d9b3e300c5a' -X DELETE localhost:4
 < Keep-Alive: timeout=5
 ```
 
-## Retrieve a user
+### Retrieve a user
 
 ```
 Request: GET /users 'Authorization: Bearer userId'
@@ -250,7 +250,7 @@ $ curl -H 'Authorization: Bearer 65684bc8dc4ef0943016343d' localhost:4000/users 
 {"name":"Wendy Darling"}
 ```
 
-## Retrieve my posts
+### Retrieve my posts
 
 ```
 Request: GET /posts/user 'Authorization: Bearer userId'
@@ -280,7 +280,7 @@ $ curl -H 'Authorization: Bearer 656748b08dbd4d9b3e300c5a' localhost:4000/posts/
 [{"author":{"name":"peter","id":"656748b08dbd4d9b3e300c5a"},"image":"https://thispersondoesnotexist.com","imageDescription":"Unknown person","text":"Who is this?","likes":[],"id":"65689bdc98bc3e457d53271e"}]
 ```
 
-## Toggle save post
+### Toggle save post
 
 ```
 Request: PATCH /posts/postId/saved 'Authorization: Bearer userId'
@@ -305,7 +305,7 @@ $ curl -H 'Authorization: Bearer 65684bc8dc4ef0943016343d' -X PATCH localhost:40
 < Keep-Alive: timeout=5
 ```
 
-## Retrieve saved posts
+### Retrieve saved posts
 
 ```
 Request: GET /posts/saved 'Authorization: Bearer userId'
@@ -335,30 +335,40 @@ $ curl -H 'Authorization: Bearer 656748b08dbd4d9b3e300c5a' localhost:4000/posts/
 [{"author":{"name":"peter","id":"656748b08dbd4d9b3e300c5a"},"image":"https://thispersondoesnotexist.com","imageDescription":"Unknown person","text":"Who is this?","likes":[],"id":"65689bdc98bc3e457d53271e"}]
 ```
 
-## Update UserPassword
+### Update UserPassword
 
-````
-Request: PATCH /users/password {userId, password, newPassword, repeatNewPassword}
+```
+Request: PATCH /users/password {password, newPassword, repeatNewPassword} 'Authorization: Bearer userId'
 Response: updated password
+```
 
 Examples:
 
 ```sh
 $ curl -H 'Authorization: Bearer 656743c48dbd4d9b3e300c56' -H 'Content-Type: application/json' -d '{ "password": "456456456", "newPassword": "123123123", "repeatNewPassword": "123123123" }' -X PATCH localhost:4000/users/password -v
 
-HTTP/1.1 201 Created
-X-Powered-By: Express
-Date: Wed, 29 Nov 2023 12:16:41 GMT
-Connection: keep-alive
-Keep-Alive: timeout=5
-Content-Length: 0
+> PATCH /users/password HTTP/1.1
+> Host: localhost:4000
+> User-Agent: curl/8.1.2
+> Accept: */*
+> Authorization: Bearer 656743c48dbd4d9b3e300c56
+> Content-Type: application/json
+> Content-Length: 118
+> 
+< HTTP/1.1 204 No Content
+< X-Powered-By: Express
+< Date: Fri, 01 Dec 2023 16:15:12 GMT
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+< 
 ```
 
-#### Update UserEmail
+### Update UserEmail
 
-````
+```
 Request: PATCH /users/email {userId, email, newEmail, repeatNewEmail}
 Response: updated email
+```
 
 Examples:
 

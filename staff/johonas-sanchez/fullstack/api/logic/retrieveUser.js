@@ -6,7 +6,7 @@ function retrieveUser(userId, callback) {
     validateText(userId, 'userId')
     validateFunction(callback, 'callback')
 
-    User.findById(userId).select('-_id -email -password -saved -__v').lean()
+    User.findById(userId).select('-_id -password  -__v').lean()
     // User.findById(userId).lean() Con el select en negativo puedo eliminar las propiedades que me devuelve
         .then(user => {
             if (!user) {
