@@ -222,6 +222,27 @@ mongoose.connect('mongodb://127.0.0.1/api')
             }
         });
 
+        api.patch("/users/password", jsonBodyParser, (req, res) => {
+            const userId = req.headers.authorization.slice(7)
+
+            const body = req.body
+            const { password, newPassword, repeatNewPassword } = body
+
+            try {
+                updateUserPassword(userId, password, newPassword, repeatNewPassword, (error) => {
+                    if (error) {
+                        res.status(400).json({ error: error.message })
+
+                        return
+                    }
+
+                    res.status(204).send()
+                })
+            } catch (error) {
+                res.status(400).json({ error: error.message })
+            }
+        })
+
         api.listen(4000, () => console.log('API listening on port 4000'))
     })
 
