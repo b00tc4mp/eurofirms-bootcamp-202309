@@ -2,8 +2,8 @@ const { validateText, validateFunction } = require('./helpers/validators')
 const { User, Post } = require('../data/models')
 
 function deletePost(userId, postId, callback) {
-    validateText(userId, 'userId')
-    validateText(postId, 'postId')
+    validateText(userId, 'user id')
+    validateText(postId, 'post id')
     validateFunction(callback, 'callback')
 
     User.findById(userId)

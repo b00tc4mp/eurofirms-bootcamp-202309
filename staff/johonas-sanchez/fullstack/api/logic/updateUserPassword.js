@@ -1,51 +1,40 @@
-const {
-  validateText,
-  validatePassword,
-  validateFunction,
-} = require("./helpers/validators")
+const { validateText, validatePassword, validateFunction } = require("./helpers/validators")
 
 const { User } = require("../data/models")
 
-function updateUserPassword(
-  userId,
-  password,
-  newPassword,
-  repeatNewPassword,
-  callback
-) {
-  validateText(userId, "userId")
-  validatePassword(password, "password")
-  validatePassword(newPassword, "new password")
-  validatePassword(repeatNewPassword, "repeat new password")
-  validateFunction(callback, "callback")
+function updateUserPassword(userId, password, newPassword, repeatNewPassword, callback) {
+   validateText(userId, "user id")
+   validatePassword(password, "password")
+   validatePassword(newPassword, "new password")
+   validatePassword(repeatNewPassword, "repeat new password")
+   validateFunction(callback, "callback")
 
-  if (newPassword !== repeatNewPassword)
-    throw new Error("your password do not match")
+   if (newPassword !== repeatNewPassword) throw new Error("your password do not match")
 
-  User.findById(userId).then((user) => {
-    if (!user) {
-      callback(new Error("user not found"))
+   User.findById(userId).then((user) => {
+      if (!user) {
+         callback(new Error("user not found"))
 
-      return;
-    }
+         return
+      }
 
-    if (user.password !== password) {
-      callback(new Error("wrong credentials"))
+      if (user.password !== password) {
+         callback(new Error("wrong credentials"))
 
-      return
-    }
+         return
+      }
 
-    user.password = newPassword
+      user.password = newPassword
 
-    user
-      .save()
-      .then(() => {
-        callback(null)
-      })
-      .catch((error) => {
-        callback(error)
-      })
-  })
+      user
+         .save()
+         .then(() => {
+            callback(null)
+         })
+         .catch((error) => {
+            callback(error)
+         })
+   })
 }
 
 module.exports = updateUserPassword
