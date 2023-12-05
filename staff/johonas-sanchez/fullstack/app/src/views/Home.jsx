@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import retrieveUser from '../logic/retrieveUser'
 
@@ -16,17 +16,23 @@ function Home(props) {
     console.log('Home')
 
     const [view, setView] = useState(null)
+    const [name, setName] = useState(null)
 
-    let name = null
+    useEffect(() => {
+        try {
+            retrieveUser(window.sessionUserId, (error, user) => {
+                if (error) {
+                    alert(error.message)
 
-    try {
-        const user = retrieveUser(window.sessionUserId)
+                    return
+                }
 
-        name = user.name
-    } catch (error) {
-        alert(error.message)
-    }
-
+                setName(user.name)
+            })
+        } catch (error) {
+            alert(error.message)
+        }
+    }, [])
     function handleLogoutClick() {
         window.sessionUserId = null
 
@@ -80,11 +86,11 @@ function Home(props) {
 
         {view === 'new-post' ? <NewPost onNewPostSubmit={handleNewPostSubmit} onNewPostCancelClick={handleNewPostCancelClick} /> : null}
 
-        {view === null || view === 'new-post' ? <AllPosts /> : null}
+        {/* {view === null || view === 'new-post' ? <AllPosts /> : null}
 
         {view === 'saved' ? <SavedPosts /> : null}
 
-        {view === 'my-posts' ? <MyPosts /> : null}
+        {view === 'my-posts' ? <MyPosts /> : null} */}
     </Container>
 }
 

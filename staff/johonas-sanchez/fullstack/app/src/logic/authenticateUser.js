@@ -1,19 +1,34 @@
-import { validateEmail, validatePassword } from '../utils/validators';
-import db from '../data/managers';
+import { validateEmail, validatePassword, validateFunction } from '../utils/validators'
 
-function authenticateUser(email, password) {
+
+function authenticateUser(email, password, callback) {
     validateEmail(email)
     validatePassword(password)
+    validateFunction(callback, 'callback')
 
-    const user = db.findUserByEmail(email)
+    const req = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password })
+    }
 
-    if (!user)
-        throw new Error('Wrong credentials')
+    fetch('http://localhost:4000/users/authenticate', req)
+        .then(res => {
+            if (!res.ok) {
+                res.json()
+                    .then(body => callback(new Error(body.error)))
+                    .catch(error => callback(error))
 
-    if (user.password !== password)
-        throw new Error('Wrong credentials')
+                return
+            }
 
-    return user.id
+            res.json()
+                .then(body => callback(null, body))
+                .catch(error => callback(error))
+        })
+        .catch(error => console.error(error))
 }
 
 export default authenticateUser;
