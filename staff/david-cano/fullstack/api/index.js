@@ -34,7 +34,17 @@ mongoose.connect('mongodb://127.0.0.1/api')
 
         const jsonBodyParser = express.json()
 
-        api.post('/users', jsonBodyParser, (req, res) => {
+        const cors = (req, res, next) => {
+            res.header('Access-Control-Allow-Origin', '*')
+            res.header('Access-Control-Allow-Methods', '*')
+            res.header('Access-Control-Allow-Headers', '*')
+
+            next()
+        }
+
+        api.use('*', cors)
+
+        api.post('/users', cors, jsonBodyParser, (req, res) => {
             const body = req.body
 
             const { name, email, password } = body
@@ -53,8 +63,6 @@ mongoose.connect('mongodb://127.0.0.1/api')
                 res.status(400).json({ error: error.message })
             }
         })
-
-        // TODO implement authenticate endpoint
 
         api.post('/users/authenticate', jsonBodyParser, (req, res) => {
             const body = req.body
