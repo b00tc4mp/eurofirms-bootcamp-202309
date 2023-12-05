@@ -23,9 +23,15 @@ function Register(props) {
         const password = passwordInput.value
 
         try {
-            registerUser(name, email, password)
+            registerUser(name, email, password, error => {
+                if (error) {
+                    alert(error.message)
 
-            props.onSuccess()
+                    return
+                }
+
+                props.onSuccess()
+            })
         } catch (error) {
             alert(error.message)
         }

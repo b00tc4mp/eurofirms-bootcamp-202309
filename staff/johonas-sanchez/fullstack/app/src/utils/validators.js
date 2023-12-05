@@ -22,3 +22,7 @@ export function validateUrl(url, explain) {
 export function validateNumber(number, explain) {
     if (typeof number !== 'number') throw new TypeError(explain + ' is not a number')
 }
+
+export function validateFunction(func, explain) {
+    if (typeof func !== 'function') throw new TypeError(explain + ' is not a function')
+}
