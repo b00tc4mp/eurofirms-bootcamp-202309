@@ -231,7 +231,7 @@ $ curl -H 'Authorization: Bearer 65684bc8dc4ef0943016343d' -X PATCH localhost:40
 ### Delete post
 
 ```
-Request: DELETE /posts/postId 'Authorization: Bearer userId'
+Request: DELETE /posts/:postId 'Authorization: Bearer userId'
 Response: 204
 ```
 

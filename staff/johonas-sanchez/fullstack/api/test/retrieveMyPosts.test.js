@@ -16,7 +16,7 @@ const req = {
        }
  
        res.json()
-          .then(posts => console.log(posts))
+          .then(posts => console.log(res.status, posts))
           .catch(error => console.error(error))
     })
-    .catch((error) => console.error(error))
+    .catch(error => console.error(error))

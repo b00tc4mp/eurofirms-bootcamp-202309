@@ -4,7 +4,7 @@ const req = {
         'Content-Type': 'application/json',
         Authorization: 'Bearer 656ddc296fc21579c1675d6e'
     },
-    body: JSON.stringify({ password: '123123123', email: 'ga2@yo.com', newEmail: 'ga@yo.com', repeatNewEmail: 'ga2@yo.com' })
+    body: JSON.stringify({ password: '456456456', email: 'ga2@yo.com', newEmail: 'ga3@yo.com', repeatNewEmail: 'ga3@yo.com' })
 }
 
 fetch('http://localhost:4000/users/email', req)
@@ -17,6 +17,6 @@ fetch('http://localhost:4000/users/email', req)
             return
         }
 
-        console.log('updated email')
+        console.log(res.status,'updated email')
     })
     .catch(error => console.error(error))
