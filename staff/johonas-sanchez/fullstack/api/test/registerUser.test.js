@@ -16,6 +16,6 @@ fetch('http://localhost:4000/users', req)
             return
         }
 
-        console.log('user registered')
+        console.log(res.status, 'user registered')
     })
     .catch(error => console.error(error))
