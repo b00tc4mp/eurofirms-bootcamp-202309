@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="register-view" class="view view-plum">
+        <h1>Register</h1>
+
+        <form id="register-form" class="form">
+            <label for="name-input">Name</label>
+            <input type="text" id="name-input">
+
+            <label for="email-input">E-mail</label>
+            <input type="email" id="email-input">
+
+            <label for="password-input">Password</label>
+            <input type="password" id="password-input">
+
+            <button type="submit">Register</button>
+            <button type="reset">Clear</button>
+        </form>
+
+        <a id="login-link" href="">Login</a>
+    </div>
+
+    <div id="login-view" class="view view-skyblue">
+        <h1>Login</h1>
+
+        <form id="login-form" class="form">
+            <label for="email-input">E-mail</label>
+            <input type="email" id="email-input">
+
+            <label for="password-input">Password</label>
+            <input type="password" id="password-input">
+
+            <button type="submit">Login</button>
+            <button type="reset">Clear</button>
+        </form>
+
+        <a id="register-link" href="">Register</a>
+    </div>
+
+    <div id="home-view">
+        <h1>Home</h1>
+        <button id="logout-button">Logout</button>
+
+        <div id="posts-list">
+            <!-- <article>
+                <img class="post-image"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/1200px-SNice.svg.png"
+                    alt="">
+                <p>Smile!</p>
+            </article>
+
+            <article>
+                <img class="post-image"
+                    src="https://www.telemundo.com/sites/nbcutelemundo/files/styles/fit-1240w/public/sites/nbcutelemundo/files/images/article/2014/08/28/hello_kitty_140920568644_4.jpg"
+                    alt="">
+                <p>Hello, Kitty!</p>
+            </article> -->
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+
+    <script src="views/register.js"></script>
+    <script src="views/login.js"></script>
+    <script src="views/home.js"></script>
+
+    <script src="main.js"></script>
+</body>
+
+</html>

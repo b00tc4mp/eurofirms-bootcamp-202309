@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="shortcut icon" href="https://b00tc4mp.com/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <div id="register-view" class="view">
+        <h1>Register</h1>
+
+        <form id="register-form" class="form">
+            <label class="label" for="name-input">Name</label>
+            <input class="input" type="text" id="name-input" title="Name">
+
+            <label class="label" for="email-input">E-mail</label>
+            <input class="input" type="email" id="email-input" title="E-mail">
+
+            <label class="label" for="password-input">Password</label>
+            <input class="input" type="password" id="password-input" title="Password">
+
+            <button class="button" type="submit">Register</button>
+        </form>
+
+        <a id="login-link" href="">Login</a>
+    </div>
+
+    <div id="login-view" class="view">
+        <h1>Login</h1>
+
+        <form id="login-form" class="form">
+            <label class="label" for="email-input">E-mail</label>
+            <input class="input" type="email" id="email-input" title="E-mail">
+
+            <label class="label" for="password-input">Password</label>
+            <input class="input" type="password" id="password-input" title="Password">
+
+            <button class="button" type="submit">Login</button>
+        </form>
+
+        <a id="register-link" href="">Register</a>
+    </div>
+
+    <div id="home-view">
+        <header class="header" aria-label="Header">
+            <h1>Home</h1>
+            <span id="user-name-span" aria-label="User name">Hello World</span>
+            <button id="new-post-button" title="New post" aria-label="New post" class="button">+</button>
+            <button id="logout-button" class="button">Logout</button>
+        </header>
+
+        <!-- add post panel -->
+
+        <div id="new-post-panel" class="view">
+            <h2>New post</h2>
+
+            <form id="new-post-form" class="form">
+                <label for="image-input" class="label">Image</label>
+                <input type="url" id="image-input" class="input">
+
+                <label for="image-description-input" class="label">Image description</label>
+                <input type="text" id="image-description-input" class="input">
+
+                <label for="text-input" class="label">Text</label>
+                <input type="text" id="text-input" class="input">
+
+                <button type="submit" class="button">Post</button>
+                <button id="cancel-new-post-button" class="button">Cancel</button>
+            </form>
+        </div>
+
+
+        <!-- posts list -->
+
+        <div id="posts-list" aria-label="Posts list" class="view">
+            <!-- <article>
+                <h3>peter@pan.com</h3>
+                <img class="post-image"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/1200px-SNice.svg.png"
+                    alt="">
+                <p>Smile!</p>
+            </article>
+
+            <article>
+                <h3>wendy@darling.com</h3>
+                <img class="post-image"
+                    src="https://www.telemundo.com/sites/nbcutelemundo/files/styles/fit-1240w/public/sites/nbcutelemundo/files/images/article/2014/08/28/hello_kitty_140920568644_4.jpg"
+                    alt="">
+                <p>Hello, Kitty!</p>
+            </article> -->
+        </div>
+    </div>
+
+    <!-- utils -->
+    <script src="utils/find.js"></script>
+    <script src="utils/validators.js"></script>
+
+    <!-- data -->
+    <script src="data.js"></script>
+
+    <!-- business logic -->
+    <script src="logic/authenticateUser.js"></script>
+    <script src="logic/retrieveUser.js"></script>
+    <script src="logic/registerUser.js"></script>
+
+    <!-- presentation -->
+    <script src="main.js"></script>
+    <script src="views/register.js"></script>
+    <script src="views/login.js"></script>
+    <script src="views/home.js"></script>
+</body>
+
+</html>
