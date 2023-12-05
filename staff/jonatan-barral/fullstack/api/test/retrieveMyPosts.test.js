@@ -1,12 +1,11 @@
 const req = {
-    method: 'POST',
+    method: 'GET',
     headers: {
-        'Content-Type': 'application/json'
+        Authorization: 'Bearer 6564c1912ba786cec95c7f3f',
     },
-    body: JSON.stringify({ name: 'Super Mario', email: 'super@mario.com', password: '123456789' })
 }
 
-fetch('http://localhost:4000/users', req)
+fetch('http://localhost:4000/posts/user', req)
     .then(res => {
         if (!res.ok) {
             res.json()
@@ -16,6 +15,8 @@ fetch('http://localhost:4000/users', req)
             return
         }
 
-        console.log('user registered')
+        res.json()
+            .then(posts => console.log(res.status, posts))
+            .catch(error => console.error(error))
     })
     .catch(error => console.error(error))

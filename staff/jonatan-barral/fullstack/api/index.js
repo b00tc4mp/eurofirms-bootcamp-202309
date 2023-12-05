@@ -3,7 +3,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 
 const registerUser = require('./logic/registerUser')
-const autenticateUser = require('./logic/autenticateUser')
+const authenticateUser = require('./logic/authenticateUser')
 const retrieveUser = require('./logic/retrieveUser')
 const updateUserPassword = require('./logic/updateUserPassword')
 const updateUserEmail = require('./logic/updateUserEmail')
@@ -41,6 +41,7 @@ mongoose.connect('mongodb://127.0.0.1/api')
         const cors = (req, res, next) => {
             res.header('Access-Control-Allow-Origin', '*')
             res.header('Access-Control-Allow-Methods', '*')
+            res.header('Access-Control-Allow-Headers', '*')
 
             next()
         }
@@ -177,7 +178,7 @@ mongoose.connect('mongodb://127.0.0.1/api')
             }
         })
 
-        api.patch("/posts/:postId/saved", (req, res) => {
+        api.patch("/posts/:postId/saves", (req, res) => {
             const userId = req.headers.authorization.slice(7)
             const postId = req.params.postId;
 

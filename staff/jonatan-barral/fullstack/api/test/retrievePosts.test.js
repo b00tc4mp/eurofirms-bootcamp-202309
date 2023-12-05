@@ -1,10 +1,8 @@
 const req = {
-    method: 'POST',
+    method: 'GET',
     headers: {
-        Authorization: 'Bearer 656f4545976bc80e51f72821',
-        'Content-Type': 'application/json'
+        Authorization: 'Bearer 6564c1912ba786cec95c7f3f',
     },
-    body: JSON.stringify({ image: 'https://wallpapers.com/images/hd/cute-minion-happy-bob-v1x9tfcn0rznkvvd.jpg', imageDescription: 'minion image', text: 'hello minion' })
 }
 
 fetch('http://localhost:4000/posts', req)
@@ -17,6 +15,8 @@ fetch('http://localhost:4000/posts', req)
             return
         }
 
-        console.log(res.status)
+        res.json()
+            .then(posts => console.log(res.status, posts))
+            .catch(error => console.error(error))
     })
     .catch(error => console.error(error))

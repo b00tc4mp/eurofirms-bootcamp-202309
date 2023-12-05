@@ -1,9 +1,9 @@
 const req = {
     method: 'POST',
     headers: {
-        'Content-Type': 'aplication/jason'
+        'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ email: 'caba@llo.com', password: '123456789' })
+    body: JSON.stringify({ email: 'super@mario.com', password: '123456789' })
 }
 
 fetch('http://localhost:4000/users/auth', req)
