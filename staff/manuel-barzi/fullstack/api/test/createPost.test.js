@@ -1,12 +1,13 @@
 const req = {
     method: 'POST',
     headers: {
+        Authorization: 'Bearer 656db3fad816cd234ffab874',
         'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ name: 'Super Manu', email: 'super@manu.com', password: '123123123' })
+    body: JSON.stringify({ image: 'https://wallpapers.com/images/hd/cute-minion-happy-bob-v1x9tfcn0rznkvvd.jpg', imageDescription: 'minion image', text: 'hello minion' })
 }
 
-fetch('http://localhost:4000/users', req)
+fetch('http://localhost:4000/posts', req)
     .then(res => {
         if (!res.ok) {
             res.json()

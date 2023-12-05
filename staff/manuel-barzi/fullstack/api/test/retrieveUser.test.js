@@ -1,17 +1,16 @@
 const req = {
-    method: 'POST',
+    method: 'GET',
     headers: {
-        'Content-Type': 'application/json'
+        Authorization: 'Bearer 656db3fad816cd234ffab874',
     },
-    body: JSON.stringify({ email: 'po@llo.com', password: '123123123' })
 }
 
-fetch('http://localhost:4000/users/auth', req)
+fetch('http://localhost:4000/users', req)
     .then(res => {
         if (!res.ok) {
             res.json()
                 .then(body => console.error(body))
-                .catch(error => console.error(error.message))
+                .catch(error => console.error(error))
 
             return
         }
