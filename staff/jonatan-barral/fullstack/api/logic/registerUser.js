@@ -3,9 +3,9 @@ const { validateText, validateEmail, validatePassword, validateFunction } = requ
 const { User } = require('../data/models')
 
 function registerUser(name, email, password, callback) {
-    validateText(name, 'name')
-    validateEmail(email, 'email')
-    validatePassword(password, 'password')
+    validateText(name, 'Name')
+    validateEmail(email, 'Email')
+    validatePassword(password, 'Password')
     validateFunction(callback, 'callback')
 
     User.create({ name, email, password })

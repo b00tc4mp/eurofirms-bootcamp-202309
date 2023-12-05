@@ -3,10 +3,10 @@ const { validateText, validateFunction } = require('./helpers/validators')
 const { User, Post } = require('../data/models')
 
 function createPost(userId, image, imageDescription, text, callback) {
-    validateText(userId, 'userId')
-    validateText(image, 'image')
-    validateText(imageDescription, 'imageDescription')
-    validateText(text, 'text')
+    validateText(userId, 'User Id')
+    validateText(image, 'Image')
+    validateText(imageDescription, 'Image description')
+    validateText(text, 'Text')
     validateFunction(callback, 'callback')
 
     User.findById(userId)

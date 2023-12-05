@@ -3,13 +3,13 @@ const { validateText, validateEmail, validatePassword, validateFunction, } = req
 const { User } = require("../data/models");
 
 function updateUserEmail(userId, newEmail, repeatNewEmail, password, callback) {
-    validateText(userId, 'userId')
-    validateEmail(newEmail, 'newEmail')
-    validateEmail(repeatNewEmail, 'repeatNewEmail')
-    validatePassword(password, "password")
+    validateText(userId, 'User Id')
+    validateEmail(newEmail, 'New email')
+    validateEmail(repeatNewEmail, 'Repeat new email')
+    validatePassword(password, "Password")
     validateFunction(callback, "callback")
 
-    if (newEmail !== repeatNewEmail) throw new error("your email do not match")
+    if (newEmail !== repeatNewEmail) throw new Error("your email do not match")
 
     User.findById(userId).then((user) => {
         if (!user) {

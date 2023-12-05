@@ -3,8 +3,8 @@ const { validateEmail, validatePassword, validateFunction } = require('./helpers
 const { User } = require('../data/models')
 
 function authenticateUser(email, password, callback) {
-    validateEmail(email, 'email')
-    validatePassword(password, 'password')
+    validateEmail(email, 'Email')
+    validatePassword(password, 'Password')
     validateFunction(callback, 'callback')
 
     User.findOne({ email, password })
