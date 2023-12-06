@@ -20,9 +20,15 @@ function NewPost(props) {
         const text = textInput.value
 
         try {
-            createNewPost(window.sessionUserId, image, imageDescription, text)
-
-            props.onNewPostSubmit()
+            createNewPost(window.sessionUserId, image, imageDescription, text, (error) => {
+                if (error) {
+                    alert(error.message)
+                } else {
+                    // Manejar la creación exitosa de la publicación
+                    console.log('Post created')
+                    props.onNewPostSubmit()
+                }
+            });
         } catch (error) {
             alert(error.message)
         }
