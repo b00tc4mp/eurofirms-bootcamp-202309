@@ -11,7 +11,7 @@ function registerUser(name, email, password, callback) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ name, email, password, callback })
+        body: JSON.stringify({ name, email, password})
     }
     
     fetch('http://localhost:4000/users', req)
