@@ -149,6 +149,26 @@ api.use('*', cors)
     }
   })
 
+  // Implement retrieveMyPosts endpoint
+
+  api.get("/posts/user", (req, res) => {
+    const userId = req.headers.authorization.slice(7)
+
+    try {
+      retrieveMyPosts(userId, (error, posts) => {
+        if (error) {
+          res.status(400).json({ error: error.message })
+
+          return
+        }
+
+        res.json(posts)
+      });
+    } catch (error) {
+      res.status(400).json({ error: error.message })
+    }
+  })
+
   // Implement retrievePost endpoint
 
   api.get("/posts/:postId", (req, res) => {
@@ -231,27 +251,6 @@ api.use('*', cors)
       res.status(400).json({ error: error.message })
     }
   })
-
-  // Implement retrieveMyPosts endpoint
-
-  api.get("/posts/user", (req, res) => {
-    const userId = req.headers.authorization.slice(7)
-
-    try {
-      retrieveMyPosts(userId, (error, posts) => {
-        if (error) {
-          res.status(400).json({ error: error.message })
-
-          return
-        }
-
-        res.json(posts)
-      });
-    } catch (error) {
-      res.status(400).json({ error: error.message })
-    }
-  })
-  
 
   // Implement toggleSavePost endpoint
 

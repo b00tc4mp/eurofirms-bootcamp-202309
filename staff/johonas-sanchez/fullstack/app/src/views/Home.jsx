@@ -93,7 +93,7 @@ function Home(props) {
 
         {view === 'saved' ? <SavedPosts timestamp={timestamp} /> : null}
 
-        {/* {view === 'my-posts' ? <MyPosts /> : null} */}
+        {view === 'my-posts' ? <MyPosts /> : null}
     </Container>
 }
 

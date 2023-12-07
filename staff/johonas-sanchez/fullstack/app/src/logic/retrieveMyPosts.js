@@ -1,31 +1,31 @@
-import { validateText } from '../utils/validators';
-import db from '../data/managers';
+import { validateText, validateFunction } from '../utils/validators'
 
-function retrieveMyPosts(userId) {
+function retrieveMyPosts(userId, callback) {
     validateText(userId, 'user id')
+    validateFunction(callback, 'callback')
 
-    const user = db.findUserById(userId)
-
-    if (!user)
-        throw new Error('User not found')
-
-        const posts = db.getPosts().reverse().filter(function (post) {
-            return post.author === user.id
+    const req = {
+        method: 'GET',
+        headers: {
+           Authorization: `Bearer ${userId}`,
+        },
+     }
+     
+     fetch('http://localhost:4000/posts/user', req)
+        .then(res => {
+           if (!res.ok) {
+              res.json()
+                 .then(body => callback(new Error(body.error)))
+                 .catch(error => callback(error))
+     
+              return
+           }
+     
+           res.json()
+              .then(posts => callback(null, posts.reverse()))
+              .catch(error => callback(error))
         })
-
-    posts.forEach(function (post) {
-
-        post.author = {
-            id: user.id,
-            name: user.name
-        }
-
-        post.liked = post.likes.includes(userId)
-
-        post.saved = user.saved.includes(post.id)
-    })
-
-    return posts
+        .catch(error => callback(error))
 }
 
-export default retrieveMyPosts;
+export default retrieveMyPosts

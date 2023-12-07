@@ -1,25 +1,33 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import Posts from './Posts'
 
 import retrieveMyPosts from '../logic/retrieveMyPosts'
 
-function MyPosts() {
+function MyPosts(props) {
     console.log('MyPosts')
 
-    const [timestamp, setTimestamp] = useState(null)
+    const [posts, setPosts] = useState([])
 
-    let posts = null
+   useEffect(() => {
+      refreshPosts()
+   }, [props.timestamp])
 
-    try {
-        posts = retrieveMyPosts(window.sessionUserId)
-    } catch (error) {
-        alert(error.message)
-    }
+   function refreshPosts() {
+      try {
+         retrieveMyPosts(window.sessionUserId, (error, posts) => {
+            if (error) {
+               alert(error.message)
 
-    function refreshPosts() {
-        setTimestamp(Date.now())
-    }
+               return
+            }
+
+            setPosts(posts)
+         })
+      } catch (error) {
+         alert(error.message)
+      }
+   }
 
     function handleLikeClick() {
         refreshPosts()
