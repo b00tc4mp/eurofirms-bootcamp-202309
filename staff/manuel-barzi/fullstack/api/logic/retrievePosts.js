@@ -26,7 +26,7 @@ function retrievePosts(userId, callback) {
                         }
                     })
 
-                    callback(null, posts)
+                    callback(null, posts.reverse())
                 })
         })
         .catch(error => console.error(error))
