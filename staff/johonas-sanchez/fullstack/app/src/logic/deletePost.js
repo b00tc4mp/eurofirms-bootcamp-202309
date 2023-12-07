@@ -1,36 +1,30 @@
-import { validateText } from '../utils/validators';
-import db from '../data/managers';
+import { validateText, validateFunction } from '../utils/validators'
 
-function deletePost(userId, postId) {
+function deletePost(userId, postId, callback) {
     validateText(userId, 'user id')
     validateText(postId, 'post id')
+    validateFunction(callback, 'callback')
 
-    const user = db.findUserById(userId)
-
-    if (!user)
-        throw new Error('User not found')
-
-    const post = db.findPostById(postId)
-
-    if (!post)
-        throw new Error('Post not found')
-
-    if (post.author !== userId)
-        throw new Error('Post doest not belong to user')
-
-        const users = db.getUsers()
-
-    users.forEach(function (user) {
-        const index = user.saved.indexOf(post.id)
-
-        if (index > -1) {
-            user.saved.splice(index, 1)
-
-            db.updateUser(user)
-        }
-    })
-
-    db.removePostById(postId)
+    const req = {
+        method: 'DELETE',
+        headers: {
+           Authorization: `Bearer ${userId}`,
+        },
+     }
+     
+     fetch(`http://localhost:4000/posts/${postId}`, req)
+        .then(res => {
+           if (!res.ok) {
+              res.json()
+                 .then(body => callback(new Error(body.error)))
+                 .catch(error => callback(error))
+     
+              return
+           }
+    
+           callback(null)
+        })
+        .catch(error => callback(error))
 }
 
-export default deletePost;
+export default deletePost
