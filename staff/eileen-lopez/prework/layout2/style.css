@@ -1,0 +1,133 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    background-color: rgb(211, 167, 167);
+}
+
+.menu{
+    display: flex;
+    padding: 20px;
+    justify-content: center;
+    background: rgb(177, 182, 37);
+    border: 2px solid black;
+    width: 100%;
+}
+
+.home-header{
+    background: aquamarine;
+    padding: 15px;
+    border: 2px solid black;
+    height: 10%;
+}
+
+.hello-header{
+    display: flex;
+    height: 100%;
+    justify-content: space-between;
+    background: rgb(199, 151, 219);
+    border: 2px solid black;
+}
+
+.home-main{
+    height: 80%;
+    padding: 10px;
+    display: flex;
+    background: rgb(216, 208, 208);
+    border: 2px solid black;
+    gap: 5px;
+}
+
+.column1{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    gap: 5px;
+}
+
+.column2{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    gap: 5px;
+}
+
+.column3{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+}
+
+.column1-top{
+    height: 33.3%;
+    background: red;
+    color: blue;
+    border: 2px solid black;
+    padding: 5px;
+}
+
+.column1-middle{
+    height: 33.3%;
+    background: blue;
+    color: white;
+    border: 2px solid black;
+    padding: 5px;
+}
+.column1-bottom{
+    height: 33.3%;
+    background: rgb(28, 150, 85);
+    color: rgb(226, 34, 89);
+    border: 2px solid black;
+    padding: 5px;
+}
+
+.column2-top{
+    height: 50%;
+    background: red;
+    color: blue;
+    border: 2px solid black;
+    padding: 5px;
+}
+
+.column2-bottom{
+    height: 50%;
+    background: rgb(28, 150, 85);
+    color: rgb(226, 34, 89);
+    border: 2px solid black;
+    padding: 5px;
+}
+
+.column3-aside{
+    height: 100%;
+    background: red;
+    color: blue;
+    border: 2px solid black;
+    padding: 5px;
+}
+
+.home-footer{
+    height: 10%;
+    display: flex;
+    background: aquamarine;
+    justify-content: center;
+    padding: 10px;
+    border: 2px solid black;
+}
+
+.home-main-image{
+    position: absolute;
+    height: 20%;
+    width: 20%;
+    left:40%;
+    right: 50%;
+    border: 10px dashed rgb(197, 220, 47);
+    top: 60%
+}
+
