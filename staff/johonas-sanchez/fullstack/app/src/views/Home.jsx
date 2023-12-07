@@ -91,9 +91,9 @@ function Home(props) {
 
         {view === null || view === 'new-post' ? <AllPosts timestamp={timestamp} /> : null}
 
-        {/* {view === 'saved' ? <SavedPosts /> : null}
+        {view === 'saved' ? <SavedPosts timestamp={timestamp} /> : null}
 
-        {view === 'my-posts' ? <MyPosts /> : null} */}
+        {/* {view === 'my-posts' ? <MyPosts /> : null} */}
     </Container>
 }
 

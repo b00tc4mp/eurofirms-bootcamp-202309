@@ -356,7 +356,7 @@ Response: 204
 Examples:
 
 ```sh
-$ curl -H 'Authorization: Bearer 65684bc8dc4ef0943016343d' -X PATCH localhost:4000/posts/65686c275ef8e443ccc48336/saved -v
+$ curl -H 'Authorization: Bearer 656ddc296fc21579c1675d6e' -X PATCH localhost:4000/posts/6571ce86762f93848c19f7c2/saved -v
 
 > PATCH /posts/65686c275ef8e443ccc48336/saved HTTP/1.1
 > Host: localhost:4000

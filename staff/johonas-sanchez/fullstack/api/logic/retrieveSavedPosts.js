@@ -13,9 +13,7 @@ function retrieveSavedPosts(userId, callback) {
 
                 return
             }
-
-            user.saved 
-
+            
             Post.find({ _id: { $in: user.saved } }).select('-__v').populate('author', 'name').lean()
                 .then(posts => {
                     posts.forEach(post => {

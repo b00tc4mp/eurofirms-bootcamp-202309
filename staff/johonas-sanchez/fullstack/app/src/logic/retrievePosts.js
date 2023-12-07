@@ -25,7 +25,7 @@ function retrievePosts(userId, callback) {
             .then(posts => callback(null, posts.reverse()))
             .catch(error => callback(error))
       })
-      .catch((error) => callback(error))
+      .catch(error => callback(error))
 }
 
 export default retrievePosts

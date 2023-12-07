@@ -5,7 +5,7 @@ import Posts from "../components/Posts"
 import retrievePosts from "../logic/retrievePosts"
 
 function AllPosts(props) {
-   console.log("AllPosts")
+   console.log('AllPosts')
 
    const [posts, setPosts] = useState([])
 
