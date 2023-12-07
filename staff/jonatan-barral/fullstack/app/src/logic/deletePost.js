@@ -1,23 +1,29 @@
 import { validateText } from "../utils/validators"
-import db from "../data/managers"
 
 function deletePost(userId, postId) {
     validateText(userId, 'user id')
     validateText(postId, 'post id')
 
-    const user = db.findUserById(userId)
+    const req = {
+        method: 'DELETE',
+        headers: {
+            Authorization: 'Bearer userId',
+        },
+    }
 
-    if (!user)
-        throw new Error('user not found')
+    fetch('http://localhost:4000/posts/postId', req)
+        .then(res => {
+            if (!res.ok) {
+                res.json()
+                    .then(body => console.error(body))
+                    .catch(error => console.error(error))
 
-    const post = db.findPostById(postId)
-    if (!post)
-        throw new Error('Post not found')
+                return
+            }
 
-    if (post.author !== userId)
-        throw new Error('Post does not belong to user')
-
-    db.removePostById(postId)
+            console.log(res.status, 'deleted')
+        })
+        .catch(error => console.error(error))
 }
 
 export default deletePost

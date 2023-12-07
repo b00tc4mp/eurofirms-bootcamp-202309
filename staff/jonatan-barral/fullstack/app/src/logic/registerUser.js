@@ -7,12 +7,27 @@ function registerUser(name, email, password) {
     validateEmail(email)
     validatePassword(password)
 
-    const user = db.findUserByEmail(email)
+    const req = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name, email, password })
+    }
 
-    if (user)
-        throw new Error('User already exists')
+    fetch('http://localhost:4000/users', req)
+        .then(res => {
+            if (!res.ok) {
+                res.json()
+                    .then(body => callback(new Error(body.error)))
+                    .catch(error => callback(error))
 
-    db.createUser(name, email, password)
+                return
+            }
+
+            callback(null)
+        })
+        .catch(error => callback(error))
 }
 
 export default registerUser
