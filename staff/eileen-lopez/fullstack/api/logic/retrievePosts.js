@@ -20,7 +20,7 @@ function retrievePosts(userId, callback) {
                             delete post.author._id
                         }
                     })
-                    callback(null, posts)
+                    callback(null, posts.reverse())
                 })
         })
         .catch(error => console.error(error))
