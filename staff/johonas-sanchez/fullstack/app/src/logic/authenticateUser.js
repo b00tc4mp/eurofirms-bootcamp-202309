@@ -24,13 +24,10 @@ function authenticateUser(email, password, callback) {
          }
 
          res.json()
-            .then((body) => {
-               sessionStorage.setItem("token", body) // Almacenar el token en sessionStorage después de una autenticación exitosa
-               callback(null, body)
-            })
+            .then((body) => callback(null, body))
             .catch((error) => callback(error))
       })
-      .catch((error) => console.error(error))
+      .catch((error) => callback(error))
 }
 
 export default authenticateUser

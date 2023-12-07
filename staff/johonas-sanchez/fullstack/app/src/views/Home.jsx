@@ -13,10 +13,11 @@ import NewPost from '../components/NewPost'
 import Logo from '../components/Logo'
 
 function Home(props) {
-    console.log('Home')
+    console.log('Home useEffect')
 
     const [view, setView] = useState(null)
     const [name, setName] = useState(null)
+    const [timestamp, setTimestamp] = useState(null)
 
     useEffect(() => {
         try {
@@ -33,6 +34,7 @@ function Home(props) {
             alert(error.message)
         }
     }, [])
+
     function handleLogoutClick() {
         window.sessionUserId = null
 
@@ -49,6 +51,7 @@ function Home(props) {
 
     function handleNewPostSubmit() {
         setView(null)
+        setTimestamp(Date.now())
     }
 
     function handleSavedClick(event) {
@@ -86,9 +89,9 @@ function Home(props) {
 
         {view === 'new-post' ? <NewPost onNewPostSubmit={handleNewPostSubmit} onNewPostCancelClick={handleNewPostCancelClick} /> : null}
 
-        {/* {view === null || view === 'new-post' ? <AllPosts /> : null}
+        {view === null || view === 'new-post' ? <AllPosts timestamp={timestamp} /> : null}
 
-        {view === 'saved' ? <SavedPosts /> : null}
+        {/* {view === 'saved' ? <SavedPosts /> : null}
 
         {view === 'my-posts' ? <MyPosts /> : null} */}
     </Container>

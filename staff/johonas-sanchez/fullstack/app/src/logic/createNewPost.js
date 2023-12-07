@@ -8,13 +8,11 @@ function createNewPost(userId, image, imageDescription, text, callback) {
     validateText(text, 'text')
     validateFunction(callback, 'callback')
 
-    const token = 'Bearer ' + sessionStorage.getItem('token') // Recuperamos el token (userId) del session storage
-
     const req = {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            Authorization: token
+            Authorization: `Bearer ${userId}`
         },
         body: JSON.stringify({ image, imageDescription, text })
     }
@@ -32,7 +30,7 @@ function createNewPost(userId, image, imageDescription, text, callback) {
             console.log(res.status, 'created')
             callback(null)
         })
-        .catch(error => console.error(error))
+        .catch(error => callback(error))
 }
 
 export default createNewPost
