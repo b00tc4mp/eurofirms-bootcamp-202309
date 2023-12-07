@@ -19,8 +19,14 @@ function NewPost(props) {
         const text = textInput.value
 
         try {
-            createNewPost(window.sessionUserId, image, imageDescription, text)
-            props.onNewPostSubmit()
+            createNewPost(window.sessionUserId, image, imageDescription, text, error => {
+                if (error) {
+                    alert(error.message)
+
+                    return
+                }
+                props.onNewPostSubmit()
+            })
         } catch (error) {
             alert(error.message)
         }

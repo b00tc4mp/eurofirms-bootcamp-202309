@@ -1,9 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import retrieveUser from '../logic/retrieveUser'
 
 import Button from '../components/Button'
 import Link from '../components/Link'
-import Field from '../components/Field'
 import Container from '../components/Container'
 import MyPosts from '../components/MyPosts'
 import SavedPosts from '../components/SavedPosts'
@@ -13,17 +12,26 @@ import Logo from '../components/Logo'
 
 function Home(props) {
     const [view, setView] = useState(null)
-   
-    let name = null
+    const [name, setName] = useState(null)
+    const [timestamp, setTimestamp] = useState(null)
 
-    try {
-        const user = retrieveUser(window.sessionUserId)
+    useEffect(() => {
+        console.log('Home useEffect')
 
-        name = user.name
-    } catch (error) {
-        alert(error.message)
-    }
+        try {
+            retrieveUser(window.sessionUserId, (error, user) => {
+                if (error) {
+                    alert(error.message)
 
+                    return
+                }
+                setName(user.name)
+            })
+        } catch (error) {
+            alert(error.message)
+        }
+    }, [])
+  
     function handleLogoutClick() {
         window.sessionUserId = null
 
@@ -39,6 +47,7 @@ function Home(props) {
     }
     function handleNewPostSubmit() {
         setView(null)
+        setTimestamp(Date.now())
     }
 
     function handleSavedClick(event) {
@@ -72,9 +81,9 @@ function Home(props) {
 
         {view === null || view === 'new-post' ? <AllPosts /> : null}
             
-        {view === 'saved' ? <SavedPosts /> : null}
+        {/*view === 'saved' ? <SavedPosts /> : null*/}
         
-        {view === 'my-posts' ? <MyPosts /> : null}
+        {/*view === 'my-posts' ? <MyPosts /> : null*/}
     </Container>
 }
 
