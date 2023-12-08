@@ -1,21 +1,21 @@
 const mongoose = require('mongoose')
-const toggleLikePost = require('./toggleLikePost')
+const retrieveSavedPosts = require('./retrieveSavedPosts')
 
-mongooose.connect('mongodb://127.0.0.1:27017/test')
+mongoose.connect('mongodb://127.0.0.1:27017/test')
     .then(() => {
         try {
-            toggleLikePost('añadir mi id', 'añadir mi id', error => {
+            retrieveSavedPosts('656f33e2a1fe3c5429828ff0', (error, posts) => {
                 if (error) {
                     console.error(error)
 
                     return
                 }
-
-                console.log('post like toggle')
+                console.log(posts)
             })
         } catch (error) {
             console.error(error)
         }
     })
+
 
 

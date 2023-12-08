@@ -8,7 +8,7 @@ function authenticateUser(email, password, callback) {
     validatePassword(password, 'password')
     validateFunction(callback, 'callback')
 
-    User.findOne({ email, passsword })
+    User.findOne({ email, password })
         .then(user => {
             if (!user) {
                 callback(new Error('wrong credentials'))
@@ -21,4 +21,4 @@ function authenticateUser(email, password, callback) {
         .catch(error => callback(error))
 }
 
-module.exports = authenticaterUser
+module.exports = authenticateUser

@@ -1,17 +1,17 @@
 const mongoose = require('mongoose')
-const retrieveMyPosts = require('./retrieveMyPosts')
+const deletePost = require('./deletePost')
 
 mongoose.connect('mongodb://127.0.0.1:27017/test')
     .then(() => {
         try {
-            retrieveMyPosts('anadir mis id', (error, posts) => {
+            deletePost('656f33e2a1fe3c5429828ff0', '656f3858b4a15c80f1960c08', error => {
                 if (error) {
                     console.error(error)
 
                     return
                 }
 
-                console.log(posts)
+                console.log('deleted')
             })
         } catch (error) {
             console.error(error)

@@ -20,8 +20,7 @@ function registerUser(name, email, password, callback) {
         })
 }
 
-
-module.exporte == registerUser
+module.exports = registerUser
 
 
 

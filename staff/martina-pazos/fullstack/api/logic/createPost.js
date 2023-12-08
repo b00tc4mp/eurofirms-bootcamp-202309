@@ -1,5 +1,5 @@
 const { validateText, validateFunction } = require('./helpers/validators')
-const { User, Post } = require('../data/molels')
+const { User, Post } = require('../data/models')
 
 function createPost(userId, image, imageDescription, text, callback) {
     validateText(userId, 'userId')

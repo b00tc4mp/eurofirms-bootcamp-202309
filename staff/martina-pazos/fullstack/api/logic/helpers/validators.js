@@ -1,5 +1,5 @@
 function validateText(text, sxplain) {
-    if (typeof text! == 'string') throw new TypeError
+    if (typeof text !== 'string') throw new TypeError
         (explain + 'is not a string')
     if (text.trim().length === 0) throw new Error(explain + 'is empty')
 }
@@ -7,8 +7,8 @@ function validateText(text, sxplain) {
 function validateEmail(email, explain) {
     validateText(email, explain)
 
-    if (!email.includes('@')) throw new Error(explain + 'is not valid')
-    if (!email.includes(',')) throw new Error(explain + 'is not valid')
+    if (!email.includes('@')) throw new Error(explain + ' is not valid')
+    if (!email.includes('.')) throw new Error(explain + ' is not valid')
 }
 
 function validatePassword(password, explain) {
