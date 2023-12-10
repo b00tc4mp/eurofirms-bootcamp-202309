@@ -9,6 +9,8 @@ import Container from '../components/Container'
 import Logo from '../components/Logo'
 
 function Register(props) {
+    console.log('Register')
+
     function handleRegisterSubmit(event) {
         event.preventDefault()
         
@@ -33,7 +35,6 @@ function Register(props) {
             } catch (error) {
                 alert(error.message)
             }
-
     }
 
     function handleLoginClick(event) {

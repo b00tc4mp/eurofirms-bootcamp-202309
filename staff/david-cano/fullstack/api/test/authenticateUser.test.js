@@ -6,7 +6,7 @@ const req = {
     body: JSON.stringify({ email: 'po@llo.com', password: '123123123' })
 }
 
-fetch('http://localhost:4000/users/auth', req)
+fetch('http://localhost:4000/users/authenticate', req)
     .then(res => {
         if (!res.ok) {
             res.json()
@@ -17,7 +17,7 @@ fetch('http://localhost:4000/users/auth', req)
         }
 
         res.json()
-            .then(body => console.log(res.status, 'user authenticated', body))
+            .then(body => console.log(res.status, body))
             .catch(error => console.error(error))
     })
     .catch(error => console.error(error))

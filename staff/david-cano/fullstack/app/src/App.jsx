@@ -4,6 +4,8 @@ import Register from "./views/Register"
 import Home from "./views/Home"
 
 function App() {
+    console.log('App')
+
     const viewState = React.useState('login')
     const view = viewState[0]
     const setView = viewState[1]
@@ -20,14 +22,12 @@ function App() {
         setView('home')
     }
 
-    return <>
+    return<>
+        {view === 'login' ? <Login onSuccess={handleShowHome} onRegisterClick={handleShowRegister} /> : null}
 
-        {view === 'login' ? <Login  onSuccess={handleShowHome} onRegisterClick={handleShowRegister} /> : null}
-
-        {view === 'register' ? <Register onSuccess={handleShowLogin}  onLoginClick = {handleShowLogin}/> : null}
+        {view === 'register' ? <Register onSuccess={handleShowLogin} onLoginClick={handleShowLogin} /> : null}
 
         {view === 'home' ? <Home onLogout={handleShowLogin} /> : null}
-
     </>
 }
 

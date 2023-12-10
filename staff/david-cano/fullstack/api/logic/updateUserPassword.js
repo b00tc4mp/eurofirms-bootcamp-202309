@@ -3,7 +3,7 @@ const {validateText, validatePassword, validateFunction} = require("./helpers/va
 const { User } = require("../data/models")
 
 function updateUserPassword(userId, password, newPassword,repeatNewPassword, callback) {
-    validateText(userId, "userId")
+    validateText(userId, "user id")
     validatePassword(password, "password")
     validatePassword(newPassword, "new password")
     validatePassword(repeatNewPassword, "repeat new password")
@@ -12,7 +12,7 @@ function updateUserPassword(userId, password, newPassword,repeatNewPassword, cal
     if (newPassword !== repeatNewPassword)
         throw new Error("your password do not match")
 
-    User.findById(userId).then((user) => {
+    User.findById(userId).then(user => {
         if (!user) {
             callback(new Error("user not found"))
 
@@ -28,13 +28,10 @@ function updateUserPassword(userId, password, newPassword,repeatNewPassword, cal
         user.password = newPassword
 
         user.save()
-            .then(() => {
-                callback(null)
-            })
-            .catch((error) => {
-                callback(error)
-            })
+            .then(() => callback(null))
+            .catch((error) => callback(error))
     })
+    .catch(error => callback(error))
 }
 
 module.exports = updateUserPassword

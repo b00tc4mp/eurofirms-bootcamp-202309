@@ -17,6 +17,6 @@ fetch('http://localhost:4000/posts', req)
             return
         }
 
-        console.log(res.status, 'created post')
+        console.log(res.status)
     })
     .catch(error => console.error(error))

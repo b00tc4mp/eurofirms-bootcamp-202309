@@ -4,7 +4,7 @@ const deletePost = require('./deletePost')
 mongoose.connect('mongodb://127.0.0.1:27017/test')
     .then(() => {
         try {
-            deletePost('6564b7163a255011af60e4e4', '6564c6a7ec1d5e237090e5f6', error => {
+            deletePost('65608715bab5d765008aa494', '6560899f724c642d12657e2b', error => {
                 if (error) {
                     console.error(error)
 

@@ -5,6 +5,8 @@ import toggleSavePost from '../logic/toggleSavePost'
 import Button from './Button'
 
 function Post(props) {
+    console.log('Post')
+    
     const post = props.post
 
     function handleLikeClick() {

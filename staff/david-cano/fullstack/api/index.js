@@ -7,24 +7,16 @@ const retrieveUser = require('./logic/retrieveUser')
 const createPost = require("./logic/createPost")
 const retrievePosts = require("./logic/retrievePosts")
 const toggleLikePost = require("./logic/toggleLikePost")
-const retrieveSavedPosts = require("./logic/retrieveSavedPosts")
-const toggleSavePost = require("./logic/toggleSavePost")
-const retrieveMyPosts = require("./logic/retrieveMyPosts")
-const deletePost = require("./logic/deletePost")
 const updateUserPassword = require("./logic/updateUserPassword")
-const updateUserEmail = require("./logic/updateUserEmail")
+const toggleSavePost = require("./logic/toggleSavePost")
 
 mongoose.connect('mongodb://127.0.0.1/api')
     .then(() => {
         const api = express()
 
-        api.get('/helloworld', (req, res) => {
-            res.send('Hello, World!')
-        })
+        api.get('/helloworld', (req, res) => res.send('Hello, World!'))
 
-        api.get('/holamundo', (req, res) => {
-            res.send('Hola, Mundo!')
-        })
+        api.get('/holamundo', (req, res) => res.send('Hola, Mundo!'))
 
         api.get('/hello', (req, res) => {
             const name = req.query.name
@@ -83,7 +75,7 @@ mongoose.connect('mongodb://127.0.0.1/api')
             }
         })
 
-        api.post('/users', (req, res) => {
+        api.get('/users', (req, res) => {
             const userId = req.headers.authorization.slice(7)
 
             try {
@@ -107,7 +99,7 @@ mongoose.connect('mongodb://127.0.0.1/api')
             const { image, imageDescription, text } = body;
 
             try {
-                createPost(userId, image, imageDescription, text, (error) => {
+                createPost(userId, image, imageDescription, text, error => {
                     if (error) {
                         res.status(400).json({ error: error.message });
 
@@ -144,7 +136,7 @@ mongoose.connect('mongodb://127.0.0.1/api')
             const postId = req.params.postId;
 
             try {
-                toggleLikePost(userId, postId, (error) => {
+                toggleLikePost(userId, postId, error => {
                     if (error) {
                         res.status(400).json({ error: error.message });
 
@@ -158,67 +150,12 @@ mongoose.connect('mongodb://127.0.0.1/api')
             }
         });
 
-        api.get("/posts/saved", (req, res) => {
-            const userId = req.headers.authorization.slice(7);
-
-            try {
-                retrieveSavedPosts(userId, (error, posts) => {
-                    if (error) {
-                        res.status(400).json({ error: error.message });
-
-                        return;
-                    }
-
-                    res.json(posts);
-                });
-            } catch (error) {
-                res.status(400).json({ error: error.message });
-            }
-        });
-
-        api.patch("/posts/:postId/saved", (req, res) => {
+        api.patch("/posts/:postId/saves", (req, res) => {
             const userId = req.headers.authorization.slice(7);
             const postId = req.params.postId;
 
             try {
-                toggleSavePost(userId, postId, (error) => {
-                    if (error) {
-                        res.status(400).json({ error: error.message });
-
-                        return;
-                    }
-
-                    res.status(204).send();
-                });
-            } catch (error) {
-                res.status(400).json({ error: error.message });
-            }
-        });
-
-        api.get("/posts/user", (req, res) => {
-            const userId = req.headers.authorization.slice(7);
-
-            try {
-                retrieveMyPosts(userId, (error, posts) => {
-                    if (error) {
-                        res.status(400).json({ error: error.message });
-
-                        return;
-                    }
-
-                    res.json(posts);
-                });
-            } catch (error) {
-                res.status(400).json({ error: error.message });
-            }
-        });
-
-        api.delete("/posts/:postId", (req, res) => {
-            const userId = req.headers.authorization.slice(7);
-            const postId = req.params.postId;
-
-            try {
-                deletePost(userId, postId, (error) => {
+                toggleSavePost(userId, postId, error => {
                     if (error) {
                         res.status(400).json({ error: error.message });
 
@@ -239,28 +176,7 @@ mongoose.connect('mongodb://127.0.0.1/api')
             const { password, newPassword, repeatNewPassword } = body
 
             try {
-                updateUserPassword(userId, password, newPassword, repeatNewPassword, (error) => {
-                    if (error) {
-                        res.status(400).json({ error: error.message })
-
-                        return
-                    }
-
-                    res.status(204).send()
-                })
-            } catch (error) {
-                res.status(400).json({ error: error.message })
-            }
-        })
-
-        api.patch("/users/email", jsonBodyParser, (req, res) => {
-            const userId = req.headers.authorization.slice(7)
-
-            const body = req.body
-            const { password, email, newEmail, repeatNewEmail } = body
-
-            try {
-                updateUserEmail(userId, password, email, newEmail, repeatNewEmail, (error) => {
+                updateUserPassword(userId, password, newPassword, repeatNewPassword, error => {
                     if (error) {
                         res.status(400).json({ error: error.message })
 

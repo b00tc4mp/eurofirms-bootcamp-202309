@@ -17,8 +17,11 @@ function Home(props) {
 
     const [view, setView] = useState(null)
     const [name, setName] = useState(null)
+    const [timestamp, setTimestamp] = useState(null)
 
     useEffect(() => {
+        console.log('Home useEffect')
+
         try {
             retrieveUser(window.sessionUserId, (error, user) => {
                 if (error) {
@@ -50,6 +53,7 @@ function Home(props) {
 
     function handleNewPostSubmit() {
         setView(null)
+        setTimestamp(Date.now())
     }
 
     function handleSavedClick(event) {
@@ -70,7 +74,6 @@ function Home(props) {
         setView('my-posts')
     }
 
-
     return <Container>
         <header className="header" aria-label="Header">
             <Link onClick={handleHomeClick}><Logo /></Link>
@@ -88,11 +91,11 @@ function Home(props) {
 
         {view === 'new-post' ? <NewPost onNewPostSubmit={handleNewPostSubmit} onNewPostCancelClick={handleNewPostCancelClick} /> : null}
 
-        {/* {view === null || view === 'new-post' ? <AllPosts /> : null}
+        {view === null || view === 'new-post' ? <AllPosts timestamp={timestamp} /> : null}
 
-        {view === 'saved' ? <SavedPosts /> : null}
+        {/*{view === 'saved' ? <SavedPosts /> : null} */}
 
-        {view === 'my-posts' ? <MyPosts /> : null} */}
+        {/*{view === 'my-posts' ? <MyPosts /> : null} */}
     </Container>
 }
 

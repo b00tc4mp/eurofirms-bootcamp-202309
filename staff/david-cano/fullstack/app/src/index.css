@@ -63,10 +63,12 @@ h2 {
 
 .link {
     padding: .5rem .5rem;
+    text-decoration: none;
 }
 
 .link:hover {
-    background-color: yellow;
+    color: yellow;
+    background-color: rgb(242, 131, 207);
 }
 
 .post {

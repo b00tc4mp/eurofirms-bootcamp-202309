@@ -9,6 +9,8 @@ import Container from '../components/Container'
 import Logo from '../components/Logo'
 
 function Login(props) {
+    console.log('Login')
+
     function handleLoginSubmit(event) {
         event.preventDefault()
 
@@ -46,7 +48,6 @@ function Login(props) {
         <h1>Login</h1>
 
         <Form onSubmit={handleLoginSubmit}>
-            
             <Field type="email" id="email-field" title="E-mail" required>E-mail</Field>
 
             <Field type="password" id="password-field" title="Password" required>Password</Field>
