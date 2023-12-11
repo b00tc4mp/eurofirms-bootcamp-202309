@@ -37,7 +37,7 @@ function AllPosts(props) {
       refreshPosts()
    }
 
-   function handleSaveClick(postId) {
+   function handleSaveClick() {
       refreshPosts()
    }
 
