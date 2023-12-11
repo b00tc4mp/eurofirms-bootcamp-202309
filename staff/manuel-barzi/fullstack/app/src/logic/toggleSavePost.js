@@ -1,5 +1,4 @@
 import { validateText, validateFunction } from '../utils/validators'
-import db from '../data/managers'
 
 function toggleSavePost(userId, postId, callback) {
     validateText(userId, 'user id')

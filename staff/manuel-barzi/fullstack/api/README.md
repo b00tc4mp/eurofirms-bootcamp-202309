@@ -253,6 +253,82 @@ $ curl -H 'Authorization: Bearer 65684bc8dc4ef0943016343d' -X PATCH localhost:40
 < Keep-Alive: timeout=5
 ```
 
+### Delete post
+
+```
+Request: DELETE /posts/postId 'Authorization: Bearer userId'
+Response: 204
+```
+
+Examples:
+
+```sh
+$ curl -H 'Authorization: Bearer 65684bc8dc4ef0943016343d' -X DELETE localhost:4000/posts/65686c275ef8e443ccc48336 -v
+
+> DELETE /posts/65686c275ef8e443ccc48336 HTTP/1.1
+> Host: localhost:4000
+> User-Agent: curl/8.1.2
+> Accept: */*
+> Authorization: Bearer 65684bc8dc4ef0943016343d
+
+< HTTP/1.1 204 No Content
+< X-Powered-By: Express
+< Access-Control-Allow-Origin: *
+< Access-Control-Allow-Methods: *
+< Access-Control-Allow-Headers: *
+< Date: Mon, 11 Dec 2023 11:11:57 GMT
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+```
+
+```sh
+$ curl -H 'Authorization: Bearer 65684bc8dc4ef0943016343d' -X DELETE localhost:4000/posts/65686c275ef8e443ccc48336 -v
+
+> DELETE /posts/65686c275ef8e443ccc48336 HTTP/1.1
+> Host: localhost:4000
+> User-Agent: curl/8.1.2
+> Accept: */*
+> Authorization: Bearer 65684bc8dc4ef0943016343d
+
+< HTTP/1.1 400 Bad Request
+< X-Powered-By: Express
+< Access-Control-Allow-Origin: *
+< Access-Control-Allow-Methods: *
+< Access-Control-Allow-Headers: *
+< Content-Type: application/json; charset=utf-8
+< Content-Length: 26
+< ETag: W/"1a-5+ZrVJxQInF12KySW9ol3Ua/ZF0"
+< Date: Mon, 11 Dec 2023 11:12:56 GMT
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+
+{"error":"post not found"}
+```
+
+```sh
+$ curl -H 'Authorization: Bearer 65684bc8dc4ef0943016343d' -X DELETE localhost:4000/posts/656eef3a673674120e51852e -v
+
+> DELETE /posts/656eef3a673674120e51852e HTTP/1.1
+> Host: localhost:4000
+> User-Agent: curl/8.1.2
+> Accept: */*
+> Authorization: Bearer 65684bc8dc4ef0943016343d
+ 
+< HTTP/1.1 400 Bad Request
+< X-Powered-By: Express
+< Access-Control-Allow-Origin: *
+< Access-Control-Allow-Methods: *
+< Access-Control-Allow-Headers: *
+< Content-Type: application/json; charset=utf-8
+< Content-Length: 40
+< ETag: W/"28-MKl4+Ecpn7arIO2VXgLKBJ29K5k"
+< Date: Mon, 11 Dec 2023 11:15:13 GMT
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+
+{"error":"post does not belong to user"}%
+```
+
 ### Update user password
 
 ```

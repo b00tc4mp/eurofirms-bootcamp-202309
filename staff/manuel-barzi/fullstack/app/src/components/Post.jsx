@@ -18,7 +18,7 @@ function Post(props) {
                     return
                 }
 
-                props.onLikeClick()
+                props.onLikeToggled()
             })
         } catch (error) {
             alert(error.message)
@@ -30,9 +30,15 @@ function Post(props) {
 
         if (confirmed)
             try {
-                deletePost(sessionUserId, post.id)
+                deletePost(sessionUserId, post.id, error => {
+                    if (error) {
+                        alert(error.message)
 
-                props.onDeleteClick()
+                        return
+                    }
+
+                    props.onDeleted()
+                })
             } catch (error) {
                 alert(error.message)
             }
@@ -47,7 +53,7 @@ function Post(props) {
                     return
                 }
 
-                props.onSaveClick()
+                props.onSaveToggled()
             })
         } catch (error) {
             alert(error.message)
