@@ -9,6 +9,7 @@ import MyPosts from '../components/MyPosts'
 import SavedPosts from '../components/SavedPosts'
 import AllPosts from '../components/AllPosts'
 import NewPost from '../components/NewPost'
+import UserProfile from '../components/UserProfile'
 
 import Logo from '../components/Logo'
 
@@ -60,6 +61,12 @@ function Home(props) {
         setView('saved')
     }
 
+    function handleUserClick(event) {
+        event.preventDefault()
+
+        setView('user-profile')
+    }
+
     function handleHomeClick(event) {
         event.preventDefault()
 
@@ -76,7 +83,7 @@ function Home(props) {
         <header className="header" aria-label="Header">
             <Link onClick={handleHomeClick}><Logo /></Link>
 
-            <span aria-label="User name">{name}</span>
+            <Link onClick={handleUserClick} aria-label="User name">{name}</Link>
 
             <Button title="New post" aria-label="New post (+)" onClick={handleNewPostClick}>+</Button>
 
@@ -87,13 +94,15 @@ function Home(props) {
             <Button onClick={handleLogoutClick}>Logout</Button>
         </header>
 
-        {view === 'new-post' ? <NewPost onNewPostSubmit={handleNewPostSubmit} onNewPostCancelClick={handleNewPostCancelClick} /> : null}
+        {view === 'new-post' && <NewPost onNewPostSubmit={handleNewPostSubmit} onNewPostCancelClick={handleNewPostCancelClick} />}
 
-        {view === null || view === 'new-post' ? <AllPosts timestamp={timestamp} /> : null}
+        {(view === null || view === 'new-post') && <AllPosts timestamp={timestamp} />}
 
-        {view === 'saved' ? <SavedPosts timestamp={timestamp} /> : null}
+        {view === 'user-profile' && <UserProfile />}
 
-        {view === 'my-posts' ? <MyPosts /> : null}
+        {view === 'saved' && <SavedPosts timestamp={timestamp} />}
+
+        {view === 'my-posts' && <MyPosts />}
     </Container>
 }
 

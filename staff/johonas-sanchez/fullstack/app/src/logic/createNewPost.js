@@ -2,11 +2,11 @@ import { validateText, validateUrl, validateFunction } from '../utils/validators
 
 
 function createNewPost(userId, image, imageDescription, text, callback) {
-    validateText(userId, 'user id')
-    validateUrl(image, 'image url')
-    validateText(imageDescription, 'image description')
-    validateText(text, 'text')
-    validateFunction(callback, 'callback')
+    validateText(userId, "user id")
+    validatePassword(password, "password")
+    validatePassword(newPassword, "new password")
+    validatePassword(repeatNewPassword, "repeat new password")
+    validateFunction(callback, "callback")
 
     const req = {
         method: 'POST',
