@@ -1,13 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from "react"
 
-import Posts from './Posts'
+import Posts from "./Posts"
 
-import retrieveMyPosts from '../logic/retrieveMyPosts'
+import retrieveMyPosts from "../logic/retrieveMyPosts"
 
 function MyPosts(props) {
-    console.log('MyPosts')
+   console.log("MyPosts")
 
-    const [posts, setPosts] = useState([])
+   const [posts, setPosts] = useState([])
 
    useEffect(() => {
       refreshPosts()
@@ -29,19 +29,21 @@ function MyPosts(props) {
       }
    }
 
-    function handleLikeClick() {
-        refreshPosts()
-    }
+   function handlePostLikeToggled() {
+      refreshPosts()
+   }
 
-    function handleSaveClick() {
-        refreshPosts()
-    }
+   function handlePostSaveToggled() {
+      refreshPosts()
+   }
 
-    function handleDeleteClick() {
-        refreshPosts()
-    }
+   function handlePostDeleted() {
+      refreshPosts()
+   }
 
-    return <Posts posts={posts} onLikeClick={handleLikeClick} onSaveClick={handleSaveClick} onDeleteClick={handleDeleteClick} />
+   return (
+      <Posts posts={posts} onPostLikeToggled={handlePostLikeToggled} onPostSaveToggled={handlePostSaveToggled} onPostDeleted={handlePostDeleted} />
+   )
 }
 
 export default MyPosts

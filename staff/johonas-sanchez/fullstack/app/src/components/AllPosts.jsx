@@ -5,7 +5,7 @@ import Posts from "../components/Posts"
 import retrievePosts from "../logic/retrievePosts"
 
 function AllPosts(props) {
-   console.log('AllPosts')
+   console.log("AllPosts")
 
    const [posts, setPosts] = useState([])
 
@@ -29,19 +29,21 @@ function AllPosts(props) {
       }
    }
 
-   function handleLikeClick() {
+   function handlePostLikeToggled() {
       refreshPosts()
    }
 
-   function handleDeleteClick() {
+   function handlePostDeleted() {
       refreshPosts()
    }
 
-   function handleSaveClick() {
+   function handlePostSaveToggled() {
       refreshPosts()
    }
 
-   return <Posts posts={posts} onLikeClick={handleLikeClick} onSaveClick={handleSaveClick} onDeleteClick={handleDeleteClick} />
+   return (
+      <Posts posts={posts} onPostLikeToggled={handlePostLikeToggled} onPostSaveToggled={handlePostSaveToggled} onPostDeleted={handlePostDeleted} />
+   )
 }
 
 export default AllPosts
