@@ -228,16 +228,16 @@ $ curl -H 'Authorization: Bearer 65684bc8dc4ef0943016343d' -X PATCH localhost:40
 ### Toggle save post
 
 ```
-Request: PATCH /posts/postId/saves 'Authorization: Bearer userId'
+Request: PATCH /posts/postId/saved 'Authorization: Bearer userId'
 Response: 204
 ```
 
 Examples:
 
 ```sh
-$ curl -H 'Authorization: Bearer 65684bc8dc4ef0943016343d' -X PATCH localhost:4000/posts/65686c275ef8e443ccc48336/saves -v
+$ curl -H 'Authorization: Bearer 65684bc8dc4ef0943016343d' -X PATCH localhost:4000/posts/65686c275ef8e443ccc48336/saved -v
 
-> PATCH /posts/65686c275ef8e443ccc48336/saves HTTP/1.1
+> PATCH /posts/65686c275ef8e443ccc48336/saved HTTP/1.1
 > Host: localhost:4000
 > User-Agent: curl/8.1.2
 > Accept: */*

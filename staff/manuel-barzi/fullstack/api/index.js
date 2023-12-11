@@ -148,7 +148,7 @@ mongoose.connect('mongodb://127.0.0.1/api')
             }
         })
 
-        api.patch('/posts/:postId/saves', (req, res) => {
+        api.patch('/posts/:postId/saved', (req, res) => {
             const userId = req.headers.authorization.slice(7)
             const postId = req.params.postId
 

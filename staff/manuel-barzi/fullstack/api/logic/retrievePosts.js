@@ -17,6 +17,8 @@ function retrievePosts(userId, callback) {
             Post.find().select('-__v').populate('author', 'name').lean()
                 .then(posts => {
                     posts.forEach(post => {
+                        console.log(user, post)
+
                         post.id = post._id.toString()
                         delete post._id
 
@@ -28,6 +30,8 @@ function retrievePosts(userId, callback) {
                         post.likes = post.likes.map(userObjectId => userObjectId.toString())
 
                         post.liked = post.likes.includes(userId)
+
+                        post.saved = user.saved.some(postObjectId => postObjectId.toString() === post.id)
                     })
 
                     callback(null, posts.reverse())
