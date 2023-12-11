@@ -10,6 +10,8 @@ const toggleLikePost = require('./logic/toggleLikePost')
 const updateUserPassword = require('./logic/updateUserPassword')
 const toggleSavePost = require('./logic/toggleSavePost')
 const deletePost = require('./logic/deletePost')
+const retrieveSavedPosts = require('./logic/retrieveSavedPosts')
+const retrieveMyPosts = require('./logic/retrieveMyPosts')
 
 mongoose.connect('mongodb://127.0.0.1/api')
     .then(() => {
@@ -117,6 +119,42 @@ mongoose.connect('mongodb://127.0.0.1/api')
 
             try {
                 retrievePosts(userId, (error, posts) => {
+                    if (error) {
+                        res.status(400).json({ error: error.message })
+
+                        return
+                    }
+
+                    res.json(posts)
+                })
+            } catch (error) {
+                res.status(400).json({ error: error.message })
+            }
+        })
+
+        api.get('/posts/saved', (req, res) => {
+            const userId = req.headers.authorization.slice(7)
+
+            try {
+                retrieveSavedPosts(userId, (error, posts) => {
+                    if (error) {
+                        res.status(400).json({ error: error.message })
+
+                        return
+                    }
+
+                    res.json(posts)
+                })
+            } catch (error) {
+                res.status(400).json({ error: error.message })
+            }
+        })
+
+        api.get('/posts/mine', (req, res) => {
+            const userId = req.headers.authorization.slice(7)
+
+            try {
+                retrieveMyPosts(userId, (error, posts) => {
                     if (error) {
                         res.status(400).json({ error: error.message })
 
