@@ -27,7 +27,11 @@ function retrievePosts(userId, callback) {
 
                         const postLikesString = post.likes.map(like => like.toString())
                         
-                        post.likes = postLikesString
+                        post.likes = post.likes.map(userObjectId => userObjectId.toString())
+
+                        post.liked = post.likes.includes(userId)
+
+                        post.saved = user.saved.some(postObjectId => postObjectId.toString() === post.id)
                     })
 
                     callback(null, posts)

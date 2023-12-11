@@ -40,9 +40,15 @@ function Post(props) {
 
     function handleSaveClick() {
         try {
-            toggleSavePost(window.sessionUserId, post.id)
+            toggleSavePost(window.sessionUserId, post.id, error => {
+                if (error) {
+                    alert(error.message)
 
-            props.onSaveClick()
+                    return
+                }
+
+                props.onSaveClick()
+            })
         } catch (error) {
             alert(error.message)
         }
