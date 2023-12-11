@@ -24,8 +24,6 @@ function retrievePosts(userId, callback) {
                             post.author.id = post.author._id.toString()
                             delete post.author._id
                         }
-
-                        const postLikesString = post.likes.map(like => like.toString())
                         
                         post.likes = post.likes.map(userObjectId => userObjectId.toString())
 
@@ -34,7 +32,7 @@ function retrievePosts(userId, callback) {
                         post.saved = user.saved.some(postObjectId => postObjectId.toString() === post.id)
                     })
 
-                    callback(null, posts)
+                    callback(null, posts.reverse())
                 })
         })
         .catch(error => console.error(error))
