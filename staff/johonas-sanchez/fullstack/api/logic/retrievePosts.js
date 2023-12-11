@@ -32,7 +32,7 @@ function retrievePosts(userId, callback) {
                         post.saved = user.saved.some(postObjectId => postObjectId.toString() === post.id)
                     })
 
-                    callback(null, posts.reverse())
+                    callback(null, posts)
                 })
         })
         .catch(error => console.error(error))

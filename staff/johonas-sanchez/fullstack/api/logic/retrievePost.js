@@ -31,7 +31,7 @@ function retrievePost(userId, postId, callback) {
                     post.liked = post.likes.includes(userId)
                 })
 
-                callback(null, posts.reverse())
+                callback(null, posts)
             })
             
                 .catch(error => callback(error))
