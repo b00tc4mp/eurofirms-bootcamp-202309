@@ -11,9 +11,15 @@ function Post(props) {
 
     function handleLikeClick() {
         try {
-            toggleLikePost(window.sessionUserId, post.id)
+            toggleLikePost(window.sessionUserId, post.id, error => {
+                if (error) {
+                    alert(error.message)
 
-            props.onLikeClick()
+                    return
+                }
+
+                props.onLikeClick()
+            })
         } catch (error) {
             alert(error.message)
         }
