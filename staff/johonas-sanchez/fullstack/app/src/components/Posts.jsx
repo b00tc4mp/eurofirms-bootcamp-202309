@@ -3,7 +3,7 @@ import Post from "./Post"
 
 function Posts(props) {
    return (
-      <Container align="center" aria-label={props["aria-label"]}>
+      <Container className="md:grid md:grid-cols-2 lg:grid-cols-3 gap-20" align="center" aria-label={props["aria-label"]}>
          {props.posts.map(function (post) {
             return (
                <Post
