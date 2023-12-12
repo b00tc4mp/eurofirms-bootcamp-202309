@@ -29,19 +29,19 @@ function AllPosts(props) {
         }
     }
 
-    function handleLikeClick() {
+    function handlePostLikeToggled() {
         refreshPosts()
     }
 
-    function handleDeleteClick() {
+    function handlePostDeleted() {
         refreshPosts()
     }
 
-    function handleSaveClick(postId) {
+    function handlePostSaveToggled() {
         refreshPosts()
     }
 
-    return <Posts posts={posts} onLikeClick={handleLikeClick} onSaveClick={handleSaveClick} onDeleteClick={handleDeleteClick} />
+    return <Posts posts={posts} onPostLikeToggled={handlePostLikeToggled} onPostSaveToggled={handlePostSaveToggled} onPostDeleted={handlePostDeleted} />
 }
 
 export default AllPosts

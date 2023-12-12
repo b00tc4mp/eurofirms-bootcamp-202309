@@ -71,12 +71,16 @@ h2 {
     background-color: rgb(242, 131, 207);
 }
 
+.link:active {
+    color: rgb(0, 170, 255);
+}
+
 .post {
     padding: 0.5rem;
 }
 
 .post:hover {
-    background-color: rgb(237, 237, 237);
+    background-color: rgb(196, 238, 239);
 }
 
 .post-image {

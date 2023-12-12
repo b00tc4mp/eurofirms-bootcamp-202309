@@ -4,11 +4,14 @@ const mongoose = require('mongoose')
 const registerUser = require('./logic/registerUser')
 const authenticateUser = require('./logic/authenticateUser')
 const retrieveUser = require('./logic/retrieveUser')
-const createPost = require("./logic/createPost")
-const retrievePosts = require("./logic/retrievePosts")
-const toggleLikePost = require("./logic/toggleLikePost")
-const updateUserPassword = require("./logic/updateUserPassword")
-const toggleSavePost = require("./logic/toggleSavePost")
+const createPost = require('./logic/createPost')
+const retrievePosts = require('./logic/retrievePosts')
+const toggleLikePost = require('./logic/toggleLikePost')
+const updateUserPassword = require('./logic/updateUserPassword')
+const toggleSavePost = require('./logic/toggleSavePost')
+const deletePost = require('./logic/deletePost')
+const retrieveSavedPosts = require('./logic/retrieveSavedPosts')
+const retrieveMyPosts = require('./logic/retrieveMyPosts')
 
 mongoose.connect('mongodb://127.0.0.1/api')
     .then(() => {
@@ -114,7 +117,7 @@ mongoose.connect('mongodb://127.0.0.1/api')
         });
 
         api.get("/posts", (req, res) => {
-            const userId = req.headers.authorization.slice(7); // Para que nos quede el userId sin el Bearer
+            const userId = req.headers.authorization.slice(7); // Para que se nos quede el userId sin el Bearer
 
             try {
                 retrievePosts(userId, (error, posts) => {
@@ -130,6 +133,42 @@ mongoose.connect('mongodb://127.0.0.1/api')
                 res.status(400).json({ error: error.message });
             }
         });
+
+        api.get('/posts/saved', (req, res) => {
+            const userId = req.headers.authorization.slice(7)
+
+            try {
+                retrieveSavedPosts(userId, (error, posts) => {
+                    if (error) {
+                        res.status(400).json({ error: error.message })
+
+                        return
+                    }
+
+                    res.json(posts)
+                })
+            } catch (error) {
+                res.status(400).json({ error: error.message })
+            }
+        })
+
+        api.get('/posts/mine', (req, res) => {
+            const userId = req.headers.authorization.slice(7)
+
+            try {
+                retrieveMyPosts(userId, (error, posts) => {
+                    if (error) {
+                        res.status(400).json({ error: error.message })
+
+                        return
+                    }
+
+                    res.json(posts)
+                })
+            } catch (error) {
+                res.status(400).json({ error: error.message })
+            }
+        })
 
         api.patch("/posts/:postId/likes", (req, res) => {
             const userId = req.headers.authorization.slice(7);
@@ -150,7 +189,7 @@ mongoose.connect('mongodb://127.0.0.1/api')
             }
         });
 
-        api.patch("/posts/:postId/saves", (req, res) => {
+        api.patch("/posts/:postId/saved", (req, res) => {
             const userId = req.headers.authorization.slice(7);
             const postId = req.params.postId;
 
@@ -168,6 +207,25 @@ mongoose.connect('mongodb://127.0.0.1/api')
                 res.status(400).json({ error: error.message });
             }
         });
+
+        api.delete('/posts/:postId', (req, res) => {
+            const userId = req.headers.authorization.slice(7)
+            const postId = req.params.postId
+
+            try {
+                deletePost(userId, postId, error => {
+                    if (error) {
+                        res.status(400).json({ error: error.message })
+
+                        return
+                    }
+
+                    res.status(204).send()
+                })
+            } catch (error) {
+                res.status(400).json({ error: error.message })
+            }
+        })
 
         api.patch("/users/password", jsonBodyParser, (req, res) => {
             const userId = req.headers.authorization.slice(7)

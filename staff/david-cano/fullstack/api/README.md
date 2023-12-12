@@ -206,6 +206,72 @@ $ curl -H 'Authorization: Bearer 65684bc8dc4ef0943016343d' localhost:4000/posts 
 [{"author":{"name":"Wendy Darling","id":"65684bc8dc4ef0943016343d"},"image":"https://thispersondoesnotexist.com","imageDescription":"Unknown person","text":"Who is this?","likes":[],"id":"65686c275ef8e443ccc48336"}]
 ```
 
+### Retrieve saved posts
+
+```
+Request: GET /posts/saved 'Authorization: Bearer userId'
+Response: 200 [{ id, author: { id, name }, image, imageDescription, text, likes }]
+```
+
+Examples:
+
+```sh
+$ curl -H 'Authorization: Bearer 65684c87dc4ef0943016343f' localhost:4000/posts/saved -v
+
+> GET /posts/saved HTTP/1.1
+> Host: localhost:4000
+> User-Agent: curl/8.1.2
+> Accept: */*
+> Authorization: Bearer 65684c87dc4ef0943016343f
+
+< HTTP/1.1 200 OK
+< X-Powered-By: Express
+< Access-Control-Allow-Origin: *
+< Access-Control-Allow-Methods: *
+< Access-Control-Allow-Headers: *
+< Content-Type: application/json; charset=utf-8
+< Content-Length: 930
+< ETag: W/"3a2-kdM6M48vIi1zRcdFmRpTew+Vm48"
+< Date: Mon, 11 Dec 2023 11:47:30 GMT
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+
+[{"author":{"name":"Mar Mota","id":"656db3fad816cd234ffab874"},"image":"https://wallpapers.com/images/hd/cute-minion-happy-bob-v1x9tfcn0rznkvvd.jpg","imageDescription":"minion image","text":"hello minion","likes":[],"id":"656ef24d673674120e518540","liked":false,"saved":true},{"author":{"name":"Peter Pan","id":"65684c87dc4ef0943016343f"},"image":"https://ichef.bbci.co.uk/news/640/amz/worldservice/live/assets/images/2014/09/29/140929092057_mafalda_promo_624x351_joaquins.lavadoquino.jpg","imageDescription":"pedro image","text":"hola pedro!","likes":[],"id":"6571b4fb8d231365bd5e62d7","liked":false,"saved":true},{"author":{"name":"Peter Pan","id":"65684c87dc4ef0943016343f"},"image":"https://upload.wikimedia.org/wikipedia/en/thumb/5/53/Scooby-Doo.png/150px-Scooby-Doo.png","imageDescription":"scooby image","text":"hello scooby!","likes":["65684c87dc4ef0943016343f"],"id":"6571b5754fba0c76963acd33","liked":true,"saved":true}]
+```
+
+### Retrieve my posts
+
+```
+Request: GET /posts/mine 'Authorization: Bearer userId'
+Response: 200 [{ id, author: { id, name }, image, imageDescription, text, likes }]
+```
+
+Examples:
+
+```sh
+$ curl -H 'Authorization: Bearer 65684c87dc4ef0943016343f' localhost:4000/posts/mine -v
+
+> GET /posts/mine HTTP/1.1
+> Host: localhost:4000
+> User-Agent: curl/8.1.2
+> Accept: */*
+> Authorization: Bearer 65684c87dc4ef0943016343f
+
+< HTTP/1.1 200 OK
+< X-Powered-By: Express
+< Access-Control-Allow-Origin: *
+< Access-Control-Allow-Methods: *
+< Access-Control-Allow-Headers: *
+< Content-Type: application/json; charset=utf-8
+< Content-Length: 655
+< ETag: W/"28f-qixTT3H0KJQuMjDqV+l4TSLhIZg"
+< Date: Mon, 11 Dec 2023 11:54:58 GMT
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+
+[{"author":{"name":"Peter Pan","id":"65684c87dc4ef0943016343f"},"image":"https://ichef.bbci.co.uk/news/640/amz/worldservice/live/assets/images/2014/09/29/140929092057_mafalda_promo_624x351_joaquins.lavadoquino.jpg","imageDescription":"pedro image","text":"hola pedro!","likes":[],"id":"6571b4fb8d231365bd5e62d7","liked":false,"saved":true},{"author":{"name":"Peter Pan","id":"65684c87dc4ef0943016343f"},"image":"https://upload.wikimedia.org/wikipedia/en/thumb/5/53/Scooby-Doo.png/150px-Scooby-Doo.png","imageDescription":"scooby image","text":"hello scooby!","likes":["65684c87dc4ef0943016343f"],"id":"6571b5754fba0c76963acd33","liked":true,"saved":true}]
+```
+
 ### Toggle like post
 
 ```
@@ -234,16 +300,16 @@ $ curl -H 'Authorization: Bearer 65684bc8dc4ef0943016343d' -X PATCH localhost:40
 ### Toggle save post
 
 ```
-Request: PATCH /posts/postId/saves 'Authorization: Bearer userId'
+Request: PATCH /posts/postId/saved 'Authorization: Bearer userId'
 Response: 204
 ```
 
 Examples:
 
 ```sh
-$ curl -H 'Authorization: Bearer 65684bc8dc4ef0943016343d' -X PATCH localhost:4000/posts/65686c275ef8e443ccc48336/saves -v
+$ curl -H 'Authorization: Bearer 65684bc8dc4ef0943016343d' -X PATCH localhost:4000/posts/65686c275ef8e443ccc48336/saved -v
 
-> PATCH /posts/65686c275ef8e443ccc48336/saves HTTP/1.1
+> PATCH /posts/65686c275ef8e443ccc48336/saved HTTP/1.1
 > Host: localhost:4000
 > User-Agent: curl/8.1.2
 > Accept: */*
@@ -257,6 +323,82 @@ $ curl -H 'Authorization: Bearer 65684bc8dc4ef0943016343d' -X PATCH localhost:40
 < Date: Tue, 05 Dec 2023 11:06:18 GMT
 < Connection: keep-alive
 < Keep-Alive: timeout=5
+```
+
+### Delete post
+
+```
+Request: DELETE /posts/postId 'Authorization: Bearer userId'
+Response: 204
+```
+
+Examples:
+
+```sh
+$ curl -H 'Authorization: Bearer 65684bc8dc4ef0943016343d' -X DELETE localhost:4000/posts/65686c275ef8e443ccc48336 -v
+
+> DELETE /posts/65686c275ef8e443ccc48336 HTTP/1.1
+> Host: localhost:4000
+> User-Agent: curl/8.1.2
+> Accept: */*
+> Authorization: Bearer 65684bc8dc4ef0943016343d
+
+< HTTP/1.1 204 No Content
+< X-Powered-By: Express
+< Access-Control-Allow-Origin: *
+< Access-Control-Allow-Methods: *
+< Access-Control-Allow-Headers: *
+< Date: Mon, 11 Dec 2023 11:11:57 GMT
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+```
+
+```sh
+$ curl -H 'Authorization: Bearer 65684bc8dc4ef0943016343d' -X DELETE localhost:4000/posts/65686c275ef8e443ccc48336 -v
+
+> DELETE /posts/65686c275ef8e443ccc48336 HTTP/1.1
+> Host: localhost:4000
+> User-Agent: curl/8.1.2
+> Accept: */*
+> Authorization: Bearer 65684bc8dc4ef0943016343d
+
+< HTTP/1.1 400 Bad Request
+< X-Powered-By: Express
+< Access-Control-Allow-Origin: *
+< Access-Control-Allow-Methods: *
+< Access-Control-Allow-Headers: *
+< Content-Type: application/json; charset=utf-8
+< Content-Length: 26
+< ETag: W/"1a-5+ZrVJxQInF12KySW9ol3Ua/ZF0"
+< Date: Mon, 11 Dec 2023 11:12:56 GMT
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+
+{"error":"post not found"}
+```
+
+```sh
+$ curl -H 'Authorization: Bearer 65684bc8dc4ef0943016343d' -X DELETE localhost:4000/posts/656eef3a673674120e51852e -v
+
+> DELETE /posts/656eef3a673674120e51852e HTTP/1.1
+> Host: localhost:4000
+> User-Agent: curl/8.1.2
+> Accept: */*
+> Authorization: Bearer 65684bc8dc4ef0943016343d
+ 
+< HTTP/1.1 400 Bad Request
+< X-Powered-By: Express
+< Access-Control-Allow-Origin: *
+< Access-Control-Allow-Methods: *
+< Access-Control-Allow-Headers: *
+< Content-Type: application/json; charset=utf-8
+< Content-Length: 40
+< ETag: W/"28-MKl4+Ecpn7arIO2VXgLKBJ29K5k"
+< Date: Mon, 11 Dec 2023 11:15:13 GMT
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+
+{"error":"post does not belong to user"}%
 ```
 
 ### Update user password

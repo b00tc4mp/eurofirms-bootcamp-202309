@@ -6,7 +6,7 @@ function Posts(props) {
     
     return <Container align="center" aria-label={props['aria-label']}>
         {props.posts.map(function (post) {
-            return <Post key={post.id} post={post} onLikeClick={props.onLikeClick} onSaveClick={props.onSaveClick} onDeleteClick={props.onDeleteClick} />
+            return <Post key={post.id} post={post} onLikeToggled={props.onPostLikeToggled} onSaveToggled={props.onPostSaveToggled} onDeleted={props.onPostDeleted} />
         })}
     </Container>
 }

@@ -11,9 +11,15 @@ function Post(props) {
 
     function handleLikeClick() {
         try {
-            toggleLikePost(window.sessionUserId, post.id)
+            toggleLikePost(window.sessionUserId, post.id, error => {
+                if (error) {
+                    alert(error.message)
 
-            props.onLikeClick()
+                    return
+                }
+
+                props.onLikeToggled()
+            })
         } catch (error) {
             alert(error.message)
         }
@@ -24,9 +30,15 @@ function Post(props) {
 
         if (confirmed)
         try {
-            deletePost(sessionUserId, post.id)
+            deletePost(sessionUserId, post.id, error => {
+                if (error) {
+                    alert(error.message)
 
-            props.onDeleteClick()
+                    return
+                }
+
+                props.onDeleted()
+            })
         } catch (error) {
             alert(error.message)
         }
@@ -34,9 +46,15 @@ function Post(props) {
 
     function handleSaveClick() {
         try {
-            toggleSavePost(window.sessionUserId, post.id)
+            toggleSavePost(window.sessionUserId, post.id, error => {
+                if (error) {
+                    alert(error.message)
 
-            props.onSaveClick()
+                    return
+                }
+
+                props.onSaveToggled()
+            })
         } catch (error) {
             alert(error.message)
         }
@@ -54,7 +72,7 @@ function Post(props) {
 
         <Button onClick={handleLikeClick}title={post.liked ? 'Unlike' : 'Like'} aria-label={post.liked ? 'Unlike' : 'Like'}>{(post.liked ? '😍' : '😒') + ' ' + post.likes.length + ' likes'}</Button>
 
-        <Button onClick={handleSaveClick}title={post.liked ? 'Unsave' : 'Save'} aria-label={post.liked ? 'Unsave' : 'Save'}>{(post.saved ? '⭐' : '✡️')}</Button>
+        <Button onClick={handleSaveClick}title={post.liked ? 'Unsave' : 'Save'} aria-label={post.saved ? 'Unsave' : 'Save'}>{(post.saved ? '⭐' : '✡️')}</Button>
 
         {post.author.id === window.sessionUserId ? <Button title="Delete" aria-label="Delete" onClick={handleDeleteClick}>🚮</Button> : null}
     </article>
