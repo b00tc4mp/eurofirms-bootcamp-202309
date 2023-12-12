@@ -74,17 +74,17 @@ function Home(props) {
         setView('my-posts')
     }
 
-    return <Container align="center">
-        <header className="flex justify-between items-center md:min-w-[500px] lg:min-w-[768px]" aria-label="Header">
-            <Link className="hidden lg:block" onClick={handleHomeClick}><Logo /></Link>
+    return <Container>
+        <header className="header" aria-label="Header">
+            <Link onClick={handleHomeClick}><Logo /></Link>
 
-            <Button className="hidden lg:block" title="New post" aria-label="New post (+)" onClick={handleNewPostClick}>+</Button>
+            <span aria-label="User name">{name}</span>
+
+            <Button title="New post" aria-label="New post (+)" onClick={handleNewPostClick}>+</Button>
 
             <Link onClick={handleSavedClick}>Saved</Link>
 
             <Link onClick={handleMyPostsClick}>My posts</Link>
-
-            <span aria-label="User name">{name}</span>
 
             <Button onClick={handleLogoutClick}>Logout</Button>
         </header>
@@ -96,13 +96,6 @@ function Home(props) {
         {view === 'saved' ? <SavedPosts /> : null}
 
         {view === 'my-posts' ? <MyPosts /> : null}
-
-        <div className="h-[2rem]"></div>
-
-        <footer className="bg-white fixed bottom-0 w-full flex justify-center items-center h-[2rem] lg:hidden">
-            <Link onClick={handleHomeClick}><Logo /></Link>
-            <Button title="New post" aria-label="New post (+)" onClick={handleNewPostClick}>+</Button>
-        </footer>
     </Container>
 }
 

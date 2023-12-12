@@ -36,7 +36,7 @@ function Logo() {
             Your browser does not support the audio element.
         </audio> */}
 
-        <audio className="hidden" id="tweet-audio" controls ref={tweetAudioRef}>
+        <audio id="tweet-audio" controls ref={tweetAudioRef}>
             <source src="https://cdn.freesound.org/previews/360/360306_6437556-lq.ogg" type="audio/ogg" />
             <source src="https://cdn.freesound.org/previews/360/360306_6437556-lq.mp3" type="audio/mpeg" />
             Your browser does not support the audio element.
