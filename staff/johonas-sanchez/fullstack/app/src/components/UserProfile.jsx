@@ -28,7 +28,7 @@ return<><Container>
     {view === 'change-email' && 
     <Container>
         <Form>
-            <Field>1</Field>
+            <Field>Change Email</Field>
             <Field></Field>
             <Field></Field>
             <Button>Enviar</Button>
@@ -39,7 +39,7 @@ return<><Container>
     {view === 'change-password' && 
     <Container>
         <Form>
-            <Field>2</Field>
+            <Field>Change Password</Field>
             <Field></Field>
             <Field></Field>
             <Button>Enviar</Button>
