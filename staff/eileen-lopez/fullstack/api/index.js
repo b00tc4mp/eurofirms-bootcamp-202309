@@ -207,7 +207,7 @@ api.patch('/posts/:postId/saved', (req, res) => {
                     res.status(400).json({ error: error.message })
                     return
                 }
-                res.status(204).
+                res.status(204).send()
             })
         } catch (error) {
             res.status(400)

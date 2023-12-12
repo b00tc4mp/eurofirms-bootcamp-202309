@@ -1,20 +1,20 @@
-const req= {
-    method: 'PATCH',
+const req = {
+    method: 'GET',
     headers: {
-        Authorization: 'Bearer 6565d569fd874b98654ee32f'
+        Authorization: 'Bearer 6565d569fd874b98654ee32f',
     },
 }
 
-fetch('https://localhost:4000/posts/6565d5c37b007c99782d1323/likes', req)
+fetch('http://localhost:4000/posts/user', req)
     .then(res => {
         if (!res.ok) {
             res.json()
                 .then(body => console.error(body))
                 .catch(error => console.error(error))
-
             return
         }
-
-        console.log(res.status)
+        res.json()
+            .then(posts => console.log(res.status, posts))
+            .catch(error => console.error(error))
     })
     .catch(error => console.error(error))
