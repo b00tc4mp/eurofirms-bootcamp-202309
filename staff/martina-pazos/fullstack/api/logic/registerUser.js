@@ -13,6 +13,7 @@ function registerUser(name, email, password, callback) {
         .catch(error => {
             if (error.code === 11000) {
                 callback(new Error('user already exists'))
+
                 return
             }
 

@@ -1,6 +1,5 @@
-function validateText(text, sxplain) {
-    if (typeof text !== 'string') throw new TypeError
-        (explain + 'is not a string')
+function validateText(text, explain) {
+    if (typeof text !== 'string') throw new TypeError(explain + 'is not a string')
     if (text.trim().length === 0) throw new Error(explain + 'is empty')
 }
 

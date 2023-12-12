@@ -4,16 +4,16 @@ const { User, Post } = require('../data/models')
 function retrieveMyPosts(userId, callback) {
     validateText(userId, 'userId')
     validateFunction(callback, 'callback')
-
+    debugger
     User.findById(userId)
-        .then(user = {
-            if(!user) {
+        .then(user => {
+            if (!user) {
                 callback(new Error('User not found'))
 
                 return
             }
 
-        Post.find({ author: userId }).select('__v').populate('áuthor', 'name').lean()
+            Post.find({ author: userId }).select('__v').populate('author', 'name').lean()
                 .then(posts => {
                     posts.forEach(post => {
                         post.id = post._id.toString()
@@ -23,14 +23,18 @@ function retrieveMyPosts(userId, callback) {
                             post.author.id = post.author._id.toString()
                             delete post.author._id
                         }
+                        //debuguer
+                        post.likes = post.likes.map(userObjectId => userObjectId.toString())
+                        post.liked = post.likes.includes(userId)
+
+                        post.saved = user.saved.some(postObjectId => postObjectId.toString() === post.id)
                     })
+
                     callback(null, posts)
                 })
                 .catch(error => callback(error))
-
         })
         .catch(error => callback(error))
 }
-module.exports = retrieneMyPosts
 
-
+module.exports = retrieveMyPosts

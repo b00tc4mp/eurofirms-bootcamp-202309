@@ -16,7 +16,7 @@ function deletePost(userId, postId, callback) {
             Post.findById(postId)
                 .then(post => {
                     if (!post) {
-                        callback(new Error(post not found))
+                        callback(new Error('post not found'))
 
                         return
                     }
@@ -37,4 +37,4 @@ function deletePost(userId, postId, callback) {
 
 }
 
-module.exports.deletePost
+module.exports = deletePost
