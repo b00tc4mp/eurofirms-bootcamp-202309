@@ -1,8 +1,9 @@
-import { validateEmail, validatePassword } from '../utils/validators'
+import { validateEmail, validatePassword, validateFunction } from '../utils/validators'
 
-function authenticateUser(email, password) {
+function authenticateUser(email, password, callback) {
     validateEmail(email)
     validatePassword(password)
+    validateFunction(callback, 'callback')
 
     const req = {
         method: 'POST',
@@ -16,17 +17,17 @@ function authenticateUser(email, password) {
         .then(res => {
             if (!res.ok) {
                 res.json()
-                    .then(body => console.error(body))
-                    .catch(error => console.error(error.message))
+                    .then(body => callback(body))
+                    .catch(error => callback(error.message))
 
                 return
             }
 
             res.json()
-                .then(body => console.log('user authenticated', body))
-                .catch(error => console.error(error))
+                .then(body => callback(null, body))
+                .catch(error => callback(error))
         })
-        .catch(error => console.error(error))
+        .catch(error => callback(error))
 }
 
 export default authenticateUser

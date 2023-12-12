@@ -1,13 +1,14 @@
-import { validateText } from "../utils/validators"
+import { validateText, validateFunction } from "../utils/validators"
 
 function deletePost(userId, postId) {
     validateText(userId, 'user id')
     validateText(postId, 'post id')
+    validateFunction(callback, 'callback')
 
     const req = {
         method: 'DELETE',
         headers: {
-            Authorization: 'Bearer userId',
+            Authorization: `Bearer ${userId}`,
         },
     }
 

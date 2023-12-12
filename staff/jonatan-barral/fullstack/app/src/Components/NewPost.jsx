@@ -6,7 +6,6 @@ import Button from './Button'
 import createNewPost from '../logic/createNewPost'
 
 function NewPost(props) {
-    console.log('NewPost')
 
     function handleNewPostSubmit(event) {
         event.preventDefault()
@@ -20,9 +19,15 @@ function NewPost(props) {
         const text = textInput.value
 
         try {
-            createNewPost(window.sessionUserId, image, imageDescription, text)
+            createNewPost(window.sessionUserId, image, imageDescription, text, error => {
+                if (error) {
+                    alert(error.message)
 
-            props.onNewPostSubmit()
+                    return
+                }
+
+                props.onNewPostSubmit()
+            })
         } catch (error) {
             alert(error.message)
         }

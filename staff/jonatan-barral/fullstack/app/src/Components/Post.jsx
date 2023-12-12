@@ -1,17 +1,24 @@
-import toggleLikePost from "../logic/toggleLikePost"
-import toggleSavePost from "../logic/toggleSavePost"
-import deletePost from "../logic/deletePost"
+import toggleLikePost from '../logic/toggleLikePost'
+import deletePost from '../logic/deletePost'
+import toggleSavePost from '../logic/toggleSavePost'
 
-import Button from "./Button"
+import Button from './Button'
 
 function Post(props) {
+
     const post = props.post
 
     function handleLikeClick() {
         try {
-            toggleLikePost(window.sessionUserId, post.id)
+            toggleLikePost(window.sessionUserId, post.id, error => {
+                if (error) {
+                    alert(error.message)
 
-            props.onLikeClick()
+                    return
+                }
+
+                props.onLikeToggled()
+            })
         } catch (error) {
             alert(error.message)
         }
@@ -22,9 +29,15 @@ function Post(props) {
 
         if (confirmed)
             try {
-                deletePost(sessionUserId, post.id)
+                deletePost(sessionUserId, post.id, error => {
+                    if (error) {
+                        alert(error.message)
 
-                props.onDeleteClick()
+                        return
+                    }
+
+                    props.onDeleted()
+                })
             } catch (error) {
                 alert(error.message)
             }
@@ -32,14 +45,21 @@ function Post(props) {
 
     function handleSaveClick() {
         try {
-            toggleSavePost(window.sessionUserId, post.id)
+            toggleSavePost(window.sessionUserId, post.id, error => {
+                if (error) {
+                    alert(error.message)
 
-            props.onSaveClick()
+                    return
+                }
+
+                props.onSaveToggled()
+            })
         } catch (error) {
             alert(error.message)
         }
     }
-    return <article key={post.id} className="post">
+
+    return <article className="post">
         <h3>{post.author.name}</h3>
 
         <img className="post-image"
@@ -54,7 +74,6 @@ function Post(props) {
         <Button onClick={handleSaveClick} title={post.saved ? 'Unsave' : 'sSave'} aria-label={post.saved ? 'Unsave' : 'Save'}>{(post.saved ? '⭐️' : '✩')}</Button>
 
         {post.author.id === window.sessionUserId ? <Button title="Delete" aria-label="Delete" onClick={handleDeleteClick}>🗑️</Button> : null}
-
     </article>
 }
 

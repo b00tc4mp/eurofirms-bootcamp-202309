@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import retrieveUser from '../logic/retrieveUser'
 
@@ -10,24 +10,32 @@ import SavedPosts from '../components/SavedPosts'
 import AllPosts from '../components/AllPosts'
 import NewPost from '../components/NewPost'
 
+import Logo from '../components/Logo'
+
 function Home(props) {
 
     const [view, setView] = useState(null)
+    const [name, setName] = useState(null)
+    const [timestamp, setTimestamp] = useState(null)
 
-    let name = null
+    useEffect(() => {
+        try {
+            retrieveUser(window.sessionUserId, (error, user) => {
+                if (error) {
+                    alert(error.message)
 
-    try {
-        const user = retrieveUser(window.sessionUserId)
+                    return
+                }
 
-        name = user.name
-    } catch (error) {
-        alert(error.message)
-    }
-
-
+                setName(user.name)
+            })
+        } catch (error) {
+            alert(error.message)
+        }
+    }, [])
 
     function handleLogoutClick() {
-        sessionUserId = null
+        window.sessionUserId = null
 
         props.onLogout()
     }
@@ -42,6 +50,7 @@ function Home(props) {
 
     function handleNewPostSubmit() {
         setView(null)
+        setTimestamp(Date.now())
     }
 
     function handleSavedClick(event) {
@@ -64,17 +73,21 @@ function Home(props) {
 
     return <Container>
         <header className="header" aria-label="Header">
-            <h1><Link onClick={handleHomeClick}>Home</Link></h1>
+
             <span aria-label="User name">{name}</span>
-            <Button title="New post" aria-label="New post" onClick={handleNewPostClick}>+</Button>
+
+            <Button title="New post" aria-label="New post (+)" onClick={handleNewPostClick}>+</Button>
+
             <Link onClick={handleSavedClick}>Saved</Link>
+
             <Link onClick={handleMyPostsClick}>My posts</Link>
+
             <Button onClick={handleLogoutClick}>Logout</Button>
         </header>
 
         {view === 'new-post' ? <NewPost onNewPostSubmit={handleNewPostSubmit} onNewPostCancelClick={handleNewPostCancelClick} /> : null}
 
-        {view === null || view === 'new-post' ? <AllPosts /> : null}
+        {view === null || view === 'new-post' ? <AllPosts timestamp={timestamp} /> : null}
 
         {view === 'saved' ? <SavedPosts /> : null}
 

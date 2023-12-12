@@ -5,7 +5,6 @@ import Posts from './Posts'
 import retrieveMyPosts from '../logic/retrieveMyPosts'
 
 function MyPosts() {
-    console.log('MyPosts')
 
     const [timestamp, setTimestamp] = useState(null)
 

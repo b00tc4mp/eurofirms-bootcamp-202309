@@ -3,32 +3,38 @@ function validateText(text, explain) {
     if (text.trim().length === 0) throw new Error(explain + ' is empty')
 }
 
-function validateEmail(email) {
-    validateText(email, 'email')
-    if (!email.includes('@')) throw new Error('email is not valid')
-    if (!email.includes('.')) throw new Error('email is not valid')
+function validateEmail(email, explain) {
+    validateText(email, explain)
+
+    if (!email.includes('@')) throw new Error(explain + ' is not valid')
+    if (!email.includes('.')) throw new Error(explain + ' is not valid')
 }
 
-function validatePassword(password) {
-    validateText(password, 'password')
-    if (password.length < 8) throw new RangeError('password length is lower than 8')
-}
+function validatePassword(password, explain) {
+    validateText(password, explain)
 
+    if (password.length < 8) throw new RangeError(explain + ' length is lower than 8')
+}
 
 function validateUrl(url, explain) {
     validateText(url, explain)
+
     if (!url.startsWith('http')) throw new Error(explain + ' is not valid')
 }
-
 
 function validateNumber(number, explain) {
     if (typeof number !== 'number') throw new TypeError(explain + ' is not a number')
 }
 
+function validateFunction(func, explain) {
+    if (typeof func !== 'function') throw new TypeError(explain + ' is not a function')
+}
+
 export {
-    validateEmail,
-    validateNumber,
-    validatePassword,
     validateText,
+    validateEmail,
+    validatePassword,
     validateUrl,
+    validateNumber,
+    validateFunction
 }

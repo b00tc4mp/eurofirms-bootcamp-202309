@@ -1,5 +1,4 @@
 const express = require('express')
-
 const mongoose = require('mongoose')
 
 const registerUser = require('./logic/registerUser')
@@ -22,20 +21,6 @@ mongoose.connect('mongodb://127.0.0.1/api')
     .then(() => {
         const api = express()
 
-        api.get('/helloworld', (req, res) => {
-            res.send('Hello, World!')
-        })
-
-        api.get('/holamundo', (req, res) => {
-            res.send('Hola Mundo!')
-        })
-
-        api.get('/hello', (req, res) => {
-            const name = req.query.name
-
-            res.send(`Hello, ${name}!`)
-        })
-
         const jsonBodyParser = express.json()
 
         const cors = (req, res, next) => {
@@ -45,6 +30,7 @@ mongoose.connect('mongodb://127.0.0.1/api')
 
             next()
         }
+
 
         api.use('*', cors)
 
@@ -87,7 +73,7 @@ mongoose.connect('mongodb://127.0.0.1/api')
         })
 
         api.get('/users', (req, res) => {
-            const userId = req.headers.authorication.slice(7)
+            const userId = req.headers.authorization.slice(7)
 
             try {
                 retrieveUser(userId, (error, user) => {
@@ -142,7 +128,25 @@ mongoose.connect('mongodb://127.0.0.1/api')
             }
         })
 
-        api.get('/posts/user', (req, res) => {
+        api.get('/posts/saved', (req, res) => {
+            const userId = req.headers.authorization.slice(7)
+
+            try {
+                retrieveSavedPosts(userId, (error, posts) => {
+                    if (error) {
+                        res.status(400).json({ error: error.message })
+
+                        return
+                    }
+
+                    res.json(posts)
+                })
+            } catch (error) {
+                res.status(400).json({ error: error.message })
+            }
+        })
+
+        api.get('/posts/mine', (req, res) => {
             const userId = req.headers.authorization.slice(7)
 
             try {
@@ -159,44 +163,6 @@ mongoose.connect('mongodb://127.0.0.1/api')
                 res.status(400).json({ error: error.message })
             }
         })
-
-        api.get('/posts/    saved', (req, res) => {
-            const userId = req.headers.authorization.slice(7)
-
-            try {
-                retrieveSavePosts(userId, (error, posts) => {
-                    if (error) {
-                        res.status(400).json({ error: error.message })
-
-                        return
-                    }
-
-                    res.json(posts)
-                })
-            } catch (error) {
-                res.status(400).json({ error: error.message })
-            }
-        })
-
-        api.patch("/posts/:postId/saves", (req, res) => {
-            const userId = req.headers.authorization.slice(7)
-            const postId = req.params.postId;
-
-            try {
-                toggleSavePost(userId, postId, (error) => {
-                    if (error) {
-                        res.status(400).json({ error: error.message })
-
-                        return
-                    }
-
-                    res.status(204).send()
-                })
-            } catch (error) {
-                res.status(400).json({ error: error.message })
-            }
-        })
-
 
         api.patch('/posts/:postId/likes', (req, res) => {
             const userId = req.headers.authorization.slice(7)
@@ -217,8 +183,45 @@ mongoose.connect('mongodb://127.0.0.1/api')
             }
         })
 
+        api.patch('/posts/:postId/saved', (req, res) => {
+            const userId = req.headers.authorization.slice(7)
+            const postId = req.params.postId
 
-        api.patch("/users/password", (req, res) => {
+            try {
+                toggleSavePost(userId, postId, error => {
+                    if (error) {
+                        res.status(400).json({ error: error.message })
+
+                        return
+                    }
+
+                    res.status(204).send()
+                })
+            } catch (error) {
+                res.status(400).json({ error: error.message })
+            }
+        })
+
+        api.delete('/posts/:postId', (req, res) => {
+            const userId = req.headers.authorization.slice(7)
+            const postId = req.params.postId
+
+            try {
+                deletePost(userId, postId, error => {
+                    if (error) {
+                        res.status(400).json({ error: error.message })
+
+                        return
+                    }
+
+                    res.status(204).send()
+                })
+            } catch (error) {
+                res.status(400).json({ error: error.message })
+            }
+        })
+
+        api.patch('/users/password', jsonBodyParser, (req, res) => {
             const userId = req.headers.authorization.slice(7)
 
             const body = req.body
@@ -234,29 +237,6 @@ mongoose.connect('mongodb://127.0.0.1/api')
 
                     res.status(204).send()
                 })
-
-            } catch (error) {
-                res.status(400).json({ error: error.message })
-            }
-        })
-
-        api.patch("/users/email", (req, res) => {
-            const userId = req.headers.authorization.slice(7)
-
-            const body = req.body
-            const { newEmail, repeatNewEmail, password } = body
-
-            try {
-                updateUserEmail(userId, newEmail, repeatNewEmail, password, error => {
-                    if (error) {
-                        res.status(400).json({ error: error.message })
-
-                        return
-                    }
-
-                    res.status(204).send()
-                })
-
             } catch (error) {
                 res.status(400).json({ error: error.message })
             }

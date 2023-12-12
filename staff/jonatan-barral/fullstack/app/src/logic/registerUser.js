@@ -1,11 +1,10 @@
-import { validateText, validateEmail, validatePassword } from '../utils/validators'
-import db from '../data/managers'
+import { validateText, validateEmail, validatePassword, validateFunction } from '../utils/validators'
 
-
-function registerUser(name, email, password) {
+function registerUser(name, email, password, callback) {
     validateText(name, 'name')
     validateEmail(email)
     validatePassword(password)
+    validateFunction(callback, 'callback')
 
     const req = {
         method: 'POST',

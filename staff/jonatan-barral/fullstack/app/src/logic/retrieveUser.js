@@ -1,15 +1,31 @@
-import { validateText } from '../utils/validators'
-import db from '../data/managers'
+import { validateText, validateFunction } from '../utils/validators'
 
-function retrieveUser(userId) {
+function retrieveUser(userId, callback) {
     validateText(userId, 'user id')
+    validateFunction(callback, 'callback')
 
-    const user = db.findUserById(userId)
+    const req = {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${userId}`,
+        },
+    }
 
-    if (!user)
-        throw new Error('User not found')
+    fetch('http://localhost:4000/users', req)
+        .then(res => {
+            if (!res.ok) {
+                res.json()
+                    .then(body => callback(new Error(body.error)))
+                    .catch(error => callback(error))
 
-    return user
+                return
+            }
+
+            res.json()
+                .then(body => callback(null, body))
+                .catch(error => callback(error))
+        })
+        .catch(error => callback(error))
 }
 
 export default retrieveUser
