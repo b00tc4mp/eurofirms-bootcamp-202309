@@ -83,15 +83,13 @@ function Home(props) {
         <header className="flex justify-between items-center md:min-w-[500px] lg:min-w-[768px] mt-3 mb-5 bg-[ghostwhite]" aria-label="Header">
             <Link className="hidden lg:block" onClick={handleHomeClick}><Logo /></Link>
 
-            <Link onClick={handleUserClick} aria-label="User name">{name}</Link>
-
             <Button className="hidden lg:block" title="New post" aria-label="New post (+)" onClick={handleNewPostClick}>+</Button>
 
             <Link onClick={handleSavedClick}>Saved</Link>
 
             <Link onClick={handleMyPostsClick}>My posts</Link>
 
-            <span aria-label="User name">{name}</span>
+            <Link onClick={handleUserClick} aria-label="User name">{name}</Link>
 
             <Button onClick={handleLogoutClick}>Logout</Button>
         </header>
