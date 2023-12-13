@@ -15,7 +15,7 @@ function AllPosts(props) {
 
    function refreshPosts() {
       try {
-         retrievePosts(window.sessionUserId, (error, posts) => {
+         retrievePosts(sessionStorage.userId, (error, posts) => {
             if (error) {
                alert(error.message)
 

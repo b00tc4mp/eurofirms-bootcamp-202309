@@ -22,7 +22,7 @@ function Home(props) {
 
    useEffect(() => {
       try {
-         retrieveUser(window.sessionUserId, (error, user) => {
+         retrieveUser(sessionStorage.userId, (error, user) => {
             if (error) {
                alert(error.message)
 
@@ -37,7 +37,7 @@ function Home(props) {
    }, [])
 
    function handleLogoutClick() {
-      window.sessionUserId = null
+      delete sessionStorage.userId
 
       props.onLogout()
    }
