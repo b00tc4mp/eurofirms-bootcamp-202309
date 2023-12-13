@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-import Posts from '../components/Posts'
+import Posts from './Posts'
 
 import retrievePosts from '../logic/retrievePosts'
 
@@ -40,7 +40,7 @@ function AllPosts(props) {
         refreshPosts()
     }
 
-    return <Posts posts={posts} onLikeClick={handleLikeClick} onSaveClick={handleSaveClick} onDeleteClick={handleDeleteClick} />
+    return <Posts posts={posts} onPostLikeToggled={handleLikeClick} onPostSaveToggled={handleSaveClick} onPostDeleted={handleDeleteClick} />
 }
 
 export default AllPosts

@@ -5,7 +5,6 @@ import retrieveSavedPosts from '../logic/retrieveSavedPosts'
 import Posts from './Posts'
 
 function SavedPosts() {
-    console.log('SavedPosts')
 
     const [posts, setPosts] = useState([])
 

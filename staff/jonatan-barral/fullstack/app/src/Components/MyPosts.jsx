@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import Posts from './Posts'
 
@@ -6,33 +6,41 @@ import retrieveMyPosts from '../logic/retrieveMyPosts'
 
 function MyPosts() {
 
-    const [timestamp, setTimestamp] = useState(null)
+    const [posts, setPosts] = useState([])
 
-    let posts = null
-
-    try {
-        posts = retrieveMyPosts(window.sessionUserId)
-    } catch (error) {
-        alert(error.message)
-    }
+    useEffect(() => {
+        refreshPosts()
+    }, [])
 
     function refreshPosts() {
-        setTimestamp(Date.now())
+        try {
+            retrieveMyPosts(window.sessionUserId, (error, posts) => {
+                if (error) {
+                    alert(error.message)
+
+                    return
+                }
+
+                setPosts(posts)
+            })
+        } catch (error) {
+            alert(error.message)
+        }
     }
 
-    function handleLikeClick() {
+    function handlePostLikeToggled() {
         refreshPosts()
     }
 
-    function handleSaveClick() {
+    function handlePostDeleted() {
         refreshPosts()
     }
 
-    function handleDeleteClick() {
+    function handlePostSaveToggled() {
         refreshPosts()
     }
 
-    return <Posts posts={posts} onLikeClick={handleLikeClick} onSaveClick={handleSaveClick} onDeleteClick={handleDeleteClick} />
+    return <Posts posts={posts} onPostLikeToggled={handlePostLikeToggled} onPostSaveToggled={handlePostSaveToggled} onPostDeleted={handlePostDeleted} />
 }
 
 export default MyPosts

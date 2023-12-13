@@ -73,6 +73,7 @@ function Home(props) {
 
     return <Container>
         <header className="header" aria-label="Header">
+            <Link className="hidden lg:block" onClick={handleHomeClick}><Logo /></Link>
 
             <span aria-label="User name">{name}</span>
 
