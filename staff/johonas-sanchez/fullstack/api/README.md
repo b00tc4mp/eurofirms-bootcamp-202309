@@ -32,7 +32,7 @@ $ curl -H 'Content-Type: application/json' -d '{ "name": "Wendy Darling", "email
 > Accept: */*
 > Content-Type: application/json
 > Content-Length: 82
- 
+
 < HTTP/1.1 201 Created
 < X-Powered-By: Express
 < Date: Thu, 30 Nov 2023 08:46:00 GMT
@@ -42,7 +42,7 @@ $ curl -H 'Content-Type: application/json' -d '{ "name": "Wendy Darling", "email
 ```
 
 ```sh
-$ curl -H 'Content-Type: application/json' -d '{ "name": "Peter Pan", "email": "peter@pan.com", "password": "123123123" }' localhost:4000/users -v 
+$ curl -H 'Content-Type: application/json' -d '{ "name": "Peter Pan", "email": "peter@pan.com", "password": "123123123" }' localhost:4000/users -v
 
 > POST /users HTTP/1.1
 > Host: localhost:4000
@@ -85,7 +85,7 @@ curl -H 'Content-Type: application/json' -d '{ "name": "Peter Pan", "email": "pe
 
 ```
 Request: POST /users/auth { email, password }
-Response: 200 userId
+Response: 200 token
 ```
 
 Examples:
@@ -107,28 +107,28 @@ $ curl -H 'Content-Type: application/json' -d '{ "email": "wendy@darling.com", "
 < ETag: W/"1a-4WuddfhLqLCLfYD8xDO24rc4iUU"
 < Date: Thu, 30 Nov 2023 09:32:15 GMT
 < Connection: keep-alive
-< Keep-Alive: timeout=5 
+< Keep-Alive: timeout=5
 
-"65684bc8dc4ef0943016343d"
+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2N…wNzh9.23P4JJz3AJzWbBM1sYuhmfugVxnJo4bmJ_YQhx39UOM"
 ```
 
 ### Create a post
 
 ```
-Request: POST /posts 'Authorization: Bearer userId' { image, imageDescription, text }
+Request: POST /posts 'Authorization: Bearer token' { image, imageDescription, text }
 Response: 201
 ```
 
 Examples:
 
 ```sh
-$ curl -H 'Authorization: Bearer 65684bc8dc4ef0943016343d' -H 'Content-Type: application/json' -d '{ "image": "https://thispersondoesnotexist.com", "imageDescription": "Unknown person", "text": "Who is this?" }' localhost:4000/posts -v
+$ curl -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2N…wNzh9.23P4JJz3AJzWbBM1sYuhmfugVxnJo4bmJ_YQhx39UOM' -H 'Content-Type: application/json' -d '{ "image": "https://thispersondoesnotexist.com", "imageDescription": "Unknown person", "text": "Who is this?" }' localhost:4000/posts -v
 
 > POST /posts HTTP/1.1
 > Host: localhost:4000
 > User-Agent: curl/8.1.2
 > Accept: */*
-> Authorization: Bearer 65684bc8dc4ef0943016343d
+> Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2N…wNzh9.23P4JJz3AJzWbBM1sYuhmfugVxnJo4bmJ_YQhx39UOM
 > Content-Type: application/json
 > Content-Length: 111
 
@@ -143,20 +143,20 @@ $ curl -H 'Authorization: Bearer 65684bc8dc4ef0943016343d' -H 'Content-Type: app
 ### Retrieve posts
 
 ```
-Request: GET /posts 'Authorization: Bearer userId'
+Request: GET /posts 'Authorization: Bearer token'
 Response: 200 [{ id, author: { id, name }, image, imageDescription, text, likes }]
 ```
 
 Examples:
 
 ```sh
-$ curl -H 'Authorization: Bearer 65684bc8dc4ef0943016343d' localhost:4000/posts -v
+$ curl -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2N…wNzh9.23P4JJz3AJzWbBM1sYuhmfugVxnJo4bmJ_YQhx39UOM' localhost:4000/posts -v
 
 > GET /posts HTTP/1.1
 > Host: localhost:4000
 > User-Agent: curl/8.1.2
 > Accept: */*
-> Authorization: Bearer 65684bc8dc4ef0943016343d
+> Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2N…wNzh9.23P4JJz3AJzWbBM1sYuhmfugVxnJo4bmJ_YQhx39UOM
 
 < HTTP/1.1 200 OK
 < X-Powered-By: Express
@@ -173,21 +173,21 @@ $ curl -H 'Authorization: Bearer 65684bc8dc4ef0943016343d' localhost:4000/posts 
 ### Retrieve post
 
 ```
-Request: GET /posts/:postId 'Authorization: Bearer userId'
+Request: GET /posts/:postId 'Authorization: Bearer token'
 Response: 200 { id, author: { id, name }, image, imageDescription, text, likes }
 ```
 
 Examples:
 
 ```sh
-$ curl -H 'Authorization: Bearer 656ddc296fc21579c1675d6e' localhost:4000/posts/656def1b6fc21579c1675e11/user -v
+$ curl -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2N…wNzh9.23P4JJz3AJzWbBM1sYuhmfugVxnJo4bmJ_YQhx39UOM' localhost:4000/posts/656def1b6fc21579c1675e11/user -v
 
 > GET /posts/656def1b6fc21579c1675e11/user HTTP/1.1
 > Host: localhost:4000
 > User-Agent: curl/8.1.2
 > Accept: */*
-> Authorization: Bearer 656ddc296fc21579c1675d6e
-> 
+> Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2N…wNzh9.23P4JJz3AJzWbBM1sYuhmfugVxnJo4bmJ_YQhx39UOM
+>
 < HTTP/1.1 200 OK
 < X-Powered-By: Express
 < Access-Control-Allow-Origin: *
@@ -206,20 +206,20 @@ $ curl -H 'Authorization: Bearer 656ddc296fc21579c1675d6e' localhost:4000/posts/
 ### Toggle like post
 
 ```
-Request: PATCH /posts/postId/likes 'Authorization: Bearer userId'
+Request: PATCH /posts/postId/likes 'Authorization: Bearer token'
 Response: 204
 ```
 
 Examples:
 
 ```sh
-$ curl -H 'Authorization: Bearer 65684bc8dc4ef0943016343d' -X PATCH localhost:4000/posts/65686c275ef8e443ccc48336/likes -v
+$ curl -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2N…wNzh9.23P4JJz3AJzWbBM1sYuhmfugVxnJo4bmJ_YQhx39UOM' -X PATCH localhost:4000/posts/65686c275ef8e443ccc48336/likes -v
 
 > PATCH /posts/65686c275ef8e443ccc48336/likes HTTP/1.1
 > Host: localhost:4000
 > User-Agent: curl/8.1.2
 > Accept: */*
-> Authorization: Bearer 65684bc8dc4ef0943016343d
+> Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2N…wNzh9.23P4JJz3AJzWbBM1sYuhmfugVxnJo4bmJ_YQhx39UOM
 
 < HTTP/1.1 204 No Content
 < X-Powered-By: Express
@@ -231,21 +231,21 @@ $ curl -H 'Authorization: Bearer 65684bc8dc4ef0943016343d' -X PATCH localhost:40
 ### Delete post
 
 ```
-Request: DELETE /posts/:postId 'Authorization: Bearer userId'
+Request: DELETE /posts/:postId 'Authorization: Bearer token'
 Response: 204
 ```
 
 Examples:
 
 ```sh
-$ curl -H 'Authorization: Bearer 656748b08dbd4d9b3e300c5a' -X DELETE localhost:4000/posts/65689bdc98bc3e457d53271e -v
+$ curl -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2N…wNzh9.23P4JJz3AJzWbBM1sYuhmfugVxnJo4bmJ_YQhx39UOM' -X DELETE localhost:4000/posts/65689bdc98bc3e457d53271e -v
 
 > DELETE /posts/65689bdc98bc3e457d53271e HTTP/1.1
 > Host: localhost:4000
 > User-Agent: curl/8.1.2
 > Accept: */*
-> Authorization: Bearer 656748b08dbd4d9b3e300c5a
-> 
+> Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2N…wNzh9.23P4JJz3AJzWbBM1sYuhmfugVxnJo4bmJ_YQhx39UOM
+>
 < HTTP/1.1 204 No Content
 < X-Powered-By: Express
 < Date: Sun, 03 Dec 2023 08:32:25 GMT
@@ -256,20 +256,20 @@ $ curl -H 'Authorization: Bearer 656748b08dbd4d9b3e300c5a' -X DELETE localhost:4
 ### Retrieve a user
 
 ```
-Request: GET /users 'Authorization: Bearer userId'
+Request: GET /users 'Authorization: Bearer token'
 Response: 200 { name }
 ```
 
 Examples:
 
 ```sh
-$ curl -H 'Authorization: Bearer 65684bc8dc4ef0943016343d' localhost:4000/users -v
+$ curl -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2N…wNzh9.23P4JJz3AJzWbBM1sYuhmfugVxnJo4bmJ_YQhx39UOM' localhost:4000/users -v
 
 > GET /users HTTP/1.1
 > Host: localhost:4000
 > User-Agent: curl/8.1.2
 > Accept: */*
-> Authorization: Bearer 65684bc8dc4ef0943016343d
+> Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2N…wNzh9.23P4JJz3AJzWbBM1sYuhmfugVxnJo4bmJ_YQhx39UOM
 
 < HTTP/1.1 200 OK
 < X-Powered-By: Express
@@ -286,20 +286,20 @@ $ curl -H 'Authorization: Bearer 65684bc8dc4ef0943016343d' localhost:4000/users 
 ### Retrieve a post
 
 ```
-Request: GET /posts/postId 'Authorization: Bearer userId'
+Request: GET /posts/postId 'Authorization: Bearer token'
 Response: 200 { post }
 ```
 
 Examples:
 
 ```sh
-$ curl -H 'Authorization: Bearer 656ddc296fc21579c1675d6e' localhost:4000/posts/656def1b6fc21579c1675e11 -v
+$ curl -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2N…wNzh9.23P4JJz3AJzWbBM1sYuhmfugVxnJo4bmJ_YQhx39UOM' localhost:4000/posts/656def1b6fc21579c1675e11 -v
 
 > GET /posts/656def1b6fc21579c1675e11 HTTP/1.1
 > Host: localhost:4000
 > User-Agent: curl/8.1.2
 > Accept: */*
-> Authorization: Bearer 656ddc296fc21579c1675d6e
+> Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2N…wNzh9.23P4JJz3AJzWbBM1sYuhmfugVxnJo4bmJ_YQhx39UOM
 
 < HTTP/1.1 200 OK
 < X-Powered-By: Express
@@ -319,20 +319,20 @@ $ curl -H 'Authorization: Bearer 656ddc296fc21579c1675d6e' localhost:4000/posts/
 ### Retrieve my posts
 
 ```
-Request: GET /posts/user 'Authorization: Bearer userId'
+Request: GET /posts/user 'Authorization: Bearer token'
 Response: 200 [{ id, author: { id, name }, image, imageDescription, text, likes }]
 ```
 
 Examples:
 
 ```sh
-$ curl -H 'Authorization: Bearer 656748b08dbd4d9b3e300c5a' localhost:4000/posts/user -v
+$ curl -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2N…wNzh9.23P4JJz3AJzWbBM1sYuhmfugVxnJo4bmJ_YQhx39UOM' localhost:4000/posts/user -v
 
 > GET /posts/user HTTP/1.1
 > Host: localhost:4000
 > User-Agent: curl/8.1.2
 > Accept: */*
-> Authorization: Bearer 656748b08dbd4d9b3e300c5a
+> Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2N…wNzh9.23P4JJz3AJzWbBM1sYuhmfugVxnJo4bmJ_YQhx39UOM
 
 < HTTP/1.1 200 OK
 < X-Powered-By: Express
@@ -349,20 +349,20 @@ $ curl -H 'Authorization: Bearer 656748b08dbd4d9b3e300c5a' localhost:4000/posts/
 ### Toggle save post
 
 ```
-Request: PATCH /posts/postId/saved 'Authorization: Bearer userId'
+Request: PATCH /posts/postId/saved 'Authorization: Bearer token'
 Response: 204
 ```
 
 Examples:
 
 ```sh
-$ curl -H 'Authorization: Bearer 656ddc296fc21579c1675d6e' -X PATCH localhost:4000/posts/6571ce86762f93848c19f7c2/saved -v
+$ curl -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2N…wNzh9.23P4JJz3AJzWbBM1sYuhmfugVxnJo4bmJ_YQhx39UOM' -X PATCH localhost:4000/posts/6571ce86762f93848c19f7c2/saved -v
 
 > PATCH /posts/65686c275ef8e443ccc48336/saved HTTP/1.1
 > Host: localhost:4000
 > User-Agent: curl/8.1.2
 > Accept: */*
-> Authorization: Bearer 65684bc8dc4ef0943016343d
+> Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2N…wNzh9.23P4JJz3AJzWbBM1sYuhmfugVxnJo4bmJ_YQhx39UOM
 
 < HTTP/1.1 204 No Content
 < X-Powered-By: Express
@@ -374,21 +374,21 @@ $ curl -H 'Authorization: Bearer 656ddc296fc21579c1675d6e' -X PATCH localhost:40
 ### Retrieve saved posts
 
 ```
-Request: GET /posts/saved 'Authorization: Bearer userId'
+Request: GET /posts/saved 'Authorization: Bearer token'
 Response: 200 [{ id, author: { id, name }, image, imageDescription, text, likes }]
 ```
 
 Examples:
 
 ```sh
-$ curl -H 'Authorization: Bearer 656748b08dbd4d9b3e300c5a' localhost:4000/posts/saved -v
+$ curl -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2N…wNzh9.23P4JJz3AJzWbBM1sYuhmfugVxnJo4bmJ_YQhx39UOM' localhost:4000/posts/saved -v
 
 > GET /posts/saved HTTP/1.1
 > Host: localhost:4000
 > User-Agent: curl/8.1.2
 > Accept: */*
-> Authorization: Bearer 656748b08dbd4d9b3e300c5a
-> 
+> Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2N…wNzh9.23P4JJz3AJzWbBM1sYuhmfugVxnJo4bmJ_YQhx39UOM
+>
 < HTTP/1.1 200 OK
 < X-Powered-By: Express
 < Content-Type: application/json; charset=utf-8
@@ -404,58 +404,56 @@ $ curl -H 'Authorization: Bearer 656748b08dbd4d9b3e300c5a' localhost:4000/posts/
 ### Update UserPassword
 
 ```
-Request: PATCH /users/password {password, newPassword, repeatNewPassword} 'Authorization: Bearer userId'
+Request: PATCH /users/password {password, newPassword, repeatNewPassword} 'Authorization: Bearer token'
 Response: updated password
 ```
 
 Examples:
 
 ```sh
-$ curl -H 'Authorization: Bearer 656743c48dbd4d9b3e300c56' -H 'Content-Type: application/json' -d '{ "password": "456456456", "newPassword": "123123123", "repeatNewPassword": "123123123" }' -X PATCH localhost:4000/users/password -v
+$ curl -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2N…wNzh9.23P4JJz3AJzWbBM1sYuhmfugVxnJo4bmJ_YQhx39UOM' -H 'Content-Type: application/json' -d '{ "password": "456456456", "newPassword": "123123123", "repeatNewPassword": "123123123" }' -X PATCH localhost:4000/users/password -v
 
 > PATCH /users/password HTTP/1.1
 > Host: localhost:4000
 > User-Agent: curl/8.1.2
 > Accept: */*
-> Authorization: Bearer 656743c48dbd4d9b3e300c56
+> Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2N…wNzh9.23P4JJz3AJzWbBM1sYuhmfugVxnJo4bmJ_YQhx39UOM
 > Content-Type: application/json
 > Content-Length: 118
-> 
+>
 < HTTP/1.1 204 No Content
 < X-Powered-By: Express
 < Date: Fri, 01 Dec 2023 16:15:12 GMT
 < Connection: keep-alive
 < Keep-Alive: timeout=5
-< 
+<
 ```
 
 ### Update UserEmail
 
 ```
-Request: PATCH /users/email {userId, email, newEmail, repeatNewEmail}
+Request: PATCH /users/email {userId, email, newEmail, repeatNewEmail} 'Authorization: Bearer token'
 Response: updated email
 ```
 
 Examples:
 
 ```sh
-$ curl -H 'Authorization: Bearer 656743c48dbd4d9b3e300c56' -H 'Content-Type: application/json' -d '{ "password": "123123123", "email": "peter3@pan.com", "newEmail": "peter@pan.com", "repeatNewEmail": "peter@pan.com" }' -X PATCH localhost:4000/users/email -v
+$ curl -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2N…wNzh9.23P4JJz3AJzWbBM1sYuhmfugVxnJo4bmJ_YQhx39UOM' -H 'Content-Type: application/json' -d '{ "password": "123123123", "email": "peter3@pan.com", "newEmail": "peter@pan.com", "repeatNewEmail": "peter@pan.com" }' -X PATCH localhost:4000/users/email -v
 
 > PATCH /users/email HTTP/1.1
 > Host: localhost:4000
 > User-Agent: curl/8.1.2
 > Accept: */*
-> Authorization: Bearer 656743c48dbd4d9b3e300c56
+> Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2N…wNzh9.23P4JJz3AJzWbBM1sYuhmfugVxnJo4bmJ_YQhx39UOM
 > Content-Type: application/json
 > Content-Length: 118
-> 
+>
 < HTTP/1.1 204 No Content
 < X-Powered-By: Express
 < Date: Fri, 01 Dec 2023 16:15:12 GMT
 < Connection: keep-alive
 < Keep-Alive: timeout=5
-< 
+<
 
 ```
-
-

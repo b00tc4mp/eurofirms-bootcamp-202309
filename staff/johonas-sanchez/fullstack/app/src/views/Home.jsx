@@ -22,7 +22,7 @@ function Home(props) {
 
    useEffect(() => {
       try {
-         retrieveUser(sessionStorage.userId, (error, user) => {
+         retrieveUser(sessionStorage.token, (error, user) => {
             if (error) {
                alert(error.message)
 

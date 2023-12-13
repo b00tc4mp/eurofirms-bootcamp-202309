@@ -11,7 +11,7 @@ function Post(props) {
 
    function handlePostLikeToggled() {
       try {
-         toggleLikePost(sessionStorage.userId, post.id, (error) => {
+         toggleLikePost(sessionStorage.token, post.id, (error) => {
             if (error) {
                alert(error.message)
 
@@ -46,7 +46,7 @@ function Post(props) {
 
    function handlePostSaveToggled() {
       try {
-         toggleSavePost(sessionStorage.userId, post.id, (error) => {
+         toggleSavePost(sessionStorage.token, post.id, (error) => {
             if (error) {
                alert(error.message)
 
@@ -77,7 +77,7 @@ function Post(props) {
                {post.saved ? "⭐️" : "✩"}
             </Button>
 
-            {post.author.id === sessionStorage.userId ? (
+            {post.author.id === sessionStorage.token ? (
                <Button title="Delete" aria-label="Delete" onClick={handlePostDeleted}>
                   🗑️
                </Button>

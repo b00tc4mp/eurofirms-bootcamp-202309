@@ -1,8 +1,8 @@
 import { validateText, validateUrl, validateFunction } from '../utils/validators'
 
 
-function createNewPost(userId, image, imageDescription, text, callback) {
-    validateText(userId, "user id")
+function createNewPost(token, image, imageDescription, text, callback) {
+    validateText(token, "token")
     validatePassword(password, "password")
     validatePassword(newPassword, "new password")
     validatePassword(repeatNewPassword, "repeat new password")
@@ -12,7 +12,7 @@ function createNewPost(userId, image, imageDescription, text, callback) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${userId}`
+            Authorization: `Bearer ${token}`
         },
         body: JSON.stringify({ image, imageDescription, text })
     }

@@ -21,14 +21,14 @@ function Login(props) {
       const password = passwordInput.value
 
       try {
-         authenticateUser(email, password, (error, userId) => {
+         authenticateUser(email, password, (error, token) => {
             if (error) {
                alert(error.message)
 
                return
             }
 
-            sessionStorage.userId = userId
+            sessionStorage.token = token
 
             props.onSuccess()
          })

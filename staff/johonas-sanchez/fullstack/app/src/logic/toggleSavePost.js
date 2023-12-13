@@ -1,15 +1,15 @@
 import { validateText, validateFunction } from '../utils/validators'
 import db from '../data/managers'
 
-function toggleSavePost(userId, postId, callback) {
-    validateText(userId, 'user id')
+function toggleSavePost(token, postId, callback) {
+    validateText(token, 'token')
     validateText(postId, 'post id')
     validateFunction(callback, 'callback')
 
     const req = {
         method: 'PATCH',
         headers: {
-            Authorization: `Bearer ${userId}`
+            Authorization: `Bearer ${token}`
         }
     }
 

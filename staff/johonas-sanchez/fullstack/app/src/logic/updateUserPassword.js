@@ -1,7 +1,7 @@
 import { validateText, validateFunction } from "../utils/validators"
 
-function updateUserPassword(userId, password, newPassword, repeatNewPassword, callback) {
-    validateText(userId, "user id")
+function updateUserPassword(token, password, newPassword, repeatNewPassword, callback) {
+    validateText(token, "token")
     validatePassword(password, "password")
     validatePassword(newPassword, "new password")
     validatePassword(repeatNewPassword, "repeat new password")
@@ -11,7 +11,7 @@ function updateUserPassword(userId, password, newPassword, repeatNewPassword, ca
       method: "PATCH",
       headers: {
          "Content-Type": "application/json",
-         Authorization: `Bearer ${userId}`
+         Authorization: `Bearer ${token}`
       },
       body: JSON.stringify({ password, newPassword, repeatNewPassword }),
    }
