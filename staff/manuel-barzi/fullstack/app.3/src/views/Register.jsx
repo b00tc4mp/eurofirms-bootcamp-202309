@@ -1,4 +1,4 @@
-import authenticateUser from '../logic/authenticateUser'
+import registerUser from '../logic/registerUser'
 
 import Button from '../components/Button'
 import Link from '../components/Link'
@@ -8,27 +8,27 @@ import Container from '../components/Container'
 
 import Logo from '../components/Logo'
 
-function Login(props) {
-    console.log('Login')
+function Register(props) {
+    console.log('Register')
 
-    function handleLoginSubmit(event) {
+    function handleRegisterSubmit(event) {
         event.preventDefault()
 
+        const nameInput = event.target.querySelector('#name-field')
         const emailInput = event.target.querySelector('#email-field')
         const passwordInput = event.target.querySelector('#password-field')
 
+        const name = nameInput.value
         const email = emailInput.value
         const password = passwordInput.value
 
         try {
-            authenticateUser(email, password, (error, token) => {
+            registerUser(name, email, password, error => {
                 if (error) {
                     alert(error.message)
 
                     return
                 }
-
-                sessionStorage.token = token
 
                 props.onSuccess()
             })
@@ -37,28 +37,29 @@ function Login(props) {
         }
     }
 
-    function handleRegisterClick(event) {
+    function handleLoginClick(event) {
         event.preventDefault()
 
-        props.onRegisterClick()
+        props.onLoginClick()
     }
 
     return <Container align="center">
         <Logo />
 
-        <h1>Login</h1>
+        <h1>Register</h1>
 
-        <Form onSubmit={handleLoginSubmit}>
+        <Form onSubmit={handleRegisterSubmit}>
+            <Field type="text" id="name-field" title="Name" required>Name</Field>
+
             <Field type="email" id="email-field" title="E-mail" required>E-mail</Field>
 
             <Field type="password" id="password-field" title="Password" required>Password</Field>
 
-            {/* <button className="button" type="submit">Login</button> */}
-            <Button type="submit">Login</Button>
+            <Button type="submit">Register</Button>
         </Form>
 
-        <Link onClick={handleRegisterClick}>Register</Link>
+        <Link onClick={handleLoginClick}>Login</Link>
     </Container>
 }
 
-export default Login
+export default Register

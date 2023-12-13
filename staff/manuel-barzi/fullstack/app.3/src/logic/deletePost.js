@@ -1,18 +1,18 @@
 import { validateText, validateFunction } from '../utils/validators'
 
-function toggleLikePost(token, postId, callback) {
-    validateText(token, 'token')
+function deletePost(userId, postId, callback) {
+    validateText(userId, 'user id')
     validateText(postId, 'post id')
     validateFunction(callback, 'callback')
 
     const req = {
-        method: 'PATCH',
+        method: 'DELETE',
         headers: {
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${userId}`
         }
     }
 
-    fetch(`http://localhost:4000/posts/${postId}/likes`, req)
+    fetch(`http://localhost:4000/posts/${postId}`, req)
         .then(res => {
             if (!res.ok) {
                 res.json()
@@ -27,4 +27,4 @@ function toggleLikePost(token, postId, callback) {
         .catch(error => callback(error))
 }
 
-export default toggleLikePost
+export default deletePost

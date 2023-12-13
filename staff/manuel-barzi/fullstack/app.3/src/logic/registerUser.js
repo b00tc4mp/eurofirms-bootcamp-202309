@@ -1,14 +1,17 @@
-import { validateText, validateFunction } from '../utils/validators'
+import { validateText, validateEmail, validatePassword, validateFunction } from '../utils/validators'
 
-function retrieveUser(token, callback) {
-    validateText(token, 'token')
+function registerUser(name, email, password, callback) {
+    validateText(name, 'name')
+    validateEmail(email)
+    validatePassword(password)
     validateFunction(callback, 'callback')
 
     const req = {
-        method: 'GET',
+        method: 'POST',
         headers: {
-            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
         },
+        body: JSON.stringify({ name, email, password })
     }
 
     fetch('http://localhost:4000/users', req)
@@ -21,11 +24,9 @@ function retrieveUser(token, callback) {
                 return
             }
 
-            res.json()
-                .then(body => callback(null, body))
-                .catch(error => callback(error))
+            callback(null)
         })
         .catch(error => callback(error))
 }
 
-export default retrieveUser
+export default registerUser

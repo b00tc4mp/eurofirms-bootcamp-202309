@@ -1,14 +1,14 @@
 import { validateText, validateFunction } from '../utils/validators'
 
-function toggleLikePost(token, postId, callback) {
-    validateText(token, 'token')
+function toggleLikePost(userId, postId, callback) {
+    validateText(userId, 'user id')
     validateText(postId, 'post id')
     validateFunction(callback, 'callback')
 
     const req = {
         method: 'PATCH',
         headers: {
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${userId}`
         }
     }
 

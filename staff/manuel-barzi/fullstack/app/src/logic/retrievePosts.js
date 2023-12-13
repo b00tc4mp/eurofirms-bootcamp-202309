@@ -1,13 +1,13 @@
 import { validateText, validateFunction } from '../utils/validators'
 
-function retrievePosts(userId, callback) {
-    validateText(userId, 'user id')
+function retrievePosts(token, callback) {
+    validateText(token, 'token')
     validateFunction(callback, 'callback')
 
     const req = {
         method: 'GET',
         headers: {
-            Authorization: `Bearer ${userId}`,
+            Authorization: `Bearer ${token}`,
         },
     }
 

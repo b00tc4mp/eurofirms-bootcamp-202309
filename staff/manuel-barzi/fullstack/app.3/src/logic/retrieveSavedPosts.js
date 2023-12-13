@@ -1,18 +1,17 @@
 import { validateText, validateFunction } from '../utils/validators'
 
-function toggleLikePost(token, postId, callback) {
-    validateText(token, 'token')
-    validateText(postId, 'post id')
+function retrieveSavedPosts(userId, callback) {
+    validateText(userId, 'user id')
     validateFunction(callback, 'callback')
 
     const req = {
-        method: 'PATCH',
+        method: 'GET',
         headers: {
-            Authorization: `Bearer ${token}`
-        }
+            Authorization: `Bearer ${userId}`,
+        },
     }
 
-    fetch(`http://localhost:4000/posts/${postId}/likes`, req)
+    fetch('http://localhost:4000/posts/saved', req)
         .then(res => {
             if (!res.ok) {
                 res.json()
@@ -22,9 +21,11 @@ function toggleLikePost(token, postId, callback) {
                 return
             }
 
-            callback(null)
+            res.json()
+                .then(posts => callback(null, posts))
+                .catch(error => callback(error))
         })
         .catch(error => callback(error))
 }
 
-export default toggleLikePost
+export default retrieveSavedPosts

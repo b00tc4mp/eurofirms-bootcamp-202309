@@ -6,7 +6,7 @@ import Home from './views/Home'
 function App() {
   console.log('App')
 
-  const [view, setView] = React.useState(sessionStorage.token ? 'home' : 'login')
+  const [view, setView] = React.useState(sessionStorage.userId ? 'home' : 'login')
 
   function handleRegisterShow() {
     setView('register')

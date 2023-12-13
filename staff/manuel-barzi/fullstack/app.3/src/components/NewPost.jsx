@@ -20,7 +20,7 @@ function NewPost(props) {
         const text = textInput.value
 
         try {
-            createNewPost(sessionStorage.token, image, imageDescription, text, error => {
+            createNewPost(sessionStorage.userId, image, imageDescription, text, error => {
                 if (error) {
                     alert(error.message)
 

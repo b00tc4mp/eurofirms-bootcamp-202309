@@ -1,7 +1,7 @@
 import { validateText, validateUrl, validateFunction } from '../utils/validators'
 
-function createNewPost(token, image, imageDescription, text, callback) {
-    validateText(token, 'token')
+function createNewPost(userId, image, imageDescription, text, callback) {
+    validateText(userId, 'user id')
     validateUrl(image, 'image url')
     validateText(imageDescription, 'image description')
     validateText(text, 'text')
@@ -10,7 +10,7 @@ function createNewPost(token, image, imageDescription, text, callback) {
     const req = {
         method: 'POST',
         headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${userId}`,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({ image, imageDescription, text })
