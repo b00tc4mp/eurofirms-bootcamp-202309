@@ -104,7 +104,7 @@ function Home(props) {
             <div className="flex items-center justify-center h-full space-x-2">
                <Button onClick={handleUserClick}>
                   <svg
-                     className="xs:block lg:hidden h-5 w-5 text-black-500"
+                     className="lg:hidden h-5 w-5 text-black-500"
                      width="24"
                      height="24"
                      viewBox="0 0 24 24"
