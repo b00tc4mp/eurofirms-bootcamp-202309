@@ -1,8 +1,9 @@
 const req = {
-    method: 'GET',
+    method: 'POST',
     headers: {
-        Authorization: 'Bearer fyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NTZkYjlmYThmZDZkNjU4MTkzZGMxNzYiLCJpYXQiOjE3MDI0NjU4MjN9.TybzUcO2lvt1Tsr2f30jS_ANzkCCAGvpcF_d-Bbb85M',
+        'Content-Type': 'application/json'
     },
+    body: JSON.stringify({ name: 'Super Manu', email: 'super@manu.com', password: '123123123' })
 }
 
 fetch('http://localhost:4000/users', req)
@@ -15,8 +16,6 @@ fetch('http://localhost:4000/users', req)
             return
         }
 
-        res.json()
-            .then(body => console.log(res.status, body))
-            .catch(error => console.error(error))
+        console.log(res.status)
     })
     .catch(error => console.error(error))

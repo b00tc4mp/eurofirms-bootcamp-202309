@@ -1,11 +1,11 @@
 const req = {
-    method: 'DELETE',
+    method: 'PATCH',
     headers: {
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NTZkYjlmYThmZDZkNjU4MTkzZGMxNzYiLCJpYXQiOjE3MDI0NjU4MjN9.TybzUcO2lvt1Tsr2f30jS_ANzkCCAGvpcF_d-Bbb85M'
+        Authorization: 'Bearer 656db3fad816cd234ffab874'
     }
 }
 
-fetch('http://localhost:4000/posts/6571b5754fba0c76963acd33', req)
+fetch('http://localhost:4000/posts/65686c275ef8e443ccc48336/saves', req)
     .then(res => {
         if (!res.ok) {
             res.json()

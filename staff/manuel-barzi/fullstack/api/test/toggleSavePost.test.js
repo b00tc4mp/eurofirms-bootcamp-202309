@@ -1,7 +1,7 @@
 const req = {
     method: 'PATCH',
     headers: {
-        Authorization: 'Bearer 656db3fad816cd234ffab874'
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NTZkYjlmYThmZDZkNjU4MTkzZGMxNzYiLCJpYXQiOjE3MDI0NjU4MjN9.TybzUcO2lvt1Tsr2f30jS_ANzkCCAGvpcF_d-Bbb85M'
     }
 }
 

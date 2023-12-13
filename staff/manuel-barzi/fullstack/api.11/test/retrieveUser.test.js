@@ -1,11 +1,11 @@
 const req = {
     method: 'GET',
     headers: {
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NTZkYjlmYThmZDZkNjU4MTkzZGMxNzYiLCJpYXQiOjE3MDI0NjU4MjN9.TybzUcO2lvt1Tsr2f30jS_ANzkCCAGvpcF_d-Bbb85M',
+        Authorization: 'Bearer 656db3fad816cd234ffab874',
     },
 }
 
-fetch('http://localhost:4000/posts', req)
+fetch('http://localhost:4000/users', req)
     .then(res => {
         if (!res.ok) {
             res.json()
@@ -16,7 +16,7 @@ fetch('http://localhost:4000/posts', req)
         }
 
         res.json()
-            .then(posts => console.log(res.status, posts))
+            .then(body => console.log(res.status, body))
             .catch(error => console.error(error))
     })
     .catch(error => console.error(error))
