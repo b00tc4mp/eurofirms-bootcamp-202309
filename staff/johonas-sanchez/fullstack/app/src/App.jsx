@@ -7,7 +7,7 @@ import Register from "./views/Register";
 function App() {
   console.log('App')
 
-  const [view, setView] = React.useState(sessionStorage.userId ? 'home' : 'login')
+  const [view, setView] = React.useState(sessionStorage.token ? 'home' : 'login')
 
   function handleRegisterShow() {
       setView('register')
