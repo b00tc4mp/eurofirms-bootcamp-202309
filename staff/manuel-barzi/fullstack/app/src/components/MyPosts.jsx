@@ -15,7 +15,7 @@ function MyPosts() {
 
     function refreshPosts() {
         try {
-            retrieveMyPosts(window.sessionUserId, (error, posts) => {
+            retrieveMyPosts(sessionStorage.userId, (error, posts) => {
                 if (error) {
                     alert(error.message)
 

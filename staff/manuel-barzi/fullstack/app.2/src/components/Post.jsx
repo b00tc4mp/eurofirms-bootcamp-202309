@@ -11,7 +11,7 @@ function Post(props) {
 
     function handleLikeClick() {
         try {
-            toggleLikePost(sessionStorage.userId, post.id, error => {
+            toggleLikePost(window.sessionUserId, post.id, error => {
                 if (error) {
                     alert(error.message)
 
@@ -46,7 +46,7 @@ function Post(props) {
 
     function handleSaveClick() {
         try {
-            toggleSavePost(sessionStorage.userId, post.id, error => {
+            toggleSavePost(window.sessionUserId, post.id, error => {
                 if (error) {
                     alert(error.message)
 
@@ -75,7 +75,7 @@ function Post(props) {
 
             <Button onClick={handleSaveClick} title={post.saved ? 'Unsave' : 'sSave'} aria-label={post.saved ? 'Unsave' : 'Save'}>{(post.saved ? '⭐️' : '✩')}</Button>
 
-            {post.author.id === sessionStorage.userId ? <Button title="Delete" aria-label="Delete" onClick={handleDeleteClick}>🗑️</Button> : null}
+            {post.author.id === window.sessionUserId ? <Button title="Delete" aria-label="Delete" onClick={handleDeleteClick}>🗑️</Button> : null}
         </div>
     </article>
 }

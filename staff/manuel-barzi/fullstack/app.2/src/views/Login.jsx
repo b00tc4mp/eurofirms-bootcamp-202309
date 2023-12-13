@@ -28,7 +28,7 @@ function Login(props) {
                     return
                 }
 
-                sessionStorage.userId = userId
+                window.sessionUserId = userId
 
                 props.onSuccess()
             })
