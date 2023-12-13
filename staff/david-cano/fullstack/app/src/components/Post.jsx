@@ -60,21 +60,25 @@ function Post(props) {
         }
     }
 
-    return <article className="post">
-        <h3>{post.author.name}</h3>
+    return <article className=" flex flex-col p-[.5rem] hover:bg-[skyblue]">
+        <h3 className='self-start'>{post.author.name}</h3>
 
-        <img className="post-image"
+        <img className="max-w-[300px] "
             src={post.image}
             alt={post.imageDescription}
             title={post.imageDescription} />
 
         <p>{post.text}</p>
 
-        <Button onClick={handleLikeClick}title={post.liked ? 'Unlike' : 'Like'} aria-label={post.liked ? 'Unlike' : 'Like'}>{(post.liked ? '😍' : '😒') + ' ' + post.likes.length + ' likes'}</Button>
+<div className='flex'>
+<Button onClick={handleLikeClick}title={post.liked ? 'Unlike' : 'Like'} aria-label={post.liked ? 'Unlike' : 'Like'}>{(post.liked ? '😍' : '😒') + ' ' + post.likes.length + ' likes'}</Button>
 
-        <Button onClick={handleSaveClick}title={post.liked ? 'Unsave' : 'Save'} aria-label={post.saved ? 'Unsave' : 'Save'}>{(post.saved ? '⭐' : '✡️')}</Button>
+<Button onClick={handleSaveClick}title={post.liked ? 'Unsave' : 'Save'} aria-label={post.saved ? 'Unsave' : 'Save'}>{(post.saved ? '⭐' : '✡️')}</Button>
 
-        {post.author.id === window.sessionUserId ? <Button title="Delete" aria-label="Delete" onClick={handleDeleteClick}>🚮</Button> : null}
+{post.author.id === window.sessionUserId ? <Button title="Delete" aria-label="Delete" onClick={handleDeleteClick}>🚮</Button> : null}
+</div>
+
+
     </article>
 }
 

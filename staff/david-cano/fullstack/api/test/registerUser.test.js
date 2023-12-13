@@ -5,7 +5,7 @@ const req = {
     },
     body: JSON.stringify({ name: 'Ga Yo', email: 'ga@yo.com', password: '123123123' })
 }
-
+debugger
 fetch('http://localhost:4000/users', req)
     .then(res => {
         if (!res.ok) {
