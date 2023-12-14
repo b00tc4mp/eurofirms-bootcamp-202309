@@ -4,6 +4,7 @@ import Form from '../components/Form'
 import Button from '../components/Button'
 
 import createNewPost from '../logic/createNewPost'
+import { JWTError } from '../utils/errors'
 
 function NewPost(props) {
     console.log('NewPost')
@@ -30,7 +31,10 @@ function NewPost(props) {
                 props.onNewPostSubmit()
             })
         } catch (error) {
-            alert(error.message)
+            if (error instanceof JWTError)
+                props.onError(error)
+            else
+                alert(error.message)
         }
     }
 

@@ -1,4 +1,4 @@
-class JWTExpiredError extends Error {
+class JWTError extends Error {
     constructor(message) {
         super(message)
 
@@ -7,5 +7,5 @@ class JWTExpiredError extends Error {
 }
 
 export {
-    JWTExpiredError
+    JWTError
 }

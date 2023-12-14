@@ -4,6 +4,8 @@ import Posts from '../components/Posts'
 
 import retrievePosts from '../logic/retrievePosts'
 
+import { JWTError } from '../utils/errors'
+
 function AllPosts(props) {
     console.log('AllPosts')
 
@@ -25,7 +27,10 @@ function AllPosts(props) {
                 setPosts(posts)
             })
         } catch (error) {
-            alert(error.message)
+            if (error instanceof JWTError)
+                props.onError(error)
+            else
+                alert(error.message)
         }
     }
 
@@ -41,7 +46,7 @@ function AllPosts(props) {
         refreshPosts()
     }
 
-    return <Posts posts={posts} onPostLikeToggled={handlePostLikeToggled} onPostSaveToggled={handlePostSaveToggled} onPostDeleted={handlePostDeleted} />
+    return <Posts posts={posts} onPostLikeToggled={handlePostLikeToggled} onPostSaveToggled={handlePostSaveToggled} onPostDeleted={handlePostDeleted} onError={props.onError} />
 }
 
 export default AllPosts

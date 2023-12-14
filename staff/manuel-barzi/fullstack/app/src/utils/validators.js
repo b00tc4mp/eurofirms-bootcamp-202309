@@ -1,4 +1,4 @@
-import { JWTExpiredError } from "./errors"
+import { JWTError } from "./errors"
 
 function validateText(text, explain) {
     if (typeof text !== 'string') throw new TypeError(explain + ' is not a string')
@@ -30,7 +30,8 @@ function validateFunction(func, explain) {
 }
 
 function validateJWT(jwt) {
-    if (jwt.isExpired()) throw new JWTExpiredError('JWT expired')
+    if (!jwt) throw new JWTError('JWT not valid')
+    if (jwt.isExpired()) throw new JWTError('JWT expired')
 }
 
 export {

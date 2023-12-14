@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import Posts from './Posts'
 
 import retrieveMyPosts from '../logic/retrieveMyPosts'
+import { JWTError } from '../utils/errors'
 
 function MyPosts() {
     console.log('MyPosts')
@@ -25,7 +26,10 @@ function MyPosts() {
                 setPosts(posts)
             })
         } catch (error) {
-            alert(error.message)
+            if (error instanceof JWTError)
+                props.onError(error)
+            else
+                alert(error.message)
         }
     }
 
@@ -41,7 +45,7 @@ function MyPosts() {
         refreshPosts()
     }
 
-    return <Posts posts={posts} onPostLikeToggled={handlePostLikeToggled} onPostSaveToggled={handlePostSaveToggled} onPostDeleted={handlePostDeleted} />
+    return <Posts posts={posts} onPostLikeToggled={handlePostLikeToggled} onPostSaveToggled={handlePostSaveToggled} onPostDeleted={handlePostDeleted} onError={props.onError} />
 }
 
 export default MyPosts

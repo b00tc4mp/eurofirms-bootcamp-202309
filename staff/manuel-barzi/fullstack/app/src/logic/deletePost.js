@@ -1,9 +1,10 @@
-import { validateText, validateFunction } from '../utils/validators'
+import { validateText, validateFunction, validateJWT } from '../utils/validators'
 import context from './context'
 
 function deletePost(postId, callback) {
     validateText(postId, 'post id')
     validateFunction(callback, 'callback')
+    validateJWT(context.jwt)
 
     const req = {
         method: 'DELETE',

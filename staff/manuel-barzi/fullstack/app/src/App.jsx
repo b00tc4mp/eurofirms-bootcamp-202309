@@ -2,33 +2,40 @@ import Login from './views/Login'
 import React from 'react'
 import Register from './views/Register'
 import Home from './views/Home'
+import Feedback from './components/Feedback'
 
 import logoutUser from './logic/logoutUser'
 
-import { JWTExpiredError } from './utils/errors'
+import { JWTError } from './utils/errors'
+import { useState } from 'react'
 
 function App() {
   console.log('App')
 
   const [view, setView] = React.useState(sessionStorage.token ? 'home' : 'login')
+  const [feedback, setFeedback] = useState(null)
 
   function handleRegisterShow() {
     setView('register')
+    setFeedback(null)
   }
 
   function handleLoginShow() {
     setView('login')
+    setFeedback(null)
   }
 
   function handleHomeShow() {
     setView('home')
+    setFeedback(null)
   }
 
   function handleError(error) {
-    if (error instanceof JWTExpiredError) {
+    if (error instanceof JWTError) {
       logoutUser()
 
       setView('login')
+      setFeedback('Session expired, please login again')
     }
   }
 
@@ -38,6 +45,8 @@ function App() {
     {view === 'register' ? <Register onSuccess={handleLoginShow} onLoginClick={handleLoginShow} /> : null}
 
     {view === 'home' ? <Home onLogout={handleLoginShow} onError={handleError} /> : null}
+
+    {feedback ? <Feedback message={feedback} /> : null}
   </>
 }
 
