@@ -198,6 +198,8 @@ mongoose.connect("mongodb://127.0.0.1/api").then(() => {
          const token = req.headers.authorization.slice(7)
          const { sub: userId } = jwt.verify(token, "es posible que pronto sea abuelo")
 
+         const { postId } = req.params
+
          toggleLikePost(userId, postId, (error) => {
             if (error) {
                res.status(400).json({ error: error.message })
