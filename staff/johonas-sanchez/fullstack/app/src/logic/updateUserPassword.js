@@ -1,7 +1,7 @@
-import { validateText, validateFunction } from "../utils/validators"
+import { validateFunction } from "../utils/validators"
+import context from './context'
 
-function updateUserPassword(token, password, newPassword, repeatNewPassword, callback) {
-    validateText(token, "token")
+function updateUserPassword(password, newPassword, repeatNewPassword, callback) {
     validatePassword(password, "password")
     validatePassword(newPassword, "new password")
     validatePassword(repeatNewPassword, "repeat new password")
@@ -11,7 +11,7 @@ function updateUserPassword(token, password, newPassword, repeatNewPassword, cal
       method: "PATCH",
       headers: {
          "Content-Type": "application/json",
-         Authorization: `Bearer ${token}`
+         Authorization: `Bearer ${context.storage.token}`
       },
       body: JSON.stringify({ password, newPassword, repeatNewPassword }),
    }

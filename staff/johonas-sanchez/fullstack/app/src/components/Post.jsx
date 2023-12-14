@@ -11,7 +11,7 @@ function Post(props) {
 
    function handlePostLikeToggled() {
       try {
-         toggleLikePost(sessionStorage.token, post.id, (error) => {
+         toggleLikePost(post.id, error => {
             if (error) {
                alert(error.message)
 
@@ -30,7 +30,7 @@ function Post(props) {
 
       if (confirmed)
          try {
-            deletePost(sessionUserId, post.id, (error) => {
+            deletePost(post.id, error => {
                if (error) {
                   alert(error.message)
 
@@ -46,7 +46,7 @@ function Post(props) {
 
    function handlePostSaveToggled() {
       try {
-         toggleSavePost(sessionStorage.token, post.id, (error) => {
+         toggleSavePost(post.id, error => {
             if (error) {
                alert(error.message)
 

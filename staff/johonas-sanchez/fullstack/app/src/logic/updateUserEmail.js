@@ -1,7 +1,7 @@
-import { validateText, validateEmail, validateFunction } from "../utils/validators"
+import { validateEmail, validateFunction } from "../utils/validators"
+import context from './context'
 
-function updateUserEmail(token, password, email, newEmail, repeatNewEmail, callback) {
-    validateText(token, "token")
+function updateUserEmail(password, email, newEmail, repeatNewEmail, callback) {
     validatePassword(password, "password")
     validateEmail(email, "email")
     validateEmail(newEmail, "new email")
@@ -12,7 +12,7 @@ function updateUserEmail(token, password, email, newEmail, repeatNewEmail, callb
       method: "PATCH",
       headers: {
          "Content-Type": "application/json",
-         Authorization: `Bearer ${token}`
+         Authorization: `Bearer ${context.storage.token}`
       },
       body: JSON.stringify({ password, email, newEmail, repeatNewEmail }),
    }

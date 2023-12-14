@@ -2,6 +2,10 @@ import { useState, useEffect } from "react"
 
 import retrieveUser from "../logic/retrieveUser"
 
+import logoutUser from "../logic/logoutUser"
+
+import { JWTExpiredError } from "../utils/errors"
+
 import Button from "../components/Button"
 import Link from "../components/Link"
 import Container from "../components/Container"
@@ -22,7 +26,7 @@ function Home(props) {
 
    useEffect(() => {
       try {
-         retrieveUser(sessionStorage.token, (error, user) => {
+         retrieveUser((error, user) => {
             if (error) {
                alert(error.message)
 
@@ -32,12 +36,15 @@ function Home(props) {
             setName(user.name)
          })
       } catch (error) {
-         alert(error.message)
+         if (error instanceof JWTExpiredError) 
+            props.onError(error)
+         else 
+            alert(error.message)
       }
    }, [])
 
    function handleLogoutClick() {
-      delete sessionStorage.userId
+      logoutUser()
 
       props.onLogout()
    }

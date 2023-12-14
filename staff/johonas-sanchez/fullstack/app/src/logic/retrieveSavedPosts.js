@@ -1,13 +1,13 @@
-import { validateText, validateFunction } from '../utils/validators'
+import { validateFunction } from '../utils/validators'
+import context from './context'
 
-function retrieveSavedPosts(token, callback) {
-    validateText(token, 'token')
+function retrieveSavedPosts(callback) {
     validateFunction(callback, 'callback')
 
     const req = {
         method: 'GET',
         headers: {
-           Authorization: `Bearer ${token}`,
+           Authorization: `Bearer ${context.storage.token}`,
         },
      }
      

@@ -1,15 +1,14 @@
 import { validateText, validateFunction } from '../utils/validators'
-import db from '../data/managers'
+import context from './context'
 
-function toggleSavePost(token, postId, callback) {
-    validateText(token, 'token')
+function toggleSavePost(postId, callback) {
     validateText(postId, 'post id')
     validateFunction(callback, 'callback')
 
     const req = {
         method: 'PATCH',
         headers: {
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${context.storage.token}`
         }
     }
 
