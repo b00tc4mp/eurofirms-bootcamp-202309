@@ -1,11 +1,12 @@
+import authenticateUser from '../logic/authenticateUser'
+
 import Button from '../components/Button'
 import Link from '../components/Link'
 import Field from '../components/Field'
 import Form from '../components/Form'
 import Container from '../components/Container'
-import Logo from '../components/Logo'
 
-import loginUser from '../logic/loginUser'
+import Logo from '../components/Logo'
 
 function Login(props) {
     console.log('Login')
@@ -20,12 +21,14 @@ function Login(props) {
         const password = passwordInput.value
 
         try {
-            loginUser(email, password, error => {
+            authenticateUser(email, password, (error, token) => {
                 if (error) {
                     alert(error.message)
 
                     return
                 }
+
+                sessionStorage.token = token
 
                 props.onSuccess()
             })

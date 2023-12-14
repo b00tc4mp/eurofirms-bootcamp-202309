@@ -1,21 +1,21 @@
 import { useState, useEffect } from 'react'
 
-import retrieveSavedPosts from '../logic/retrieveSavedPosts'
+import Posts from '../components/Posts'
 
-import Posts from './Posts'
+import retrievePosts from '../logic/retrievePosts'
 
-function SavedPosts() {
-    console.log('SavedPosts')
+function AllPosts(props) {
+    console.log('AllPosts')
 
     const [posts, setPosts] = useState([])
 
     useEffect(() => {
         refreshPosts()
-    }, [])
+    }, [props.timestamp])
 
     function refreshPosts() {
         try {
-            retrieveSavedPosts((error, posts) => {
+            retrievePosts(sessionStorage.token, (error, posts) => {
                 if (error) {
                     alert(error.message)
 
@@ -44,4 +44,4 @@ function SavedPosts() {
     return <Posts posts={posts} onPostLikeToggled={handlePostLikeToggled} onPostSaveToggled={handlePostSaveToggled} onPostDeleted={handlePostDeleted} />
 }
 
-export default SavedPosts
+export default AllPosts

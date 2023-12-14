@@ -1,18 +1,18 @@
 import { validateText, validateFunction } from '../utils/validators'
-import context from './context'
 
-function toggleSavePost(postId, callback) {
+function toggleLikePost(token, postId, callback) {
+    validateText(token, 'token')
     validateText(postId, 'post id')
     validateFunction(callback, 'callback')
 
     const req = {
         method: 'PATCH',
         headers: {
-            Authorization: `Bearer ${context.storage.token}`
+            Authorization: `Bearer ${token}`
         }
     }
 
-    fetch(`http://localhost:4000/posts/${postId}/saved`, req)
+    fetch(`http://localhost:4000/posts/${postId}/likes`, req)
         .then(res => {
             if (!res.ok) {
                 res.json()
@@ -27,4 +27,4 @@ function toggleSavePost(postId, callback) {
         .catch(error => callback(error))
 }
 
-export default toggleSavePost
+export default toggleLikePost

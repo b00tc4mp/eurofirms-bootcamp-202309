@@ -1,17 +1,17 @@
-import { validateFunction } from '../utils/validators'
-import context from './context'
+import { validateText, validateFunction } from '../utils/validators'
 
-function retrieveSavedPosts(callback) {
+function retrievePosts(token, callback) {
+    validateText(token, 'token')
     validateFunction(callback, 'callback')
 
     const req = {
         method: 'GET',
         headers: {
-            Authorization: `Bearer ${context.storage.token}`,
+            Authorization: `Bearer ${token}`,
         },
     }
 
-    fetch('http://localhost:4000/posts/saved', req)
+    fetch('http://localhost:4000/posts', req)
         .then(res => {
             if (!res.ok) {
                 res.json()
@@ -28,4 +28,4 @@ function retrieveSavedPosts(callback) {
         .catch(error => callback(error))
 }
 
-export default retrieveSavedPosts
+export default retrievePosts

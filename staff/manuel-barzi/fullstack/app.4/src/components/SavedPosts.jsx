@@ -15,7 +15,7 @@ function SavedPosts() {
 
     function refreshPosts() {
         try {
-            retrieveSavedPosts((error, posts) => {
+            retrieveSavedPosts(sessionStorage.token, (error, posts) => {
                 if (error) {
                     alert(error.message)
 
