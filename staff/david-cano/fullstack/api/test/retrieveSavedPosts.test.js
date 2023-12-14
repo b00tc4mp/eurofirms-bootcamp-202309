@@ -1,13 +1,11 @@
 const req = {
-    method: 'POST',
+    method: 'GET',
     headers: {
         Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NTc1MjNhMmM1YmZkMDU3ZWY1NWE5NzEiLCJpYXQiOjE3MDI1MTg3Mjd9.x_cj7ACxNeJGZPOIycSy6CI87TgXXnV16uq7i8s2s7Y',
-        'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ image: 'https://wallpapers.com/images/hd/cute-minion-happy-bob-v1x9tfcn0rznkvvd.jpg', imageDescription: 'minion image', text: 'hello minion' })
 }
 
-fetch('http://localhost:4000/posts', req)
+fetch('http://localhost:4000/posts/saved', req)
     .then(res => {
         if (!res.ok) {
             res.json()
@@ -17,6 +15,8 @@ fetch('http://localhost:4000/posts', req)
             return
         }
 
-        console.log(res.status)
+        res.json()
+            .then(posts => console.log(res.status, posts))
+            .catch(error => console.error(error))
     })
     .catch(error => console.error(error))

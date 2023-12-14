@@ -23,7 +23,7 @@ function Home(props) {
         console.log('Home useEffect')
 
         try {
-            retrieveUser(window.sessionUserId, (error, user) => {
+            retrieveUser(sessionStorage.token, (error, user) => {
                 if (error) {
                     alert(error.message)
 
@@ -38,7 +38,7 @@ function Home(props) {
     }, [])
 
     function handleLogoutClick() {
-        window.sessionUserId = null
+        sessionStorage.token = null
 
         props.onLogout()
     }

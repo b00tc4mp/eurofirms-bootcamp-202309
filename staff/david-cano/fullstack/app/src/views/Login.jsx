@@ -20,14 +20,14 @@ function Login(props) {
         const email = emailInput.value
         const password = passwordInput.value
         try {
-            authenticateUser(email, password, (error, userId) => {
+            authenticateUser(email, password, (error, token) => {
                 if (error) {
                     alert(error.message)
 
                     return
                 }
 
-                window.sessionUserId = userId
+                sessionStorage.token = token
 
                 props.onSuccess()
             })

@@ -6,12 +6,12 @@ import Button from './Button'
 
 function Post(props) {
     console.log('Post')
-    
+
     const post = props.post
 
     function handleLikeClick() {
         try {
-            toggleLikePost(window.sessionUserId, post.id)
+            toggleLikePost(sessionStorage.token, post.id)
 
             props.onLikeClick()
         } catch (error) {
@@ -23,18 +23,18 @@ function Post(props) {
         const confirmed = confirm('Are you sure you want to delete post?')
 
         if (confirmed)
-        try {
-            deletePost(sessionUserId, post.id)
+            try {
+                deletePost(sessionUserId, post.id)
 
-            props.onDeleteClick()
-        } catch (error) {
-            alert(error.message)
-        }
+                props.onDeleteClick()
+            } catch (error) {
+                alert(error.message)
+            }
     }
 
     function handleSaveClick() {
         try {
-            toggleSavePost(window.sessionUserId, post.id)
+            toggleSavePost(sessionStorage.token, post.id)
 
             props.onSaveClick()
         } catch (error) {
@@ -52,11 +52,11 @@ function Post(props) {
 
         <p>{post.text}</p>
 
-        <Button onClick={handleLikeClick}title={post.liked ? 'Unlike' : 'Like'} aria-label={post.liked ? 'Unlike' : 'Like'}>{(post.liked ? '😍' : '😒') + ' ' + post.likes.length + ' likes'}</Button>
+        <Button onClick={handleLikeClick} title={post.liked ? 'Unlike' : 'Like'} aria-label={post.liked ? 'Unlike' : 'Like'}>{(post.liked ? '😍' : '😒') + ' ' + post.likes.length + ' likes'}</Button>
 
-        <Button onClick={handleSaveClick}title={post.liked ? 'Unsave' : 'Save'} aria-label={post.liked ? 'Unsave' : 'Save'}>{(post.saved ? '⭐' : '✡️')}</Button>
+        <Button onClick={handleSaveClick} title={post.liked ? 'Unsave' : 'Save'} aria-label={post.liked ? 'Unsave' : 'Save'}>{(post.saved ? '⭐' : '✡️')}</Button>
 
-        {post.author.id === window.sessionUserId ? <Button title="Delete" aria-label="Delete" onClick={handleDeleteClick}>🚮</Button> : null}
+        {post.author.id === sessionStorage.token ? <Button title="Delete" aria-label="Delete" onClick={handleDeleteClick}>🚮</Button> : null}
     </article>
 }
 

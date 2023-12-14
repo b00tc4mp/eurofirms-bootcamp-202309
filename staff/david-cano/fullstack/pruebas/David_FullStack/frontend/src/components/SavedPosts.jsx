@@ -12,7 +12,7 @@ function SavedPosts() {
     let posts = null
 
     try {
-        posts = retrieveSavedPosts(window.sessionUserId)
+        posts = retrieveSavedPosts(sessionStorage.token)
     } catch (error) {
         alert(error.message)
     }

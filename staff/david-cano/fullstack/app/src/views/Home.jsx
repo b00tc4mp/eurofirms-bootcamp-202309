@@ -23,7 +23,7 @@ function Home(props) {
         console.log('Home useEffect')
 
         try {
-            retrieveUser(window.sessionUserId, (error, user) => {
+            retrieveUser(sessionStorage.token, (error, user) => {
                 if (error) {
                     alert(error.message)
 
@@ -38,7 +38,7 @@ function Home(props) {
     }, [])
 
     function handleLogoutClick() {
-        window.sessionUserId = null
+        delete sessionStorage.token
 
         props.onLogout()
     }
@@ -77,9 +77,9 @@ function Home(props) {
     return <Container align='center'>
         <header className="flex justify-beetwen items-center md:min-w-[500px] lg:min-w-[1024px]" aria-label="Header">
 
-        <Link className='hidden lg:block' onClick={handleHomeClick}><Logo /></Link>
+            <Link className='hidden lg:block' onClick={handleHomeClick}><Logo /></Link>
 
-<Button className='hidden lg:block' title="New post" aria-label="New post (+)" onClick={handleNewPostClick}>+</Button>
+            <Button className='hidden lg:block' title="New post" aria-label="New post (+)" onClick={handleNewPostClick}>+</Button>
 
             <Link onClick={handleSavedClick}>Saved</Link>
 
@@ -94,14 +94,14 @@ function Home(props) {
 
         {view === null || view === 'new-post' ? <AllPosts timestamp={timestamp} /> : null}
 
-        {view === 'saved' ? <SavedPosts /> : null} 
+        {view === 'saved' ? <SavedPosts /> : null}
 
-        {view === 'my-posts' ? <MyPosts /> : null} 
+        {view === 'my-posts' ? <MyPosts /> : null}
 
-<div className='h-[2rem]'></div>
+        <div className='h-[2rem]'></div>
 
         <footer className='bg-[skyblue] fixed bottom-0 w-full flex justify-center items-center h-[2rem] lg:hidden'><Link onClick={handleHomeClick}><Logo /></Link>
-<Button title="New post" aria-label="New post (+)" onClick={handleNewPostClick}>+</Button></footer>
+            <Button title="New post" aria-label="New post (+)" onClick={handleNewPostClick}>+</Button></footer>
     </Container>
 }
 

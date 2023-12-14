@@ -1,5 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const jwt = require('jsonwebtoken')
 
 const registerUser = require('./logic/registerUser')
 const authenticateUser = require('./logic/authenticateUser')
@@ -40,11 +41,9 @@ mongoose.connect('mongodb://127.0.0.1/api')
         api.use('*', cors)
 
         api.post('/users', cors, jsonBodyParser, (req, res) => {
-            const body = req.body
-
-            const { name, email, password } = body
-
             try {
+            const { name, email, password } = req.body
+
                 registerUser(name, email, password, error => {
                     if (error) {
                         res.status(400).json({ error: error.message })
@@ -60,18 +59,19 @@ mongoose.connect('mongodb://127.0.0.1/api')
         })
 
         api.post('/users/authenticate', jsonBodyParser, (req, res) => {
-            const body = req.body
-
-            const { email, password } = body
-
             try {
+            const { email, password } = req.body
+
+            
                 authenticateUser(email, password, (error, userId) => {
                     if (error) {
                         res.status(400).json({ error: error.message })
                         return
                     }
 
-                    res.json(userId)
+                    const token = jwt.sign({ sub: userId }, 'es posible que pronto sea abuelo', {expiresIn: '1h'})
+
+                    res.json(token)
                 })
             } catch (error) {
                 res.status(400).json({ error: error.message })
@@ -79,9 +79,11 @@ mongoose.connect('mongodb://127.0.0.1/api')
         })
 
         api.get('/users', (req, res) => {
-            const userId = req.headers.authorization.slice(7)
-
             try {
+                const token = req.headers.authorization.slice(7)
+
+                const { sub: userId } = jwt.verify(token, 'es posible que pronto sea abuelo')
+
                 retrieveUser(userId, (error, user) => {
                     if (error) {
                         res.status(400).json({ error: error.message })
@@ -96,12 +98,13 @@ mongoose.connect('mongodb://127.0.0.1/api')
         })
 
         api.post("/posts", jsonBodyParser, (req, res) => {
-            const userId = req.headers.authorization.slice(7);
-            const body = req.body;
-
-            const { image, imageDescription, text } = body;
-
             try {
+                const token = req.headers.authorization.slice(7)
+
+                const { sub: userId } = jwt.verify(token, 'es posible que pronto sea abuelo')
+
+                const { image, imageDescription, text } = req.body;
+
                 createPost(userId, image, imageDescription, text, error => {
                     if (error) {
                         res.status(400).json({ error: error.message });
@@ -117,9 +120,11 @@ mongoose.connect('mongodb://127.0.0.1/api')
         });
 
         api.get("/posts", (req, res) => {
-            const userId = req.headers.authorization.slice(7); // Para que se nos quede el userId sin el Bearer
-
             try {
+                const token = req.headers.authorization.slice(7)// Para que se nos quede el userId sin el Bearer
+
+                const { sub: userId } = jwt.verify(token, 'es posible que pronto sea abuelo')
+
                 retrievePosts(userId, (error, posts) => {
                     if (error) {
                         res.status(400).json({ error: error.message });
@@ -135,9 +140,11 @@ mongoose.connect('mongodb://127.0.0.1/api')
         });
 
         api.get('/posts/saved', (req, res) => {
-            const userId = req.headers.authorization.slice(7)
-
             try {
+                const token = req.headers.authorization.slice(7)
+
+                const { sub: userId } = jwt.verify(token, 'es posible que pronto sea abuelo')
+            
                 retrieveSavedPosts(userId, (error, posts) => {
                     if (error) {
                         res.status(400).json({ error: error.message })
@@ -153,9 +160,11 @@ mongoose.connect('mongodb://127.0.0.1/api')
         })
 
         api.get('/posts/mine', (req, res) => {
-            const userId = req.headers.authorization.slice(7)
-
             try {
+                const token = req.headers.authorization.slice(7)
+
+                const { sub: userId } = jwt.verify(token, 'es posible que pronto sea abuelo')
+
                 retrieveMyPosts(userId, (error, posts) => {
                     if (error) {
                         res.status(400).json({ error: error.message })
@@ -171,10 +180,13 @@ mongoose.connect('mongodb://127.0.0.1/api')
         })
 
         api.patch("/posts/:postId/likes", (req, res) => {
-            const userId = req.headers.authorization.slice(7);
-            const postId = req.params.postId;
-
             try {
+                const token = req.headers.authorization.slice(7)
+
+                const { sub: userId } = jwt.verify(token, 'es posible que pronto sea abuelo')
+
+                const postId = req.params.postId;
+
                 toggleLikePost(userId, postId, error => {
                     if (error) {
                         res.status(400).json({ error: error.message });
@@ -190,10 +202,13 @@ mongoose.connect('mongodb://127.0.0.1/api')
         });
 
         api.patch("/posts/:postId/saved", (req, res) => {
-            const userId = req.headers.authorization.slice(7);
-            const postId = req.params.postId;
-
             try {
+                const token = req.headers.authorization.slice(7)
+
+                const { sub: userId } = jwt.verify(token, 'es posible que pronto sea abuelo')
+
+                const postId = req.params.postId;
+
                 toggleSavePost(userId, postId, error => {
                     if (error) {
                         res.status(400).json({ error: error.message });
@@ -209,10 +224,13 @@ mongoose.connect('mongodb://127.0.0.1/api')
         });
 
         api.delete('/posts/:postId', (req, res) => {
-            const userId = req.headers.authorization.slice(7)
-            const postId = req.params.postId
-
             try {
+                const token = req.headers.authorization.slice(7)
+
+                const { sub: userId } = jwt.verify(token, 'es posible que pronto sea abuelo')
+
+                const postId = req.params.postId
+
                 deletePost(userId, postId, error => {
                     if (error) {
                         res.status(400).json({ error: error.message })
@@ -228,12 +246,13 @@ mongoose.connect('mongodb://127.0.0.1/api')
         })
 
         api.patch("/users/password", jsonBodyParser, (req, res) => {
-            const userId = req.headers.authorization.slice(7)
-
-            const body = req.body
-            const { password, newPassword, repeatNewPassword } = body
-
             try {
+                const token = req.headers.authorization.slice(7)
+
+                const { sub: userId } = jwt.verify(token, 'es posible que pronto sea abuelo')
+
+                const { password, newPassword, repeatNewPassword } = req.body
+
                 updateUserPassword(userId, password, newPassword, repeatNewPassword, error => {
                     if (error) {
                         res.status(400).json({ error: error.message })

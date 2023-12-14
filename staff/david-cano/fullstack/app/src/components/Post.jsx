@@ -6,12 +6,12 @@ import Button from './Button'
 
 function Post(props) {
     console.log('Post')
-    
+
     const post = props.post
 
     function handleLikeClick() {
         try {
-            toggleLikePost(window.sessionUserId, post.id, error => {
+            toggleLikePost(sessionStorage.token, post.id, error => {
                 if (error) {
                     alert(error.message)
 
@@ -29,24 +29,24 @@ function Post(props) {
         const confirmed = confirm('Are you sure you want to delete post?')
 
         if (confirmed)
-        try {
-            deletePost(sessionUserId, post.id, error => {
-                if (error) {
-                    alert(error.message)
+            try {
+                deletePost(sessionUserId, post.id, error => {
+                    if (error) {
+                        alert(error.message)
 
-                    return
-                }
+                        return
+                    }
 
-                props.onDeleted()
-            })
-        } catch (error) {
-            alert(error.message)
-        }
+                    props.onDeleted()
+                })
+            } catch (error) {
+                alert(error.message)
+            }
     }
 
     function handleSaveClick() {
         try {
-            toggleSavePost(window.sessionUserId, post.id, error => {
+            toggleSavePost(sessionStorage.token, post.id, error => {
                 if (error) {
                     alert(error.message)
 
@@ -70,13 +70,13 @@ function Post(props) {
 
         <p>{post.text}</p>
 
-<div className='flex'>
-<Button onClick={handleLikeClick}title={post.liked ? 'Unlike' : 'Like'} aria-label={post.liked ? 'Unlike' : 'Like'}>{(post.liked ? '😍' : '😒') + ' ' + post.likes.length + ' likes'}</Button>
+        <div className='flex'>
+            <Button onClick={handleLikeClick} title={post.liked ? 'Unlike' : 'Like'} aria-label={post.liked ? 'Unlike' : 'Like'}>{(post.liked ? '😍' : '😒') + ' ' + post.likes.length + ' likes'}</Button>
 
-<Button onClick={handleSaveClick}title={post.liked ? 'Unsave' : 'Save'} aria-label={post.saved ? 'Unsave' : 'Save'}>{(post.saved ? '⭐' : '✡️')}</Button>
+            <Button onClick={handleSaveClick} title={post.liked ? 'Unsave' : 'Save'} aria-label={post.saved ? 'Unsave' : 'Save'}>{(post.saved ? '⭐' : '✡️')}</Button>
 
-{post.author.id === window.sessionUserId ? <Button title="Delete" aria-label="Delete" onClick={handleDeleteClick}>🚮</Button> : null}
-</div>
+            {post.author.id === sessionStorage.token ? <Button title="Delete" aria-label="Delete" onClick={handleDeleteClick}>🚮</Button> : null}
+        </div>
 
 
     </article>

@@ -12,7 +12,7 @@ function MyPosts() {
     let posts = null
 
     try {
-        posts = retrieveMyPosts(window.sessionUserId)
+        posts = retrieveMyPosts(sessionStorage.token)
     } catch (error) {
         alert(error.message)
     }

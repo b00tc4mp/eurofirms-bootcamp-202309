@@ -9,13 +9,13 @@ function AllPosts(props) {
 
     const [posts, setPosts] = useState([])
 
-    useEffect( () => {
-    refreshPosts()
-}, [props.timestamp])
+    useEffect(() => {
+        refreshPosts()
+    }, [props.timestamp])
 
-    function refreshPosts(){
+    function refreshPosts() {
         try {
-            retrievePosts(window.sessionUserId, (error, posts) => {
+            retrievePosts(sessionStorage.token, (error, posts) => {
                 if (error) {
                     alert(error.message)
 

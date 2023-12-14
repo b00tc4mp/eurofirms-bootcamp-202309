@@ -27,7 +27,7 @@ function Login(props) {
                     return
                 }
 
-                window.sessionUserId = userId
+                sessionStorage.token = userId
 
                 props.onSuccess()
             })

@@ -91,7 +91,7 @@ curl -H 'Content-Type: application/json' -d '{ "name": "Peter Pan", "email": "pe
 
 ```
 Request: POST /users/auth { email, password }
-Response: 200 userId
+Response: 200 token
 ```
 
 Examples:
