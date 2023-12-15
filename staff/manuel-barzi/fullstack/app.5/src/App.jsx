@@ -36,13 +36,13 @@ function App() {
 
       setView('login')
       setFeedback('Session expired, please login again')
-    } else setFeedback(error.message)
+    }
   }
 
   return <>
-    {view === 'login' ? <Login onSuccess={handleHomeShow} onRegisterClick={handleRegisterShow} onError={handleError} /> : null}
+    {view === 'login' ? <Login onSuccess={handleHomeShow} onRegisterClick={handleRegisterShow} /> : null}
 
-    {view === 'register' ? <Register onSuccess={handleLoginShow} onLoginClick={handleLoginShow} onError={handleError} /> : null}
+    {view === 'register' ? <Register onSuccess={handleLoginShow} onLoginClick={handleLoginShow} /> : null}
 
     {view === 'home' ? <Home onLogout={handleLoginShow} onError={handleError} /> : null}
 

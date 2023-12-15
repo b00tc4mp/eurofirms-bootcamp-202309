@@ -22,7 +22,7 @@ function Login(props) {
         try {
             loginUser(email, password, error => {
                 if (error) {
-                    props.onError(error)
+                    alert(error.message)
 
                     return
                 }
@@ -30,7 +30,7 @@ function Login(props) {
                 props.onSuccess()
             })
         } catch (error) {
-            props.onError(error.message)
+            alert(error.message)
         }
     }
 
