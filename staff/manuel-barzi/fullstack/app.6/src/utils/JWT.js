@@ -22,10 +22,6 @@ class JWT {
 
         return this.payload.exp - now < 0
     }
-
-    getSubject() {
-        return this.payload.sub
-    }
 }
 
 export default JWT

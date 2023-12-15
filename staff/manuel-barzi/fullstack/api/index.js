@@ -68,7 +68,7 @@ mongoose.connect('mongodb://127.0.0.1/api')
                         return
                     }
 
-                    const token = jwt.sign({ sub: userId }, 'es posible que pronto sea abuelo', { expiresIn: '1s' })
+                    const token = jwt.sign({ sub: userId }, 'es posible que pronto sea abuelo', { expiresIn: '1m' })
 
                     res.json(token)
                 })

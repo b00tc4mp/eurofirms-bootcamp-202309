@@ -1,9 +1,8 @@
 import toggleLikePost from '../logic/toggleLikePost'
 import deletePost from '../logic/deletePost'
 import toggleSavePost from '../logic/toggleSavePost'
-import getLoggedInUserId from '../logic/getLoggedInUserId'
 
-import Button from '../library/Button'
+import Button from './Button'
 
 function Post(props) {
     console.log('Post')
@@ -76,7 +75,7 @@ function Post(props) {
 
             <Button onClick={handleSaveClick} title={post.saved ? 'Unsave' : 'sSave'} aria-label={post.saved ? 'Unsave' : 'Save'}>{(post.saved ? '⭐️' : '✩')}</Button>
 
-            {post.author.id === getLoggedInUserId() ? <Button title="Delete" aria-label="Delete" onClick={handleDeleteClick}>🗑️</Button> : null}
+            {post.author.id === sessionStorage.token ? <Button title="Delete" aria-label="Delete" onClick={handleDeleteClick}>🗑️</Button> : null}
         </div>
     </article>
 }

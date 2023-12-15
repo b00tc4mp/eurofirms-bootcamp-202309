@@ -1,7 +1,7 @@
-import Button from '../library/Button'
-import Container from '../library/Container'
-import Field from '../library/Field'
-import Form from '../library/Form'
+import Button from '../components/Button'
+import Container from '../components/Container'
+import Field from '../components/Field'
+import Form from '../components/Form'
 
 import createNewPost from '../logic/createNewPost'
 
@@ -36,6 +36,7 @@ function NewPost(props) {
 
     function handleCancelClick() {
         props.onNewPostCancelClick()
+        props.onSuccess()
     }
 
     return <Container align="center">

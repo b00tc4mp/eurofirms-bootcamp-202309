@@ -1,6 +1,5 @@
-import Container from '../library/Container'
-
 import Post from './Post'
+import Container from './Container'
 
 function Posts(props) {
     console.log('Posts')

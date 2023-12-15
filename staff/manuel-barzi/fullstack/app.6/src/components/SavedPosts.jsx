@@ -31,14 +31,17 @@ function SavedPosts(props) {
 
     function handlePostLikeToggled() {
         refreshPosts()
+        props.onSuccess()
     }
 
     function handlePostDeleted() {
         refreshPosts()
+        props.onSuccess()
     }
 
     function handlePostSaveToggled() {
         refreshPosts()
+        props.onSuccess()
     }
 
     return <Posts posts={posts} onPostLikeToggled={handlePostLikeToggled} onPostSaveToggled={handlePostSaveToggled} onPostDeleted={handlePostDeleted} onError={props.onError} />

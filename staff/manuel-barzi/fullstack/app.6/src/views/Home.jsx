@@ -3,16 +3,15 @@ import { useEffect, useState } from 'react'
 import logoutUser from '../logic/logoutUser'
 import retrieveUser from '../logic/retrieveUser'
 
-import Button from '../library/Button'
-import Link from '../library/Link'
-import Container from '../library/Container'
-
 import AllPosts from '../components/AllPosts'
+import Button from '../components/Button'
+import Container from '../components/Container'
+import Link from '../components/Link'
 import MyPosts from '../components/MyPosts'
 import NewPost from '../components/NewPost'
 import SavedPosts from '../components/SavedPosts'
-import Logo from '../components/Logo'
 
+import Logo from '../components/Logo'
 
 function Home(props) {
     console.log('Home')
@@ -56,24 +55,28 @@ function Home(props) {
     function handleNewPostSubmit() {
         setView(null)
         setTimestamp(Date.now())
+        props.onSuccess()
     }
 
     function handleSavedClick(event) {
         event.preventDefault()
 
         setView('saved')
+        props.onSuccess()
     }
 
     function handleHomeClick(event) {
         event.preventDefault()
 
         setView(null)
+        props.onSuccess()
     }
 
     function handleMyPostsClick(event) {
         event.preventDefault()
 
         setView('my-posts')
+        props.onSuccess()
     }
 
     return <Container align="center">
@@ -91,13 +94,13 @@ function Home(props) {
             <Button onClick={handleLogoutClick}>Logout</Button>
         </header>
 
-        {view === 'new-post' ? <NewPost onNewPostSubmit={handleNewPostSubmit} onNewPostCancelClick={handleNewPostCancelClick} onError={props.onError} /> : null}
+        {view === 'new-post' ? <NewPost onNewPostSubmit={handleNewPostSubmit} onNewPostCancelClick={handleNewPostCancelClick} onSuccess={props.onSuccess} onError={props.onError} /> : null}
 
-        {view === null || view === 'new-post' ? <AllPosts timestamp={timestamp} onError={props.onError} /> : null}
+        {view === null || view === 'new-post' ? <AllPosts timestamp={timestamp} onSuccess={props.onSuccess} onError={props.onError} /> : null}
 
-        {view === 'saved' ? <SavedPosts onError={props.onError} /> : null}
+        {view === 'saved' ? <SavedPosts onSuccess={props.onSuccess} onError={props.onError} /> : null}
 
-        {view === 'my-posts' ? <MyPosts onError={props.onError} /> : null}
+        {view === 'my-posts' ? <MyPosts onSuccess={props.onSuccess} onError={props.onError} /> : null}
 
         <div className="h-[2rem]"></div>
 

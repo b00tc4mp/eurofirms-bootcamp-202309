@@ -1,10 +1,10 @@
 import registerUser from '../logic/registerUser'
 
-import Button from '../library/Button'
-import Link from '../library/Link'
-import Field from '../library/Field'
-import Form from '../library/Form'
-import Container from '../library/Container'
+import Button from '../components/Button'
+import Link from '../components/Link'
+import Field from '../components/Field'
+import Form from '../components/Form'
+import Container from '../components/Container'
 
 import Logo from '../components/Logo'
 
