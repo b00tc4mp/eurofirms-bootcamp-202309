@@ -21,15 +21,15 @@ function updateUserPassword(password, newPassword, repeatNewPassword, callback) 
       .then((res) => {
          if (!res.ok) {
             res.json()
-               .then((body) => console.error(body))
-               .catch((error) => console.error(error))
+               .then((body) => callback(new Error(body.error)))
+               .catch((error) => callback(error))
 
             return
          }
 
          console.log("password updated")
       })
-      .catch((error) => console.error(error))
+      .catch((error) => callback(error))
 }
 
 export default updateUserPassword

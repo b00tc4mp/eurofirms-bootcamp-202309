@@ -22,15 +22,15 @@ function updateUserEmail(password, email, newEmail, repeatNewEmail, callback) {
       .then((res) => {
          if (!res.ok) {
             res.json()
-               .then((body) => console.error(body))
-               .catch((error) => console.error(error))
+               .then((body) => callback(new Error(body.error)))
+               .catch((error) => callback(error))
 
             return
          }
 
          console.log("email updated")
       })
-      .catch((error) => console.error(error))
+      .catch((error) => callback(error))
 }
 
 export default updateUserEmail
