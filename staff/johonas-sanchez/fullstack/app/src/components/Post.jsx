@@ -1,10 +1,9 @@
 import toggleLikePost from "../logic/toggleLikePost"
 import deletePost from "../logic/deletePost"
 import toggleSavePost from "../logic/toggleSavePost"
+import getLoggedInUserId from '../logic/getLoggedInUserId'
 
-import Button from "./Button"
-
-import { JWTError } from '../utils/errors'
+import Button from "../library/Button"
 
 function Post(props) {
    console.log("Post")
@@ -13,9 +12,9 @@ function Post(props) {
 
    function handlePostLikeToggled() {
       try {
-         toggleLikePost(post.id, error => {
+         toggleLikePost(post.id, (error) => {
             if (error) {
-               alert(error.message)
+               props.onError(error)
 
                return
             }
@@ -23,10 +22,7 @@ function Post(props) {
             props.onPostLikeToggled()
          })
       } catch (error) {
-         if (error instanceof JWTError)
-                props.onError(error)
-            else
-                alert(error.message)
+         props.onError(error)
       }
    }
 
@@ -35,9 +31,9 @@ function Post(props) {
 
       if (confirmed)
          try {
-            deletePost(post.id, error => {
+            deletePost(post.id, (error) => {
                if (error) {
-                  alert(error.message)
+                  props.onError(error)
 
                   return
                }
@@ -45,18 +41,15 @@ function Post(props) {
                props.onPostDeleted()
             })
          } catch (error) {
-            if (error instanceof JWTError)
-                props.onError(error)
-            else
-                alert(error.message)
+            props.onError(error)
          }
    }
 
    function handlePostSaveToggled() {
       try {
-         toggleSavePost(post.id, error => {
+         toggleSavePost(post.id, (error) => {
             if (error) {
-               alert(error.message)
+               props.onError(error)
 
                return
             }
@@ -64,10 +57,7 @@ function Post(props) {
             props.onPostSaveToggled()
          })
       } catch (error) {
-         if (error instanceof JWTError)
-                props.onError(error)
-            else
-                alert(error.message)
+         props.onError(error)
       }
    }
 
@@ -88,7 +78,7 @@ function Post(props) {
                {post.saved ? "⭐️" : "✩"}
             </Button>
 
-            {post.author.id === sessionStorage.token ? (
+            {post.author.id === getLoggedInUserId() ? (
                <Button title="Delete" aria-label="Delete" onClick={handlePostDeleted}>
                   🗑️
                </Button>

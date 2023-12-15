@@ -1,11 +1,9 @@
-import Container from "../components/Container"
-import Field from "../components/Field"
-import Form from "../components/Form"
-import Button from "../components/Button"
+import Container from "../library/Container"
+import Field from "../library/Field"
+import Form from "../library/Form"
+import Button from "../library/Button"
 
 import createNewPost from "../logic/createNewPost"
-
-import { JWTError } from '../utils/errors'
 
 function NewPost(props) {
    console.log("NewPost")
@@ -22,9 +20,9 @@ function NewPost(props) {
       const text = textInput.value
 
       try {
-         createNewPost(image, imageDescription, text, error => {
+         createNewPost(image, imageDescription, text, (error) => {
             if (error) {
-               alert(error.message)
+               props.onError(error)
             } else {
                // Manejar la creación exitosa de la publicación
                console.log("Post created")
@@ -32,10 +30,7 @@ function NewPost(props) {
             }
          })
       } catch (error) {
-         if (error instanceof JWTError)
-                props.onError(error)
-            else
-                alert(error.message)
+         props.onError(error)
       }
    }
 

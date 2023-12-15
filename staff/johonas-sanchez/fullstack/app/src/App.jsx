@@ -1,18 +1,19 @@
+import { useState } from "react"
+
+import Feedback from "./library/Feedback"
+
 import Login from "./views/Login"
-import React from "react"
 import Register from "./views/Register"
 import Home from "./views/Home"
-import Feedback from "./components/Feedback"
 
 import logoutUser from "./logic/logoutUser"
 
 import { JWTError } from "./utils/errors"
-import { useState } from "react"
 
 function App() {
    console.log("App")
 
-   const [view, setView] = React.useState(sessionStorage.token ? "home" : "login")
+   const [view, setView] = useState(sessionStorage.token ? "home" : "login")
    const [feedback, setFeedback] = useState(null)
 
    function handleRegisterShow() {
@@ -39,6 +40,10 @@ function App() {
       } else setFeedback(error.message)
    }
 
+   function handleAcceptFeedback() {
+      setFeedback(null)
+   }
+
    return (
       <>
          {view === "login" ? <Login onSuccess={handleHomeShow} onRegisterClick={handleRegisterShow} onError={handleError} /> : null}
@@ -47,7 +52,7 @@ function App() {
 
          {view === "home" ? <Home onLogout={handleLoginShow} onError={handleError} /> : null}
 
-         {feedback ? <Feedback message={feedback} /> : null}
+         {feedback ? <Feedback message={feedback} onAccept={handleAcceptFeedback} /> : null}
       </>
    )
 }

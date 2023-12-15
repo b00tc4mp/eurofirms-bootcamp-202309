@@ -1,61 +1,79 @@
-import { useState } from 'react'
+import { useState } from "react"
 
-import Container from '../components/Container'
-import Field from '../components/Field'
-import Form from '../components/Form'
-import Button from '../components/Button'
+import Container from "../library/Container"
+import Field from "../library/Field"
+import Form from "../library/Form"
+import Button from "../library/Button"
 
 function UserProfile() {
-const [view,setView] = useState( null )
+   const [view, setView] = useState(null)
 
-function handleChangeEmailClick() {
-    setView('change-email')
-}
+   function handleChangeEmailClick() {
+      setView("change-email")
+   }
 
-function handleChangePasswordClick() {
-    setView('change-password')
-}
+   function handleChangePasswordClick() {
+      setView("change-password")
+   }
 
-function handleCancelClick() {
-    setView(null)
-}
+   function handleCancelClick() {
+      setView(null)
+   }
 
-return<><Container>
-    <Button onClick={handleChangeEmailClick}>Change Email</Button>
-    <Button onClick={handleChangePasswordClick}>Change Password</Button>
-    </Container>
+   return (
+      <>
+         <Container>
+            <Button onClick={handleChangeEmailClick}>Change Email</Button>
+            <Button onClick={handleChangePasswordClick}>Change Password</Button>
+         </Container>
 
-    {view === 'change-password' && 
-    <Container className="mt-7">
-        <Form>
-            <Field type="password" id="old-password" required>Old Password</Field>
+         {view === "change-password" && (
+            <Container className="mt-7">
+               <Form>
+                  <Field type="password" id="old-password" required>
+                     Old Password
+                  </Field>
 
-            <Field type="password" id="new-password" required>New password</Field>
+                  <Field type="password" id="new-password" required>
+                     New password
+                  </Field>
 
-            <Field type="password" id="repeat-new-password" required>Repeat new password</Field>
+                  <Field type="password" id="repeat-new-password" required>
+                     Repeat new password
+                  </Field>
 
-            <Button type="submit">Actualizar</Button>
-            <Button onClick={handleCancelClick}>Cancel</Button>
-        </Form>
-    </Container> }
+                  <Button type="submit">Actualizar</Button>
+                  <Button onClick={handleCancelClick}>Cancel</Button>
+               </Form>
+            </Container>
+         )}
 
-    {view === 'change-email' && 
-    <Container className="mt-7">
-    <Form>
-        <Field type="password" id="password" required>Password</Field>
+         {view === "change-email" && (
+            <Container className="mt-7">
+               <Form>
+                  <Field type="password" id="password" required>
+                     Password
+                  </Field>
 
-        <Field type="email" id="old-email" required>Old email</Field>
+                  <Field type="email" id="old-email" required>
+                     Old email
+                  </Field>
 
-        <Field type="email" id="new-email" required>New email</Field>
+                  <Field type="email" id="new-email" required>
+                     New email
+                  </Field>
 
-        <Field type="email" id="repeat-new-email" required>Repeat new email</Field>
+                  <Field type="email" id="repeat-new-email" required>
+                     Repeat new email
+                  </Field>
 
-        <Button type="submit">Actualizar</Button>
-        <Button onClick={handleCancelClick}>Cancel</Button>
-    </Form>
-</Container> }
-
-    </>
+                  <Button type="submit">Actualizar</Button>
+                  <Button onClick={handleCancelClick}>Cancel</Button>
+               </Form>
+            </Container>
+         )}
+      </>
+   )
 }
 
 export default UserProfile

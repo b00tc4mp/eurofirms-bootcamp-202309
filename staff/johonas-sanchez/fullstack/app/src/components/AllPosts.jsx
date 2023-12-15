@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react"
 
-import Posts from "../components/Posts"
+import Posts from "./Posts"
 
 import retrievePosts from "../logic/retrievePosts"
-
-import { JWTError } from '../utils/errors'
 
 function AllPosts(props) {
    console.log("AllPosts")
@@ -19,7 +17,7 @@ function AllPosts(props) {
       try {
          retrievePosts((error, posts) => {
             if (error) {
-               alert(error.message)
+               props.onError(error)
 
                return
             }
@@ -27,10 +25,7 @@ function AllPosts(props) {
             setPosts(posts)
          })
       } catch (error) {
-         if (error instanceof JWTError)
-                props.onError(error)
-            else
-                alert(error.message)
+         props.onError(error)
       }
    }
 

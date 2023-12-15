@@ -2,8 +2,6 @@ import { useState, useEffect } from "react"
 
 import Posts from "./Posts"
 
-import { JWTError } from '../utils/errors'
-
 import retrieveSavedPosts from "../logic/retrieveSavedPosts"
 
 function SavedPosts(props) {
@@ -19,7 +17,7 @@ function SavedPosts(props) {
       try {
          retrieveSavedPosts((error, posts) => {
             if (error) {
-               alert(error.message)
+               props.onError(error)
 
                return
             }
@@ -27,10 +25,7 @@ function SavedPosts(props) {
             setPosts(posts)
          })
       } catch (error) {
-         if (error instanceof JWTError)
-                props.onError(error)
-            else
-                alert(error.message)
+         props.onError(error)
       }
    }
 

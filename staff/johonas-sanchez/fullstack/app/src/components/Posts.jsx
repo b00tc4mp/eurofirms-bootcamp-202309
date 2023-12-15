@@ -1,4 +1,4 @@
-import Container from "./Container"
+import Container from "../library/Container"
 import Post from "./Post"
 
 function Posts(props) {

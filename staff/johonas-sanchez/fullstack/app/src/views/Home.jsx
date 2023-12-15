@@ -1,20 +1,19 @@
 import { useState, useEffect } from "react"
 
-import retrieveUser from "../logic/retrieveUser"
-
 import logoutUser from "../logic/logoutUser"
+import retrieveUser from "../logic/retrieveUser"
 
 import { JWTError } from "../utils/errors"
 
-import Button from "../components/Button"
-import Link from "../components/Link"
-import Container from "../components/Container"
+import Button from "../library/Button"
+import Link from "../library/Link"
+import Container from "../library/Container"
+
 import MyPosts from "../components/MyPosts"
 import SavedPosts from "../components/SavedPosts"
 import AllPosts from "../components/AllPosts"
 import NewPost from "../components/NewPost"
 import UserProfile from "../components/UserProfile"
-
 import Logo from "../components/Logo"
 
 function Home(props) {
@@ -28,7 +27,7 @@ function Home(props) {
       try {
          retrieveUser((error, user) => {
             if (error) {
-               alert(error.message)
+               props.onError(error)
 
                return
             }
@@ -36,10 +35,7 @@ function Home(props) {
             setName(user.name)
          })
       } catch (error) {
-         if (error instanceof JWTError) 
-            props.onError(error)
-         else 
-            alert(error.message)
+         props.onError(error)
       }
    }, [])
 
@@ -132,15 +128,17 @@ function Home(props) {
             </div>
          </header>
 
-         {view === 'new-post' ? <NewPost onNewPostSubmit={handleNewPostSubmit} onNewPostCancelClick={handleNewPostCancelClick} onError={props.onError} /> : null}
+         {view === "new-post" ? (
+            <NewPost onNewPostSubmit={handleNewPostSubmit} onNewPostCancelClick={handleNewPostCancelClick} onError={props.onError} />
+         ) : null}
 
-         {view === null || view === 'new-post' ? <AllPosts timestamp={timestamp} onError={props.onError} /> : null}
+         {view === null || view === "new-post" ? <AllPosts timestamp={timestamp} onError={props.onError} /> : null}
 
          {view === "user-profile" && <UserProfile />}
 
-         {view === 'saved' ? <SavedPosts onError={props.onError} /> : null}
+         {view === "saved" ? <SavedPosts onError={props.onError} /> : null}
 
-         {view === 'my-posts' ? <MyPosts onError={props.onError} /> : null}
+         {view === "my-posts" ? <MyPosts onError={props.onError} /> : null}
 
          <div className="h-[3rem] mb-5"></div>
 
