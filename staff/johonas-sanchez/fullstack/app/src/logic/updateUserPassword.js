@@ -1,4 +1,4 @@
-import { validateFunction, validateJWT } from "../utils/validators"
+import { validatePassword, validateFunction, validateJWT } from "../utils/validators"
 import context from './context'
 
 function updateUserPassword(password, newPassword, repeatNewPassword, callback) {
@@ -27,7 +27,7 @@ function updateUserPassword(password, newPassword, repeatNewPassword, callback) 
             return
          }
 
-         console.log(res.status, "updated password")
+         console.log("password updated")
       })
       .catch((error) => console.error(error))
 }

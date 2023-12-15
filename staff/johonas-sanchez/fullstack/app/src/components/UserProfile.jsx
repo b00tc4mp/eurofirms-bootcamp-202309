@@ -5,7 +5,10 @@ import Field from "../library/Field"
 import Form from "../library/Form"
 import Button from "../library/Button"
 
-function UserProfile() {
+import updateUserPassword from "../logic/updateUserPassword"
+import updateUserEmail from "../logic/updateUserEmail"
+
+function UserProfile(props) {
    const [view, setView] = useState(null)
 
    function handleChangeEmailClick() {
@@ -20,6 +23,56 @@ function UserProfile() {
       setView(null)
    }
 
+   function handleChangePasswordSubmit(event) {
+      event.preventDefault()
+
+      const passwordInput = event.target.querySelector("#password-field")
+      const newPasswordInput = event.target.querySelector("#new-password-field")
+      const repeatNewPasswordInput = event.target.querySelector("#repeat-new-password-field")
+
+      const password = passwordInput.value
+      const newPassword = newPasswordInput.value
+      const repeatNewPassword = repeatNewPasswordInput.value
+
+      try {
+         updateUserPassword(password, newPassword, repeatNewPassword, error => {
+            if (error) {
+               props.onError(error)
+            } else {
+               props.onNewPasswordSubmit()
+            }
+         })
+      } catch (error) {
+         props.onError(error)
+      }
+   }
+
+   function handleChangeEmailSubmit(event) {
+      event.preventDefault()
+
+      const passwordInput = event.target.querySelector("#password-field")
+      const oldEmailInput = event.target.querySelector("#old-email-field")
+      const newEmailInput = event.target.querySelector("#new-email-field")
+      const repeatNewEmailInput = event.target.querySelector("#repeat-new-email-field")
+
+      const password = passwordInput.value
+      const oldEmail = oldEmailInput.value
+      const newEmail = newEmailInput.value
+      const repeatNewEmail = repeatNewEmailInput.value
+
+      try {
+         updateUserEmail(password, oldEmail, newEmail, repeatNewEmail, error => {
+            if (error) {
+               props.onError(error)
+            } else {
+               props.onNewEmailSubmit()
+            }
+         })
+      } catch (error) {
+         props.onError(error)
+      }
+   }
+
    return (
       <>
          <Container>
@@ -29,16 +82,16 @@ function UserProfile() {
 
          {view === "change-password" && (
             <Container className="mt-7">
-               <Form>
-                  <Field type="password" id="old-password" required>
+               <Form onSubmit={handleChangePasswordSubmit}>
+                  <Field type="password" id="password-field" required>
                      Old Password
                   </Field>
 
-                  <Field type="password" id="new-password" required>
+                  <Field type="password" id="new-password-field" required>
                      New password
                   </Field>
 
-                  <Field type="password" id="repeat-new-password" required>
+                  <Field type="password" id="repeat-new-password-field" required>
                      Repeat new password
                   </Field>
 
@@ -50,20 +103,20 @@ function UserProfile() {
 
          {view === "change-email" && (
             <Container className="mt-7">
-               <Form>
-                  <Field type="password" id="password" required>
+               <Form onSubmit={handleChangeEmailSubmit}>
+                  <Field type="password" id="password-field" required>
                      Password
                   </Field>
 
-                  <Field type="email" id="old-email" required>
+                  <Field type="email" id="old-email-field" required>
                      Old email
                   </Field>
 
-                  <Field type="email" id="new-email" required>
+                  <Field type="email" id="new-email-field" required>
                      New email
                   </Field>
 
-                  <Field type="email" id="repeat-new-email" required>
+                  <Field type="email" id="repeat-new-email-field" required>
                      Repeat new email
                   </Field>
 

@@ -1,4 +1,4 @@
-import { validateEmail, validateFunction, validateJWT } from "../utils/validators"
+import { validatePassword, validateEmail, validateFunction, validateJWT } from "../utils/validators"
 import context from './context'
 
 function updateUserEmail(password, email, newEmail, repeatNewEmail, callback) {
@@ -28,7 +28,7 @@ function updateUserEmail(password, email, newEmail, repeatNewEmail, callback) {
             return
          }
 
-         console.log(res.status, "updated email")
+         console.log("email updated")
       })
       .catch((error) => console.error(error))
 }

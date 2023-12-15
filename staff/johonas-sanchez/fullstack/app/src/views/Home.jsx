@@ -3,8 +3,6 @@ import { useState, useEffect } from "react"
 import logoutUser from "../logic/logoutUser"
 import retrieveUser from "../logic/retrieveUser"
 
-import { JWTError } from "../utils/errors"
-
 import Button from "../library/Button"
 import Link from "../library/Link"
 import Container from "../library/Container"
@@ -54,6 +52,16 @@ function Home(props) {
    }
 
    function handleNewPostSubmit() {
+      setView(null)
+      setTimestamp(Date.now())
+   }
+
+   function handleChangePasswordSubmit() {
+      setView(null)
+      setTimestamp(Date.now())
+   }
+
+   function handleChangeEmailSubmit() {
       setView(null)
       setTimestamp(Date.now())
    }
@@ -134,7 +142,7 @@ function Home(props) {
 
          {view === null || view === "new-post" ? <AllPosts timestamp={timestamp} onError={props.onError} /> : null}
 
-         {view === "user-profile" && <UserProfile />}
+         {view === "user-profile" && <UserProfile  onNewPasswordSubmit={handleChangePasswordSubmit} onNewEmailSubmit={handleChangeEmailSubmit} onError={props.onError} />}
 
          {view === "saved" ? <SavedPosts onError={props.onError} /> : null}
 
