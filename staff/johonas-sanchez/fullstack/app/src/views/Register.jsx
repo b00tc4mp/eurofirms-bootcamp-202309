@@ -25,7 +25,7 @@ function Register(props) {
         try {
             registerUser(name, email, password, error => {
                 if (error) {
-                    alert(error.message)
+                    props.onError(error)
 
                     return
                 }
@@ -33,7 +33,7 @@ function Register(props) {
                 props.onSuccess()
             })
         } catch (error) {
-            alert(error.message)
+            props.onError(error)
         }
     }
 
