@@ -1,16 +1,17 @@
-import { validateText, validateUrl, validateFunction } from '../utils/validators'
+import { validateText, validateUrl, validateFunction, validateJWT } from '../utils/validators'
+import context from './context'
 
-function createNewPost(userId, image, imageDescription, text, callback) {
-    validateText(userId, 'user id')
+function createNewPost(image, imageDescription, text, callback) {
     validateUrl(image, 'image url')
     validateText(imageDescription, 'image description')
     validateText(text, 'text')
     validateFunction(callback, 'callback')
+    validateJWT(context.jwt)
 
     const req = {
         method: 'POST',
         headers: {
-            Authorization: `Bearer ${userId}`,
+            Authorization: `Bearer ${context.storage.token}`,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({ image, imageDescription, text })

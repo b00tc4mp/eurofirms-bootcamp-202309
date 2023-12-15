@@ -14,9 +14,9 @@ function AllPosts(props) {
 
     function refreshPosts() {
         try {
-            retrievePosts(window.sessionUserId, (error, posts) => {
+            retrievePosts((error, posts) => {
                 if (error) {
-                    alert(error.message)
+                    props.onError(error)
 
                     return
                 }
@@ -24,23 +24,24 @@ function AllPosts(props) {
                 setPosts(posts)
             })
         } catch (error) {
-            alert(error.message)
+            props.onError(error)
+
         }
     }
 
-    function handleLikeClick() {
+    function handlePostLikeToggled() {
         refreshPosts()
     }
 
-    function handleDeleteClick() {
+    function handlePostDeleted() {
         refreshPosts()
     }
 
-    function handleSaveClick(postId) {
+    function handlePostSaveToggled() {
         refreshPosts()
     }
 
-    return <Posts posts={posts} onPostLikeToggled={handleLikeClick} onPostSaveToggled={handleSaveClick} onPostDeleted={handleDeleteClick} />
+    return <Posts posts={posts} onPostLikeToggled={handlePostLikeToggled} onPostSaveToggled={handlePostSaveToggled} onPostDeleted={handlePostDeleted} onError={props.onError} />
 }
 
 export default AllPosts

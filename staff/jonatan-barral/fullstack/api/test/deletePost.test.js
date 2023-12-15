@@ -1,7 +1,7 @@
 const req = {
     method: 'DELETE',
     headers: {
-        Authorization: 'Bearer 656f4545976bc80e51f72821',
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NTZmNDU0NTk3NmJjODBlNTFmNzI4MjEiLCJpYXQiOjE3MDI1NjM2MTB9.sc4HVERAqLe2ApJlp0lutAqkrVMvI9_EcIyzwvZpsIM',
     },
 }
 

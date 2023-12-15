@@ -1,11 +1,12 @@
-import authenticateUser from '../logic/authenticateUser'
+import Button from '../library/Button'
+import Link from '../library/Link'
+import Field from '../library/Field'
+import Form from '../library/Form'
+import Container from '../library/Container'
 
 import Logo from '../components/Logo'
-import Container from "../components/Container"
-import Link from '../components/Link'
-import Field from "../components/Field"
-import Form from '../components/Form'
-import Button from '../components/Button'
+
+import loginUser from '../logic/loginUser'
 
 function Login(props) {
 
@@ -19,19 +20,17 @@ function Login(props) {
         const password = passwordInput.value
 
         try {
-            authenticateUser(email, password, (error, userId) => {
+            loginUser(email, password, error => {
                 if (error) {
-                    alert(error.message)
+                    props.onError(error)
 
                     return
                 }
 
-                window.sessionUserId = userId
-
                 props.onSuccess()
             })
         } catch (error) {
-            alert(error.message)
+            props.onError(error.message)
         }
     }
 
@@ -46,15 +45,13 @@ function Login(props) {
 
         <h1>Login</h1>
 
-        <Form id="login-form" onSubmit={handleLoginSubmit}>
-
+        <Form onSubmit={handleLoginSubmit}>
             <Field type="email" id="email-field" title="E-mail" required>E-mail</Field>
 
             <Field type="password" id="password-field" title="Password" required>Password</Field>
 
 
             <Button type="submit">Login</Button>
-
         </Form>
 
         <Link onClick={handleRegisterClick}>Register</Link>

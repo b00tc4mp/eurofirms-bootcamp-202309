@@ -1,6 +1,8 @@
 import { validateEmail, validatePassword, validateFunction } from '../utils/validators'
+import context from './context'
+import JWT from '../utils/jwt'
 
-function authenticateUser(email, password, callback) {
+function loginUser(email, password, callback) {
     validateEmail(email)
     validatePassword(password)
     validateFunction(callback, 'callback')
@@ -17,17 +19,22 @@ function authenticateUser(email, password, callback) {
         .then(res => {
             if (!res.ok) {
                 res.json()
-                    .then(body => callback(body))
-                    .catch(error => callback(error.message))
+                    .then(body => callback(new Error(body.error)))
+                    .catch(error => callback(error))
 
                 return
             }
 
             res.json()
-                .then(body => callback(null, body))
+                .then(token => {
+                    context.storage.token = token
+                    context.jwt = new JWT(token)
+
+                    callback(null)
+                })
                 .catch(error => callback(error))
         })
-        .catch(error => callback(error))
+        .catch(error => console.error(error))
 }
 
-export default authenticateUser
+export default loginUser

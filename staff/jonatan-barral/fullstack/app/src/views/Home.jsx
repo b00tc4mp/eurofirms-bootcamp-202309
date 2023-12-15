@@ -1,16 +1,18 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
+import logoutUser from '../logic/logoutUser'
 import retrieveUser from '../logic/retrieveUser'
 
-import Button from '../components/Button'
-import Link from '../components/Link'
-import Container from '../components/Container'
-import MyPosts from '../components/MyPosts'
-import SavedPosts from '../components/SavedPosts'
-import AllPosts from '../components/AllPosts'
-import NewPost from '../components/NewPost'
+import Button from '../library/Button'
+import Link from '../library/Link'
+import Container from '../library/Container'
 
+import AllPosts from '../components/AllPosts'
+import MyPosts from '../components/MyPosts'
+import NewPost from '../components/NewPost'
+import SavedPosts from '../components/SavedPosts'
 import Logo from '../components/Logo'
+
 
 function Home(props) {
 
@@ -19,10 +21,11 @@ function Home(props) {
     const [timestamp, setTimestamp] = useState(null)
 
     useEffect(() => {
+
         try {
-            retrieveUser(window.sessionUserId, (error, user) => {
+            retrieveUser((error, user) => {
                 if (error) {
-                    alert(error.message)
+                    props.onError(error)
 
                     return
                 }
@@ -30,12 +33,12 @@ function Home(props) {
                 setName(user.name)
             })
         } catch (error) {
-            alert(error.message)
+            props.onError(error)
         }
     }, [])
 
     function handleLogoutClick() {
-        window.sessionUserId = null
+        logoutUser()
 
         props.onLogout()
     }
@@ -71,28 +74,35 @@ function Home(props) {
         setView('my-posts')
     }
 
-    return <Container>
-        <header className="header" aria-label="Header">
+    return <Container align="center">
+        <header className="flex justify-between items-center md:min-w-[500px] lg:min-w-[768px]" aria-label="Header">
             <Link className="hidden lg:block" onClick={handleHomeClick}><Logo /></Link>
 
-            <span aria-label="User name">{name}</span>
-
-            <Button title="New post" aria-label="New post (+)" onClick={handleNewPostClick}>+</Button>
+            <Button className="hidden lg:block" title="New post" aria-label="New post (+)" onClick={handleNewPostClick}>+</Button>
 
             <Link onClick={handleSavedClick}>Saved</Link>
 
             <Link onClick={handleMyPostsClick}>My posts</Link>
 
+            <span aria-label="User name">{name}</span>
+
             <Button onClick={handleLogoutClick}>Logout</Button>
         </header>
 
-        {view === 'new-post' ? <NewPost onNewPostSubmit={handleNewPostSubmit} onNewPostCancelClick={handleNewPostCancelClick} /> : null}
+        {view === 'new-post' ? <NewPost onNewPostSubmit={handleNewPostSubmit} onNewPostCancelClick={handleNewPostCancelClick} onError={props.onError} /> : null}
 
-        {view === null || view === 'new-post' ? <AllPosts timestamp={timestamp} /> : null}
+        {view === null || view === 'new-post' ? <AllPosts timestamp={timestamp} onError={props.onError} /> : null}
 
-        {view === 'saved' ? <SavedPosts /> : null}
+        {view === 'saved' ? <SavedPosts onError={props.onError} /> : null}
 
-        {view === 'my-posts' ? <MyPosts /> : null}
+        {view === 'my-posts' ? <MyPosts onError={props.onError} /> : null}
+
+        <div className="h-[2rem]"></div>
+
+        <footer className="bg-white fixed bottom-0 w-full flex justify-center items-center h-[2rem] lg:hidden">
+            <Link onClick={handleHomeClick}><Logo /></Link>
+            <Button title="New post" aria-label="New post (+)" onClick={handleNewPostClick}>+</Button>
+        </footer>
     </Container>
 }
 

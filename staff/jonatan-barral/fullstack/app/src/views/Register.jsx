@@ -1,11 +1,12 @@
 import registerUser from '../logic/registerUser'
 
-import Logo from "../components/Logo"
-import Link from '../components/Link'
-import Field from '../components/Field'
-import Form from "../components/Form"
-import Button from '../components/Button'
-import Container from '../Components/Container'
+import Button from '../library/Button'
+import Link from '../library/Link'
+import Field from '../library/Field'
+import Form from '../library/Form'
+import Container from '../library/Container'
+
+import Logo from '../components/Logo'
 
 function Register(props) {
 
@@ -23,16 +24,15 @@ function Register(props) {
         try {
             registerUser(name, email, password, error => {
                 if (error) {
-                    alert(error.message)
+                    props.onError(error)
 
                     return
                 }
 
                 props.onSuccess()
             })
-
         } catch (error) {
-            alert(error.message)
+            props.onError(error)
         }
     }
 
@@ -42,10 +42,12 @@ function Register(props) {
         props.onLoginClick()
     }
 
-    return <Container id="register-view">
+    return <Container align="center">
+        <Logo />
+
         <h1>Register</h1>
 
-        <Form id="register-form" onSubmit={handleRegisterSubmit}>
+        <Form onSubmit={handleRegisterSubmit}>
             <Field type="text" id="name-field" title="Name" required>Name</Field>
 
             <Field type="email" id="email-field" title="E-mail" required>E-mail</Field>
@@ -56,7 +58,7 @@ function Register(props) {
         </Form>
 
         <Link onClick={handleLoginClick}>Login</Link>
-    </Container >
+    </Container>
 }
 
 export default Register

@@ -7,7 +7,7 @@ function retrieveSavedPosts(userId) {
     const req = {
         method: 'GET',
         headers: {
-            Authorization: `Bearer ${userId}`,
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NTZmNDU0NTk3NmJjODBlNTFmNzI4MjEiLCJpYXQiOjE3MDI1NjM2MTB9.sc4HVERAqLe2ApJlp0lutAqkrVMvI9_EcIyzwvZpsIM',
         },
     }
 

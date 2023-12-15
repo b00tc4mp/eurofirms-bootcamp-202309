@@ -2,7 +2,7 @@ const req = {
     method: 'PATCH',
     headers: {
         'Content-Type': 'application/json',
-        Authorization: 'Bearer '
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NTZmNDU0NTk3NmJjODBlNTFmNzI4MjEiLCJpYXQiOjE3MDI1NjM2MTB9.sc4HVERAqLe2ApJlp0lutAqkrVMvI9_EcIyzwvZpsIM'
     },
     body: JSON.stringify({ password: '123456789', newPassword: '456456456', repeatNewPassword: '456456456' })
 }
