@@ -5,8 +5,7 @@ const registerUser = require('./registerUser')
 mongoose.connect('mongodb://127.0.0.1:27017/test')
     .then(() => {
         try {
-            registerUser('Mafalda', 'mafalda@niña.com', '123123123', error => {
-
+            registerUser('Zipi Zape', 'zipi@zape.com', '123123123', error => {
                 if (error) {
                     console.error(error)
 
@@ -15,7 +14,6 @@ mongoose.connect('mongodb://127.0.0.1:27017/test')
 
                 console.log('user registered')
             })
-
         } catch (error) {
             console.error(error)
         }

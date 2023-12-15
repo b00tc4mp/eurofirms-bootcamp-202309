@@ -13,6 +13,7 @@ function deletePost(userId, postId, callback) {
 
                 return
             }
+
             Post.findById(postId)
                 .then(post => {
                     if (!post) {
@@ -28,13 +29,20 @@ function deletePost(userId, postId, callback) {
                     }
 
                     Post.deleteOne({ _id: postId })
-                        .then(() => callback(null))
+                        .then(result => {
+                            if (result.deletedCount === 0) {
+                                callback(new Error('post can not be deleted'))
+
+                                return
+                            }
+
+                            callback(null)
+                        })
                         .catch(error => callback(error))
                 })
                 .catch(error => callback(error))
         })
         .catch(error => callback(error))
-
 }
 
 module.exports = deletePost

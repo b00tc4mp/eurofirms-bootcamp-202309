@@ -1,25 +1,27 @@
-const loadUsers = require('./helpers/loadUsers')
-const { validateText } = require('./validators')
+const { validateText, validateFunction } = require('./helpers/validators')
+
+const { User } = require('../data/models')
 
 function retrieveUser(userId, callback) {
     validateText(userId, 'userId')
-    //TO DO validate callback
+    validateFunction(callback, 'callback')
 
-    loadUsers(function (error, users) {
-        if (error) {
-            callback(error)
+    User.findById(userId).select('-password -__v').lean()
+        .then(user => {
+            if (!user) {
+                callback(new Error('user not found'))
 
-            return
-        }
+                return
+            }
+            user.id = user._id.toString()
 
-        const user = users.find(function (user) {
-            return user.id === userId
+            delete user._id
+
+            callback(null, user)
         })
-
-        if (!user) throw new Error('user not found')
-
-        callback(null, user)
-    })
+        .catch(error => {
+            callback(error)
+        })
 }
 
 module.exports = retrieveUser

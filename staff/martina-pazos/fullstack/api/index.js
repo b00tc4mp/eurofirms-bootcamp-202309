@@ -8,13 +8,15 @@ const createPost = require('./logic/createPost')
 const retrievePosts = require('./logic/retrievePosts')
 const toggleLikePost = require('./logic/toggleLikePost')
 const updateUserPassword = require('./logic/updateUserPassword')
+const updateUserEmail = require('./logic/updateUserEmail')
 const toggleSavePost = require('./logic/toggleSavePost')
 const deletePost = require('./logic/deletePost')
-const retrieveSavedPosts = require('./logic/retrieveSavedPosts')
+const retrieveSavedPosts = require('./logic/retrieveSavedPost')
 const retrieveMyPosts = require('./logic/retrieveMyPosts')
 
 mongoose.connect('mongodb://127.0.0.1/api')
     .then(() => {
+        cons
         const api = express()
 
         api.get('/helloworld', (req, res) => res.send('Hello, World!'))

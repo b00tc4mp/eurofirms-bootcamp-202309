@@ -20,7 +20,7 @@ const user = new Schema({
     },
 
     saved: {
-        type: (ObjectId),
+        type: [ObjectId],
         ref: 'Post'
     }
 })

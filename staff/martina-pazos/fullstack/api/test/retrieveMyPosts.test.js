@@ -1,11 +1,11 @@
 const req = {
     method: 'GET',
     headers: {
-        Authorization: 'Bearer 656ddc296fc21579c1675d6e',
+        Authorization: 'Bearer 65718eca788313056865666',
     },
 }
 
-fetch('http://localhost:4000/posts/user', req)
+fetch('http://localhost:4000/posts/mine', req)
     .then(res => {
         if (!res.ok) {
             res.json()

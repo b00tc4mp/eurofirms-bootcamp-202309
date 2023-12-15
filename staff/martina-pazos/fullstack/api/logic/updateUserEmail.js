@@ -1,7 +1,7 @@
 const { validateText, validateEmail, validatePassword, validateFunction } = require('./helpers/validators')
 const { User } = require('../data/models')
 
-function updateUserPassword(userId, password, email, newEmail, repeatNewEmail, callback) {
+function updateUserEmail(userId, password, email, newEmail, repeatNewEmail, callback) {
     validateText(userId, 'userId')
     validatePassword(password, 'password')
     validateEmail(email, 'email')

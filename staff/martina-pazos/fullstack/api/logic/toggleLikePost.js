@@ -1,18 +1,20 @@
 const { validateText, validateFunction } = require('./helpers/validators')
-const { User, Post } = require('./data/models')
+
+const { User, Post } = require('../data/models')
 
 function toggleLikePost(userId, postId, callback) {
     validateText(userId, 'userId')
     validateText(postId, 'postId')
-    validateText(callback, 'callback')
+    validateFunction(callback, 'callback')
 
     User.findById(userId)
         .then(user => {
             if (!user) {
-                callback(new Error('user not founf'))
+                callback(new Error('user not found'))
 
                 return
             }
+
             Post.findById(postId)
                 .then(post => {
                     if (!post) {
@@ -32,11 +34,10 @@ function toggleLikePost(userId, postId, callback) {
                         .then(() => callback(null))
                         .catch(error => callback(error))
                 })
-
         })
         .catch(error => callback(error))
-
 }
+
 module.exports = toggleLikePost
 
 

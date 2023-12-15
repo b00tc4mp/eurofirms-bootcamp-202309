@@ -1,18 +1,20 @@
-const { validateText, validateFunction } = require('/helpers/validators')
+const { validateText, validateFunction } = require('./helpers/validators')
+
 const { User, Post } = require('../data/models')
 
 function toggleSavePost(userId, postId, callback) {
-    validateText(userId, 'userId')
-    validateText(postId, 'postId')
+    validateText(userId, 'user Id')
+    validateText(postId, 'post Id')
     validateFunction(callback, 'callback')
 
     User.findById(userId)
         .then(user => {
-            if (user) {
+            if (!user) {
                 callback(new Error('user not found'))
 
                 return
             }
+
             Post.findById(postId)
                 .then(post => {
                     if (!post) {

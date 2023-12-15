@@ -3,10 +3,10 @@ const req = {
     headers: (
         'Content-Type': 'application/json'
     ),
-body: JSON.stringify({ name: 'Po Llo', email: 'po@llo.com', password: '123123123' })
+body: JSON.stringify({ name: 'Shakti Maan', email: 'shakti@maan.com', password: '123123123' })
 }
 
-fetch('http://localhost:4000/users' req)
+fetch('http://localhost:4000/users', req)
     .then(res => {
         if (!res.ok) {
             res.json()
@@ -16,7 +16,7 @@ fetch('http://localhost:4000/users' req)
             return
         }
 
-        console.log(res.status, 'user registered')
+        console.log(res.status)
 
     })
     .catch(error => console.error(error))

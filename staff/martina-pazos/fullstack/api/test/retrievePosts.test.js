@@ -2,12 +2,12 @@ const req = {
     method: 'GET',
     headers: {
         // bearer se utiliza un jsonwebtoken, (es un id) despues usaremos el jsonwebtoken
-        Authorization: 'Bearer 656f33e2a1fe3c5429828ff0',
+        Authorization: 'Bearer 65718eaa788313056865666',
     },
 }
 
-fetch('http://localhost:4000/posts/657718eaa788313056865666', red)
-    .then((res) => {
+fetch('http://localhost:4000/posts', req)
+    .then(res => {
         if (!res.ok) {
             res.json()
                 .then(body => console.error(body))

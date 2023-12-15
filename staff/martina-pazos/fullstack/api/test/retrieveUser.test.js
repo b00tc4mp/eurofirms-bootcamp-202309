@@ -1,17 +1,16 @@
 const req = {
-    method: 'POST',
+    method: 'GET',
     headers: {
-        'Content-Type': 'application/json'
+        Authorization: 'Bearer 65718eaa78831305686566',
     },
-    body: JSON.stringify({ email: 'shakti@maan.com', password: '123123123' })
 }
 
-fetch('http://localhost:4000/users/auth', req)
+fetch('http://localhost:4000/users', req)
     .then(res => {
         if (!res.ok) {
             res.json()
                 .then(body => console.error(body))
-                .catch(error => console.error(error.message))
+                .catch(error => console.error(error))
 
             return
         }
@@ -21,21 +20,3 @@ fetch('http://localhost:4000/users/auth', req)
             .catch(error => console.error(error))
     })
     .catch(error => console.error(error))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

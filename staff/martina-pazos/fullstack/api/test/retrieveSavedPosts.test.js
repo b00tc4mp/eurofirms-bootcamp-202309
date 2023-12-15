@@ -1,11 +1,11 @@
 const req = {
-    method: 'DELETE',
+    method: 'GET',
     headers: {
-        Authorization: 'Bearer 657b33bcfcda74595a33322b'
-    }
+        Authorization: 'Beader 65718eaa788313056865666',
+    },
 }
 
-fetch('http://localhost:4000/posts/657718eaa788313056865666', req)
+fetch('http://localhost:4000/posts/saved', req)
     .then(res => {
         if (!res.ok) {
             res.json()
@@ -15,7 +15,8 @@ fetch('http://localhost:4000/posts/657718eaa788313056865666', req)
             return
         }
 
-        console.log(res.status)
-
+        res.json()
+            .then(posts => console.log(res.status, posts))
+            .catch(error => console.error(error))
     })
     .catch(error => console.error(error))
