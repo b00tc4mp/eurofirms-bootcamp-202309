@@ -12,6 +12,7 @@ function Posts(props) {
                   onPostLikeToggled={props.onPostLikeToggled}
                   onPostSaveToggled={props.onPostSaveToggled}
                   onPostDeleted={props.onPostDeleted}
+                  onError={props.onError}
                />
             )
          })}

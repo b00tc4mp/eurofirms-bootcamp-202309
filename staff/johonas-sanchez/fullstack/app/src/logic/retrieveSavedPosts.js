@@ -1,8 +1,9 @@
-import { validateFunction } from '../utils/validators'
+import { validateFunction, validateJWT } from '../utils/validators'
 import context from './context'
 
 function retrieveSavedPosts(callback) {
     validateFunction(callback, 'callback')
+    validateJWT(context.jwt)
 
     const req = {
         method: 'GET',

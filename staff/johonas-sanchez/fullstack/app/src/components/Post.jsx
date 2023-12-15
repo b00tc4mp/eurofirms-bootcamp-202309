@@ -4,6 +4,8 @@ import toggleSavePost from "../logic/toggleSavePost"
 
 import Button from "./Button"
 
+import { JWTError } from '../utils/errors'
+
 function Post(props) {
    console.log("Post")
 
@@ -21,7 +23,10 @@ function Post(props) {
             props.onPostLikeToggled()
          })
       } catch (error) {
-         alert(error.message)
+         if (error instanceof JWTError)
+                props.onError(error)
+            else
+                alert(error.message)
       }
    }
 
@@ -40,7 +45,10 @@ function Post(props) {
                props.onPostDeleted()
             })
          } catch (error) {
-            alert(error.message)
+            if (error instanceof JWTError)
+                props.onError(error)
+            else
+                alert(error.message)
          }
    }
 
@@ -56,7 +64,10 @@ function Post(props) {
             props.onPostSaveToggled()
          })
       } catch (error) {
-         alert(error.message)
+         if (error instanceof JWTError)
+                props.onError(error)
+            else
+                alert(error.message)
       }
    }
 

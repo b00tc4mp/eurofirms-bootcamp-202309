@@ -1,4 +1,4 @@
-import { validateEmail, validateFunction } from "../utils/validators"
+import { validateEmail, validateFunction, validateJWT } from "../utils/validators"
 import context from './context'
 
 function updateUserEmail(password, email, newEmail, repeatNewEmail, callback) {
@@ -7,6 +7,7 @@ function updateUserEmail(password, email, newEmail, repeatNewEmail, callback) {
     validateEmail(newEmail, "new email")
     validateEmail(repeatNewEmail, "repeat new email")
     validateFunction(callback, "callback")
+    validateJWT(context.jwt)
 
    const req = {
       method: "PATCH",

@@ -4,7 +4,7 @@ import retrieveUser from "../logic/retrieveUser"
 
 import logoutUser from "../logic/logoutUser"
 
-import { JWTExpiredError } from "../utils/errors"
+import { JWTError } from "../utils/errors"
 
 import Button from "../components/Button"
 import Link from "../components/Link"
@@ -36,7 +36,7 @@ function Home(props) {
             setName(user.name)
          })
       } catch (error) {
-         if (error instanceof JWTExpiredError) 
+         if (error instanceof JWTError) 
             props.onError(error)
          else 
             alert(error.message)
@@ -132,15 +132,15 @@ function Home(props) {
             </div>
          </header>
 
-         {view === "new-post" && <NewPost onNewPostSubmit={handleNewPostSubmit} onNewPostCancelClick={handleNewPostCancelClick} />}
+         {view === 'new-post' ? <NewPost onNewPostSubmit={handleNewPostSubmit} onNewPostCancelClick={handleNewPostCancelClick} onError={props.onError} /> : null}
 
-         {(view === null || view === "new-post") && <AllPosts timestamp={timestamp} />}
+         {view === null || view === 'new-post' ? <AllPosts timestamp={timestamp} onError={props.onError} /> : null}
 
          {view === "user-profile" && <UserProfile />}
 
-         {view === "saved" && <SavedPosts timestamp={timestamp} />}
+         {view === 'saved' ? <SavedPosts onError={props.onError} /> : null}
 
-         {view === "my-posts" && <MyPosts />}
+         {view === 'my-posts' ? <MyPosts onError={props.onError} /> : null}
 
          <div className="h-[3rem] mb-5"></div>
 

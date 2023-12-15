@@ -76,8 +76,8 @@ mongoose.connect("mongodb://127.0.0.1/api").then(() => {
                return
             }
 
-            const token = jwt.sign({ sub: userId }, "es posible que pronto sea abuelo", { expiresIn: '10s' } ) // Ponemos la fecha de expiración del token
-
+            // const token = jwt.sign({ sub: userId }, "es posible que pronto sea abuelo", { expiresIn: '10s' }  ) // Ponemos la fecha de expiración del token
+            const token = jwt.sign({ sub: userId }, "es posible que pronto sea abuelo" )
             res.json(token)
          })
       } catch (error) {
