@@ -1,18 +1,18 @@
 import { validatePassword, validateFunction, validateJWT } from "../utils/validators"
-import context from './context'
+import context from "./context"
 
 function updateUserPassword(password, newPassword, repeatNewPassword, callback) {
-    validatePassword(password, "password")
-    validatePassword(newPassword, "new password")
-    validatePassword(repeatNewPassword, "repeat new password")
-    validateFunction(callback, "callback")
-    validateJWT(context.jwt)
+   validatePassword(password, "password")
+   validatePassword(newPassword, "new password")
+   validatePassword(repeatNewPassword, "repeat new password")
+   validateFunction(callback, "callback")
+   validateJWT(context.jwt)
 
    const req = {
       method: "PATCH",
       headers: {
          "Content-Type": "application/json",
-         Authorization: `Bearer ${context.storage.token}`
+         Authorization: `Bearer ${context.storage.token}`,
       },
       body: JSON.stringify({ password, newPassword, repeatNewPassword }),
    }
@@ -27,7 +27,7 @@ function updateUserPassword(password, newPassword, repeatNewPassword, callback) 
             return
          }
 
-         console.log("password updated")
+         callback(null)
       })
       .catch((error) => callback(error))
 }

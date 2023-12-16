@@ -39,6 +39,7 @@ function UserProfile(props) {
             if (error) {
                props.onError(error)
             } else {
+               console.log('password updated')
                props.onNewPasswordSubmit()
             }
          })
@@ -65,6 +66,7 @@ function UserProfile(props) {
             if (error) {
                props.onError(error)
             } else {
+               console.log('email updated')
                props.onNewEmailSubmit()
             }
          })

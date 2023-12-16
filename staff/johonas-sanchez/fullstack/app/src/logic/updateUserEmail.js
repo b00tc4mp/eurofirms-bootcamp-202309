@@ -1,19 +1,19 @@
 import { validatePassword, validateEmail, validateFunction, validateJWT } from "../utils/validators"
-import context from './context'
+import context from "./context"
 
 function updateUserEmail(password, email, newEmail, repeatNewEmail, callback) {
-    validatePassword(password, "password")
-    validateEmail(email, "email")
-    validateEmail(newEmail, "new email")
-    validateEmail(repeatNewEmail, "repeat new email")
-    validateFunction(callback, "callback")
-    validateJWT(context.jwt)
+   validatePassword(password, "password")
+   validateEmail(email, "email")
+   validateEmail(newEmail, "new email")
+   validateEmail(repeatNewEmail, "repeat new email")
+   validateFunction(callback, "callback")
+   validateJWT(context.jwt)
 
    const req = {
       method: "PATCH",
       headers: {
          "Content-Type": "application/json",
-         Authorization: `Bearer ${context.storage.token}`
+         Authorization: `Bearer ${context.storage.token}`,
       },
       body: JSON.stringify({ password, email, newEmail, repeatNewEmail }),
    }
@@ -27,8 +27,8 @@ function updateUserEmail(password, email, newEmail, repeatNewEmail, callback) {
 
             return
          }
-
-         console.log("email updated")
+         
+         callback(null)
       })
       .catch((error) => callback(error))
 }
