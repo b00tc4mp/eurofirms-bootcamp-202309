@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Routes, Route, useNavigate, Navigate } from 'react-router-dom'
 
 import Feedback from './library/Feedback'
 
@@ -8,28 +7,27 @@ import Register from './views/Register'
 import Home from './views/Home'
 
 import logoutUser from './logic/logoutUser'
-import isUserLoggedIn from './logic/isUserLoggedIn'
 
 import { JWTError } from './utils/errors'
 
 function App() {
   console.log('App')
 
+  const [view, setView] = useState(sessionStorage.token ? 'home' : 'login')
   const [feedback, setFeedback] = useState(null)
-  const navigate = useNavigate()
 
   function handleRegisterShow() {
-    navigate('/register')
+    setView('register')
     setFeedback(null)
   }
 
   function handleLoginShow() {
-    navigate('/login')
+    setView('login')
     setFeedback(null)
   }
 
   function handleHomeShow() {
-    navigate('/')
+    setView('home')
     setFeedback(null)
   }
 
@@ -37,7 +35,7 @@ function App() {
     if (error instanceof JWTError) {
       logoutUser()
 
-      navigate('/login')
+      setView('login')
       setFeedback('Session expired, please login again')
     } else setFeedback(error.message)
   }
@@ -47,11 +45,11 @@ function App() {
   }
 
   return <>
-    <Routes>
-      <Route path="/login" element={isUserLoggedIn() ? <Navigate to="/" /> : <Login onSuccess={handleHomeShow} onRegisterClick={handleRegisterShow} onError={handleError} />} />
-      <Route path="/register" element={isUserLoggedIn() ? <Navigate to="/" /> : <Register onSuccess={handleLoginShow} onLoginClick={handleLoginShow} onError={handleError} />} />
-      <Route path="/" element={isUserLoggedIn() ? <Home onLogout={handleLoginShow} onError={handleError} /> : <Navigate to="/login" />} />
-    </Routes>
+    {view === 'login' ? <Login onSuccess={handleHomeShow} onRegisterClick={handleRegisterShow} onError={handleError} /> : null}
+
+    {view === 'register' ? <Register onSuccess={handleLoginShow} onLoginClick={handleLoginShow} onError={handleError} /> : null}
+
+    {view === 'home' ? <Home onLogout={handleLoginShow} onError={handleError} /> : null}
 
     {feedback ? <Feedback message={feedback} onAccept={handleAcceptFeedback} /> : null}
   </>
