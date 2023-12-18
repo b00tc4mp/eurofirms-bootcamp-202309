@@ -1,5 +1,5 @@
-import Input from '../components/Input'
-import Label from '../components/Label'
+import Input from './Input'
+import Label from './Label'
 
 function Field(props) {
     return <>

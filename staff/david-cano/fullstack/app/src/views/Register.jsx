@@ -1,10 +1,10 @@
 import registerUser from '../logic/registerUser'
 
-import Button from '../components/Button'
-import Link from '../components/Link'
-import Field from '../components/Field'
-import Form from '../components/Form'
-import Container from '../components/Container'
+import Button from '../library/Button'
+import Link from '../library/Link'
+import Field from '../library/Field'
+import Form from '../library/Form'
+import Container from '../library/Container'
 
 import Logo from '../components/Logo'
 
@@ -13,28 +13,28 @@ function Register(props) {
 
     function handleRegisterSubmit(event) {
         event.preventDefault()
-        
-            const nameInput = event.target.querySelector('#name-field')
-            const emailInput = event.target.querySelector('#email-field')
-            const passwordInput = event.target.querySelector('#password-field')
 
-            const name = nameInput.value
-            const email = emailInput.value
-            const password = passwordInput.value
+        const nameInput = event.target.querySelector('#name-field')
+        const emailInput = event.target.querySelector('#email-field')
+        const passwordInput = event.target.querySelector('#password-field')
 
-            try {
-                registerUser(name, email, password, error => {
-                    if (error) {
-                        alert(error.message)
-    
-                        return
-                    }
-    
-                    props.onSuccess()
-                })
-            } catch (error) {
-                alert(error.message)
-            }
+        const name = nameInput.value
+        const email = emailInput.value
+        const password = passwordInput.value
+
+        try {
+            registerUser(name, email, password, error => {
+                if (error) {
+                    props.onError(error)
+
+                    return
+                }
+
+                props.onSuccess()
+            })
+        } catch (error) {
+            props.onError(error)
+        }
     }
 
     function handleLoginClick(event) {

@@ -69,7 +69,7 @@ mongoose.connect('mongodb://127.0.0.1/api')
                         return
                     }
 
-                    const token = jwt.sign({ sub: userId }, 'es posible que pronto sea abuelo', {expiresIn: '1h'})
+                    const token = jwt.sign({ sub: userId }, 'es posible que pronto sea abuelo', { expiresIn: '1m' })
 
                     res.json(token)
                 })
@@ -87,6 +87,7 @@ mongoose.connect('mongodb://127.0.0.1/api')
                 retrieveUser(userId, (error, user) => {
                     if (error) {
                         res.status(400).json({ error: error.message })
+                        
                         return
                     }
 

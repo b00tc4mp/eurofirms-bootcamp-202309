@@ -1,3 +1,5 @@
+import { JWTError } from "./errors"
+
 function validateText(text, explain) {
     if (typeof text !== 'string') throw new TypeError(explain + ' is not a string')
     if (text.trim().length === 0) throw new Error(explain + ' is empty')
@@ -27,11 +29,17 @@ function validateFunction(func, explain) {
     if (typeof func !== 'function') throw new TypeError(explain + ' is not a function')
 }
 
+function validateJWT(jwt) {
+    if (!jwt) throw new JWTError('JWT not valid')
+    if (jwt.isExpired()) throw new JWTError('JWT is expired')
+}
+
 export {
     validateText,
     validateEmail,
     validatePassword,
     validateUrl,
     validateNumber,
-    validateFunction
+    validateFunction,
+    validateJWT
 }

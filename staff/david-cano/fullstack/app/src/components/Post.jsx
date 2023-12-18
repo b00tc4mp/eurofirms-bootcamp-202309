@@ -1,8 +1,9 @@
 import toggleLikePost from '../logic/toggleLikePost'
 import deletePost from '../logic/deletePost'
 import toggleSavePost from '../logic/toggleSavePost'
+import getLoggedInUserId from '../logic/getLoggedInUserId'
 
-import Button from './Button'
+import Button from '../library/Button'
 
 function Post(props) {
     console.log('Post')
@@ -11,9 +12,9 @@ function Post(props) {
 
     function handleLikeClick() {
         try {
-            toggleLikePost(sessionStorage.token, post.id, error => {
+            toggleLikePost(post.id, error => {
                 if (error) {
-                    alert(error.message)
+                    props.onError(error)
 
                     return
                 }
@@ -21,7 +22,7 @@ function Post(props) {
                 props.onLikeToggled()
             })
         } catch (error) {
-            alert(error.message)
+            props.onError(error)
         }
     }
 
@@ -30,9 +31,9 @@ function Post(props) {
 
         if (confirmed)
             try {
-                deletePost(sessionUserId, post.id, error => {
+                deletePost(post.id, error => {
                     if (error) {
-                        alert(error.message)
+                        props.onError(error)
 
                         return
                     }
@@ -40,46 +41,44 @@ function Post(props) {
                     props.onDeleted()
                 })
             } catch (error) {
-                alert(error.message)
+                props.onError(error)
             }
-    }
-
-    function handleSaveClick() {
-        try {
-            toggleSavePost(sessionStorage.token, post.id, error => {
-                if (error) {
-                    alert(error.message)
-
-                    return
-                }
-
-                props.onSaveToggled()
-            })
-        } catch (error) {
-            alert(error.message)
         }
-    }
 
-    return <article className=" flex flex-col p-[.5rem] hover:bg-[skyblue]">
-        <h3 className='self-start'>{post.author.name}</h3>
+        function handleSaveClick() {
+            try {
+                toggleSavePost(post.id, error => {
+                    if (error) {
+                        props.onError(error)
 
-        <img className="max-w-[300px] "
-            src={post.image}
-            alt={post.imageDescription}
-            title={post.imageDescription} />
+                        return
+                    }
 
-        <p>{post.text}</p>
+                    props.onSaveToggled()
+                })
+            } catch (error) {
+                props.onError(error)
+            }
+        }
 
-        <div className='flex'>
-            <Button onClick={handleLikeClick} title={post.liked ? 'Unlike' : 'Like'} aria-label={post.liked ? 'Unlike' : 'Like'}>{(post.liked ? '😍' : '😒') + ' ' + post.likes.length + ' likes'}</Button>
+        return <article className=" flex flex-col p-[.5rem] hover:bg-[skyblue]">
+            <h3 className='self-start'>{post.author.name}</h3>
 
-            <Button onClick={handleSaveClick} title={post.liked ? 'Unsave' : 'Save'} aria-label={post.saved ? 'Unsave' : 'Save'}>{(post.saved ? '⭐' : '✡️')}</Button>
+            <img className="max-w-[300px] "
+                src={post.image}
+                alt={post.imageDescription}
+                title={post.imageDescription} />
 
-            {post.author.id === sessionStorage.token ? <Button title="Delete" aria-label="Delete" onClick={handleDeleteClick}>🚮</Button> : null}
-        </div>
+            <p>{post.text}</p>
 
+            <div className='flex'>
+                <Button onClick={handleLikeClick} title={post.liked ? 'Unlike' : 'Like'} aria-label={post.liked ? 'Unlike' : 'Like'}>{(post.liked ? '😍' : '😒') + ' ' + post.likes.length + ' likes'}</Button>
 
-    </article>
+                <Button onClick={handleSaveClick} title={post.liked ? 'Unsave' : 'Save'} aria-label={post.saved ? 'Unsave' : 'Save'}>{(post.saved ? '⭐' : '✡️')}</Button>
+
+                {post.author.id === getLoggedInUserId() ? <Button title="Delete" aria-label="Delete" onClick={handleDeleteClick}>🚮</Button> : null}
+            </div>
+        </article>
 }
 
 export default Post

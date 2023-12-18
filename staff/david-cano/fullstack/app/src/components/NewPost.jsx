@@ -1,7 +1,7 @@
-import Container from '../components/Container'
-import Field from '../components/Field'
-import Form from '../components/Form'
-import Button from '../components/Button'
+import Button from '../library/Button'
+import Container from '../library/Container'
+import Field from '../library/Field'
+import Form from '../library/Form'
 
 import createNewPost from '../logic/createNewPost'
 
@@ -20,9 +20,9 @@ function NewPost(props) {
         const text = textInput.value
 
         try {
-            createNewPost(sessionStorage.token, image, imageDescription, text, error => {
+            createNewPost(image, imageDescription, text, error => {
                 if (error) {
-                    alert(error.message)
+                    props.onError(error)
 
                     return
                 }
@@ -30,7 +30,7 @@ function NewPost(props) {
                 props.onNewPostSubmit()
             })
         } catch (error) {
-            alert(error.message)
+            props.onError(error)
         }
     }
 

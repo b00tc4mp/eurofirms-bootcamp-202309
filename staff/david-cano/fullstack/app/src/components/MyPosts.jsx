@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import Posts from './Posts'
 
 import retrieveMyPosts from '../logic/retrieveMyPosts'
 
-function MyPosts() {
+function MyPosts(props) {
     console.log('MyPosts')
 
     const [posts, setPosts] = useState([])
@@ -15,9 +15,9 @@ function MyPosts() {
 
     function refreshPosts() {
         try {
-            retrieveMyPosts(sessionStorage.token, (error, posts) => {
+            retrieveMyPosts( (error, posts) => {
                 if (error) {
-                    alert(error.message)
+                    props.onError(error)
 
                     return
                 }
@@ -25,7 +25,7 @@ function MyPosts() {
                 setPosts(posts)
             })
         } catch (error) {
-            alert(error.message)
+            props.onError(error)
         }
     }
 
@@ -41,7 +41,7 @@ function MyPosts() {
         refreshPosts()
     }
 
-    return <Posts posts={posts} onPostLikeToggled={handlePostLikeToggled} onPostSaveToggled={handlePostSaveToggled} onPostDeleted={handlePostDeleted} />
+    return <Posts posts={posts} onPostLikeToggled={handlePostLikeToggled} onPostSaveToggled={handlePostSaveToggled} onPostDeleted={handlePostDeleted} onError={props.onError} />
 }
 
 export default MyPosts
