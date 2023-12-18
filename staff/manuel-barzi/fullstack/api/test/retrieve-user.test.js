@@ -1,7 +1,7 @@
 const req = {
     method: 'GET',
     headers: {
-        Authorization: 'Bearer fyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NTZkYjlmYThmZDZkNjU4MTkzZGMxNzYiLCJpYXQiOjE3MDI0NjU4MjN9.TybzUcO2lvt1Tsr2f30jS_ANzkCCAGvpcF_d-Bbb85M',
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NTZkYjlmYThmZDZkNjU4MTkzZGMxNzYiLCJpYXQiOjE3MDI4OTA1MzksImV4cCI6MTcwMjg5MTEzOX0.EGLXybI7Kz_7sF7CUiisEOXDewNdegmrLvIFP-wmyFs',
     },
 }
 
