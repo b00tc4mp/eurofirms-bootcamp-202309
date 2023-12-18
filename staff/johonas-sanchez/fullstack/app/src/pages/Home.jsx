@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import { Routes, Route, useNavigate } from "react-router-dom"
 
 import logoutUser from "../logic/logoutUser"
 import retrieveUser from "../logic/retrieveUser"
@@ -15,11 +16,11 @@ import UserProfile from "../components/UserProfile"
 import Logo from "../components/Logo"
 
 function Home(props) {
-   console.log("Home useEffect")
+   console.log("Home")
 
-   const [view, setView] = useState(null)
    const [name, setName] = useState(null)
    const [timestamp, setTimestamp] = useState(null)
+   const navigate = useNavigate()
 
    useEffect(() => {
       try {
@@ -44,50 +45,50 @@ function Home(props) {
    }
 
    function handleNewPostClick() {
-      setView("new-post")
+      navigate("/new-post")
    }
 
    function handleNewPostCancelClick() {
-      setView(null)
+      navigate("/")
    }
 
    function handleNewPostSubmit() {
-      setView(null)
+      navigate("/")
       setTimestamp(Date.now())
    }
 
    function handleChangePasswordSubmit() {
-      setView(null)
+      navigate("/user-profile")
       setTimestamp(Date.now())
    }
 
    function handleChangeEmailSubmit() {
-      setView(null)
+      navigate("/user-profile")
       setTimestamp(Date.now())
    }
 
    function handleSavedClick(event) {
       event.preventDefault()
 
-      setView("saved")
+      navigate("/saved")
    }
 
    function handleUserClick(event) {
       event.preventDefault()
 
-      setView("user-profile")
+      navigate("/user-profile")
    }
 
    function handleHomeClick(event) {
       event.preventDefault()
 
-      setView(null)
+      navigate("/")
    }
 
    function handleMyPostsClick(event) {
       event.preventDefault()
 
-      setView("my-posts")
+      navigate("/my-posts")
    }
 
    return (
@@ -136,17 +137,25 @@ function Home(props) {
             </div>
          </header>
 
-         {view === "new-post" ? (
-            <NewPost onNewPostSubmit={handleNewPostSubmit} onNewPostCancelClick={handleNewPostCancelClick} onError={props.onError} />
-         ) : null}
+         <Routes>
+            <Route
+               path="/new-post"
+               element={<NewPost onNewPostSubmit={handleNewPostSubmit} onNewPostCancelClick={handleNewPostCancelClick} onError={props.onError} />}
+            />
 
-         {view === null || view === "new-post" ? <AllPosts timestamp={timestamp} onError={props.onError} /> : null}
+            <Route path="/" element={<AllPosts timestamp={timestamp} onError={props.onError} />} />
 
-         {view === "user-profile" && <UserProfile  onNewPasswordSubmit={handleChangePasswordSubmit} onNewEmailSubmit={handleChangeEmailSubmit} onError={props.onError} />}
+            <Route
+               path="/user-profile"
+               element={
+                  <UserProfile onNewPasswordSubmit={handleChangePasswordSubmit} onNewEmailSubmit={handleChangeEmailSubmit} onError={props.onError} />
+               }
+            />
 
-         {view === "saved" ? <SavedPosts onError={props.onError} /> : null}
+            <Route path="/saved" element={<SavedPosts onError={props.onError} />} />
 
-         {view === "my-posts" ? <MyPosts onError={props.onError} /> : null}
+            <Route path="/my-posts" element={<MyPosts onError={props.onError} />} />
+         </Routes>
 
          <div className="h-[3rem] mb-5"></div>
 

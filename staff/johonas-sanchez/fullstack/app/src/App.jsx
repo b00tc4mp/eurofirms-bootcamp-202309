@@ -3,9 +3,11 @@ import { Routes, Route, useNavigate, Navigate } from 'react-router-dom'
 
 import Feedback from "./library/Feedback"
 
-import Login from "./views/Login"
-import Register from "./views/Register"
-import Home from "./views/Home"
+import Login from "./pages/Login"
+import Register from "./pages/Register"
+import Home from "./pages/Home"
+
+import Hello from './components/Hello'
 
 import logoutUser from "./logic/logoutUser"
 import isUserLoggedIn from './logic/isUserLoggedIn'
@@ -49,8 +51,13 @@ function App() {
    return <>
    <Routes>
      <Route path="/login" element={isUserLoggedIn() ? <Navigate to="/" /> : <Login onSuccess={handleHomeShow} onRegisterClick={handleRegisterShow} onError={handleError} />} />
+
      <Route path="/register" element={isUserLoggedIn() ? <Navigate to="/" /> : <Register onSuccess={handleLoginShow} onLoginClick={handleLoginShow} onError={handleError} />} />
-     <Route path="/" element={isUserLoggedIn() ? <Home onLogout={handleLoginShow} onError={handleError} /> : <Navigate to="/login" />} />
+     
+     <Route path="/*" element={isUserLoggedIn() ? <Home onLogout={handleLoginShow} onError={handleError} /> : <Navigate to="/login" />} />
+
+     <Route path="/hello/:name" element={<Hello />} />
+     
    </Routes>
 
    {feedback ? <Feedback message={feedback} onAccept={handleAcceptFeedback} /> : null}
