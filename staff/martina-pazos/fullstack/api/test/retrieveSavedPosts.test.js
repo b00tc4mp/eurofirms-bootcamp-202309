@@ -1,7 +1,7 @@
 const req = {
     method: 'GET',
     headers: {
-        Authorization: 'Beader 65718eaa788313056865666',
+        Authorization: ' Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NTdjNWNlOGY1ZDcyOThlYmFhYzNjNjciLCJpYXQiOjE3MDI5MDkwNjksImV4cCI6MTcwMjk0NTA2OX0.-VGYmkr7vvLiqAyAKdBdU31ZUbWYvOT0lZEMWUxtu3A',
     },
 }
 

@@ -1,11 +1,10 @@
 const req = {
     method: 'DELETE',
     headers: {
-        Authorization: 'Bearer 657b33bcfcda74595a33322b'
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NTdjNWNlOGY1ZDcyOThlYmFhYzNjNjciLCJpYXQiOjE3MDI5MDkwNjksImV4cCI6MTcwMjk0NTA2OX0.-VGYmkr7vvLiqAyAKdBdU31ZUbWYvOT0lZEMWUxtu3A'
     }
 }
-
-fetch('http://localhost:4000/posts/657718eaa788313056865666', req)
+fetch('http://localhost:4000/posts/657c77c324c0b442a7100cdd', req)
     .then(res => {
         if (!res.ok) {
             res.json()

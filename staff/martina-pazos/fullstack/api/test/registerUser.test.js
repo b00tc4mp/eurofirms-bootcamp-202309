@@ -1,9 +1,9 @@
 const req = {
     method: 'POST',
-    headers: (
+    headers: {
         'Content-Type': 'application/json'
-    ),
-body: JSON.stringify({ name: 'Shakti Maan', email: 'shakti@maan.com', password: '123123123' })
+    },
+    body: JSON.stringify({ name: 'Rodolfo Langostino', email: 'rodolfo@langostino.com', password: '123123123' })
 }
 
 fetch('http://localhost:4000/users', req)
@@ -11,7 +11,7 @@ fetch('http://localhost:4000/users', req)
         if (!res.ok) {
             res.json()
                 .then(body => console.error(body))
-                .catch(error => console error(error))
+                .catch(error => console.error(error))
 
             return
         }

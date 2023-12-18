@@ -16,24 +16,22 @@ function retrievePost(userId, postId, callback) {
             }
 
             Post.findById(postId).select('-__v').populate('author', 'name').lean()
-                .then(post => {
-                    if (!post) {
-                        callback(new Error('post not found'))
+                .then(posts => {
+                    posts.forEach(post => {
+                        post.id = post._id.toString()
+                        delete post._id
 
-                        return
-                    }
+                        if (post.author._id) {
+                            post.author.id = post.author._id.toString()
+                            delete post.author._id
+                        }
 
-                    post.id = post._id.toString()
-                    delete post._id
+                        post.likes = post.likes.map(userObjectId => userObjectId.toString())
 
-                    post.author.id = post.author._id.toString()
-                    delete post.author._id
+                        post.liked = post.likes.includes(userId)
+                    })
 
-                    const postLikesString = post.likes.map(like => like.toString())
-                    post.likes = postLikesString
-
-                    callback(null, post)
-
+                    callback(null, posts)
                 })
 
                 .catch(error => callback(error))

@@ -3,10 +3,10 @@ const req = {
     headers: {
         'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ email: 'shakti@maan.com', password: '123123123' })
+    body: JSON.stringify({ email: 'candy2@candy.com', password: '123123123' })
 }
 
-fetch('http://localhost:4000/users/auth', req)
+fetch('http://localhost:4000/users/authenticate', req)
     .then(res => {
         if (!res.ok) {
             res.json()

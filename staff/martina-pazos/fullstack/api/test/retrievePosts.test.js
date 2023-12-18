@@ -1,13 +1,13 @@
 const req = {
     method: 'GET',
     headers: {
-        // bearer se utiliza un jsonwebtoken, (es un id) despues usaremos el jsonwebtoken
-        Authorization: 'Bearer 65718eaa788313056865666',
+
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NTdjNWNlOGY1ZDcyOThlYmFhYzNjNjciLCJpYXQiOjE3MDI5MDkwNjksImV4cCI6MTcwMjk0NTA2OX0.-VGYmkr7vvLiqAyAKdBdU31ZUbWYvOT0lZEMWUxtu3A',
     },
 }
 
 fetch('http://localhost:4000/posts', req)
-    .then(res => {
+    .then((res) => {
         if (!res.ok) {
             res.json()
                 .then(body => console.error(body))

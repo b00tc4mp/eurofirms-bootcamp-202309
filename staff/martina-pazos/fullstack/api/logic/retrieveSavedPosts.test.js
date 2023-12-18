@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const retrieveSavedPosts = require('./retrieveSavedPost')
+const retrieveSavedPosts = require('./retrieveSavedPosts')
 
 mongoose.connect('mongodb://127.0.0.1:27017/test')
 

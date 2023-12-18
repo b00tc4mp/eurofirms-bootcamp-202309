@@ -14,7 +14,7 @@ function retrievePosts(userId, callback) {
                 return
             }
             Post.find().select('-__v').populate('author', 'name').lean()
-                .then(post => {
+                .then(posts => {
                     posts.forEach(post => {
                         post.id = post._id.toString()
                         delete post._id

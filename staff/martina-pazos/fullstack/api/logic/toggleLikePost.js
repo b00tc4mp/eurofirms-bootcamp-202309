@@ -23,7 +23,7 @@ function toggleLikePost(userId, postId, callback) {
                         return
                     }
 
-                    const index = post.likes.findIndex(userObjectId => userObjectId.toString() === userid)
+                    const index = post.likes.findIndex(userObjectId => userObjectId.toString() === userId)
 
                     if (index < 0)
                         post.likes.push(userId)
