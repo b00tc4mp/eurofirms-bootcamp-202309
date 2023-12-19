@@ -1,4 +1,4 @@
-import JWT from "../utils/jwt"
+import JWT from "../utils/JWT"
 
 const context = {
     storage: sessionStorage,

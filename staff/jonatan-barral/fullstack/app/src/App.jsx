@@ -7,7 +7,8 @@ import { Register, Login, Home } from './pages'
 
 import { isUserLoggedIn, logoutUser } from './logic'
 
-import { JWTError } from './utils/errors'
+import { JWTError } from './logic/errors'
+
 
 function App() {
 

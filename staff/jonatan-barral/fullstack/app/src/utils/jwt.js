@@ -4,9 +4,11 @@ class JWT {
 
         const [header64, payload64, signature] = token.split('.')
 
+
         const headerJSON = atob(header64)
         const header = JSON.parse(headerJSON)
         this.header = header
+
 
         const payloadJSON = atob(payload64)
         const payload = JSON.parse(payloadJSON)

@@ -1,8 +1,9 @@
-import { validateFunction } from '../utils/validators'
+import validate from './validate'
+
 import context from './context'
 
 function retrievePosts(callback) {
-    validateFunction(callback, 'callback')
+    validate.funktion(callback, 'callback')
 
     const req = {
         method: 'GET',

@@ -1,11 +1,11 @@
-import { validateEmail, validatePassword, validateFunction } from '../utils/validators'
+import validate from './validate'
 import context from './context'
-import JWT from '../utils/jwt'
+import JWT from '../utils/JWT'
 
 function loginUser(email, password, callback) {
-    validateEmail(email)
-    validatePassword(password)
-    validateFunction(callback, 'callback')
+    validate.email(email)
+    validate.password(password)
+    validate.funktion(callback, 'callback')
 
     const req = {
         method: 'POST',
@@ -14,7 +14,7 @@ function loginUser(email, password, callback) {
         },
         body: JSON.stringify({ email, password })
     }
-
+    console.log('´hola')
     fetch('http://localhost:4000/users/auth', req)
         .then(res => {
             if (!res.ok) {
