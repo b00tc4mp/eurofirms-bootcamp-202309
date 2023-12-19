@@ -9,10 +9,8 @@ import Home from './pages/Home'
 
 import Hello from './components/Hello'
 
-import logoutUser from './logic/logoutUser'
-import isUserLoggedIn from './logic/isUserLoggedIn'
-
-import { JWTError } from './utils/errors'
+import logic from './logic'
+import { JWTError } from './logic/errors'
 
 export default function App() {
   console.log('App')
@@ -37,7 +35,7 @@ export default function App() {
 
   function handleError(error) {
     if (error instanceof JWTError) {
-      logoutUser()
+      logic.logoutUser()
 
       navigate('/login')
       setFeedback('Session expired, please login again')
@@ -50,11 +48,11 @@ export default function App() {
 
   return <>
     <Routes>
-      <Route path="/login" element={isUserLoggedIn() ? <Navigate to="/" /> : <Login onSuccess={handleHomeShow} onRegisterClick={handleRegisterShow} onError={handleError} />} />
+      <Route path="/login" element={logic.isUserLoggedIn() ? <Navigate to="/" /> : <Login onSuccess={handleHomeShow} onRegisterClick={handleRegisterShow} onError={handleError} />} />
 
-      <Route path="/register" element={isUserLoggedIn() ? <Navigate to="/" /> : <Register onSuccess={handleLoginShow} onLoginClick={handleLoginShow} onError={handleError} />} />
+      <Route path="/register" element={logic.isUserLoggedIn() ? <Navigate to="/" /> : <Register onSuccess={handleLoginShow} onLoginClick={handleLoginShow} onError={handleError} />} />
 
-      <Route path="/*" element={isUserLoggedIn() ? <Home onLogout={handleLoginShow} onError={handleError} /> : <Navigate to="/login" />} />
+      <Route path="/*" element={logic.isUserLoggedIn() ? <Home onLogout={handleLoginShow} onError={handleError} /> : <Navigate to="/login" />} />
 
       <Route path="/hello/:name" element={<Hello />} />
     </Routes>

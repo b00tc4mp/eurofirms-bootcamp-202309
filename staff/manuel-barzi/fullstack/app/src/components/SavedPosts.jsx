@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-import retrieveSavedPosts from '../logic/retrieveSavedPosts'
+import logic from '../logic'
 
 import Posts from './Posts'
 
@@ -15,7 +15,7 @@ export default function SavedPosts(props) {
 
     function refreshPosts() {
         try {
-            retrieveSavedPosts((error, posts) => {
+            logic.retrieveSavedPosts((error, posts) => {
                 if (error) {
                     props.onError(error)
 

@@ -3,7 +3,7 @@ import Container from '../library/Container'
 import Field from '../library/Field'
 import Form from '../library/Form'
 
-import createNewPost from '../logic/createNewPost'
+import logic from '../logic'
 
 export default function NewPost(props) {
     console.log('NewPost')
@@ -20,7 +20,7 @@ export default function NewPost(props) {
         const text = textInput.value
 
         try {
-            createNewPost(image, imageDescription, text, error => {
+            logic.createNewPost(image, imageDescription, text, error => {
                 if (error) {
                     props.onError(error)
 

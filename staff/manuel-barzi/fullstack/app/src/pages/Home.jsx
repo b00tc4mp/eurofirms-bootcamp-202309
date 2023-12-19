@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Routes, Route, useNavigate } from 'react-router-dom'
 
-import logoutUser from '../logic/logoutUser'
-import retrieveUser from '../logic/retrieveUser'
+import logic from '../logic'
 
 import { Button, Link, Container } from '../library'
 
@@ -20,7 +19,7 @@ export default function Home(props) {
         console.log('Home useEffect')
 
         try {
-            retrieveUser((error, user) => {
+            logic.retrieveUser((error, user) => {
                 if (error) {
                     props.onError(error)
 
@@ -35,7 +34,7 @@ export default function Home(props) {
     }, [])
 
     function handleLogoutClick() {
-        logoutUser()
+        logic.logoutUser()
 
         props.onLogout()
     }

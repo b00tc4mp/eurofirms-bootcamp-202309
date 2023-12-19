@@ -1,8 +1,8 @@
-import registerUser from '../logic/registerUser'
-
 import { Button, Link, Field, Form, Container } from '../library'
 
 import { Logo } from '../components'
+
+import logic from '../logic'
 
 export default function Register(props) {
     console.log('Register')
@@ -19,7 +19,7 @@ export default function Register(props) {
         const password = passwordInput.value
 
         try {
-            registerUser(name, email, password, error => {
+            logic.registerUser(name, email, password, error => {
                 if (error) {
                     props.onError(error)
 

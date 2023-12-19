@@ -2,7 +2,7 @@ import { Button, Link, Field, Form, Container } from '../library'
 
 import { Logo } from '../components'
 
-import loginUser from '../logic/loginUser'
+import logic from '../logic'
 
 export default function Login(props) {
     console.log('Login')
@@ -17,7 +17,7 @@ export default function Login(props) {
         const password = passwordInput.value
 
         try {
-            loginUser(email, password, error => {
+            logic.loginUser(email, password, error => {
                 if (error) {
                     props.onError(error)
 
