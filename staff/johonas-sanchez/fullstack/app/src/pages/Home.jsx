@@ -57,16 +57,6 @@ function Home(props) {
       setTimestamp(Date.now())
    }
 
-   function handleChangePasswordSubmit() {
-      navigate("/user-profile")
-      setTimestamp(Date.now())
-   }
-
-   function handleChangeEmailSubmit() {
-      navigate("/user-profile")
-      setTimestamp(Date.now())
-   }
-
    function handleSavedClick(event) {
       event.preventDefault()
 
@@ -145,12 +135,7 @@ function Home(props) {
 
             <Route path="/" element={<AllPosts timestamp={timestamp} onError={props.onError} />} />
 
-            <Route
-               path="/user-profile"
-               element={
-                  <UserProfile onNewPasswordSubmit={handleChangePasswordSubmit} onNewEmailSubmit={handleChangeEmailSubmit} onError={props.onError} />
-               }
-            />
+            <Route path="/user-profile/*" element={<UserProfile  onError={props.onError} />} />
 
             <Route path="/saved" element={<SavedPosts onError={props.onError} />} />
 
