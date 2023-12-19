@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 import Posts from './Posts'
 
-import retrieveMyPosts from '../logic/retrieveMyPosts'
+import { retrieveMyPosts } from '../logic'
 
 function MyPosts(props) {
 

@@ -1,32 +1,31 @@
 import { useState } from 'react'
+import { Routes, Route, useNavigate, Navigate } from 'react-router-dom'
 
-import Feedback from './library/Feedback'
+import { Feedback } from './library'
 
-import Login from './views/Login'
-import Register from './views/Register'
-import Home from './views/Home'
+import { Register, Login, Home } from './pages'
 
-import logoutUser from './logic/logoutUser'
+import { isUserLoggedIn, logoutUser } from './logic'
 
 import { JWTError } from './utils/errors'
 
 function App() {
 
-  const [view, setView] = useState(sessionStorage.token ? 'home' : 'login')
   const [feedback, setFeedback] = useState(null)
+  const navigate = useNavigate()
 
   function handleRegisterShow() {
-    setView('register')
+    navigate('/register')
     setFeedback(null)
   }
 
   function handleLoginShow() {
-    setView('login')
+    navigate('/login')
     setFeedback(null)
   }
 
   function handleHomeShow() {
-    setView('home')
+    navigate('/')
     setFeedback(null)
   }
 
@@ -34,7 +33,7 @@ function App() {
     if (error instanceof JWTError) {
       logoutUser()
 
-      setView('login')
+      navigate('/login')
       setFeedback('Session expired, please login again')
     } else setFeedback(error.message)
   }
@@ -44,11 +43,15 @@ function App() {
   }
 
   return <>
-    {view === 'login' ? <Login onSuccess={handleHomeShow} onRegisterClick={handleRegisterShow} onError={handleError} /> : null}
+    <Routes>
+      <Route path="/login" element={isUserLoggedIn() ? <Navigate to="/" /> : <Login onSuccess={handleHomeShow} onRegisterClick={handleRegisterShow} onError={handleError} />} />
 
-    {view === 'register' ? <Register onSuccess={handleLoginShow} onLoginClick={handleLoginShow} onError={handleError} /> : null}
+      <Route path="/register" element={isUserLoggedIn() ? <Navigate to="/" /> : <Register onSuccess={handleLoginShow} onLoginClick={handleLoginShow} onError={handleError} />} />
 
-    {view === 'home' ? <Home onLogout={handleLoginShow} onError={handleError} /> : null}
+      <Route path="/*" element={isUserLoggedIn() ? <Home onLogout={handleLoginShow} onError={handleError} /> : <Navigate to="/login" />} />
+
+
+    </Routes>
 
     {feedback ? <Feedback message={feedback} onAccept={handleAcceptFeedback} /> : null}
   </>

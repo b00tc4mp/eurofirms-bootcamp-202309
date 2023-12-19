@@ -1,12 +1,8 @@
-import Button from '../library/Button'
-import Link from '../library/Link'
-import Field from '../library/Field'
-import Form from '../library/Form'
-import Container from '../library/Container'
+import { Button, Field, Form, Container, Link } from '../library'
 
-import Logo from '../components/Logo'
+import { Logo } from '../components'
 
-import loginUser from '../logic/loginUser'
+import { loginUser } from '../logic'
 
 function Login(props) {
 

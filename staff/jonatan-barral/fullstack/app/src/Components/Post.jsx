@@ -1,9 +1,6 @@
-import toggleLikePost from '../logic/toggleLikePost'
-import deletePost from '../logic/deletePost'
-import toggleSavePost from '../logic/toggleSavePost'
-import getLoggedInUserId from '../logic/getLoggedInUserId'
+import { deletePost, toggleLikePost, toggleSavePost, getLoggedInUserId } from '../logic'
 
-import Button from '../library/Button'
+import { Button } from '../library'
 
 function Post(props) {
 

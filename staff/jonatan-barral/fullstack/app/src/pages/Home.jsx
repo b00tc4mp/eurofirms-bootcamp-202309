@@ -1,24 +1,17 @@
 import { useEffect, useState } from 'react'
+import { Routes, Route, useNavigate } from 'react-router-dom'
 
-import logoutUser from '../logic/logoutUser'
-import retrieveUser from '../logic/retrieveUser'
+import { logoutUser, retrieveUser } from '../logic'
 
-import Button from '../library/Button'
-import Link from '../library/Link'
-import Container from '../library/Container'
+import { Button, Container, Link } from '../library'
 
-import AllPosts from '../components/AllPosts'
-import MyPosts from '../components/MyPosts'
-import NewPost from '../components/NewPost'
-import SavedPosts from '../components/SavedPosts'
-import Logo from '../components/Logo'
-
+import { AllPosts, MyPosts, NewPost, SavedPosts, Logo } from '../components'
 
 function Home(props) {
 
-    const [view, setView] = useState(null)
     const [name, setName] = useState(null)
     const [timestamp, setTimestamp] = useState(null)
+    const navigate = useNavigate()
 
     useEffect(() => {
 
@@ -44,34 +37,34 @@ function Home(props) {
     }
 
     function handleNewPostClick() {
-        setView('new-post')
+        navigate('/new-post')
     }
 
     function handleNewPostCancelClick() {
-        setView(null)
+        navigate('/')
     }
 
     function handleNewPostSubmit() {
-        setView(null)
+        navigate('/')
         setTimestamp(Date.now())
     }
 
     function handleSavedClick(event) {
         event.preventDefault()
 
-        setView('saved')
+        navigate('/saved')
     }
 
     function handleHomeClick(event) {
         event.preventDefault()
 
-        setView(null)
+        navigate('/')
     }
 
     function handleMyPostsClick(event) {
         event.preventDefault()
 
-        setView('my-posts')
+        navigate('/my-posts')
     }
 
     return <Container align="center">
@@ -89,13 +82,18 @@ function Home(props) {
             <Button onClick={handleLogoutClick}>Logout</Button>
         </header>
 
-        {view === 'new-post' ? <NewPost onNewPostSubmit={handleNewPostSubmit} onNewPostCancelClick={handleNewPostCancelClick} onError={props.onError} /> : null}
+        <Routes>
+            <Route path="/new-post" element={<>
+                <NewPost onNewPostSubmit={handleNewPostSubmit} onNewPostCancelClick={handleNewPostCancelClick} onError={props.onError} />
+                <AllPosts timestamp={timestamp} onError={props.onError} />
+            </>} />
 
-        {view === null || view === 'new-post' ? <AllPosts timestamp={timestamp} onError={props.onError} /> : null}
+            <Route path="/" element={<AllPosts timestamp={timestamp} onError={props.onError} />} />
 
-        {view === 'saved' ? <SavedPosts onError={props.onError} /> : null}
+            <Route path="/saved" element={<SavedPosts onError={props.onError} />} />
 
-        {view === 'my-posts' ? <MyPosts onError={props.onError} /> : null}
+            <Route path='/my-posts' element={<MyPosts onError={props.onError} />} />
+        </Routes>
 
         <div className="h-[2rem]"></div>
 

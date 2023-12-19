@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-import retrieveSavedPosts from '../logic/retrieveSavedPosts'
+import { retrieveSavedPosts } from '../logic'
 
 import Posts from './Posts'
 

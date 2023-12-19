@@ -1,9 +1,6 @@
-import Button from '../library/Button'
-import Container from '../library/Container'
-import Field from '../library/Field'
-import Form from '../library/Form'
+import { Button, Field, Form, Container, Link } from '../library'
 
-import createNewPost from '../logic/createNewPost'
+import { createNewPost } from '../logic'
 
 function NewPost(props) {
 

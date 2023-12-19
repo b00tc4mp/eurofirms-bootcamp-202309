@@ -1,4 +1,4 @@
-import Container from '../library/Container'
+import { Container, } from '../library'
 
 import Post from './Post'
 
