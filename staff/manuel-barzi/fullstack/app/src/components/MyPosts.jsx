@@ -4,7 +4,7 @@ import Posts from './Posts'
 
 import retrieveMyPosts from '../logic/retrieveMyPosts'
 
-function MyPosts(props) {
+export default function MyPosts(props) {
     console.log('MyPosts')
 
     const [posts, setPosts] = useState([])
@@ -43,5 +43,3 @@ function MyPosts(props) {
 
     return <Posts posts={posts} onPostLikeToggled={handlePostLikeToggled} onPostSaveToggled={handlePostSaveToggled} onPostDeleted={handlePostDeleted} onError={props.onError} />
 }
-
-export default MyPosts

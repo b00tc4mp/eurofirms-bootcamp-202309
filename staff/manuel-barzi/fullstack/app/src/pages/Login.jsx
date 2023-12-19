@@ -8,7 +8,7 @@ import Logo from '../components/Logo'
 
 import loginUser from '../logic/loginUser'
 
-function Login(props) {
+export default function Login(props) {
     console.log('Login')
 
     function handleLoginSubmit(event) {
@@ -58,5 +58,3 @@ function Login(props) {
         <Link onClick={handleRegisterClick}>Register</Link>
     </Container>
 }
-
-export default Login

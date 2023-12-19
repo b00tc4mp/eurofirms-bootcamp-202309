@@ -13,9 +13,10 @@ import MyPosts from '../components/MyPosts'
 import NewPost from '../components/NewPost'
 import SavedPosts from '../components/SavedPosts'
 import Logo from '../components/Logo'
+import Profile from '../components/Profile'
 
 
-function Home(props) {
+export default function Home(props) {
     console.log('Home')
 
     const [name, setName] = useState(null)
@@ -77,6 +78,12 @@ function Home(props) {
         navigate('/my-posts')
     }
 
+    function handleProfileClick(event) {
+        event.preventDefault()
+
+        navigate('/profile')
+    }
+
     return <Container align="center">
         <header className="flex justify-between items-center md:min-w-[500px] lg:min-w-[768px]" aria-label="Header">
             <Link className="hidden lg:block" onClick={handleHomeClick}><Logo /></Link>
@@ -87,7 +94,7 @@ function Home(props) {
 
             <Link onClick={handleMyPostsClick}>My posts</Link>
 
-            <span aria-label="User name">{name}</span>
+            <Link onClick={handleProfileClick} aria-label="User name">{name}</Link>
 
             <Button onClick={handleLogoutClick}>Logout</Button>
         </header>
@@ -102,7 +109,9 @@ function Home(props) {
 
             <Route path="/saved" element={<SavedPosts onError={props.onError} />} />
 
-            <Route path='/my-posts' element={<MyPosts onError={props.onError} />} />
+            <Route path="/my-posts" element={<MyPosts onError={props.onError} />} />
+
+            <Route path="/profile/*" element={<Profile />} />
         </Routes>
 
         <div className="h-[2rem]"></div>
@@ -113,5 +122,3 @@ function Home(props) {
         </footer>
     </Container>
 }
-
-export default Home

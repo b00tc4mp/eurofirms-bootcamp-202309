@@ -4,7 +4,7 @@ import retrieveSavedPosts from '../logic/retrieveSavedPosts'
 
 import Posts from './Posts'
 
-function SavedPosts(props) {
+export default function SavedPosts(props) {
     console.log('SavedPosts')
 
     const [posts, setPosts] = useState([])
@@ -43,5 +43,3 @@ function SavedPosts(props) {
 
     return <Posts posts={posts} onPostLikeToggled={handlePostLikeToggled} onPostSaveToggled={handlePostSaveToggled} onPostDeleted={handlePostDeleted} onError={props.onError} />
 }
-
-export default SavedPosts

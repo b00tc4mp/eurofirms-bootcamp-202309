@@ -1,5 +1,3 @@
-function Link(props) {
-    return <a href="" className={`${props.className} p-[.5rem] hover:underline`} onClick={props.onClick}>{props.children}</a>
+export default function Link(props) {
+    return <a href="" className="p-[1rem] hover:underline" {...props}></a>
 }
-
-export default Link

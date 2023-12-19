@@ -5,7 +5,7 @@ import getLoggedInUserId from '../logic/getLoggedInUserId'
 
 import Button from '../library/Button'
 
-function Post(props) {
+export default function Post(props) {
     console.log('Post')
 
     const post = props.post
@@ -80,5 +80,3 @@ function Post(props) {
         </div>
     </article>
 }
-
-export default Post

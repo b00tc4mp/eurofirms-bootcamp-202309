@@ -8,7 +8,7 @@ import Container from '../library/Container'
 
 import Logo from '../components/Logo'
 
-function Register(props) {
+export default function Register(props) {
     console.log('Register')
 
     function handleRegisterSubmit(event) {
@@ -61,5 +61,3 @@ function Register(props) {
         <Link onClick={handleLoginClick}>Login</Link>
     </Container>
 }
-
-export default Register

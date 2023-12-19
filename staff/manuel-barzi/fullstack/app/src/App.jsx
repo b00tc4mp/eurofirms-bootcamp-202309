@@ -14,7 +14,7 @@ import isUserLoggedIn from './logic/isUserLoggedIn'
 
 import { JWTError } from './utils/errors'
 
-function App() {
+export default function App() {
   console.log('App')
 
   const [feedback, setFeedback] = useState(null)
@@ -62,5 +62,3 @@ function App() {
     {feedback ? <Feedback message={feedback} onAccept={handleAcceptFeedback} /> : null}
   </>
 }
-
-export default App

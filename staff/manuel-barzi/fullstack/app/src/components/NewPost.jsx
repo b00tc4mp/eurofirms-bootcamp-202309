@@ -5,7 +5,7 @@ import Form from '../library/Form'
 
 import createNewPost from '../logic/createNewPost'
 
-function NewPost(props) {
+export default function NewPost(props) {
     console.log('NewPost')
 
     function handleNewPostSubmit(event) {
@@ -53,5 +53,3 @@ function NewPost(props) {
         </Form>
     </Container>
 }
-
-export default NewPost
