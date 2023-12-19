@@ -1,10 +1,7 @@
 import context from './context'
 
 function isUserLoggedIn() {
-    if (!context.jwt || context.jwt.isExpired()) {
-        delete context.storage.token
-
-        context.jwt = null
+    if (!context.jwt) {
 
         return false
     }

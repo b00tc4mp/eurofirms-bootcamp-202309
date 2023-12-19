@@ -1,12 +1,12 @@
-import { validatePassword, validateFunction, validateJWT } from "../utils/validators"
+import validate from './validate'
 import context from "./context"
 
 function updateUserPassword(password, newPassword, repeatNewPassword, callback) {
-   validatePassword(password, "password")
-   validatePassword(newPassword, "new password")
-   validatePassword(repeatNewPassword, "repeat new password")
-   validateFunction(callback, "callback")
-   validateJWT(context.jwt)
+   validate.password(password, "password")
+   validate.password(newPassword, "new password")
+   validate.password(repeatNewPassword, "repeat new password")
+   validate.funktion(callback, "callback")
+   validate.jwt(context.jwt)
 
    const req = {
       method: "PATCH",

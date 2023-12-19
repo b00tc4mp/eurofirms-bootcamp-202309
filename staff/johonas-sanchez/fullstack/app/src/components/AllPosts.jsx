@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 
 import Posts from "./Posts"
 
-import retrievePosts from "../logic/retrievePosts"
+import logic from '../logic'
 
 function AllPosts(props) {
    console.log("AllPosts")
@@ -15,7 +15,7 @@ function AllPosts(props) {
 
    function refreshPosts() {
       try {
-         retrievePosts((error, posts) => {
+         logic.retrievePosts((error, posts) => {
             if (error) {
                props.onError(error)
 

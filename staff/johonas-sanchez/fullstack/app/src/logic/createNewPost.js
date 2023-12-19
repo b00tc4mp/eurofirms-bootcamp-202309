@@ -1,12 +1,12 @@
-import { validateText, validateUrl, validateFunction, validateJWT } from '../utils/validators'
+import validate from './validate'
 import context from './context'
 
 function createNewPost(image, imageDescription, text, callback) {
-    validateUrl(image, 'image url')
-    validateText(imageDescription, 'image description')
-    validateText(text, 'text')
-    validateFunction(callback, 'callback')
-    validateJWT(context.jwt)
+    validate.url(image, 'image url')
+    validate.text(imageDescription, 'image description')
+    validate.text(text, 'text')
+    validate.funktion(callback, 'callback')
+    validate.jwt(context.jwt)
 
     const req = {
         method: 'POST',

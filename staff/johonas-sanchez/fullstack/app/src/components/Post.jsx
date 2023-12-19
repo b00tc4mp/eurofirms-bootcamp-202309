@@ -1,9 +1,6 @@
-import toggleLikePost from "../logic/toggleLikePost"
-import deletePost from "../logic/deletePost"
-import toggleSavePost from "../logic/toggleSavePost"
-import getLoggedInUserId from '../logic/getLoggedInUserId'
-
 import Button from "../library/Button"
+
+import logic from '../logic'
 
 function Post(props) {
    console.log("Post")
@@ -12,7 +9,7 @@ function Post(props) {
 
    function handlePostLikeToggled() {
       try {
-         toggleLikePost(post.id, (error) => {
+         logic.toggleLikePost(post.id, (error) => {
             if (error) {
                props.onError(error)
 
@@ -31,7 +28,7 @@ function Post(props) {
 
       if (confirmed)
          try {
-            deletePost(post.id, (error) => {
+            logic.deletePost(post.id, (error) => {
                if (error) {
                   props.onError(error)
 
@@ -47,7 +44,7 @@ function Post(props) {
 
    function handlePostSaveToggled() {
       try {
-         toggleSavePost(post.id, (error) => {
+         logic.toggleSavePost(post.id, (error) => {
             if (error) {
                props.onError(error)
 
@@ -78,7 +75,7 @@ function Post(props) {
                {post.saved ? "⭐️" : "✩"}
             </Button>
 
-            {post.author.id === getLoggedInUserId() ? (
+            {post.author.id === logic.getLoggedInUserId() ? (
                <Button title="Delete" aria-label="Delete" onClick={handlePostDeleted}>
                   🗑️
                </Button>

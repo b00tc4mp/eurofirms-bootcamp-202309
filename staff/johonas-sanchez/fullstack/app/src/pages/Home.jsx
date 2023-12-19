@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react"
 import { Routes, Route, useNavigate } from "react-router-dom"
 
-import logoutUser from "../logic/logoutUser"
-import retrieveUser from "../logic/retrieveUser"
+import logic from '../logic'
 
 import { Button, Link, Container } from '../library'
 
@@ -17,7 +16,7 @@ function Home(props) {
 
    useEffect(() => {
       try {
-         retrieveUser((error, user) => {
+         logic.retrieveUser((error, user) => {
             if (error) {
                props.onError(error)
 
@@ -32,7 +31,7 @@ function Home(props) {
    }, [])
 
    function handleLogoutClick() {
-      logoutUser()
+      logic.logoutUser()
 
       props.onLogout()
    }

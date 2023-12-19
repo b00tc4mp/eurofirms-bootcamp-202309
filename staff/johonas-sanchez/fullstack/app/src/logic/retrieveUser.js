@@ -1,10 +1,10 @@
-import { validateFunction, validateJWT } from '../utils/validators'
+import validate from './validate'
 import context from './context'
 
 
 function retrieveUser(callback) {
-    validateFunction(callback, 'callback')
-    validateJWT(context.jwt)
+    validate.funktion(callback, 'callback')
+    validate.jwt(context.jwt)
 
     const req = {
         method: 'GET',
