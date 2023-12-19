@@ -1,5 +1,3 @@
-function Label(props) {
-    return <label className="self-start" htmlFor={props.htmlFor}>{props.children}</label>
+export default function Label(props) {
+    return <label className="self-start" {...props}></label>
 }
-
-export default Label

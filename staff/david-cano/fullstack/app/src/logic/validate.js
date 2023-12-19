@@ -1,45 +1,48 @@
 import { JWTError } from "./errors"
+import { JWT } from '../utils'
 
-function validateText(text, explain) {
+function text(text, explain) {
     if (typeof text !== 'string') throw new TypeError(explain + ' is not a string')
     if (text.trim().length === 0) throw new Error(explain + ' is empty')
 }
 
-function validateEmail(email) {
-    validateText(email, 'email')
+function email(email) {
+    text(email, 'email')
     if (!email.includes('@')) throw new Error('Email is not valid')
     if (!email.includes('.')) throw new Error('Email is not valid')
 }
 
-function validatePassword(password) {
-    validateText(password, 'password')
+function password(password) {
+    text(password, 'password')
     if (password.length < 8) throw new RangeError('Password length is lower than 8')
 }
 
-function validateUrl(url, explain) {
-    validateText(url, explain)
+function url(url, explain) {
+    text(url, explain)
     if (!url.startsWith('http')) throw new Error(explain + ' is not valid')
 }
 
-function validateNumber(number, explain) {
+function number(number, explain) {
     if (typeof number !== 'number') throw new TypeError(explain + ' is not a number')
 }
 
-function validateFunction(func, explain) {
-    if (typeof func !== 'function') throw new TypeError(explain + ' is not a function')
+function funktion(funktion, explain) {
+    if (typeof funktion !== 'function') throw new TypeError(explain + ' is not a function')
 }
 
-function validateJWT(jwt) {
-    if (!jwt) throw new JWTError('JWT not valid')
+function jwt(jwt) {
+    if (!jwt || !(jwt instanceof JWT)) throw new JWTError('JWT not valid')
     if (jwt.isExpired()) throw new JWTError('JWT is expired')
 }
 
-export {
-    validateText,
-    validateEmail,
-    validatePassword,
-    validateUrl,
-    validateNumber,
-    validateFunction,
-    validateJWT
+const validate =  {
+    text,
+    email,
+    password,
+    url,
+    number,
+    funktion,
+    jwt
 }
+
+export default validate

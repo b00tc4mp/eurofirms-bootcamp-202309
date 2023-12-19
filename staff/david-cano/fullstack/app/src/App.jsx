@@ -1,43 +1,45 @@
 import { useState } from 'react'
+import { Routes, Route, useNavigate, Navigate } from 'react-router-dom'
 
 import Feedback from './library/Feedback'
 
-import Login from "./views/Login"
-import Register from "./views/Register"
-import Home from "./views/Home"
+import Login from './pages/Login'
+import Register from './pages/Register'
+import Home from './pages/Home'
 
-import logoutUser from './logic/logoutUser'
+import Hello from './components/Hello'
 
-import { JWTError } from './utils/errors'
+import logic from './logic'
+import { JWTError } from './logic/errors'
 
-function App() {
+export default function App() {
     console.log('App')
 
-    const [view, setView] = useState(sessionStorage.token ? 'home' : 'login')
     const [feedback, setFeedback] = useState(null)
+    const navigate = useNavigate()
 
     function handleShowRegister() {
-        setView('register')
+        navigate('/register')
         setFeedback(null)
     }
 
     function handleShowLogin() {
-        setView('login')
+        navigate('/login')
         setFeedback(null)
     }
 
     function handleShowHome() {
-        setView('home')
+        navigate('/')
         setFeedback(null)
     }
 
     function handleError(error) {
         if (error instanceof JWTError) {
-            logoutUser()
+            logic.logoutUser()
 
-            setView('login')
-            setFeedback('SESSION EXPIRED!!!; please "LOGIN" again')
-        }else setFeedback(error.message)
+            navigate('/login')
+            setFeedback('SESSION IS EXPIRED!!!; please "LOGIN" again')
+        } else setFeedback(error.message)
     }
 
     function handleAcceptFeedback() {
@@ -46,14 +48,16 @@ function App() {
 
 
     return <>
-        {view === 'login' ? <Login onSuccess={handleShowHome} onRegisterClick={handleShowRegister} onError={handleError} /> : null}
+        <Routes>
+            <Route path="/login" element={logic.isUserLoggedIn() ? <Navigate to="/" /> : <Login onSuccess={handleShowHome} onRegisterClick={handleShowRegister} onError={handleError} />} />
 
-        {view === 'register' ? <Register onSuccess={handleShowLogin} onLoginClick={handleShowLogin} onError={handleError} /> : null}
+            <Route path="/register" element={logic.isUserLoggedIn() ? <Navigate to="/" /> : <Register onSuccess={handleShowLogin} onLoginClick={handleShowLogin} onError={handleError} />} />
 
-        {view === 'home' ? <Home onLogout={handleShowLogin} onError={handleError} /> : null}
+            <Route path="/*" element={logic.isUserLoggedIn() ? <Home onLogout={handleShowLogin} onError={handleError} /> : <Navigate to="/login" />} />
+
+            <Route path="/hello/:name" element={<Hello />} />
+        </Routes>
 
         {feedback ? <Feedback message={feedback} onAccept={handleAcceptFeedback} /> : null}
     </>
 }
-
-export default App

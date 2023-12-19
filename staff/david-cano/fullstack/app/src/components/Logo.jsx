@@ -1,6 +1,7 @@
 import React from "react"
 
-function Logo() {
+export default function Logo() {
+    console.log('Logo')
 
     const horseAudioRef = React.useRef()
     const tweetAudioRef = React.useRef()
@@ -32,5 +33,3 @@ function Logo() {
         </audio>
     </div>
 }
-
-export default Logo

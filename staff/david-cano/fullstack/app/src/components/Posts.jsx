@@ -2,7 +2,7 @@ import Container from '../library/Container'
 
 import Post from './Post'
 
-function Posts(props) {
+export default function Posts(props) {
     console.log('Posts')
     
     return <Container className ='md:grid md:grid-cols-2 lg:grid-cols-3' align="center" aria-label={props['aria-label']}>
@@ -11,5 +11,3 @@ function Posts(props) {
         })}
     </Container>
 }
-
-export default Posts

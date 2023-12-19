@@ -1,8 +1,7 @@
 import context from "./context";
 
-function logoutUser() {
+export default function logoutUser() {
     delete context.storage.token
     context.jwt = null
 }
 
-export default logoutUser

@@ -1,14 +1,10 @@
-import registerUser from '../logic/registerUser'
+import { Button, Link, Field, Form, Container } from '../library'
 
-import Button from '../library/Button'
-import Link from '../library/Link'
-import Field from '../library/Field'
-import Form from '../library/Form'
-import Container from '../library/Container'
+import { Logo } from '../components'
 
-import Logo from '../components/Logo'
+import logic from '../logic'
 
-function Register(props) {
+export default function Register(props) {
     console.log('Register')
 
     function handleRegisterSubmit(event) {
@@ -23,7 +19,7 @@ function Register(props) {
         const password = passwordInput.value
 
         try {
-            registerUser(name, email, password, error => {
+            logic.registerUser(name, email, password, error => {
                 if (error) {
                     props.onError(error)
 
@@ -61,5 +57,3 @@ function Register(props) {
         <Link onClick={handleLoginClick}>Login</Link>
     </Container>
 }
-
-export default Register
