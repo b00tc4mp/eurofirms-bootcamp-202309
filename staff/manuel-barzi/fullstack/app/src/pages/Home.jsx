@@ -4,16 +4,9 @@ import { Routes, Route, useNavigate } from 'react-router-dom'
 import logoutUser from '../logic/logoutUser'
 import retrieveUser from '../logic/retrieveUser'
 
-import Button from '../library/Button'
-import Link from '../library/Link'
-import Container from '../library/Container'
+import { Button, Link, Container } from '../library'
 
-import AllPosts from '../components/AllPosts'
-import MyPosts from '../components/MyPosts'
-import NewPost from '../components/NewPost'
-import SavedPosts from '../components/SavedPosts'
-import Logo from '../components/Logo'
-import Profile from '../components/Profile'
+import { AllPosts, MyPosts, NewPost, SavedPosts, Logo, Profile } from '../components'
 
 
 export default function Home(props) {
