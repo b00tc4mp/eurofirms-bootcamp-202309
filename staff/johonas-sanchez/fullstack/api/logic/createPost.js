@@ -1,12 +1,12 @@
-const { validateText, validateFunction } = require('./helpers/validators')
+const validate = require('./helpers/validate')
 const { User, Post } = require('../data/models')
 
 function createPost(userId, image, imageDescription, text, callback) {
-    validateText(userId, 'user id')
-    validateText(image, 'image')
-    validateText(imageDescription, 'image description')
-    validateText(text, 'text')
-    validateFunction(callback, 'callback')
+    validate.text(userId, 'user id')
+    validate.textt(image, 'image')
+    validate.text(imageDescription, 'image description')
+    validate.text(text, 'text')
+    validate.function(callback, 'callback')
 
     User.findById(userId)
         .then(user => {

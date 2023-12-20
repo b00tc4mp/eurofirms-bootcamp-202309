@@ -2,6 +2,10 @@ const express = require("express")
 const mongoose = require("mongoose")
 const jwt = require("jsonwebtoken")
 
+const { cors } = require('./utils')
+
+const logic = require('./logic')
+
 const registerUser = require("./logic/registerUser")
 const authenticateUser = require("./logic/authenticateUser")
 const createPost = require("./logic/createPost")
@@ -35,15 +39,7 @@ mongoose.connect("mongodb://127.0.0.1/api").then(() => {
 
    const jsonBodyParser = express.json()
 
-   const cors = (req, res, next) => {
-      res.header("Access-Control-Allow-Origin", "*")
-      res.header("Access-Control-Allow-Methods", "*")
-      res.header("Access-Control-Allow-Headers", "*")
-
-      next()
-   }
-
-   api.use("*", cors)
+   api.use(cors)
 
    api.post("/users", cors, jsonBodyParser, (req, res) => {
       try {
