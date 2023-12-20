@@ -8,7 +8,7 @@ const { cors } = require('./utils')
 
 const logic = require('./logic')
 
-mongoose.connect('mongodb://127.0.0.1/api')
+mongoose.connect(process.env.MONGODB_URL)
     .then(() => {
         const api = express()
 
