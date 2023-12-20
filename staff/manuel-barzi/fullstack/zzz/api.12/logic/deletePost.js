@@ -1,10 +1,10 @@
-const validate = require('./helpers/validate')
+const { validateText, validateFunction } = require('./helpers/validators')
 const { User, Post } = require('../data/models')
 
-function toggleLikePost(userId, postId, callback) {
-    validate.text(userId, 'user id')
-    validate.text(postId, 'post id')
-    validate.function(callback, 'callback')
+function deletePost(userId, postId, callback) {
+    validateText(userId, 'user id')
+    validateText(postId, 'post id')
+    validateFunction(callback, 'callback')
 
     User.findById(userId)
         .then(user => {
@@ -13,6 +13,7 @@ function toggleLikePost(userId, postId, callback) {
 
                 return
             }
+
             Post.findById(postId)
                 .then(post => {
                     if (!post) {
@@ -21,18 +22,19 @@ function toggleLikePost(userId, postId, callback) {
                         return
                     }
 
-                    const index = post.likes.findIndex(userObjectId => userObjectId.toString() === userId)
+                    if (post.author.toString() !== userId) {
+                        callback(new Error('post does not belong to user'))
 
-                    if (index < 0)
-                        post.likes.push(userId)
-                    else
-                        post.likes.splice(index, 1)
+                        return
+                    }
 
-                    post.save()
+                    Post.deleteOne({ _id: postId })
                         .then(() => callback(null))
                         .catch(error => callback(error))
                 })
+                .catch(error => callback(error))
         })
         .catch(error => callback(error))
 }
-module.exports = toggleLikePost
+
+module.exports = deletePost

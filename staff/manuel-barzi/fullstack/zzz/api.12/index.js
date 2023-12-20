@@ -2,9 +2,17 @@ const express = require('express')
 const mongoose = require('mongoose')
 const jwt = require('jsonwebtoken')
 
-const { cors } = require('./utils')
-
-const logic = require('./logic')
+const registerUser = require('./logic/registerUser')
+const authenticateUser = require('./logic/authenticateUser')
+const retrieveUser = require('./logic/retrieveUser')
+const createPost = require('./logic/createPost')
+const retrievePosts = require('./logic/retrievePosts')
+const toggleLikePost = require('./logic/toggleLikePost')
+const updateUserPassword = require('./logic/updateUserPassword')
+const toggleSavePost = require('./logic/toggleSavePost')
+const deletePost = require('./logic/deletePost')
+const retrieveSavedPosts = require('./logic/retrieveSavedPosts')
+const retrieveMyPosts = require('./logic/retrieveMyPosts')
 
 mongoose.connect('mongodb://127.0.0.1/api')
     .then(() => {
@@ -22,13 +30,21 @@ mongoose.connect('mongodb://127.0.0.1/api')
 
         const jsonBodyParser = express.json()
 
-        api.use(cors)
+        const cors = (req, res, next) => {
+            res.header('Access-Control-Allow-Origin', '*')
+            res.header('Access-Control-Allow-Methods', '*')
+            res.header('Access-Control-Allow-Headers', '*')
+
+            next()
+        }
+
+        api.use('*', cors)
 
         api.post('/users', cors, jsonBodyParser, (req, res) => {
             try {
                 const { name, email, password } = req.body
 
-                logic.registerUser(name, email, password, error => {
+                registerUser(name, email, password, error => {
                     if (error) {
                         res.status(400).json({ error: error.message })
 
@@ -46,13 +62,13 @@ mongoose.connect('mongodb://127.0.0.1/api')
             try {
                 const { email, password } = req.body
 
-                logic.authenticateUser(email, password, (error, userId) => {
+                authenticateUser(email, password, (error, userId) => {
                     if (error) {
                         res.status(400).json({ error: error.message })
                         return
                     }
 
-                    const token = jwt.sign({ sub: userId }, 'es posible que pronto sea abuelo', { expiresIn: '1m' })
+                    const token = jwt.sign({ sub: userId }, 'es posible que pronto sea abuelo', { expiresIn: '1s' })
 
                     res.json(token)
                 })
@@ -67,7 +83,7 @@ mongoose.connect('mongodb://127.0.0.1/api')
 
                 const { sub: userId } = jwt.verify(token, 'es posible que pronto sea abuelo')
 
-                logic.retrieveUser(userId, (error, user) => {
+                retrieveUser(userId, (error, user) => {
                     if (error) {
                         res.status(400).json({ error: error.message })
 
@@ -89,7 +105,7 @@ mongoose.connect('mongodb://127.0.0.1/api')
 
                 const { image, imageDescription, text } = req.body
 
-                logic.createPost(userId, image, imageDescription, text, error => {
+                createPost(userId, image, imageDescription, text, error => {
                     if (error) {
                         res.status(400).json({ error: error.message })
 
@@ -109,7 +125,7 @@ mongoose.connect('mongodb://127.0.0.1/api')
 
                 const { sub: userId } = jwt.verify(token, 'es posible que pronto sea abuelo')
 
-                logic.retrievePosts(userId, (error, posts) => {
+                retrievePosts(userId, (error, posts) => {
                     if (error) {
                         res.status(400).json({ error: error.message })
 
@@ -129,7 +145,7 @@ mongoose.connect('mongodb://127.0.0.1/api')
 
                 const { sub: userId } = jwt.verify(token, 'es posible que pronto sea abuelo')
 
-                logic.retrieveSavedPosts(userId, (error, posts) => {
+                retrieveSavedPosts(userId, (error, posts) => {
                     if (error) {
                         res.status(400).json({ error: error.message })
 
@@ -149,7 +165,7 @@ mongoose.connect('mongodb://127.0.0.1/api')
 
                 const { sub: userId } = jwt.verify(token, 'es posible que pronto sea abuelo')
 
-                logic.retrieveMyPosts(userId, (error, posts) => {
+                retrieveMyPosts(userId, (error, posts) => {
                     if (error) {
                         res.status(400).json({ error: error.message })
 
@@ -171,7 +187,7 @@ mongoose.connect('mongodb://127.0.0.1/api')
 
                 const postId = req.params.postId
 
-                logic.toggleLikePost(userId, postId, error => {
+                toggleLikePost(userId, postId, error => {
                     if (error) {
                         res.status(400).json({ error: error.message })
 
@@ -193,7 +209,7 @@ mongoose.connect('mongodb://127.0.0.1/api')
 
                 const postId = req.params.postId
 
-                logic.toggleSavePost(userId, postId, error => {
+                toggleSavePost(userId, postId, error => {
                     if (error) {
                         res.status(400).json({ error: error.message })
 
@@ -215,7 +231,7 @@ mongoose.connect('mongodb://127.0.0.1/api')
 
                 const postId = req.params.postId
 
-                logic.deletePost(userId, postId, error => {
+                deletePost(userId, postId, error => {
                     if (error) {
                         res.status(400).json({ error: error.message })
 
@@ -237,7 +253,7 @@ mongoose.connect('mongodb://127.0.0.1/api')
 
                 const { password, newPassword, repeatNewPassword } = req.body
 
-                logic.updateUserPassword(userId, password, newPassword, repeatNewPassword, error => {
+                updateUserPassword(userId, password, newPassword, repeatNewPassword, error => {
                     if (error) {
                         res.status(400).json({ error: error.message })
 

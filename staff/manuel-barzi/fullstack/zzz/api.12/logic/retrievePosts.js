@@ -1,10 +1,10 @@
-const validate = require('./helpers/validate')
+const { validateText, validateFunction } = require('./helpers/validators')
 
 const { User, Post } = require('../data/models')
 
 function retrievePosts(userId, callback) {
-    validate.text(userId, 'user id')
-    validate.function(callback, 'callback')
+    validateText(userId, 'user id')
+    validateFunction(callback, 'callback')
 
     User.findById(userId)
         .then(user => {
