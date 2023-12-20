@@ -13,7 +13,7 @@ function deletePost(postId, callback) {
         },
      }
      
-     fetch(`http://localhost:4000/posts/${postId}`, req)
+     fetch(`${import.meta.env.VITE_API_URL}/posts/${postId}`, req)
         .then(res => {
            if (!res.ok) {
               res.json()

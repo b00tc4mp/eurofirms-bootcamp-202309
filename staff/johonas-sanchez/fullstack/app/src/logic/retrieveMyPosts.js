@@ -13,7 +13,7 @@ function retrieveMyPosts(callback) {
         },
      }
      
-     fetch('http://localhost:4000/posts/user', req)
+     fetch(`${import.meta.env.VITE_API_URL}/posts/user`, req)
         .then(res => {
            if (!res.ok) {
               res.json()

@@ -17,7 +17,7 @@ function updateUserPassword(password, newPassword, repeatNewPassword, callback) 
       body: JSON.stringify({ password, newPassword, repeatNewPassword }),
    }
 
-   fetch("http://localhost:4000/users/password", req)
+   fetch(`${import.meta.env.VITE_API_URL}/users/password`, req)
       .then((res) => {
          if (!res.ok) {
             res.json()

@@ -18,7 +18,7 @@ function updateUserEmail(password, email, newEmail, repeatNewEmail, callback) {
       body: JSON.stringify({ password, email, newEmail, repeatNewEmail }),
    }
 
-   fetch("http://localhost:4000/users/email", req)
+   fetch(`${import.meta.env.VITE_API_URL}/users/email`, req)
       .then((res) => {
          if (!res.ok) {
             res.json()
