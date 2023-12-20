@@ -1,9 +1,9 @@
-import validate from './validate'
+import { validate } from './helpers'
 import context from './context'
 
 function toggleLikePost(postId, callback) {
     validate.text(postId, 'post id')
-    validate.funktion(callback, 'callback')
+    validate.function(callback, 'callback')
     validate.jwt(context.jwt)
 
     const req = {

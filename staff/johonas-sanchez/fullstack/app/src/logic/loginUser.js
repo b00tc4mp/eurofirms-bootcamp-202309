@@ -1,12 +1,12 @@
 import { JWT } from '../utils'
-import validate from './validate'
+import { validate } from './helpers'
 import context from './context'
 
 
 function loginUser(email, password, callback) {
     validate.email(email)
     validate.password(password)
-    validate.funktion(callback, 'callback')
+    validate.function(callback, 'callback')
 
     const req = {
         method: 'POST',

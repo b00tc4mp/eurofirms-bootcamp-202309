@@ -1,11 +1,11 @@
-import validate from './validate'
+import { validate } from './helpers'
 import context from './context'
 
 function createNewPost(image, imageDescription, text, callback) {
     validate.url(image, 'image url')
     validate.text(imageDescription, 'image description')
     validate.text(text, 'text')
-    validate.funktion(callback, 'callback')
+    validate.function(callback, 'callback')
     validate.jwt(context.jwt)
 
     const req = {

@@ -1,4 +1,4 @@
-import validate from './validate'
+import { validate } from './helpers'
 import context from "./context"
 
 function updateUserEmail(password, email, newEmail, repeatNewEmail, callback) {
@@ -6,7 +6,7 @@ function updateUserEmail(password, email, newEmail, repeatNewEmail, callback) {
    validate.email(email, "email")
    validate.email(newEmail, "new email")
    validate.email(repeatNewEmail, "repeat new email")
-   validate.funktion(callback, "callback")
+   validate.function(callback, "callback")
    validate.jwt(context.jwt)
 
    const req = {

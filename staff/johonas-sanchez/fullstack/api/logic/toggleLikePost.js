@@ -1,5 +1,4 @@
-const validate = require('./helpers/validate')
-
+const { validate } = require('./helpers')
 const { User, Post } = require('../data/models')
 
 function toggleLikePost(userId, postId, callback) {

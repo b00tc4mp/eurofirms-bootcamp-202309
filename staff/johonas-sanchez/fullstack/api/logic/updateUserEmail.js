@@ -1,5 +1,4 @@
-const validate = require('./helpers/validate')
-
+const { validate } = require('./helpers')
 const { User } = require("../data/models")
 
 function updateUserEmail(userId, password, email, newEmail, repeatNewEmail, callback) {

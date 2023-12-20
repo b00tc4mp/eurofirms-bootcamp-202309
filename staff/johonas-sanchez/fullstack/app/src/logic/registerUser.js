@@ -1,10 +1,10 @@
-import validate from './validate'
+import { validate } from './helpers'
 
 function registerUser(name, email, password, callback) {
     validate.text(name, 'name')
     validate.email(email)
     validate.password(password)
-    validate.funktion(callback, 'callback')
+    validate.function(callback, 'callback')
 
     const req = {
         method: 'POST',
