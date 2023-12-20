@@ -289,11 +289,6 @@ mongoose.connect(process.env.MONGODB_URL).then(() => {
    // Implement updateUserEmail endpoint
 
    api.patch("/users/email", jsonBodyParser, (req, res) => {
-      const userId = req.headers.authorization.slice(7)
-
-      const body = req.body
-      const { password, email, newEmail, repeatNewEmail } = body
-
       try {
          const token = req.headers.authorization.slice(7)
          const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
