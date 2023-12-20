@@ -12,7 +12,7 @@ function retrieveUser(callback) {
         },
     }
 
-    fetch('http://localhost:4000/users', req)
+    fetch(`${import.meta.env.VITE_API_URL}/users`, req)
         .then(res => {
             if (!res.ok) {
                 res.json()

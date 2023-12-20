@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const express = require('express')
 const mongoose = require('mongoose')
 const jwt = require('jsonwebtoken')
@@ -52,7 +54,7 @@ mongoose.connect('mongodb://127.0.0.1/api')
                         return
                     }
 
-                    const token = jwt.sign({ sub: userId }, 'es posible que pronto sea abuelo', { expiresIn: '1m' })
+                    const token = jwt.sign({ sub: userId }, process.env.JWT_SECRET, { expiresIn: '1m' })
 
                     res.json(token)
                 })
@@ -65,7 +67,7 @@ mongoose.connect('mongodb://127.0.0.1/api')
             try {
                 const token = req.headers.authorization.slice(7)
 
-                const { sub: userId } = jwt.verify(token, 'es posible que pronto sea abuelo')
+                const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
 
                 logic.retrieveUser(userId, (error, user) => {
                     if (error) {
@@ -85,7 +87,7 @@ mongoose.connect('mongodb://127.0.0.1/api')
             try {
                 const token = req.headers.authorization.slice(7)
 
-                const { sub: userId } = jwt.verify(token, 'es posible que pronto sea abuelo')
+                const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
 
                 const { image, imageDescription, text } = req.body
 
@@ -107,7 +109,7 @@ mongoose.connect('mongodb://127.0.0.1/api')
             try {
                 const token = req.headers.authorization.slice(7)
 
-                const { sub: userId } = jwt.verify(token, 'es posible que pronto sea abuelo')
+                const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
 
                 logic.retrievePosts(userId, (error, posts) => {
                     if (error) {
@@ -127,7 +129,7 @@ mongoose.connect('mongodb://127.0.0.1/api')
             try {
                 const token = req.headers.authorization.slice(7)
 
-                const { sub: userId } = jwt.verify(token, 'es posible que pronto sea abuelo')
+                const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
 
                 logic.retrieveSavedPosts(userId, (error, posts) => {
                     if (error) {
@@ -147,7 +149,7 @@ mongoose.connect('mongodb://127.0.0.1/api')
             try {
                 const token = req.headers.authorization.slice(7)
 
-                const { sub: userId } = jwt.verify(token, 'es posible que pronto sea abuelo')
+                const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
 
                 logic.retrieveMyPosts(userId, (error, posts) => {
                     if (error) {
@@ -167,7 +169,7 @@ mongoose.connect('mongodb://127.0.0.1/api')
             try {
                 const token = req.headers.authorization.slice(7)
 
-                const { sub: userId } = jwt.verify(token, 'es posible que pronto sea abuelo')
+                const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
 
                 const postId = req.params.postId
 
@@ -189,7 +191,7 @@ mongoose.connect('mongodb://127.0.0.1/api')
             try {
                 const token = req.headers.authorization.slice(7)
 
-                const { sub: userId } = jwt.verify(token, 'es posible que pronto sea abuelo')
+                const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
 
                 const postId = req.params.postId
 
@@ -211,7 +213,7 @@ mongoose.connect('mongodb://127.0.0.1/api')
             try {
                 const token = req.headers.authorization.slice(7)
 
-                const { sub: userId } = jwt.verify(token, 'es posible que pronto sea abuelo')
+                const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
 
                 const postId = req.params.postId
 
@@ -233,7 +235,7 @@ mongoose.connect('mongodb://127.0.0.1/api')
             try {
                 const token = req.headers.authorization.slice(7)
 
-                const { sub: userId } = jwt.verify(token, 'es posible que pronto sea abuelo')
+                const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
 
                 const { password, newPassword, repeatNewPassword } = req.body
 
@@ -251,5 +253,5 @@ mongoose.connect('mongodb://127.0.0.1/api')
             }
         })
 
-        api.listen(4000, () => console.log('API listening on port 4000'))
+        api.listen(process.env.PORT, () => console.log(`API listening on port ${process.env.PORT}`))
     })
