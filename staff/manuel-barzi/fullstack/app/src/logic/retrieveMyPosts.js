@@ -1,8 +1,8 @@
-import validate from './validate'
+import { validate } from './helpers'
 import context from './context'
 
 function retrieveMyPosts(callback) {
-    validate.funktion(callback, 'callback')
+    validate.function(callback, 'callback')
     validate.jwt(context.jwt)
 
     const req = {
