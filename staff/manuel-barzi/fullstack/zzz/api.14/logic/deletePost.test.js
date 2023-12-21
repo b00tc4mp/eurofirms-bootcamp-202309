@@ -1,18 +1,17 @@
 const mongoose = require('mongoose')
-
-const updateUserPassword = require('./updateUserPassword')
+const deletePost = require('./deletePost')
 
 mongoose.connect('mongodb://127.0.0.1:27017/test')
     .then(() => {
         try {
-            updateUserPassword('65840682b7cbc5d89f49b364', '123123123', '345345345', '345345345', error => {
+            deletePost('65608715bab5d765008aa494', '6560899f724c642d12657e2b', error => {
                 if (error) {
                     console.error(error)
 
                     return
                 }
 
-                console.log('updated password')
+                console.log('deleted')
             })
         } catch (error) {
             console.error(error)

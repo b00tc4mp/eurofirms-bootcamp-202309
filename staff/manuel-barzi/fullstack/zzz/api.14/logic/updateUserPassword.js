@@ -1,5 +1,3 @@
-const bcrypt = require('bcryptjs')
-
 const { validate } = require('./helpers')
 
 const { User } = require("../data/models")
@@ -22,24 +20,17 @@ function updateUserPassword(userId, password, newPassword, repeatNewPassword, ca
                 return
             }
 
-            bcrypt.compare(password, user.password)
-                .then(match => {
-                    if (!match) {
-                        callback(new Error("wrong credentials"))
+            if (user.password !== password) {
+                callback(new Error("wrong credentials"))
 
-                        return
-                    }
+                return
+            }
 
-                    bcrypt.hash(newPassword, 8)
-                        .then(hash => {
-                            user.password = hash
+            user.password = newPassword
 
-                            user.save()
-                                .then(() => callback(null))
-                                .catch(error => callback(error))
-                        })
-                        .catch(error => callback(error))
-                })
+            user.save()
+                .then(() => callback(null))
+                .catch(error => callback(error))
         })
         .catch(error => callback(error))
 }
