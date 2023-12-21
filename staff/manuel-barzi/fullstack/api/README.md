@@ -19,6 +19,7 @@ $ pnpm start
 ```
 Request: POST /users { name, email, password }
 Response: 201
+Response (error): 409|406|500 { error, message }
 ```
 
 ### Authenticate a user

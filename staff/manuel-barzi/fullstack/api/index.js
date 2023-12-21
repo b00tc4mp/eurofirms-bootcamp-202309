@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken')
 const { cors } = require('./utils')
 
 const logic = require('./logic')
+const { ContentError, DuplicityError, NotFoundError, CredentialsError, ClearanceError } = require('./logic/errors')
 
 mongoose.connect(process.env.MONGODB_URL)
     .then(() => {
@@ -32,7 +33,12 @@ mongoose.connect(process.env.MONGODB_URL)
 
                 logic.registerUser(name, email, password, error => {
                     if (error) {
-                        res.status(400).json({ error: error.message })
+                        let status = 500
+
+                        if (error instanceof DuplicityError)
+                            status = 409
+
+                        res.status(status).json({ error: error.constructor.name, message: error.message })
 
                         return
                     }
@@ -40,7 +46,12 @@ mongoose.connect(process.env.MONGODB_URL)
                     res.status(201).send()
                 })
             } catch (error) {
-                res.status(400).json({ error: error.message })
+                let status = 500
+
+                if (error instanceof TypeError || error instanceof ContentError || error instanceof RangeError)
+                    status = 406
+
+                res.status(status).json({ error: error.constructor.name, message: error.message })
             }
         })
 
@@ -50,7 +61,15 @@ mongoose.connect(process.env.MONGODB_URL)
 
                 logic.authenticateUser(email, password, (error, userId) => {
                     if (error) {
-                        res.status(400).json({ error: error.message })
+                        let status = 500
+
+                        if (error instanceof NotFoundError)
+                            status = 404
+                        else if (error instanceof CredentialsError)
+                            status = 401
+
+                        res.status(status).json({ error: error.message })
+
                         return
                     }
 
@@ -59,7 +78,12 @@ mongoose.connect(process.env.MONGODB_URL)
                     res.json(token)
                 })
             } catch (error) {
-                res.status(400).json({ error: error.message })
+                let status = 500
+
+                if (error instanceof TypeError || error instanceof ContentError || error instanceof RangeError)
+                    status = 406
+
+                res.status(status).json({ error: error.constructor.name, message: error.message })
             }
         })
 
@@ -71,7 +95,12 @@ mongoose.connect(process.env.MONGODB_URL)
 
                 logic.retrieveUser(userId, (error, user) => {
                     if (error) {
-                        res.status(400).json({ error: error.message })
+                        let status = 500
+
+                        if (error instanceof NotFoundError)
+                            status = 404
+
+                        res.status(status).json({ error: error.constructor.name, message: error.message })
 
                         return
                     }
@@ -79,7 +108,14 @@ mongoose.connect(process.env.MONGODB_URL)
                     res.json(user)
                 })
             } catch (error) {
-                res.status(400).json({ error: error.message })
+                let status = 500
+
+                if (error instanceof TypeError || error instanceof ContentError)
+                    status = 406
+                else if (error instanceof jwt.JsonWebTokenError)
+                    status = 401
+
+                res.status(status).json({ error: error.constructor.name, message: error.message })
             }
         })
 
@@ -93,7 +129,12 @@ mongoose.connect(process.env.MONGODB_URL)
 
                 logic.createPost(userId, image, imageDescription, text, error => {
                     if (error) {
-                        res.status(400).json({ error: error.message })
+                        let status = 500
+
+                        if (error instanceof NotFoundError)
+                            status = 404
+
+                        res.status(status).json({ error: error.constructor.name, message: error.message })
 
                         return
                     }
@@ -101,7 +142,14 @@ mongoose.connect(process.env.MONGODB_URL)
                     res.status(201).send()
                 })
             } catch (error) {
-                res.status(400).json({ error: error.message })
+                let status = 500
+
+                if (error instanceof TypeError || error instanceof ContentError)
+                    status = 406
+                else if (error instanceof jwt.JsonWebTokenError)
+                    status = 401
+
+                res.status(status).json({ error: error.constructor.name, message: error.message })
             }
         })
 
@@ -113,7 +161,12 @@ mongoose.connect(process.env.MONGODB_URL)
 
                 logic.retrievePosts(userId, (error, posts) => {
                     if (error) {
-                        res.status(400).json({ error: error.message })
+                        let status = 500
+
+                        if (error instanceof NotFoundError)
+                            status = 404
+
+                        res.status(status).json({ error: error.constructor.name, message: error.message })
 
                         return
                     }
@@ -121,7 +174,14 @@ mongoose.connect(process.env.MONGODB_URL)
                     res.json(posts)
                 })
             } catch (error) {
-                res.status(400).json({ error: error.message })
+                let status = 500
+
+                if (error instanceof TypeError || error instanceof ContentError)
+                    status = 406
+                else if (error instanceof jwt.JsonWebTokenError)
+                    status = 401
+
+                res.status(status).json({ error: error.constructor.name, message: error.message })
             }
         })
 
@@ -133,7 +193,12 @@ mongoose.connect(process.env.MONGODB_URL)
 
                 logic.retrieveSavedPosts(userId, (error, posts) => {
                     if (error) {
-                        res.status(400).json({ error: error.message })
+                        let status = 500
+
+                        if (error instanceof NotFoundError)
+                            status = 404
+
+                        res.status(status).json({ error: error.constructor.name, message: error.message })
 
                         return
                     }
@@ -141,7 +206,14 @@ mongoose.connect(process.env.MONGODB_URL)
                     res.json(posts)
                 })
             } catch (error) {
-                res.status(400).json({ error: error.message })
+                let status = 500
+
+                if (error instanceof TypeError || error instanceof ContentError)
+                    status = 406
+                else if (error instanceof jwt.JsonWebTokenError)
+                    status = 401
+
+                res.status(status).json({ error: error.constructor.name, message: error.message })
             }
         })
 
@@ -153,7 +225,12 @@ mongoose.connect(process.env.MONGODB_URL)
 
                 logic.retrieveMyPosts(userId, (error, posts) => {
                     if (error) {
-                        res.status(400).json({ error: error.message })
+                        let status = 500
+
+                        if (error instanceof NotFoundError)
+                            status = 404
+
+                        res.status(status).json({ error: error.constructor.name, message: error.message })
 
                         return
                     }
@@ -161,7 +238,14 @@ mongoose.connect(process.env.MONGODB_URL)
                     res.json(posts)
                 })
             } catch (error) {
-                res.status(400).json({ error: error.message })
+                let status = 500
+
+                if (error instanceof TypeError || error instanceof ContentError)
+                    status = 406
+                else if (error instanceof jwt.JsonWebTokenError)
+                    status = 401
+
+                res.status(status).json({ error: error.constructor.name, message: error.message })
             }
         })
 
@@ -175,7 +259,12 @@ mongoose.connect(process.env.MONGODB_URL)
 
                 logic.toggleLikePost(userId, postId, error => {
                     if (error) {
-                        res.status(400).json({ error: error.message })
+                        let status = 500
+
+                        if (error instanceof NotFoundError)
+                            status = 404
+
+                        res.status(status).json({ error: error.constructor.name, message: error.message })
 
                         return
                     }
@@ -183,7 +272,14 @@ mongoose.connect(process.env.MONGODB_URL)
                     res.status(204).send()
                 })
             } catch (error) {
-                res.status(400).json({ error: error.message })
+                let status = 500
+
+                if (error instanceof TypeError || error instanceof ContentError)
+                    status = 406
+                else if (error instanceof jwt.JsonWebTokenError)
+                    status = 401
+
+                res.status(status).json({ error: error.constructor.name, message: error.message })
             }
         })
 
@@ -197,7 +293,12 @@ mongoose.connect(process.env.MONGODB_URL)
 
                 logic.toggleSavePost(userId, postId, error => {
                     if (error) {
-                        res.status(400).json({ error: error.message })
+                        let status = 500
+
+                        if (error instanceof NotFoundError)
+                            status = 404
+
+                        res.status(status).json({ error: error.constructor.name, message: error.message })
 
                         return
                     }
@@ -205,7 +306,14 @@ mongoose.connect(process.env.MONGODB_URL)
                     res.status(204).send()
                 })
             } catch (error) {
-                res.status(400).json({ error: error.message })
+                let status = 500
+
+                if (error instanceof TypeError || error instanceof ContentError)
+                    status = 406
+                else if (error instanceof jwt.JsonWebTokenError)
+                    status = 401
+
+                res.status(status).json({ error: error.constructor.name, message: error.message })
             }
         })
 
@@ -219,7 +327,14 @@ mongoose.connect(process.env.MONGODB_URL)
 
                 logic.deletePost(userId, postId, error => {
                     if (error) {
-                        res.status(400).json({ error: error.message })
+                        let status = 500
+
+                        if (error instanceof NotFoundError)
+                            status = 404
+                        else if (error instanceof ClearanceError)
+                            status = 403
+
+                        res.status(status).json({ error: error.constructor.name, message: error.message })
 
                         return
                     }
@@ -227,7 +342,14 @@ mongoose.connect(process.env.MONGODB_URL)
                     res.status(204).send()
                 })
             } catch (error) {
-                res.status(400).json({ error: error.message })
+                let status = 500
+
+                if (error instanceof TypeError || error instanceof ContentError)
+                    status = 406
+                else if (error instanceof jwt.JsonWebTokenError)
+                    status = 401
+
+                res.status(status).json({ error: error.constructor.name, message: error.message })
             }
         })
 
@@ -241,15 +363,28 @@ mongoose.connect(process.env.MONGODB_URL)
 
                 logic.updateUserPassword(userId, password, newPassword, repeatNewPassword, error => {
                     if (error) {
-                        res.status(400).json({ error: error.message })
+                        let status = 500
+
+                        if (error instanceof NotFoundError)
+                            status = 404
+                        else if (error instanceof CredentialsError)
+                            status = 401
+
+                        res.status(status).json({ error: error.constructor.name, message: error.message })
 
                         return
                     }
-
                     res.status(204).send()
                 })
             } catch (error) {
-                res.status(400).json({ error: error.message })
+                let status = 500
+
+                if (error instanceof TypeError || error instanceof ContentError || error instanceof RangeError)
+                    status = 406
+                else if (error instanceof jwt.JsonWebTokenError)
+                    status = 401
+
+                res.status(status).json({ error: error.constructor.name, message: error.message })
             }
         })
 

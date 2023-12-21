@@ -1,6 +1,7 @@
 const { validate } = require('./helpers')
 
 const { User, Post } = require('../data/models')
+const { NotFoundError, SystemError } = require('./errors')
 
 function retrieveSavedPosts(userId, callback) {
     validate.text(userId, 'user id')
@@ -9,7 +10,7 @@ function retrieveSavedPosts(userId, callback) {
     User.findById(userId)
         .then(user => {
             if (!user) {
-                callback(new Error('user not found'))
+                callback(new NotFoundError('user not found'))
 
                 return
             }
@@ -36,9 +37,9 @@ function retrieveSavedPosts(userId, callback) {
 
                     callback(null, posts)
                 })
-                .catch(error => callback(error))
+                .catch(error => callback(new SystemError(error.message)))
         })
-        .catch(error => callback(error))
+        .catch(error => callback(new SystemError(error.message)))
 }
 
 module.exports = retrieveSavedPosts

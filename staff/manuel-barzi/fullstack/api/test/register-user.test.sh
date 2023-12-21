@@ -1,4 +1,4 @@
-curl -H 'Content-Type: application/json' -d '{ "name": "Wendy Darling", "email": "wendy@darling.com", "password": "123123123" }' localhost:4000/users -v
+curl -H 'Content-Type: application/json' -d '{ "name": "Wendy Darling", "email": "wendy@darling.com", "password": "123123123" }' localhost:9000/users -v
 
 # > POST /users HTTP/1.1
 # > Host: localhost:4000
