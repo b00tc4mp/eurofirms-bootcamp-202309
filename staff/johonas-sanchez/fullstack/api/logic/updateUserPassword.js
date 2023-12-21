@@ -1,4 +1,5 @@
-const { validate } = require('./helpers')
+const bcrypt = require("bcryptjs")
+const { validate } = require("./helpers")
 const { User } = require("../data/models")
 
 function updateUserPassword(userId, password, newPassword, repeatNewPassword, callback) {
@@ -10,30 +11,35 @@ function updateUserPassword(userId, password, newPassword, repeatNewPassword, ca
 
    if (newPassword !== repeatNewPassword) throw new Error("your password do not match")
 
-   User.findById(userId).then((user) => {
-      if (!user) {
-         callback(new Error("user not found"))
+   User.findById(userId)
+      .then((user) => {
+         if (!user) {
+            callback(new Error("user not found"))
 
-         return
-      }
+            return
+         }
 
-      if (user.password !== password) {
-         callback(new Error("wrong credentials"))
+         bcrypt.compare(password, user.password).then((match) => {
+            if (!match) {
+               callback(new Error("wrong credentials"))
 
-         return
-      }
+               return
+            }
 
-      user.password = newPassword
+            bcrypt
+               .hash(newPassword, 8)
+               .then((hash) => {
+                  user.password = hash
 
-      user
-         .save()
-         .then(() => {
-            callback(null)
+                  user
+                     .save()
+                     .then(() => callback(null))
+                     .catch((error) => callback(error))
+               })
+               .catch((error) => callback(error))
          })
-         .catch((error) => {
-            callback(error)
-         })
-   })
+      })
+      .catch((error) => callback(error))
 }
 
 module.exports = updateUserPassword
