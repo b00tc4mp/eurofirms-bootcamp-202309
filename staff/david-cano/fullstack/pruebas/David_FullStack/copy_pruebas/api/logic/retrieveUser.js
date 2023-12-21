@@ -1,4 +1,4 @@
-const { validateText, validateFunction } = require('./helpers/validators')
+const { validateText, validateFunction } = require('./helpers/validate')
 
 const { User } = require('../data/models')
 
@@ -7,7 +7,7 @@ function retrieveUser(userId, callback) {
     validateFunction(callback, 'callback')
 
     User.findById(userId).select('-password -__v').lean()
-    // User.findById(userId).lean() Con el select en negativo puedo eliminar las propiedades que me devuelve
+        // User.findById(userId).lean() Con el select en negativo puedo eliminar las propiedades que me devuelve
         .then(user => {
             if (!user) {
                 callback(new Error('user not found'))

@@ -1,11 +1,11 @@
 import { JWT } from '../utils'
-import validate from './validate'
+import { validate } from './helpers'
 import context from './context'
 
 function loginUser(email, password, callback) {
     validate.email(email)
     validate.password(password)
-    validate.funktion(callback, 'callback')
+    validate.function(callback, 'callback')
 
     const req = {
         method: 'POST',
@@ -15,7 +15,7 @@ function loginUser(email, password, callback) {
         body: JSON.stringify({ email, password })
     }
 
-    fetch('http://localhost:4000/users/authenticate', req)
+    fetch(`${import.meta.env.VITE_API_URL}/users/authenticate`, req)
         .then(res => {
             if (!res.ok) {
                 res.json()

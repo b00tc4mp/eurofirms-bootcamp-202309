@@ -1,8 +1,8 @@
-const {validateText, validatePassword, validateFunction} = require("./helpers/validators")
+const { validateText, validatePassword, validateFunction } = require("./helpers/validate")
 
 const { User } = require("../data/models")
 
-function updateUserPassword(userId, password, newPassword,repeatNewPassword, callback) {
+function updateUserPassword(userId, password, newPassword, repeatNewPassword, callback) {
     validateText(userId, "user id")
     validatePassword(password, "password")
     validatePassword(newPassword, "new password")
@@ -31,7 +31,7 @@ function updateUserPassword(userId, password, newPassword,repeatNewPassword, cal
             .then(() => callback(null))
             .catch((error) => callback(error))
     })
-    .catch(error => callback(error))
+        .catch(error => callback(error))
 }
 
 module.exports = updateUserPassword

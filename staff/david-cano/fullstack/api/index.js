@@ -1,20 +1,14 @@
+require('dotenv').config()
+
 const express = require('express')
 const mongoose = require('mongoose')
 const jwt = require('jsonwebtoken')
 
-const registerUser = require('./logic/registerUser')
-const authenticateUser = require('./logic/authenticateUser')
-const retrieveUser = require('./logic/retrieveUser')
-const createPost = require('./logic/createPost')
-const retrievePosts = require('./logic/retrievePosts')
-const toggleLikePost = require('./logic/toggleLikePost')
-const updateUserPassword = require('./logic/updateUserPassword')
-const toggleSavePost = require('./logic/toggleSavePost')
-const deletePost = require('./logic/deletePost')
-const retrieveSavedPosts = require('./logic/retrieveSavedPosts')
-const retrieveMyPosts = require('./logic/retrieveMyPosts')
+const { cors } = require('./utils')
 
-mongoose.connect('mongodb://127.0.0.1/api')
+const logic = require('./logic')
+
+mongoose.connect(process.env.MONGODB_URL)
     .then(() => {
         const api = express()
 
@@ -30,21 +24,13 @@ mongoose.connect('mongodb://127.0.0.1/api')
 
         const jsonBodyParser = express.json()
 
-        const cors = (req, res, next) => {
-            res.header('Access-Control-Allow-Origin', '*')
-            res.header('Access-Control-Allow-Methods', '*')
-            res.header('Access-Control-Allow-Headers', '*')
-
-            next()
-        }
-
-        api.use('*', cors)
+        api.use(cors)
 
         api.post('/users', cors, jsonBodyParser, (req, res) => {
             try {
             const { name, email, password } = req.body
 
-                registerUser(name, email, password, error => {
+                logic.registerUser(name, email, password, error => {
                     if (error) {
                         res.status(400).json({ error: error.message })
 
@@ -63,13 +49,13 @@ mongoose.connect('mongodb://127.0.0.1/api')
             const { email, password } = req.body
 
             
-                authenticateUser(email, password, (error, userId) => {
+                logic.authenticateUser(email, password, (error, userId) => {
                     if (error) {
                         res.status(400).json({ error: error.message })
                         return
                     }
 
-                    const token = jwt.sign({ sub: userId }, 'es posible que pronto sea abuelo', { expiresIn: '5h' })
+                    const token = jwt.sign({ sub: userId }, process.env.JWT_SECRET, { expiresIn: '5h' })
 
                     res.json(token)
                 })
@@ -82,9 +68,9 @@ mongoose.connect('mongodb://127.0.0.1/api')
             try {
                 const token = req.headers.authorization.slice(7)
 
-                const { sub: userId } = jwt.verify(token, 'es posible que pronto sea abuelo')
+                const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
 
-                retrieveUser(userId, (error, user) => {
+                logic.retrieveUser(userId, (error, user) => {
                     if (error) {
                         res.status(400).json({ error: error.message })
                         
@@ -102,11 +88,11 @@ mongoose.connect('mongodb://127.0.0.1/api')
             try {
                 const token = req.headers.authorization.slice(7)
 
-                const { sub: userId } = jwt.verify(token, 'es posible que pronto sea abuelo')
+                const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
 
                 const { image, imageDescription, text } = req.body;
 
-                createPost(userId, image, imageDescription, text, error => {
+                logic.createPost(userId, image, imageDescription, text, error => {
                     if (error) {
                         res.status(400).json({ error: error.message });
 
@@ -124,9 +110,9 @@ mongoose.connect('mongodb://127.0.0.1/api')
             try {
                 const token = req.headers.authorization.slice(7)// Para que se nos quede el userId sin el Bearer
 
-                const { sub: userId } = jwt.verify(token, 'es posible que pronto sea abuelo')
+                const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
 
-                retrievePosts(userId, (error, posts) => {
+                logic.retrievePosts(userId, (error, posts) => {
                     if (error) {
                         res.status(400).json({ error: error.message });
 
@@ -144,9 +130,9 @@ mongoose.connect('mongodb://127.0.0.1/api')
             try {
                 const token = req.headers.authorization.slice(7)
 
-                const { sub: userId } = jwt.verify(token, 'es posible que pronto sea abuelo')
+                const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
             
-                retrieveSavedPosts(userId, (error, posts) => {
+                logic.retrieveSavedPosts(userId, (error, posts) => {
                     if (error) {
                         res.status(400).json({ error: error.message })
 
@@ -164,9 +150,9 @@ mongoose.connect('mongodb://127.0.0.1/api')
             try {
                 const token = req.headers.authorization.slice(7)
 
-                const { sub: userId } = jwt.verify(token, 'es posible que pronto sea abuelo')
+                const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
 
-                retrieveMyPosts(userId, (error, posts) => {
+                logic.retrieveMyPosts(userId, (error, posts) => {
                     if (error) {
                         res.status(400).json({ error: error.message })
 
@@ -184,11 +170,11 @@ mongoose.connect('mongodb://127.0.0.1/api')
             try {
                 const token = req.headers.authorization.slice(7)
 
-                const { sub: userId } = jwt.verify(token, 'es posible que pronto sea abuelo')
+                const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
 
                 const postId = req.params.postId;
 
-                toggleLikePost(userId, postId, error => {
+                logic.toggleLikePost(userId, postId, error => {
                     if (error) {
                         res.status(400).json({ error: error.message });
 
@@ -206,11 +192,11 @@ mongoose.connect('mongodb://127.0.0.1/api')
             try {
                 const token = req.headers.authorization.slice(7)
 
-                const { sub: userId } = jwt.verify(token, 'es posible que pronto sea abuelo')
+                const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
 
                 const postId = req.params.postId;
 
-                toggleSavePost(userId, postId, error => {
+                logic.toggleSavePost(userId, postId, error => {
                     if (error) {
                         res.status(400).json({ error: error.message });
 
@@ -228,11 +214,11 @@ mongoose.connect('mongodb://127.0.0.1/api')
             try {
                 const token = req.headers.authorization.slice(7)
 
-                const { sub: userId } = jwt.verify(token, 'es posible que pronto sea abuelo')
+                const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
 
                 const postId = req.params.postId
 
-                deletePost(userId, postId, error => {
+                logic.deletePost(userId, postId, error => {
                     if (error) {
                         res.status(400).json({ error: error.message })
 
@@ -250,11 +236,11 @@ mongoose.connect('mongodb://127.0.0.1/api')
             try {
                 const token = req.headers.authorization.slice(7)
 
-                const { sub: userId } = jwt.verify(token, 'es posible que pronto sea abuelo')
+                const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
 
                 const { password, newPassword, repeatNewPassword } = req.body
 
-                updateUserPassword(userId, password, newPassword, repeatNewPassword, error => {
+                logic.updateUserPassword(userId, password, newPassword, repeatNewPassword, error => {
                     if (error) {
                         res.status(400).json({ error: error.message })
 
@@ -268,6 +254,6 @@ mongoose.connect('mongodb://127.0.0.1/api')
             }
         })
 
-        api.listen(4000, () => console.log('API listening on port 4000'))
+        api.listen(process.env.PORT, () => console.log(`API listening on port ${process.env.PORT}`))
     })
 

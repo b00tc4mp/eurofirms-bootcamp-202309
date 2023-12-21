@@ -1,4 +1,4 @@
-const { validateEmail, validatePassword, validateFunction } = require('./helpers/validators')
+const { validateEmail, validatePassword, validateFunction } = require('./helpers/validate')
 
 const { User } = require('../data/models')
 

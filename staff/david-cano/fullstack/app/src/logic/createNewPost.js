@@ -1,11 +1,11 @@
-import validate from './validate'
+import { validate } from './helpers'
 import context from './context'
 
 function createNewPost(image, imageDescription, text, callback) {
     validate.url(image, 'image url')
     validate.text(imageDescription, 'image description')
     validate.text(text, 'text')
-    validate.funktion(callback, 'callback')
+    validate.function(callback, 'callback')
     validate.jwt(context.jwt)
 
     const req = {
@@ -17,7 +17,7 @@ function createNewPost(image, imageDescription, text, callback) {
         body: JSON.stringify({ image, imageDescription, text })
     }
 
-    fetch('http://localhost:4000/posts', req)
+    fetch(`${import.meta.env.VITE_API_URL}/posts`, req)
         .then(res => {
             if (!res.ok) {
                 res.json()

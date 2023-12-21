@@ -1,10 +1,10 @@
-const { validateText, validateFunction } = require('./helpers/validators')
+const { validate } = require('./helpers')
 
 const { User } = require('../data/models')
 
 function retrieveUser(userId, callback) {
-    validateText(userId, 'user id')
-    validateFunction(callback, 'callback')
+    validate.text(userId, 'user id')
+    validate.function(callback, 'callback')
 
     User.findById(userId).select('-_id -email -password -saved -__v').lean()
         .then(user => {

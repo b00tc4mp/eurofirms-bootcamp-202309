@@ -1,4 +1,4 @@
-const { validateText, validateFunction } = require('./helpers/validators')
+const { validateText, validateFunction } = require('./helpers/validate')
 const { User, Post } = require('../data/models')
 
 function deletePost(userId, postId, callback) {
@@ -30,12 +30,12 @@ function deletePost(userId, postId, callback) {
 
                     Post.deleteOne({ _id: postId })
                         .then(result => {
-                            if(result.deletedCount === 0) {
+                            if (result.deletedCount === 0) {
                                 callback(new Error('post can not be deleted'))
 
                                 return
                             }
-                            
+
                             callback(null)
                         })
                         .catch(error => callback(error))

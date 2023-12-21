@@ -1,4 +1,4 @@
-const { validateText, validatePassword, validateEmail, validateFunction } = require("./helpers/validators")
+const { validateText, validatePassword, validateEmail, validateFunction } = require("./helpers/validate")
 
 const { User } = require("../data/models")
 
@@ -20,10 +20,10 @@ function updateUserEmail(userId, password, email, newEmail, repeatNewEmail, call
       }
 
       if (user.password !== password) {
-        callback(new Error("wrong credentials"))
+         callback(new Error("wrong credentials"))
 
-        return
-     }
+         return
+      }
 
       if (user.email !== email) {
          callback(new Error("wrong credentials"))
