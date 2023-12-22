@@ -2,12 +2,22 @@ require('dotenv').config()
 
 const express = require('express')
 const mongoose = require('mongoose')
-const jwt = require('jsonwebtoken')
 
 const { cors } = require('./utils')
 
-const logic = require('./logic')
-const { ContentError, DuplicityError, NotFoundError, CredentialsError, ClearanceError } = require('./logic/errors')
+const {
+    registerUserHandler,
+    authenticateUserHandler,
+    retrieveUserHandler,
+    createPostHandler,
+    retrievePostsHandler,
+    retrieveSavedPostsHandler,
+    retrieveMyPostsHandler,
+    toggleLikePostHandler,
+    toggleSavePostHandler,
+    deletePostHandler,
+    updateUserPasswordHandler
+} = require('./handlers')
 
 mongoose.connect(process.env.MONGODB_URL)
     .then(() => {
@@ -27,366 +37,27 @@ mongoose.connect(process.env.MONGODB_URL)
 
         api.use(cors)
 
-        api.post('/users', cors, jsonBodyParser, (req, res) => {
-            try {
-                const { name, email, password } = req.body
+        api.post('/users', cors, jsonBodyParser, registerUserHandler)
 
-                logic.registerUser(name, email, password, error => {
-                    if (error) {
-                        let status = 500
+        api.post('/users/auth', jsonBodyParser, authenticateUserHandler)
 
-                        if (error instanceof DuplicityError)
-                            status = 409
+        api.get('/users', retrieveUserHandler)
 
-                        res.status(status).json({ error: error.constructor.name, message: error.message })
+        api.post('/posts', jsonBodyParser, createPostHandler)
 
-                        return
-                    }
+        api.get('/posts', retrievePostsHandler)
 
-                    res.status(201).send()
-                })
-            } catch (error) {
-                let status = 500
+        api.get('/posts/saved', retrieveSavedPostsHandler)
 
-                if (error instanceof TypeError || error instanceof ContentError || error instanceof RangeError)
-                    status = 406
+        api.get('/posts/mine', retrieveMyPostsHandler)
 
-                res.status(status).json({ error: error.constructor.name, message: error.message })
-            }
-        })
+        api.patch('/posts/:postId/likes', toggleLikePostHandler)
 
-        api.post('/users/auth', jsonBodyParser, (req, res) => {
-            try {
-                const { email, password } = req.body
+        api.patch('/posts/:postId/saved', toggleSavePostHandler)
 
-                logic.authenticateUser(email, password, (error, userId) => {
-                    if (error) {
-                        let status = 500
+        api.delete('/posts/:postId', deletePostHandler)
 
-                        if (error instanceof NotFoundError)
-                            status = 404
-                        else if (error instanceof CredentialsError)
-                            status = 401
-
-                        res.status(status).json({ error: error.message })
-
-                        return
-                    }
-
-                    const token = jwt.sign({ sub: userId }, process.env.JWT_SECRET, { expiresIn: '1m' })
-
-                    res.json(token)
-                })
-            } catch (error) {
-                let status = 500
-
-                if (error instanceof TypeError || error instanceof ContentError || error instanceof RangeError)
-                    status = 406
-
-                res.status(status).json({ error: error.constructor.name, message: error.message })
-            }
-        })
-
-        api.get('/users', (req, res) => {
-            try {
-                const token = req.headers.authorization.slice(7)
-
-                const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
-
-                logic.retrieveUser(userId, (error, user) => {
-                    if (error) {
-                        let status = 500
-
-                        if (error instanceof NotFoundError)
-                            status = 404
-
-                        res.status(status).json({ error: error.constructor.name, message: error.message })
-
-                        return
-                    }
-
-                    res.json(user)
-                })
-            } catch (error) {
-                let status = 500
-
-                if (error instanceof TypeError || error instanceof ContentError)
-                    status = 406
-                else if (error instanceof jwt.JsonWebTokenError)
-                    status = 401
-
-                res.status(status).json({ error: error.constructor.name, message: error.message })
-            }
-        })
-
-        api.post('/posts', jsonBodyParser, (req, res) => {
-            try {
-                const token = req.headers.authorization.slice(7)
-
-                const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
-
-                const { image, imageDescription, text } = req.body
-
-                logic.createPost(userId, image, imageDescription, text, error => {
-                    if (error) {
-                        let status = 500
-
-                        if (error instanceof NotFoundError)
-                            status = 404
-
-                        res.status(status).json({ error: error.constructor.name, message: error.message })
-
-                        return
-                    }
-
-                    res.status(201).send()
-                })
-            } catch (error) {
-                let status = 500
-
-                if (error instanceof TypeError || error instanceof ContentError)
-                    status = 406
-                else if (error instanceof jwt.JsonWebTokenError)
-                    status = 401
-
-                res.status(status).json({ error: error.constructor.name, message: error.message })
-            }
-        })
-
-        api.get('/posts', (req, res) => {
-            try {
-                const token = req.headers.authorization.slice(7)
-
-                const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
-
-                logic.retrievePosts(userId, (error, posts) => {
-                    if (error) {
-                        let status = 500
-
-                        if (error instanceof NotFoundError)
-                            status = 404
-
-                        res.status(status).json({ error: error.constructor.name, message: error.message })
-
-                        return
-                    }
-
-                    res.json(posts)
-                })
-            } catch (error) {
-                let status = 500
-
-                if (error instanceof TypeError || error instanceof ContentError)
-                    status = 406
-                else if (error instanceof jwt.JsonWebTokenError)
-                    status = 401
-
-                res.status(status).json({ error: error.constructor.name, message: error.message })
-            }
-        })
-
-        api.get('/posts/saved', (req, res) => {
-            try {
-                const token = req.headers.authorization.slice(7)
-
-                const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
-
-                logic.retrieveSavedPosts(userId, (error, posts) => {
-                    if (error) {
-                        let status = 500
-
-                        if (error instanceof NotFoundError)
-                            status = 404
-
-                        res.status(status).json({ error: error.constructor.name, message: error.message })
-
-                        return
-                    }
-
-                    res.json(posts)
-                })
-            } catch (error) {
-                let status = 500
-
-                if (error instanceof TypeError || error instanceof ContentError)
-                    status = 406
-                else if (error instanceof jwt.JsonWebTokenError)
-                    status = 401
-
-                res.status(status).json({ error: error.constructor.name, message: error.message })
-            }
-        })
-
-        api.get('/posts/mine', (req, res) => {
-            try {
-                const token = req.headers.authorization.slice(7)
-
-                const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
-
-                logic.retrieveMyPosts(userId, (error, posts) => {
-                    if (error) {
-                        let status = 500
-
-                        if (error instanceof NotFoundError)
-                            status = 404
-
-                        res.status(status).json({ error: error.constructor.name, message: error.message })
-
-                        return
-                    }
-
-                    res.json(posts)
-                })
-            } catch (error) {
-                let status = 500
-
-                if (error instanceof TypeError || error instanceof ContentError)
-                    status = 406
-                else if (error instanceof jwt.JsonWebTokenError)
-                    status = 401
-
-                res.status(status).json({ error: error.constructor.name, message: error.message })
-            }
-        })
-
-        api.patch('/posts/:postId/likes', (req, res) => {
-            try {
-                const token = req.headers.authorization.slice(7)
-
-                const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
-
-                const postId = req.params.postId
-
-                logic.toggleLikePost(userId, postId, error => {
-                    if (error) {
-                        let status = 500
-
-                        if (error instanceof NotFoundError)
-                            status = 404
-
-                        res.status(status).json({ error: error.constructor.name, message: error.message })
-
-                        return
-                    }
-
-                    res.status(204).send()
-                })
-            } catch (error) {
-                let status = 500
-
-                if (error instanceof TypeError || error instanceof ContentError)
-                    status = 406
-                else if (error instanceof jwt.JsonWebTokenError)
-                    status = 401
-
-                res.status(status).json({ error: error.constructor.name, message: error.message })
-            }
-        })
-
-        api.patch('/posts/:postId/saved', (req, res) => {
-            try {
-                const token = req.headers.authorization.slice(7)
-
-                const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
-
-                const postId = req.params.postId
-
-                logic.toggleSavePost(userId, postId, error => {
-                    if (error) {
-                        let status = 500
-
-                        if (error instanceof NotFoundError)
-                            status = 404
-
-                        res.status(status).json({ error: error.constructor.name, message: error.message })
-
-                        return
-                    }
-
-                    res.status(204).send()
-                })
-            } catch (error) {
-                let status = 500
-
-                if (error instanceof TypeError || error instanceof ContentError)
-                    status = 406
-                else if (error instanceof jwt.JsonWebTokenError)
-                    status = 401
-
-                res.status(status).json({ error: error.constructor.name, message: error.message })
-            }
-        })
-
-        api.delete('/posts/:postId', (req, res) => {
-            try {
-                const token = req.headers.authorization.slice(7)
-
-                const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
-
-                const postId = req.params.postId
-
-                logic.deletePost(userId, postId, error => {
-                    if (error) {
-                        let status = 500
-
-                        if (error instanceof NotFoundError)
-                            status = 404
-                        else if (error instanceof ClearanceError)
-                            status = 403
-
-                        res.status(status).json({ error: error.constructor.name, message: error.message })
-
-                        return
-                    }
-
-                    res.status(204).send()
-                })
-            } catch (error) {
-                let status = 500
-
-                if (error instanceof TypeError || error instanceof ContentError)
-                    status = 406
-                else if (error instanceof jwt.JsonWebTokenError)
-                    status = 401
-
-                res.status(status).json({ error: error.constructor.name, message: error.message })
-            }
-        })
-
-        api.patch('/users/password', jsonBodyParser, (req, res) => {
-            try {
-                const token = req.headers.authorization.slice(7)
-
-                const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
-
-                const { password, newPassword, repeatNewPassword } = req.body
-
-                logic.updateUserPassword(userId, password, newPassword, repeatNewPassword, error => {
-                    if (error) {
-                        let status = 500
-
-                        if (error instanceof NotFoundError)
-                            status = 404
-                        else if (error instanceof CredentialsError)
-                            status = 401
-
-                        res.status(status).json({ error: error.constructor.name, message: error.message })
-
-                        return
-                    }
-                    res.status(204).send()
-                })
-            } catch (error) {
-                let status = 500
-
-                if (error instanceof TypeError || error instanceof ContentError || error instanceof RangeError)
-                    status = 406
-                else if (error instanceof jwt.JsonWebTokenError)
-                    status = 401
-
-                res.status(status).json({ error: error.constructor.name, message: error.message })
-            }
-        })
+        api.patch('/users/password', jsonBodyParser, updateUserPasswordHandler)
 
         api.listen(process.env.PORT, () => console.log(`API listening on port ${process.env.PORT}`))
     })
