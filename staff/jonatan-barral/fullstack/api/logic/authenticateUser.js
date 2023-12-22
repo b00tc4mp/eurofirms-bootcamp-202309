@@ -1,23 +1,28 @@
-const { validateEmail, validatePassword, validateFunction } = require('./helpers/validators')
+const bcrypt = require('bcryptjs')
+
+const { validate } = require('./helpers')
 
 const { User } = require('../data/models')
+const { NotFoundError, CredentialsError, SystemError } = require('./errors')
 
 function authenticateUser(email, password, callback) {
-    validateEmail(email, 'Email')
-    validatePassword(password, 'Password')
-    validateFunction(callback, 'callback')
+    validate.email(email, 'email')
+    validate.password(password, 'password')
+    validate.function(callback, 'callback')
 
-    User.findOne({ email, password })
+    User.findOne({ email })
         .then(user => {
             if (!user) {
-                callback(new Error('wrong credentials'))
+                callback(new NotFoundError('user not found'))
 
                 return
             }
 
-            callback(null, user.id)
+            bcrypt.compare(password, user.password)
+                .then(match => match ? callback(null, user.id) : callback(new CredentialsError('wrong credentials')))
+                .catch(error => callback(new SystemError(error.message)))
         })
-        .catch(error => callback(error))
+        .catch(error => callback(new SystemError(error.message)))
 }
 
 module.exports = authenticateUser

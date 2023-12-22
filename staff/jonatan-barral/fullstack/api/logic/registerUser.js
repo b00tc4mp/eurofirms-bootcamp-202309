@@ -1,24 +1,32 @@
-const { validateText, validateEmail, validatePassword, validateFunction } = require('./helpers/validators')
+const bcrypt = require('bcryptjs')
+
+const { validate } = require('./helpers')
 
 const { User } = require('../data/models')
 
+const { SystemError, DuplicityError } = require('./errors')
+
 function registerUser(name, email, password, callback) {
-    validateText(name, 'Name')
-    validateEmail(email, 'Email')
-    validatePassword(password, 'Password')
-    validateFunction(callback, 'callback')
+    validate.text(name, 'name')
+    validate.email(email, 'email')
+    validate.password(password, 'password')
+    validate.function(callback, 'callback')
 
-    User.create({ name, email, password })
-        .then(() => callback(null))
-        .catch(error => {
-            if (error.code === 11000) {
-                callback(new Error('user already exists'))
+    bcrypt.hash(password, 8)
+        .then(hash => {
+            User.create({ name, email, password: hash })
+                .then(() => callback(null))
+                .catch(error => {
+                    if (error.code === 11000) {
+                        callback(new DuplicityError('user already exists'))
 
-                return
-            }
+                        return
+                    }
 
-            callback(error)
+                    callback(new SystemError(error.message))
+                })
         })
+        .catch(error => callback(new SystemError(error.message)))
 }
 
 module.exports = registerUser

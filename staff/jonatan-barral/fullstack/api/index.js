@@ -1,298 +1,422 @@
-const express = require('express')
-const jwt = require('jsonwebtoken')
-const mongoose = require('mongoose')
+require("dotenv").config()
 
-const registerUser = require('./logic/registerUser')
-const authenticateUser = require('./logic/authenticateUser')
-const retrieveUser = require('./logic/retrieveUser')
-const updateUserPassword = require('./logic/updateUserPassword')
-const updateUserEmail = require('./logic/updateUserEmail')
+const express = require("express")
+const mongoose = require("mongoose")
+const jwt = require("jsonwebtoken")
 
-const createPost = require('./logic/createPost')
-const deletePost = require('./logic/deletePost')
+const { cors } = require("./utils")
 
-const retrievePosts = require('./logic/retrievePosts')
-const retrievePost = require('./logic/retrievePost')
-const retrieveMyPosts = require('./logic/retrieveMyPosts')
-const retrieveSavedPosts = require('./logic/retrieveSavedPosts')
+const logic = require("./logic")
+const { ContentError, DuplicityError, NotFoundError, CredentialsError, ClearanceError } = require("./logic/errors")
 
-const toggleLikePost = require('./logic/toggleLikePost')
-const toggleSavePost = require('./logic/toggleSavePost')
+mongoose.connect(process.env.MONGODB_URL).then(() => {
+    const api = express()
 
-mongoose.connect('mongodb://127.0.0.1/api')
-    .then(() => {
-        const api = express()
 
-        const SECURITY_KEY = 'es posible que pronto sea abuelo'
 
-        const jsonBodyParser = express.json()
+    const jsonBodyParser = express.json()
 
-        const cors = (req, res, next) => {
-            res.header('Access-Control-Allow-Origin', '*')
-            res.header('Access-Control-Allow-Methods', '*')
-            res.header('Access-Control-Allow-Headers', '*')
+    api.use(cors)
 
-            next()
+    // Implement registerUser endpoint
+
+    api.post("/users", cors, jsonBodyParser, (req, res) => {
+        try {
+            const { name, email, password } = req.body
+
+            logic.registerUser(name, email, password, (error) => {
+                if (error) {
+                    let status = 500
+
+                    if (error instanceof DuplicityError) status = 409
+
+                    res.status(status).json({ error: error.constructor.name, message: error.message })
+
+                    return
+                }
+
+                res.status(201).send()
+            })
+        } catch (error) {
+            let status = 500
+
+            if (error instanceof TypeError || error instanceof ContentError || error instanceof RangeError) status = 406
+
+            res.status(status).json({ error: error.constructor.name, message: error.message })
         }
-
-
-        api.use('*', cors)
-
-        api.post('/users', jsonBodyParser, (req, res) => {
-            const body = req.body
-
-            const { name, email, password } = body
-
-            try {
-                registerUser(name, email, password, error => {
-                    if (error) {
-                        res.status(400).json({ error: error.message })
-
-                        return
-                    }
-
-                    res.status(201).send()
-                })
-            } catch (error) {
-                res.status(400).json({ error: error.message })
-            }
-        })
-
-        api.post('/users/auth', jsonBodyParser, (req, res) => {
-            const body = req.body
-            const { email, password } = body
-
-            try {
-                authenticateUser(email, password, (error, userId) => {
-                    if (error) {
-                        res.status(400).json({ error: error.message })
-                        return
-                    }
-                    const token = jwt.sign({ sub: userId }, SECURITY_KEY, { expiresIn: '10h' })
-
-                    res.json(token)
-                })
-            } catch (error) {
-                res.status(400).json({ error: error.message })
-            }
-        })
-
-        api.get('/users', (req, res) => {
-            try {
-                const token = req.headers.authorization.slice(7)
-
-                const { sub: userId } = jwt.verify(token, SECURITY_KEY)
-
-                retrieveUser(userId, (error, user) => {
-                    if (error) {
-                        res.status(400).json({ error: error.message })
-
-                        return
-                    }
-
-                    res.json(user)
-                })
-            } catch (error) {
-                res.status(400).json({ error: error.message })
-            }
-        })
-
-        api.post('/posts', jsonBodyParser, (req, res) => {
-            try {
-                const token = req.headers.authorization.slice(7)
-
-                const { sub: userId } = jwt.verify(token, SECURITY_KEY)
-
-                const body = req.body
-                const { image, imageDescription, text } = body
-
-                createPost(userId, image, imageDescription, text, error => {
-                    if (error) {
-                        res.status(400).json({ error: error.message })
-
-                        return
-                    }
-
-                    res.status(201).send()
-                })
-            } catch (error) {
-                res.status(400).json({ error: error.message })
-            }
-        })
-
-
-        api.get('/posts', (req, res) => {
-            try {
-                const token = req.headers.authorization.slice(7)
-
-                const { sub: userId } = jwt.verify(token, SECURITY_KEY)
-
-                retrievePosts(userId, (error, posts) => {
-                    if (error) {
-                        res.status(400).json({ error: error.message })
-
-                        return
-                    }
-
-                    res.json(posts)
-                })
-            } catch (error) {
-                res.status(400).json({ error: error.message })
-            }
-        })
-
-
-        api.get('/posts/saved', (req, res) => {
-            try {
-                const token = req.headers.authorization.slice(7)
-
-                const { sub: userId } = jwt.verify(token, SECURITY_KEY)
-
-                retrieveSavedPosts(userId, (error, posts) => {
-                    if (error) {
-                        res.status(400).json({ error: error.message })
-
-                        return
-                    }
-
-                    res.json(posts)
-                })
-            } catch (error) {
-                res.status(400).json({ error: error.message })
-            }
-        })
-
-        api.get('/posts/mine', (req, res) => {
-            try {
-                const token = req.headers.authorization.slice(7)
-
-                const { sub: userId } = jwt.verify(token, SECURITY_KEY)
-
-                retrieveMyPosts(userId, (error, posts) => {
-                    if (error) {
-                        res.status(400).json({ error: error.message })
-
-                        return
-                    }
-
-                    res.json(posts)
-                })
-            } catch (error) {
-                res.status(400).json({ error: error.message })
-            }
-        })
-
-        api.get('/posts/:postId', (req, res) => {
-            try {
-                const token = req.headers.authorization.slice(7)
-
-                const { sub: userId } = jwt.verify(token, SECURITY_KEY)
-
-                const postId = req.params.postId
-
-                retrievePost(userId, postId, (error, post) => {
-                    if (error) {
-                        res.status(400).json({ error: error.message })
-
-                        return
-                    }
-
-                    res.json(post)
-                })
-            } catch (error) {
-                res.status(400).json({ error: error.message })
-            }
-        })
-
-
-        api.patch('/posts/:postId/likes', (req, res) => {
-            try {
-                const token = req.headers.authorization.slice(7)
-
-                const { sub: userId } = jwt.verify(token, SECURITY_KEY)
-
-                const postId = req.params.postId
-
-                toggleLikePost(userId, postId, error => {
-                    if (error) {
-                        res.status(400).json({ error: error.message })
-
-                        return
-                    }
-
-                    res.status(204).send()
-                })
-            } catch (error) {
-                res.status(400).json({ error: error.message })
-            }
-        })
-
-        api.patch('/posts/:postId/saved', (req, res) => {
-            try {
-                const token = req.headers.authorization.slice(7)
-
-                const { sub: userId } = jwt.verify(token, SECURITY_KEY)
-
-                const postId = req.params.postId
-
-                toggleSavePost(userId, postId, error => {
-                    if (error) {
-                        res.status(400).json({ error: error.message })
-
-                        return
-                    }
-
-                    res.status(204).send()
-                })
-            } catch (error) {
-                res.status(400).json({ error: error.message })
-            }
-        })
-
-        api.delete('/posts/:postId', (req, res) => {
-            try {
-                const token = req.headers.authorization.slice(7)
-
-                const { sub: userId } = jwt.verify(token, SECURITY_KEY)
-
-                const postId = req.params.postId
-
-                deletePost(userId, postId, error => {
-                    if (error) {
-                        res.status(400).json({ error: error.message })
-
-                        return
-                    }
-
-                    res.status(204).send()
-                })
-            } catch (error) {
-                res.status(400).json({ error: error.message })
-            }
-        })
-
-        api.patch('/users/password', jsonBodyParser, (req, res) => {
-            try {
-                const token = req.headers.authorization.slice(7)
-
-                const { sub: userId } = jwt.verify(token, SECURITY_KEY)
-
-                const body = req.body
-                const { password, newPassword, repeatNewPassword } = body
-
-                updateUserPassword(userId, password, newPassword, repeatNewPassword, error => {
-                    if (error) {
-                        res.status(400).json({ error: error.message })
-
-                        return
-                    }
-
-                    res.status(204).send()
-                })
-            } catch (error) {
-                res.status(400).json({ error: error.message })
-            }
-        })
-
-        api.listen(4000, () => console.log('API listening on port 4000'))
     })
+
+    // Implement authenticate endpoint
+
+    api.post("/users/authenticate", jsonBodyParser, (req, res) => {
+        try {
+            const { email, password } = req.body
+
+            logic.authenticateUser(email, password, (error, userId) => {
+                if (error) {
+                    let status = 500
+
+                    if (error instanceof NotFoundError) status = 404
+                    else if (error instanceof CredentialsError) status = 401
+
+                    res.status(status).json({ error: error.message })
+
+                    return
+                }
+
+                // const token = jwt.sign({ sub: userId }, "es posible que pronto sea abuelo", { expiresIn: '10s' }  ) // Ponemos la fecha de expiración del token
+                const token = jwt.sign({ sub: userId }, process.env.JWT_SECRET)
+                res.json(token)
+            })
+        } catch (error) {
+            let status = 500
+
+            if (error instanceof TypeError || error instanceof ContentError || error instanceof RangeError) status = 406
+
+            res.status(status).json({ error: error.constructor.name, message: error.message })
+        }
+    })
+
+    // Implement createPost endpoint
+
+    api.post("/posts", jsonBodyParser, (req, res) => {
+        try {
+            const token = req.headers.authorization.slice(7)
+            const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
+            const { image, imageDescription, text } = req.body
+
+            logic.createPost(userId, image, imageDescription, text, (error) => {
+                if (error) {
+                    let status = 500
+
+                    if (error instanceof NotFoundError) status = 404
+
+                    res.status(status).json({ error: error.constructor.name, message: error.message })
+
+                    return
+                }
+
+                res.status(201).send()
+            })
+        } catch (error) {
+            let status = 500
+
+            if (error instanceof TypeError || error instanceof ContentError) status = 406
+            else if (error instanceof jwt.JsonWebTokenError) status = 401
+
+            res.status(status).json({ error: error.constructor.name, message: error.message })
+        }
+    })
+
+    // Implement retrievePosts endpoint
+
+    api.get("/posts", (req, res) => {
+        try {
+            const token = req.headers.authorization.slice(7)
+            const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
+
+            logic.retrievePosts(userId, (error, posts) => {
+                if (error) {
+                    let status = 500
+
+                    if (error instanceof NotFoundError) status = 404
+
+                    res.status(status).json({ error: error.constructor.name, message: error.message })
+
+                    return
+                }
+
+                res.json(posts)
+            })
+        } catch (error) {
+            let status = 500
+
+            if (error instanceof TypeError || error instanceof ContentError) status = 406
+            else if (error instanceof jwt.JsonWebTokenError) status = 401
+
+            res.status(status).json({ error: error.constructor.name, message: error.message })
+        }
+    })
+
+    // Implement retrieveSavedPosts endpoint
+
+    api.get("/posts/saved", (req, res) => {
+        try {
+            const token = req.headers.authorization.slice(7)
+            const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
+
+            logic.retrieveSavedPosts(userId, (error, posts) => {
+                if (error) {
+                    let status = 500
+
+                    if (error instanceof NotFoundError) status = 404
+
+                    res.status(status).json({ error: error.constructor.name, message: error.message })
+
+                    return
+                }
+
+                res.json(posts)
+            })
+        } catch (error) {
+            let status = 500
+
+            if (error instanceof TypeError || error instanceof ContentError) status = 406
+            else if (error instanceof jwt.JsonWebTokenError) status = 401
+
+            res.status(status).json({ error: error.constructor.name, message: error.message })
+        }
+    })
+
+    // Implement retrieveMyPosts endpoint
+
+    api.get("/posts/user", (req, res) => {
+        try {
+            const token = req.headers.authorization.slice(7)
+            const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
+
+            logic.retrieveMyPosts(userId, (error, posts) => {
+                if (error) {
+                    let status = 500
+
+                    if (error instanceof NotFoundError) status = 404
+
+                    res.status(status).json({ error: error.constructor.name, message: error.message })
+
+                    return
+                }
+
+                res.json(posts)
+            })
+        } catch (error) {
+            let status = 500
+
+            if (error instanceof TypeError || error instanceof ContentError) status = 406
+            else if (error instanceof jwt.JsonWebTokenError) status = 401
+
+            res.status(status).json({ error: error.constructor.name, message: error.message })
+        }
+    })
+
+    // Implement retrievePost endpoint
+
+    api.get("/posts/:postId", (req, res) => {
+        const userId = req.headers.authorization.slice(7) // Para que nos quede el userId sin el Bearer
+        const postId = req.params.postId
+
+        try {
+            logic.retrievePost(userId, postId, (error, post) => {
+                if (error) {
+                    let status = 500
+
+                    if (error instanceof NotFoundError) status = 404
+
+                    res.status(status).json({ error: error.constructor.name, message: error.message })
+
+                    return
+                }
+
+                res.json(post)
+            })
+        } catch (error) {
+            let status = 500
+
+            if (error instanceof TypeError || error instanceof ContentError) status = 406
+            else if (error instanceof jwt.JsonWebTokenError) status = 401
+
+            res.status(status).json({ error: error.constructor.name, message: error.message })
+        }
+    })
+
+    // Implement toggleLikePost endpoint
+
+    api.patch("/posts/:postId/likes", (req, res) => {
+        try {
+            const token = req.headers.authorization.slice(7)
+            const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
+
+            const { postId } = req.params
+
+            logic.toggleLikePost(userId, postId, (error) => {
+                if (error) {
+                    let status = 500
+
+                    if (error instanceof NotFoundError) status = 404
+
+                    res.status(status).json({ error: error.constructor.name, message: error.message })
+
+                    return
+                }
+
+                res.status(204).send()
+            })
+        } catch (error) {
+            let status = 500
+
+            if (error instanceof TypeError || error instanceof ContentError) status = 406
+            else if (error instanceof jwt.JsonWebTokenError) status = 401
+
+            res.status(status).json({ error: error.constructor.name, message: error.message })
+        }
+    })
+
+    // Implement deletePost endpoint
+
+    api.delete("/posts/:postId", (req, res) => {
+        try {
+            const token = req.headers.authorization.slice(7)
+            const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
+            const postId = req.params.postId
+
+            logic.deletePost(userId, postId, (error) => {
+                if (error) {
+                    let status = 500
+
+                    if (error instanceof NotFoundError) status = 404
+                    else if (error instanceof ClearanceError) status = 403
+
+                    res.status(status).json({ error: error.constructor.name, message: error.message })
+
+                    return
+                }
+
+                res.status(204).send()
+            })
+        } catch (error) {
+            let status = 500
+
+            if (error instanceof TypeError || error instanceof ContentError) status = 406
+            else if (error instanceof jwt.JsonWebTokenError) status = 401
+
+            res.status(status).json({ error: error.constructor.name, message: error.message })
+        }
+    })
+
+    // Implement retrieveUser endpoint
+
+    api.get("/users", (req, res) => {
+        try {
+            const token = req.headers.authorization.slice(7)
+
+            const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
+
+            logic.retrieveUser(userId, (error, user) => {
+                if (error) {
+                    let status = 500
+
+                    if (error instanceof NotFoundError) status = 404
+
+                    res.status(status).json({ error: error.constructor.name, message: error.message })
+
+                    return
+                }
+
+                res.json(user)
+            })
+        } catch (error) {
+            let status = 500
+
+            if (error instanceof TypeError || error instanceof ContentError) status = 406
+            else if (error instanceof jwt.JsonWebTokenError) status = 401
+
+            res.status(status).json({ error: error.constructor.name, message: error.message })
+        }
+    })
+
+    // Implement toggleSavePost endpoint
+
+    api.patch("/posts/:postId/saved", (req, res) => {
+        try {
+            const token = req.headers.authorization.slice(7)
+            const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
+            const postId = req.params.postId
+
+            logic.toggleSavePost(userId, postId, (error) => {
+                if (error) {
+                    let status = 500
+
+                    if (error instanceof NotFoundError) status = 404
+
+                    res.status(status).json({ error: error.constructor.name, message: error.message })
+
+                    return
+                }
+
+                res.status(204).send()
+            })
+        } catch (error) {
+            let status = 500
+
+            if (error instanceof TypeError || error instanceof ContentError) status = 406
+            else if (error instanceof jwt.JsonWebTokenError) status = 401
+
+            res.status(status).json({ error: error.constructor.name, message: error.message })
+        }
+    })
+
+    // Implement udateUserPassword endpoint
+
+    api.patch("/users/password", jsonBodyParser, (req, res) => {
+        try {
+            const token = req.headers.authorization.slice(7)
+            const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
+            const { password, newPassword, repeatNewPassword } = req.body
+
+            logic.updateUserPassword(userId, password, newPassword, repeatNewPassword, (error) => {
+                if (error) {
+                    let status = 500
+
+                    if (error instanceof NotFoundError) status = 404
+                    else if (error instanceof CredentialsError) status = 401
+
+                    res.status(status).json({ error: error.constructor.name, message: error.message })
+
+                    return
+                }
+
+                res.status(204).send()
+            })
+        } catch (error) {
+            let status = 500
+
+            if (error instanceof TypeError || error instanceof ContentError || error instanceof RangeError) status = 406
+            else if (error instanceof jwt.JsonWebTokenError) status = 401
+
+            res.status(status).json({ error: error.constructor.name, message: error.message })
+        }
+    })
+
+    // Implement updateUserEmail endpoint
+
+    api.patch("/users/email", jsonBodyParser, (req, res) => {
+        try {
+            const token = req.headers.authorization.slice(7)
+            const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
+            const { password, email, newEmail, repeatNewEmail } = req.body
+
+            logic.updateUserEmail(userId, password, email, newEmail, repeatNewEmail, (error) => {
+                if (error) {
+                    let status = 500
+
+                    if (error instanceof NotFoundError) status = 404
+                    else if (error instanceof CredentialsError) status = 401
+
+                    res.status(status).json({ error: error.constructor.name, message: error.message })
+
+                    return
+                }
+
+                res.status(204).send()
+            })
+        } catch (error) {
+            let status = 500
+
+            if (error instanceof TypeError || error instanceof ContentError || error instanceof RangeError) status = 406
+            else if (error instanceof jwt.JsonWebTokenError) status = 401
+
+            res.status(status).json({ error: error.constructor.name, message: error.message })
+        }
+    })
+
+    api.listen(process.env.PORT, () => console.log(`API listening on port ${process.env.PORT}`))
+})
