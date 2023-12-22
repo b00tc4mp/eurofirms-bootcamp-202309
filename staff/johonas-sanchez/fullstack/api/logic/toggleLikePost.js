@@ -1,15 +1,16 @@
 const { validate } = require('./helpers')
 const { User, Post } = require('../data/models')
+const { NotFoundError, SystemError } = require('./errors')
 
 function toggleLikePost(userId, postId, callback) {
-    validate.text(userId, 'user id')
-    validate.text(postId, 'post id')
+    validate.id(userId, 'user id')
+    validate.id(postId, 'post id')
     validate.function(callback, 'callback')
 
     User.findById(userId)
         .then(user => {
             if (!user) {
-                callback(new Error('user not found'))
+                callback(new NotFoundError('user not found'))
 
                 return
             }
@@ -17,7 +18,7 @@ function toggleLikePost(userId, postId, callback) {
             Post.findById(postId)
                 .then(post => {
                     if (!post) {
-                        callback(new Error('post not found'))
+                        callback(new NotFoundError('post not found'))
 
                         return
                     }
@@ -31,10 +32,11 @@ function toggleLikePost(userId, postId, callback) {
 
                     post.save()
                         .then(() => callback(null))
-                        .catch(error => callback(error))
+                        .catch(error => callback(new SystemError(error.message)))
                 })
+                .catch(error => callback(new SystemError(error.message)))
         })
-        .catch(error => callback(error))
+        .catch(error => callback(new SystemError(error.message)))
 }
 
 module.exports = toggleLikePost

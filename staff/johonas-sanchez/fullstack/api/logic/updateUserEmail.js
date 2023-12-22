@@ -1,31 +1,33 @@
-const { validate } = require('./helpers')
+const { validate } = require("./helpers")
 const { User } = require("../data/models")
+const { ContentError, CredentialsError, NotFoundError, SystemError } = require("./errors")
 
 function updateUserEmail(userId, password, email, newEmail, repeatNewEmail, callback) {
-   validate.text(userId, "user id")
+   validate.id(userId, "user id")
    validate.password(password, "password")
    validate.email(email, "email")
    validate.email(newEmail, "new email")
    validate.email(repeatNewEmail, "repeat new email")
    validate.function(callback, "callback")
 
-   if (newEmail !== repeatNewEmail) throw new Error("your email do not match")
+   if (newEmail !== repeatNewEmail) throw new ContentError("new email does not match repeat new email")
 
-   User.findById(userId).then((user) => {
+   User.findById(userId)
+   .then((user) => {
       if (!user) {
-         callback(new Error("user not found"))
+         callback(new NotFoundError("user not found"))
 
          return
       }
 
       if (user.password !== password) {
-        callback(new Error("wrong credentials"))
+         callback(new CredentialsError("wrong credentials"))
 
-        return
-     }
+         return
+      }
 
       if (user.email !== email) {
-         callback(new Error("wrong credentials"))
+         callback(new CredentialsError("wrong credentials"))
 
          return
       }
@@ -34,13 +36,10 @@ function updateUserEmail(userId, password, email, newEmail, repeatNewEmail, call
 
       user
          .save()
-         .then(() => {
-            callback(null)
-         })
-         .catch((error) => {
-            callback(error)
-         })
+         .then(() => {callback(null)})
+         .catch((error) => callback(new SystemError(error.message)))
    })
+   .catch((error) => callback(new SystemError(error.message)))
 }
 
 module.exports = updateUserEmail
