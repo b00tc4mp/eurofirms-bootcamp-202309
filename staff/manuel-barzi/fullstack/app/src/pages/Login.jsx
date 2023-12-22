@@ -27,7 +27,7 @@ export default function Login(props) {
                 props.onSuccess()
             })
         } catch (error) {
-            props.onError(error.message)
+            props.onError(error)
         }
     }
 

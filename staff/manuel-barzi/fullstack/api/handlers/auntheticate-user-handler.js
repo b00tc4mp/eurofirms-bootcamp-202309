@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 
 const logic = require('../logic')
-const { ContentError, NotFoundError, CredentialsError } = require('../logic/errors')
+const { ContentError, CredentialsError } = require('../logic/errors')
 
 module.exports = (req, res) => {
     try {
@@ -11,12 +11,10 @@ module.exports = (req, res) => {
             if (error) {
                 let status = 500
 
-                if (error instanceof NotFoundError)
-                    status = 404
-                else if (error instanceof CredentialsError)
+                if (error instanceof CredentialsError)
                     status = 401
 
-                res.status(status).json({ error: error.message })
+                res.status(status).json({ error: error.constructor.name, message: error.message })
 
                 return
             }

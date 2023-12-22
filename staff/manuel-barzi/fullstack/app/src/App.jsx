@@ -10,7 +10,7 @@ import Home from './pages/Home'
 import Hello from './components/Hello'
 
 import logic from './logic'
-import { JWTError } from './logic/errors'
+import { CredentialsError, JWTError, SystemError } from './logic/errors'
 
 export default function App() {
   console.log('App')
@@ -39,7 +39,12 @@ export default function App() {
 
       navigate('/login')
       setFeedback('Session expired, please login again')
-    } else setFeedback(error.message)
+    } else if (error instanceof CredentialsError) {
+      setFeedback('Wrong credentials, try again')
+    } else if (error instanceof SystemError) {
+      setFeedback('Something went wrong. Please, try again later')
+    }
+    else setFeedback(error.message)
   }
 
   function handleAcceptFeedback() {

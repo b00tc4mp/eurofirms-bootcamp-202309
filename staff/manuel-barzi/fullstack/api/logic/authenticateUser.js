@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs')
 const { validate } = require('./helpers')
 
 const { User } = require('../data/models')
-const { NotFoundError, CredentialsError, SystemError } = require('./errors')
+const { CredentialsError, SystemError } = require('./errors')
 
 function authenticateUser(email, password, callback) {
     validate.email(email, 'email')
@@ -13,13 +13,13 @@ function authenticateUser(email, password, callback) {
     User.findOne({ email })
         .then(user => {
             if (!user) {
-                callback(new NotFoundError('user not found'))
+                callback(new CredentialsError('wrong email'))
 
                 return
             }
 
             bcrypt.compare(password, user.password)
-                .then(match => match ? callback(null, user.id) : callback(new CredentialsError('wrong credentials')))
+                .then(match => match ? callback(null, user.id) : callback(new CredentialsError('wrong password')))
                 .catch(error => callback(new SystemError(error.message)))
         })
         .catch(error => callback(new SystemError(error.message)))
