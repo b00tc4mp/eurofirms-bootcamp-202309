@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Routes, Route, useNavigate, Navigate } from 'react-router-dom'
+import { Routes, Route, useNavigate, Navigate } from "react-router-dom"
 
 import Feedback from "./library/Feedback"
 
@@ -7,11 +7,10 @@ import Login from "./pages/Login"
 import Register from "./pages/Register"
 import Home from "./pages/Home"
 
-import Hello from './components/Hello'
+import Hello from "./components/Hello"
 
-import logic from './logic'
-import { JWTError } from './logic/errors'
-
+import logic from "./logic"
+import { CredentialsError, JWTError, SystemError } from "./logic/errors"
 
 function App() {
    console.log("App")
@@ -20,17 +19,17 @@ function App() {
    const navigate = useNavigate()
 
    function handleRegisterShow() {
-      navigate('/register')
+      navigate("/register")
       setFeedback(null)
    }
 
    function handleLoginShow() {
-      navigate('/login')
+      navigate("/login")
       setFeedback(null)
    }
 
    function handleHomeShow() {
-      navigate('/')
+      navigate("/")
       setFeedback(null)
    }
 
@@ -38,8 +37,12 @@ function App() {
       if (error instanceof JWTError) {
          logic.logoutUser()
 
-         navigate('/login')
+         navigate("/login")
          setFeedback("Session expired, please login again")
+      } else if (error instanceof CredentialsError) {
+         setFeedback("Wrong credentials, try again")
+      } else if (error instanceof SystemError) {
+         setFeedback("Something went wrong. Please, try again later")
       } else setFeedback(error.message)
    }
 
@@ -47,20 +50,42 @@ function App() {
       setFeedback(null)
    }
 
-   return <>
-   <Routes>
-     <Route path="/login" element={logic.isUserLoggedIn() ? <Navigate to="/" /> : <Login onSuccess={handleHomeShow} onRegisterClick={handleRegisterShow} onError={handleError} />} />
+   return (
+      <>
+         <Routes>
+            <Route
+               path="/login"
+               element={
+                  logic.isUserLoggedIn() ? (
+                     <Navigate to="/" />
+                  ) : (
+                     <Login onSuccess={handleHomeShow} onRegisterClick={handleRegisterShow} onError={handleError} />
+                  )
+               }
+            />
 
-     <Route path="/register" element={logic.isUserLoggedIn() ? <Navigate to="/" /> : <Register onSuccess={handleLoginShow} onLoginClick={handleLoginShow} onError={handleError} />} />
-     
-     <Route path="/*" element={logic.isUserLoggedIn() ? <Home onLogout={handleLoginShow} onError={handleError} /> : <Navigate to="/login" />} />
+            <Route
+               path="/register"
+               element={
+                  logic.isUserLoggedIn() ? (
+                     <Navigate to="/" />
+                  ) : (
+                     <Register onSuccess={handleLoginShow} onLoginClick={handleLoginShow} onError={handleError} />
+                  )
+               }
+            />
 
-     <Route path="/hello/:name" element={<Hello />} />
-     
-   </Routes>
+            <Route
+               path="/*"
+               element={logic.isUserLoggedIn() ? <Home onLogout={handleLoginShow} onError={handleError} /> : <Navigate to="/login" />}
+            />
 
-   {feedback ? <Feedback message={feedback} onAccept={handleAcceptFeedback} /> : null}
- </>
+            <Route path="/hello/:name" element={<Hello />} />
+         </Routes>
+
+         {feedback ? <Feedback message={feedback} onAccept={handleAcceptFeedback} /> : null}
+      </>
+   )
 }
 
 export default App

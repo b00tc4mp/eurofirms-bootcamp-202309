@@ -1,4 +1,5 @@
 import { validate } from './helpers'
+import errors, { SystemError } from './errors'
 
 function registerUser(name, email, password, callback) {
     validate.text(name, 'name')
@@ -18,15 +19,19 @@ function registerUser(name, email, password, callback) {
         .then(res => {
             if (!res.ok) {
                 res.json()
-                    .then(body => callback(new Error(body.error)))
-                    .catch(error => callback(error))
+                .then(body => {
+                    const constructor = errors[body.error]
+
+                    callback(new constructor(body.message))
+                })
+                .catch(error => callback(new SystemError(error.message)))
     
                 return
             }
     
             callback(null)
         })
-        .catch(error => callback(error))
+        .catch(error => callback(new SystemError(error.message)))
 }
 
 export default registerUser
