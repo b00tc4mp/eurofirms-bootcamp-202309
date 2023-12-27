@@ -9,16 +9,20 @@ module.exports = (req, res) => {
 
         const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
 
-        logic.retrieveUser(userId)
-            .then(user => res.json(user))
-            .catch(error => {
+        logic.retrievePosts(userId, (error, posts) => {
+            if (error) {
                 let status = 500
 
                 if (error instanceof NotFoundError)
                     status = 404
 
                 res.status(status).json({ error: error.constructor.name, message: error.message })
-            })
+
+                return
+            }
+
+            res.json(posts)
+        })
     } catch (error) {
         let status = 500
 

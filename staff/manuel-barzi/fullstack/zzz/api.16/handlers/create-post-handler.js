@@ -9,16 +9,22 @@ module.exports = (req, res) => {
 
         const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
 
-        logic.retrieveUser(userId)
-            .then(user => res.json(user))
-            .catch(error => {
+        const { image, imageDescription, text } = req.body
+
+        logic.createPost(userId, image, imageDescription, text, error => {
+            if (error) {
                 let status = 500
 
                 if (error instanceof NotFoundError)
                     status = 404
 
                 res.status(status).json({ error: error.constructor.name, message: error.message })
-            })
+
+                return
+            }
+
+            res.status(201).send()
+        })
     } catch (error) {
         let status = 500
 

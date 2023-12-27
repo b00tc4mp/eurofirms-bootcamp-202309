@@ -1,4 +1,4 @@
-curl -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NThjMzE1M2I5ZDlkM2EzMWRiMGYxNTkiLCJpYXQiOjE3MDM2ODc4MDUsImV4cCI6MTcwMzY4Nzg2NX0.jLh4Sj9Y7jCzAdLGlRKGMYjzcA6TTvcQkE3xHN0zU1o' localhost:9000/users -v
+curl -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NTg0MWIyMzQ3NGM0YThhMTFiMDk4MDAiLCJpYXQiOjE3MDMxNjAwMjIsImV4cCI6MTcwMzE2MDA4Mn0.TpqBjwdQhxifXmDYizvzXmljSmIZ2DMje75Ilm_wBew' localhost:9000/users -v
 
 # > GET /users HTTP/1.1
 # > Host: localhost:4000
