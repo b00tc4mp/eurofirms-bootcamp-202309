@@ -264,7 +264,7 @@ Response: 200 { name }
 Examples:
 
 ```sh
-$ curl -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NTZkZGMyOTZmYzIxNTc5YzE2NzVkNmUiLCJpYXQiOjE3MDI1NTkyNTJ9.lAZHnQWV7DrHYmbgh-FGBklAMfcs9nv6IezuU6sog0Y' localhost:4000/users -v
+$ curl -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NThjNDgxMzRiOTNkMTI5M2I3Y2Y3YjYiLCJpYXQiOjE3MDM2OTkzNzMsImV4cCI6MTcwMzY5OTQzM30.TKHYbpBXQcAWa5DzS1JN7KBe_1noZPDpBKRrny-iDkM' localhost:9000/users -v
 
 > GET /users HTTP/1.1
 > Host: localhost:4000

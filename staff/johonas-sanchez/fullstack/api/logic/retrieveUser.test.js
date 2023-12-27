@@ -5,14 +5,9 @@ const retrieveUser = require('./retrieveUser')
 mongoose.connect('mongodb://127.0.0.1:27017/test')
     .then(() => {
         try {
-            retrieveUser('655f610eb233e2167c987171', (error, user) => {
-                if (error) {
-                    console.error(error)
-                    return
-                }
-
-                console.log(user)
-            })
+            retrieveUser('658c3e141850d055fc26032e')
+                .then(user => console.log('user retrieved', user))
+                .catch(error => console.error(error))
         } catch (error) {
             console.error(error)
         }
