@@ -1,0 +1,151 @@
+import { useState, useEffect } from "react"
+import { Routes, Route, useNavigate } from "react-router-dom"
+
+import logic from '../logic'
+
+import { Button, Link, Container } from '../library'
+
+import { AllPosts, MyPosts, NewPost, SavedPosts, Logo, UserProfile } from '../components'
+
+function Home(props) {
+   console.log("Home")
+
+   const [name, setName] = useState(null)
+   const [timestamp, setTimestamp] = useState(null)
+   const navigate = useNavigate()
+
+   useEffect(() => {
+      try {
+         logic.retrieveUser((error, user) => {
+            if (error) {
+               props.onError(error)
+
+               return
+            }
+
+            setName(user.name)
+         })
+      } catch (error) {
+         props.onError(error)
+      }
+   }, [])
+
+   function handleLogoutClick() {
+      logic.logoutUser()
+
+      props.onLogout()
+   }
+
+   function handleNewPostClick() {
+      navigate("/new-post")
+   }
+
+   function handleNewPostCancelClick() {
+      navigate("/")
+   }
+
+   function handleNewPostSubmit() {
+      navigate("/")
+      setTimestamp(Date.now())
+   }
+
+   function handleSavedClick(event) {
+      event.preventDefault()
+
+      navigate("/saved")
+   }
+
+   function handleUserClick(event) {
+      event.preventDefault()
+
+      navigate("/user-profile")
+   }
+
+   function handleHomeClick(event) {
+      event.preventDefault()
+
+      navigate("/")
+   }
+
+   function handleMyPostsClick(event) {
+      event.preventDefault()
+
+      navigate("/my-posts")
+   }
+
+   return (
+      <Container align="center">
+         <header className="flex justify-between items-center md:min-w-[500px] lg:min-w-[768px] mt-3 mb-5 bg-[ghostwhite] px-2" aria-label="Header">
+            <Link className="hidden lg:block p-0" onClick={handleHomeClick}>
+               <Logo />
+            </Link>
+
+            <Button className="hidden lg:block" title="New post" aria-label="New post (+)" onClick={handleNewPostClick}>
+               +
+            </Button>
+
+            <Link className="p-0" onClick={handleSavedClick}>
+               Saved
+            </Link>
+
+            <Link className="p-0" onClick={handleMyPostsClick}>
+               My posts
+            </Link>
+
+            <span className="hidden lg:block" aria-label="User name">
+               {name}
+            </span>
+            <div className="flex items-center justify-center h-full space-x-2">
+               <Button onClick={handleUserClick}>
+                  <svg
+                     className="lg:hidden h-5 w-5 text-black-500"
+                     width="24"
+                     height="24"
+                     viewBox="0 0 24 24"
+                     strokeWidth="2"
+                     stroke="currentColor"
+                     fill="none"
+                     stroke-linecap="round"
+                     stroke-linejoin="round"
+                  >
+                     <path stroke="none" d="M0 0h24v24H0z" />
+                     <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />{" "}
+                     <circle cx="12" cy="12" r="3" />
+                  </svg>
+                  <span className="hidden lg:block">Settings</span>
+               </Button>
+
+               <Button onClick={handleLogoutClick}>Logout</Button>
+            </div>
+         </header>
+
+         <Routes>
+            <Route
+               path="/new-post"
+               element={<NewPost onNewPostSubmit={handleNewPostSubmit} onNewPostCancelClick={handleNewPostCancelClick} onError={props.onError} />}
+            />
+
+            <Route path="/" element={<AllPosts timestamp={timestamp} onError={props.onError} />} />
+
+            <Route path="/user-profile/*" element={<UserProfile  onError={props.onError} />} />
+
+            <Route path="/saved" element={<SavedPosts onError={props.onError} />} />
+
+            <Route path="/my-posts" element={<MyPosts onError={props.onError} />} />
+         </Routes>
+
+         <div className="h-[3rem] mb-5"></div>
+
+         <footer className="bg-[ghostwhite] fixed bottom-0 w-full flex justify-center items-center h-[3rem] lg:hidden">
+            <Link onClick={handleHomeClick}>
+               <Logo />
+            </Link>
+            <Button title="New post" aria-label="New post (+)" onClick={handleNewPostClick}>
+               +
+            </Button>
+         </footer>
+      </Container>
+   )
+}
+
+export default Home
