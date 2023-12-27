@@ -1,0 +1,11 @@
+UDP
+M1,M3,M4,M5... o=====o M2 
+
+TCP
+M1 o=================o M2
+
+HTTP (1.0, 1.1, 2.0, 3.0)
+M1 o=================o M2
+[req] ->            
+                    <- [res]
+            X (close connection)

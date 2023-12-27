@@ -1,0 +1,19 @@
+User                Nav (user agent)    Server (Vite)
+localhost:5173 ->   localhost:5173 ->   load index.html
+view page           <- render           <- index.html
+                    style.css ->        load style.css
+view styles         <- render           <- style.css
+                    main.js ->          load main.js
+                    load main.js        <- main.js
+
+                                        API (Express)       DB (Mongo)
+click register ->   change view state
+view Register       <- render Register
+submit data ->      call register ->    register user ->    persist user
+                    change view state   <- confirm          <- confirm
+view Login          <- render Login
+submit data ->      call auth ->        auth user ->        find user
+                    change view state   <- return id        <- return
+view Home           <- render Home
+                    call retrieve ->    retrieve user ->    find user
+view Home           <- render Home      <- return user      <- return

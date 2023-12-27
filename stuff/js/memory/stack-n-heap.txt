@@ -1,0 +1,20 @@
+STACK
+ref     val
+---------------
+a       2
+b       #1
+c       1
+d       #1
+e       #2
+f       #3
+add     #4
+rename  #5
+
+HEAP
+ref      val
+--------------
+#1      { name: 'Pitufo', surname: 'Pan', fun: #3 }
+#2      [ ] { 0: 10, 1: 20, 2: 30, 3: #1, length: 3, name: 'Peter' }
+#3      f() { ... } { name: 'f', surname: 'Pan' }
+#4      f(...) { ... } { name: 'add' }
+#5      f(...) { ... } { name: 'rename' }
