@@ -25,7 +25,7 @@ Response (error): 409|406|500 { error, message }
 Examples:
 
 ```sh
-$ curl -H 'Content-Type: application/json' -d '{ "name": "Wendy Darling", "email": "wendy@darling.com", "password": "123123123" }' localhost:4000/users -v
+$ curl -H 'Content-Type: application/json' -d '{ "name": "Wendy Darling", "email": "wendy@darling.com", "password": "123123123" }' localhost:9000/users -v
 
 > POST /users HTTP/1.1
 > Host: localhost:4000
@@ -43,7 +43,7 @@ $ curl -H 'Content-Type: application/json' -d '{ "name": "Wendy Darling", "email
 ```
 
 ```sh
-$ curl -H 'Content-Type: application/json' -d '{ "name": "Peter Pan", "email": "peter@pan.com", "password": "123123123" }' localhost:4000/users -v
+$ curl -H 'Content-Type: application/json' -d '{ "name": "Peter Pan", "email": "peter@pan.com", "password": "123123123" }' localhost:9000/users -v
 
 > POST /users HTTP/1.1
 > Host: localhost:4000
@@ -61,7 +61,7 @@ $ curl -H 'Content-Type: application/json' -d '{ "name": "Peter Pan", "email": "
 ```
 
 ```sh
-curl -H 'Content-Type: application/json' -d '{ "name": "Peter Pan", "email": "peter@pan.com", "password": "123123123" }' localhost:4000/users -v
+$ curl -H 'Content-Type: application/json' -d '{ "name": "Peter Pan", "email": "peter@pan.com", "password": "123123123" }' localhost:9000/users -v
 
 > POST /users HTTP/1.1
 > Host: localhost:4000
@@ -92,7 +92,7 @@ Response: 200 token
 Examples:
 
 ```sh
-$ curl -H 'Content-Type: application/json' -d '{ "email": "wendy@darling.com", "password": "123123123" }' localhost:4000/users/auth -v
+$ curl -H 'Content-Type: application/json' -d '{ "email": "peter@pan.com", "password": "123123123" }' localhost:9000/users/auth -v
 
 > POST /users/auth HTTP/1.1
 > Host: localhost:4000

@@ -54,7 +54,7 @@ mongoose.connect(process.env.MONGODB_URL).then(() => {
 
    // Implement authenticate endpoint
 
-   api.post("/users/authenticate", jsonBodyParser, authenticateUserHandler)
+   api.post("/users/auth", jsonBodyParser, authenticateUserHandler)
 
    // Implement createPost endpoint
 
