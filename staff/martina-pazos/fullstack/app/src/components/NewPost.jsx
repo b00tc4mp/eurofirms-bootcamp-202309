@@ -3,7 +3,7 @@ import Container from '../library/Container'
 import Field from '../library/Field'
 import Form from '../library/Form'
 
-import createNewPost from '../logic/createNewPost'
+import logic from '../logic'
 
 export default function NewPost(props) {
     console.log('NewPost')
@@ -17,10 +17,10 @@ export default function NewPost(props) {
 
         const image = imageInput.value
         const imageDescription = imageDescriptionInput.value
-        const text = taxtInput.value
+        const text = textInput.value
 
         try {
-            createNewPost(image, imageDescription, test, error => {
+            logic.createNewPost(image, imageDescription, test, error => {
                 if (error) {
                     props.onError(error)
 
@@ -34,12 +34,22 @@ export default function NewPost(props) {
         }
     }
 
-    function.handleCancelClik() {
+    function handleCancelClik() {
         props.onNewPostCancelClick()
     }
 
-    return <Container align='center'></Container>
-    <h2>New post</h2>
+    return <Container align='center'>
+        <h2>New post</h2>
 
-    <Form onSubmit={handleNewPostSubmit}>
+        <Form onSubmit={handleNewPostSubmit}>
+            <Field type='url' id='image-field' required>Image</Field>
+
+            <Field type='text' id='image-description-field' required>Image description</Field>
+
+            <Field type='text' id='text-field' required >Text</Field>
+
+            <Button type='submit'>Post</Button>
+            <Button onClick={handleCancelClik}>Cancel</Button>
+        </Form>
+    </Container>
 }

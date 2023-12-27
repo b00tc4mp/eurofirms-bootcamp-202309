@@ -6,7 +6,7 @@ const req = {
     body: JSON.stringify({ email: 'candy2@candy.com', password: '123123123' })
 }
 
-fetch('http://localhost:4000/users/authenticate', req)
+fetch('http://localhost:4000/users/auth', req)
     .then(res => {
         if (!res.ok) {
             res.json()
