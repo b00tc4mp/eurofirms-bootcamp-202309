@@ -1,0 +1,1 @@
+// TODO create a function called registerUser that registers a user in database (name, email, password)
