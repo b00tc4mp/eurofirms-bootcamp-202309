@@ -1,12 +1,13 @@
-const { validateText, validateEmail, validateFunction } = require('./helpers/validators')
+/* 
+const { validate } = require('./helpers')
 const { User } = require('../data/models')
 
-function updatePassword(userId, email, newEmail, repeatNewEmail, callback) {
-    validateText(userId, 'user id')
-    validateEmail(email, 'email')
-    validateEmail(newEmail, 'new email')
-    validateEmail(repeatNewEmail, 'repeat new email')
-    validateFunction(callback, 'callback')
+function updateEmail(userId, email, newEmail, repeatNewEmail, callback) {
+    validate.text(userId, 'user id')
+    validate.email(email, 'email')
+    validate.email(newEmail, 'new email')
+    validate.email(repeatNewEmail, 'repeat new email')
+    validate.function(callback, 'callback')
 
     if(newEmail !== repeatNewEmail)
         throw new Error('new email does not match repeat email')
@@ -25,3 +26,4 @@ function updatePassword(userId, email, newEmail, repeatNewEmail, callback) {
             .catch(error => callback(error))
 }
 module.exports =updateEmail
+*/
