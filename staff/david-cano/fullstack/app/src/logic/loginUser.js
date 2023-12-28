@@ -1,6 +1,7 @@
 import { JWT } from '../utils'
 import { validate } from './helpers'
 import context from './context'
+import errors, { SystemError } from './errors'
 
 function loginUser(email, password, callback) {
     validate.email(email)
@@ -16,11 +17,15 @@ function loginUser(email, password, callback) {
     }
 
     fetch(`${import.meta.env.VITE_API_URL}/users/authenticate`, req)
-        .then(res => {
-            if (!res.ok) {
-                res.json()
-                    .then(body => callback(new Error(body.error)))
-                    .catch(error => callback(error))
+    .then(res => {
+        if (!res.ok) {
+            res.json()
+                .then(body => {
+                    const constructor = errors[body.error]
+
+                    callback(new constructor(body.message))
+                })
+                .catch(error => callback(new SystemError(error.message)))
 
                 return
             }
@@ -32,9 +37,9 @@ function loginUser(email, password, callback) {
 
                     callback(null)
                 })
-                .catch(error => callback(error))
+                .catch(error => callback(new SystemError(error.message)))
         })
-        .catch(error => console.error(error))
+        .catch(error => callback(new SystemError(error.message)))
 }
 
 export default loginUser

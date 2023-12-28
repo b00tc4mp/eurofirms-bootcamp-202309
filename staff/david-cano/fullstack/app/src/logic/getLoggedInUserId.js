@@ -1,5 +1,7 @@
 import context from './context'
 
-export default function getLoggedInUserId() {
+function getLoggedInUserId() {
     return context.jwt && context.jwt.getSubject()
 }
+
+export default getLoggedInUserId

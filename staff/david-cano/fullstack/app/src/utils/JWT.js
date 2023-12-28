@@ -1,4 +1,4 @@
-export default class JWT {
+ class JWT {
     constructor(token) {
         this.token = token
 
@@ -27,3 +27,5 @@ export default class JWT {
         return this.payload.sub
     }
 }
+
+export default JWT

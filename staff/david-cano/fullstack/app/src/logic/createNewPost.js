@@ -1,5 +1,6 @@
 import { validate } from './helpers'
 import context from './context'
+import errors, { SystemError } from './errors'
 
 function createNewPost(image, imageDescription, text, callback) {
     validate.url(image, 'image url')
@@ -21,15 +22,19 @@ function createNewPost(image, imageDescription, text, callback) {
         .then(res => {
             if (!res.ok) {
                 res.json()
-                    .then(body => callback(new Error(body.error)))
-                    .catch(error => callback(error))
+                    .then(body => {
+                        const constructor = errors[body.error]
+
+                        callback(new constructor(body.message))
+                    })
+                    .catch(error => callback(new SystemError(error.message)))
 
                 return
             }
 
             callback(null)
         })
-        .catch(error => callback(error))
+        .catch(error => callback(new SystemError(error.message)))
 }
 
 export default createNewPost

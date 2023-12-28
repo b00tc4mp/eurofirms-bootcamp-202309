@@ -1,5 +1,6 @@
 const { validate } = require('./helpers')
 const { User, Post } = require('../data/models')
+const { NotFoundError, ClearanceError, SystemError } = require('./errors')
 
 function deletePost(userId, postId, callback) {
     validate.text(userId, 'user id')
@@ -9,7 +10,7 @@ function deletePost(userId, postId, callback) {
     User.findById(userId)
         .then(user => {
             if (!user) {
-                callback(new Error('user not found'))
+                callback(new NotFoundError('user not found'))
 
                 return
             }
@@ -17,24 +18,24 @@ function deletePost(userId, postId, callback) {
             Post.findById(postId)
                 .then(post => {
                     if (!post) {
-                        callback(new Error('post not found'))
+                        callback(new NotFoundError('post not found'))
 
                         return
                     }
 
                     if (post.author.toString() !== userId) {
-                        callback(new Error('post does not belong to user'))
+                        callback(new NotFoundError('post does not belong to user'))
 
                         return
                     }
 
                     Post.deleteOne({ _id: postId })
                         .then(() => callback(null))
-                        .catch(error => callback(error))
+                        .catch(error => callback(new SystemError(error.message)))
                 })
-                .catch(error => callback(error))
+                .catch(error => callback(new SystemError(error.message)))
         })
-        .catch(error => callback(error))
+        .catch(error => callback(new SystemError(error.message)))
 }
 
 module.exports = deletePost

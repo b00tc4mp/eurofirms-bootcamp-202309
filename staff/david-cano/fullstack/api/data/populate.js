@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const { User, Post } = require('./models')
+const { User, Post } = require('./models').default
 
 const { Types: { ObjectId } } = mongoose
 
