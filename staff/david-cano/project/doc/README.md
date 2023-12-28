@@ -33,4 +33,4 @@ Order
 - id (string, unique, required)
 - cart (Cart.id, required)
 - date (Date, required)
-- paymentMethod (['card', 'cash', 'paypal', ...])
+- paymentMethod (['card', 'cash', 'paypal', ... ])
