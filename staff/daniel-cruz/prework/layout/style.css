@@ -1,0 +1,30 @@
+body{
+
+    height: 100vh;
+}
+
+
+
+.botones{
+
+    display: flex;
+    margin-top: 5px;
+    gap: 5px;
+    
+}
+
+.main-body{
+
+    display: flex;
+
+    height: 80%;
+}
+
+.main-footer{
+
+    height: 20%;
+
+
+
+}
+
