@@ -39,6 +39,11 @@ const parking = new Schema({
         required: true,
      },
    },
+   locator: {
+      type: ObjectId,
+      required: true,
+      ref: "User"
+   },
    reviews: {
       type: [ObjectId],
       required: true,
