@@ -34,7 +34,7 @@ La propia app debería devolver un pdf con el formato de repris que se entregar�
 - Crear actas 
  - Enviar o imprimir hojas de puntuación
 
-###Jueces
+### Jueces
 
 - Introducir su nombre
 - Seleccionar el jinete a juzgar
@@ -58,8 +58,9 @@ La propia app debería devolver un pdf con el formato de repris que se entregar�
 
 - id (string, unique, required)
 - name (string, required)
+- username (string, unique, required)
 - password (string, required)
-- role (string, admin|secretary|judge|judge-C)
+- role (string, admin|secretary|judge)
 - active (boolean)
 
 #### Event
@@ -67,34 +68,37 @@ La propia app debería devolver un pdf con el formato de repris que se entregar�
 - id (string, unique, required)
 - date (string, required)
 - organizer (User.id, required)
+- judges ([User.id])
+- president (User.id)
+- competitors ([Competitor.id])
 - location (string, required)
         
 #### Competitor 
 
+- id (string, unique, required)
 - fullName (string, required)
-- license (string, required)
+- license (string )
 - horseName(string, required)
-- horseLicense (string, required)
+- horseLicense (string)
 - trialType (string, official|open, required)
-- discipline (string, dressage|paralympic, required)
+- discipline (string, dressage|paralympic )
+- dressagelevel (string, 0|1|2|3|4|San Jorge|Intermedia 1|Intermedia 2|Intermedia AB|Gran Premio)
 - dressageCategory (string, ap|benjamin|alevin|... )
-- dressageRepriseType (string, team|individual|kür)
+- dressageRepriseType (string, team|individual|kür )
 - paralympicGrade (string, 1-6|6a|6b)
 - paralympicRepriseType (string, novel|intermediate|GP)
+- valuation ([Valuation.id])
 
-#### Judges
+#### Exercises
 
-- name (string, required)
-- note (number, required)
-- coments (string)
-- Aditional coment (string)
+- mark (number, required)
+- coment (string)
+- coefficient (number 1|2|3|4, )
 
-#### C judge 
+#### Valuation
 
-- name (string, required)
-- note (number, required)
-- coments (string)
-- Aditional coment (string)
-- first error (boolean)
-- second error (boolean)
-- third error|eliminated (boolean)
+- id (string, unique, required)
+- judge (User.id, required)
+- exercises ([exercises])
+
+- finalMark (sum mark * coefficient)
