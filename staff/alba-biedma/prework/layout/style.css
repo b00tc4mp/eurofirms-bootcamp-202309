@@ -1,0 +1,64 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    height: 100vh;
+    /* background-image: url("https://img.freepik.com/free-photo/ultra-detailed-nebula-abstract-wallpaper-4_1562-749.jpg");
+    background-repeat: no-repeat;
+    background-size: cover; */
+}
+
+footer p{
+    color: red
+}
+
+.home-header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: aquamarine;
+    padding: 10px;
+    height: 10%;
+}
+.home-menu{
+    padding: 20px;
+    text-align: center;
+    align-items: center;
+    border: 2px solid black;
+    height: 10%;    
+} 
+
+.home-main{
+    height: 80%;
+    display: flex;
+}
+
+.home-left{
+    margin-top: 60px;
+    height: 93%;
+    width: 100%;
+    background-color: bisque;
+}
+
+.home-right{
+    margin-top: 60px;
+    height: 95%;
+    width: 100%;
+    background-color: brown;
+}
+
+.home-footer{
+    display: flex;
+    gap: 10px;
+    height: 10%;
+    background-color: aquamarine;
+}
+
+.home-main-image{
+    position: absolute;
+    left: 40%;
+    right: 40%;
+    width: 20%;
+}
