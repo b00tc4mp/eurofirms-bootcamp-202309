@@ -33,11 +33,15 @@ User
 - name (string, required)
 - email (string, unique, required)
 - password (string, required)
+- saved ([Parking.id])
 
 Parking
 - id (string, unique, required)
-- location (numbers array [lat, long], required)
-- reviews ([Review])
+- location ({
+    lat: number required, 
+    long: number required
+    })
+- reviews ([Review.id])
 
 Review
 - id (string, unique, required)
