@@ -1,35 +1,61 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Routes, Route, useNavigate, Navigate } from 'react-router-dom'
+
+import { Feedback } from './library'
+
+import { Register, Login, Home } from './pages'
+
+import { isUserLoggedIn, logoutUser } from './logic'
+
+import { JWTError } from './logic/errors'
+
 
 function App() {
-  const [count, setCount] = useState(0)
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+  const [feedback, setFeedback] = useState(null)
+  const navigate = useNavigate()
+
+  function handleRegisterShow() {
+    navigate('/register')
+    setFeedback(null)
+  }
+
+  function handleLoginShow() {
+    navigate('/login')
+    setFeedback(null)
+  }
+
+  function handleHomeShow() {
+    navigate('/')
+    setFeedback(null)
+  }
+
+  function handleError(error) {
+    if (error instanceof JWTError) {
+      logoutUser()
+
+      navigate('/login')
+      setFeedback('Session expired, please login again')
+    } else setFeedback(error.message)
+  }
+
+  function handleAcceptFeedback() {
+    setFeedback(null)
+  }
+
+  return <>
+    <Routes>
+      <Route path="/login" element={isUserLoggedIn() ? <Navigate to="/" /> : <Login onSuccess={handleHomeShow} onRegisterClick={handleRegisterShow} onError={handleError} />} />
+
+      <Route path="/register" element={isUserLoggedIn() ? <Navigate to="/" /> : <Register onSuccess={handleLoginShow} onLoginClick={handleLoginShow} onError={handleError} />} />
+
+      <Route path="/*" element={isUserLoggedIn() ? <Home onLogout={handleLoginShow} onError={handleError} /> : <Navigate to="/login" />} />
+
+
+    </Routes>
+
+    {feedback ? <Feedback message={feedback} onAccept={handleAcceptFeedback} /> : null}
+  </>
 }
 
-export default App
+export default Ap p

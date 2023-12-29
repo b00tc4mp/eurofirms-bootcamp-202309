@@ -55,6 +55,7 @@ La propia app debería devolver un pdf con el formato de repris que se entregar�
 ### Modelo de datos
 
 #### User
+
 - id (string, unique, required)
 - name (string, required)
 - password (string, required)
@@ -62,22 +63,38 @@ La propia app debería devolver un pdf con el formato de repris que se entregar�
 - active (boolean)
 
 #### Event
+
 - id (string, unique, required)
 - date (string, required)
 - organizer (User.id, required)
 - location (string, required)
         
-####Inscripción de jinetes en evento: 
-Nombre y apellidos del jinete/amazona (string, required)
-- LDN: (string, required)
-- nombre del caballo (string, required)
-- LAC (string, required)
-- prueba:  oficial/open
-- disciplina: doma clásica/doma paralímpica 
-*) cuando clásica (categoría, reprise), cuando paralimpica (grado, reprise))
+#### Competitor 
 
-####Jueces
-- Nombre del juez. (string, required)
-- Nota (number, required)
-- Observaciones: (string)
-Observaciones generales (string)
+- fullName (string, required)
+- license (string, required)
+- horseName(string, required)
+- horseLicense (string, required)
+- trialType (string, official|open, required)
+- discipline (string, dressage|paralympic, required)
+- dressageCategory (string, ap|benjamin|alevin|... )
+- dressageRepriseType (string, team|individual|kür)
+- paralympicGrade (string, 1-6|6a|6b)
+- paralympicRepriseType (string, novel|intermediate|GP)
+
+#### Judges
+
+- name (string, required)
+- note (number, required)
+- coments (string)
+- Aditional coment (string)
+
+#### C judge 
+
+- name (string, required)
+- note (number, required)
+- coments (string)
+- Aditional coment (string)
+- first error (boolean)
+- second error (boolean)
+- third error|eliminated (boolean)
