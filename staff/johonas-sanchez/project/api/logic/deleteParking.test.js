@@ -4,7 +4,7 @@ const deleteParking = require('./deleteParking')
 mongoose.connect('mongodb://127.0.0.1:27017/projectTest')
     .then(() => {
         try {
-            deleteParking('658edafb256bbad09cd4c23c', '658ef07bb421ba1a11c24099', error => {
+            deleteParking('6593d3059ea31c753328c2fd', '6593e2ef303fba11492e51f9', error => {
                 if (error) {
                     console.error(error)
 

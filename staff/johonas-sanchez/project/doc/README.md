@@ -33,6 +33,7 @@ User
 - name (string, required)
 - email (string, unique, required)
 - password (string, required)
+- role (string, manager|user)
 - saved ([Parking.id])
 
 Parking
@@ -42,6 +43,7 @@ Parking
     long: number required
     })
 - reviews ([Review.id])
+- confirm (boolean, required)
 
 Review
 - id (string, unique, required)

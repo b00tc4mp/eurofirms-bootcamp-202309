@@ -22,6 +22,11 @@ const user = new Schema({
       type: String,
       required: true,
    },
+   role: {
+      type: String,
+      enum: ['Manager', 'User'],
+      required: true
+  },
    saved: {
       type: [ObjectId],
       ref: "Parking",
@@ -49,6 +54,12 @@ const parking = new Schema({
       required: true,
       ref: "Review"
    },
+   confirm: {
+      type: [ObjectId],
+      required: true,
+      ref: "User"
+   },
+
 })
 
 const review = new Schema({

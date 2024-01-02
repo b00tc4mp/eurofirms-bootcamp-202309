@@ -29,6 +29,12 @@ function deleteParking(userId, parkingId, callback) {
                         return
                     }
 
+                    if (parking.confirm.length > 0) {
+                        callback(new ClearanceError('you can not delete a confirmed parking space'))
+
+                        return
+                    }
+
                     Parking.deleteOne({ _id: parkingId })
                         .then(result => {
                             if(result.deletedCount === 0) {
