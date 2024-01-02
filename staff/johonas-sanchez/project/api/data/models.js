@@ -54,7 +54,7 @@ const parking = new Schema({
       required: true,
       ref: "Review"
    },
-   confirm: {
+   confirmations: {
       type: [ObjectId],
       required: true,
       ref: "User"
