@@ -112,29 +112,34 @@ const competitor = new Schema({
         enum: ['Grado I Novel A', 'Grado I Novel B', 'Grado I Intermedia A', 'Grado I Intermedia B', 'Grado I Gran Premio A', 'Grado I Gran Premio B', 'Grado I Kür Gran Premio', 'Grado II Novel A', 'Grado II Novel B', 'Grado II Intermedia A', 'Grado II Intermedia B', 'Grado II Gran Premio A', 'Grado II Gran Premio B', 'Grado II Kür Gran Premio', 'Grado III Novel A', 'Grado III Novel B', 'Grado III Intermedia A', 'Grado III Intermedia B', 'Grado III Gran Premio A', 'Grado III Gran Premio B', 'Grado III Kür Gran Premio', 'Grado IV Novel A', '0Grado IV Novel B', 'Grado IV Intermedia A', 'Grado IV Intermedia B', 'Grado IV Gran Premio A', 'Grado IV Gran Premio B', 'Grado IV Kür Gran Premio', 'Grado V Novel A', 'Grado V Novel B', 'Grado V Intermedia A', 'Grado V Intermedia B', 'Grado V Gran Premio A', 'Grado V Gran Premio B', 'Grado V Kür Gran Premio', 'Grado VI-A Novel A', 'Grado VI-A novel B', 'Grado VI-A Intermedia A', 'Grado VI-A Intermedia B', 'Grado VI-A Gran Premio A', 'Grado VI-A Gran Premio B', 'Grado VI-A Kür Gran Premio', 'Grado VI-B Novel A', 'Grado VI-B novel B', 'Grado VI-B Intermedia A', 'Grado VI-B Intermedia B', 'Grado VI-B Gran Premio A', 'Grado VI-B Gran Premio B', 'Grado VI-B Kür Gran Premio']
     },
 
-    valuation: {
-        type: ObjectId,
-        ref: 'Valuation'
-    }
+
 
 })
 
-const exercises = new Schema({
+const exercise = new Schema({
     mark: {
         type: number,
         required: true
-    },
-
-    coment: {
-        type: String
     },
 
     coefficient: {
         type: number,
         enum: [1, 2, 3, 4],
         default: 1
+    },
+
+    finalMark: {
+        type: number
+
+    },
+
+    coment: {
+        type: String
     }
+
+
 })
+
 
 const valuation = new Schema({
     judge: {
@@ -142,7 +147,16 @@ const valuation = new Schema({
         ref: 'User'
     },
 
-    exercises: [exercises]
+    Competitor: {
+        type: ObjectId,
+        Ref: 'Competitor'
+    },
+
+    exercise: [exercise],
+
+    finalScore: {
+        Type: sum
+    }
 })
 
 const User = model('User', user)
