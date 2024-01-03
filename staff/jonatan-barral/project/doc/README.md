@@ -18,40 +18,46 @@ Sumará las notas porcentuales de los jueces y las dibidirá entre el número de
 
 La propia app debería devolver un pdf con el formato de repris que se entregará, bien en papel o bien por correo electrónico a cada jinete.
 
+## Descripción Funcional
 
-## Tipos de usuarios y funciones
+### Tipos de usuarios y funciones
 
-###Administrador
+#### Administrador
 
 - Crear eventos
 - Proporcionar credenciales de acceso a los comités organizadores
 - Restringir el acceso una vez terminado el tiempo de contratación
 
-### Secretaría
+#### Secretaría
 
 - Inscribir jinetes/amazonas en el evento
 - Revisar y corregir las puntuaciones de los jueces 
 - Crear actas 
  - Enviar o imprimir hojas de puntuación
 
-### Jueces
+#### Jueces
 
 - Introducir su nombre
 - Seleccionar el jinete a juzgar
 - Valorar y comentar ejercicios.
 - Confirmar notas
 
-### Juez C (presidente de la prueba)
+#### Juez C (presidente de la prueba)
 
 - Introducir su nombre
+- Indicar el punto desde el que está juzgando
 - Seleccionar el jinete a juzgar
 - Valorar y comentar ejercicios.
 - Marcar errores 
 - Eliminar
 - Confirmar notas
 
+#### Funcionalidades
+
+TODO
 
 ## Descripción técnica
+
 ### Modelo de datos
 
 #### User
@@ -96,8 +102,11 @@ La propia app debería devolver un pdf con el formato de repris que se entregar�
 #### Reprise
 
 - id (string, required, unique)
-- type (string, AP Final|AP Preliminar|Benjamines 1|Benjamines 2|4 años experimental|4 años preliminar|4 años final|Alevines equipos|Alevines individual|Alevines preliminar|Promoción 1|Rider 1A|Rider 1B|Rider 1C|5 años final|5 años preliminar|Infantiles Equipos|Infantiles Individual|Infantiles Preliminar A|Infantiles Preliminar B|Promoción 2|Rider 2A|Rider 2B|Rider 2C|Juveniles 0 Equipos|Juveniles 0 Individual|Juveniles 0 Preliminar|Kur Juveniles 0|Promoción 3|Rider 3A|rider 3B|Rider 3C|Rider 3D|Ponis Equipos|Ponis Individual|Kur Ponis|Ponis Preliminar|6 Años Final|6 Años Preliminar|Clásica 1|Clásica 2|Clásica 3|Juveniles Individual|Juveniles Preliminar|Juveniles Equipos|Kur Juveniles|Promoción 4|Jóvenes Jinetes Equipos|Jóvenes Jinetes Individual|Jóvenes Jinetes Preliminar|Kur Jóvenes Jinetes|Preliminar Caballos 7 Años|Final Caballos Jóvenes|San Jorge|Intermedia I|Kur Intermedia I|Intermedia II|Intermedia A|Intermedia B|Kur Intermedia A-B|Gran Premio Caballos Jóvenes J 8|Gran Premio Especial|Gran Premio U25|Gran Premio|Kur Gran Premio | Grado I Novel A|Grado I Novel B|Grado I Intermedia A|Grado I Intermedia B|Grado I Gran Premio A|Grado I Gran Premio B|Grado I Kür Gran Premio|Grado II Novel A|Grado II Novel B|Grado II Intermedia A|Grado II Intermedia B|Grado II Gran Premio A|Grado II Gran Premio B|Grado II Kür Gran Premio|Grado III Novel A|Grado III Novel B|Grado III Intermedia A|Grado III Intermedia B|Grado III Gran Premio A|Grado III Gran Premio B|Grado III Kür Gran Premio|Grado IV Novel A|0Grado IV Novel B|Grado IV Intermedia A|Grado IV Intermedia B|Grado IV Gran Premio A|Grado IV Gran Premio B|Grado IV Kür Gran Premio|Grado V Novel A|Grado V Novel B|Grado V Intermedia A|Grado V Intermedia B|Grado V Gran Premio A|Grado V Gran Premio B|Grado V Kür Gran Premio|Grado VI-A Novel A|Grado VI-A novel B|Grado VI-A Intermedia A|Grado VI-A Intermedia B|Grado VI-A Gran Premio A|Grado VI-A Gran Premio B|Grado VI-A Kür Gran Premio|Grado VI-B Novel A|Grado VI-B novel B|Grado VI-B Intermedia A|Grado VI-B Intermedia B|Grado VI-B Gran Premio A|Grado VI-B Gran Premio B|Grado VI-B Kür Gran Premio)
+- type (string, AP Final|AP Preliminar|Benjamines 1|Benjamines 2|4 años experimental|4 años preliminar|4 años final|Alevines equipos|Alevines individual|Alevines preliminar|Promoción 1|Rider 1A|Rider 1B|Rider 1C|5 años final|5 años preliminar|Infantiles Equipos|Infantiles Individual|Infantiles Preliminar A|Infantiles Preliminar B|Promoción 2|Rider 2A|Rider 2B|Rider 2C|Juveniles 0 Equipos|Juveniles 0 Individual|Juveniles 0 Preliminar|Kur Juveniles 0|Promoción 3|Rider 3A|rider 3B|Rider 3C|Rider 3D|Ponis Equipos|Ponis Individual|Kur Ponis|Ponis Preliminar|6 Años Final|6 Años Preliminar|Clásica 1|Clásica 2|Clásica 3|Juveniles Individual|Juveniles Preliminar|Juveniles Equipos|Kur Juveniles|Promoción 4|Jóvenes Jinetes Equipos|Jóvenes Jinetes Individual|Jóvenes Jinetes Preliminar|Kur Jóvenes Jinetes|Preliminar Caballos 7 Años|Final Caballos Jóvenes|San Jorge|Intermedia I|Kur Intermedia I|Intermedia II|Intermedia A|Intermedia B|Kur Intermedia A-B|Gran Premio Caballos Jóvenes J 8|Gran Premio Especial|Gran Premio U25|Gran Premio|Kur Gran Premio | Grado I Novel A|Grado I Novel B|Grado I Intermedia A|Grado I Intermedia B|Grado I Gran Premio A|Grado I Gran Premio B|Grado I Kür Gran Premio|Grado II Novel A|Grado II Novel B|Grado II Intermedia A|Grado II Intermedia B|Grado II Gran Premio A|Grado II Gran Premio B|Grado II Kür Gran Premio|Grado III Novel A|Grado III Novel B|Grado III Intermedia A|Grado III Intermedia B|Grado III Gran Premio A|Grado III Gran Premio B|Grado III Kür Gran Premio|Grado IV Novel A|Grado IV Novel B|Grado IV Intermedia A|Grado IV Intermedia B|Grado IV Gran Premio A|Grado IV Gran Premio B|Grado IV Kür Gran Premio|Grado V Novel A|Grado V Novel B|Grado V Intermedia A|Grado V Intermedia B|Grado V Gran Premio A|Grado V Gran Premio B|Grado V Kür Gran Premio|Grado VI-A Novel A|Grado VI-A novel B|Grado VI-A Intermedia A|Grado VI-A Intermedia B|Grado VI-A Gran Premio A|Grado VI-A Gran Premio B|Grado VI-A Kür Gran Premio|Grado VI-B Novel A|Grado VI-B novel B|Grado VI-B Intermedia A|Grado VI-B Intermedia B|Grado VI-B Gran Premio A|Grado VI-B Gran Premio B|Grado VI-B Kür Gran Premio)
 - exercises ([Exercise.id, required])
+- total Exercices (number, required)
+- collectiveMarks ([collectiveMark.id], required)
+- totalRepris (number, required)
 
 #### Exercise
 
@@ -105,8 +114,14 @@ La propia app debería devolver un pdf con el formato de repris que se entregar�
 - order (number, 1-N)
 - letters (string, required)
 - movements (string, required)
-- coefficient (number 1|2|3|4, required)
+- coefficient (number 1|2|3|4|5|6|7|8|9|10, required)
 - directives (string, required)
+
+#### CollectiveMark
+
+- id (string, required)
+- directives (string, required)
+- coefficient (number 1|2|3|4, required)
 
 #### Valuation
 
@@ -116,5 +131,7 @@ La propia app debería devolver un pdf con el formato de repris que se entregar�
 - competitor (Competitor.id, required)
 - horse (Horse.id, required)
 - exercise (Exercise.id)
+- collectiveMark (CollectiveMark.Id)
 - mark (number, required)
 - comment (string)
+- generalRemarks (string)
