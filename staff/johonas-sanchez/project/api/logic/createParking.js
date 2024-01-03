@@ -1,5 +1,5 @@
 const { validate } = require('./helpers')
-const { User, Parking } = require('../data/models')
+const { User, Parking, Point } = require('../data/models')
 const { NotFoundError, SystemError } = require('./errors')
 
 function createParking(userId, lat, long, callback) {
@@ -16,7 +16,9 @@ function createParking(userId, lat, long, callback) {
                 return
             }
 
-            Parking.create({ locator: userId, location: { lat, long } })
+            const point = new Point({coordinates: [long, lat]})
+
+            Parking.create({ locator: userId, location: point })
                 .then(() => callback(null))
                 .catch(error => callback(new SystemError(error.message)))
         })

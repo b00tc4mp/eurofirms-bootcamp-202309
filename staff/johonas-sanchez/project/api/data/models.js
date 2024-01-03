@@ -29,20 +29,27 @@ const user = new Schema({
   },
    saved: {
       type: [ObjectId],
-      ref: "Parking",
+      ref: 'Parking',
    },
+})
+
+const point = new Schema({
+   type: {
+      type: String,
+      default: 'Point',
+      required: true
+    },
+    coordinates: {
+      type: [Number],
+      required: true
+    }
 })
 
 const parking = new Schema({
    location: {
-      lat: {
-         type: Number,
-         required: true,
-      },
-      long: {
-        type: Number,
-        required: true,
-     },
+      type: point,
+      required: true,
+      index: '2dsphere'
    },
    locator: {
       type: ObjectId,
@@ -78,12 +85,16 @@ const review = new Schema({
 
  })
 
+
 const User = model("User", user)
+const Point = model("Point", point)
 const Parking = model("Parking", parking)
 const Review = model("Review", review)
 
+
 module.exports = {
    User,
+   Point,
    Parking,
    Review
 }
