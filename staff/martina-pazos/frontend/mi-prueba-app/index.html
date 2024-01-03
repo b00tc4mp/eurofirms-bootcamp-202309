@@ -10,47 +10,66 @@
 </head>
 
 <body>
-    <div id="register-view">
+    <div id="register-view" class="view">
         <h1>Register</h1>
-        <form id="register-form">
-            <label for="name-input">Name</label>
-            <input type="text" id="name-input">
+        <form id="register-form" class="form">
+            <label for="name-input" class="name">Name</label>
+            <input type="text" id="name-input" class="name-input">
 
-            <label for="email-input">Email</label>
-            <input type="email" id="email-input">
+            <label for="email-input" class="email">Email</label>
+            <input type="email" id="email-input" class="email-input">
 
-            <label for=" password-input">Password</label>
-            <input type="password" id="password-input">
+            <label for=" password-input" class="password">Password</label>
+            <input type="password" id="password-input" class="password-input">
 
-            <button type="submit">Register</button>
-            <button type="reset">Clear</button>
+            <button type="submit" id="register">Register</button>
+            <button type="reset" id="clear">Clear</button>
         </form>
         <a id="login-link" href="">Login</a>
     </div>
 
 
-    <div id="login-view">
+    <div id="login-view" class="view">
         <h1>Login</h1>
-        <form id="login-form">
-            <label for="email-input-login">Email</label>
-            <input type="email" id="email-input-login">
+        <form id="login-form" class="form">
+            <label for="email-input-login" class="name">Email</label>
+            <input type="email" id="email-input-login" class="name-input">
 
-            <label for="password-input-login">Password</label>
-            <input type="password" id="password-input-login">
+            <label for="password-input-login" class="password">Password</label>
+            <input type="password" id="password-input-login" class="password-input">
 
-            <button type="submit">Login</button>
-            <button type="reset">Clear</button>
+            <button type="submit" id="login">Login</button>
+            <button type="reset" id="clear">Clear</button>
         </form>
         <a id="register-link" href="">Register</a>
     </div>
 
 
     <div id="home-view">
-        <h1>Hello Wold!</h1>
+        <h1>Hello World!</h1>
         <button id="logout-button">Logout</button>
 
+        <div id="posts-list">
+            <!--article>
+                <img class="post-image"
+                    src="https://imgs.search.brave.com/KYetCiw1rgr1fq3bX8kvtM1NJmcbuTbh10z4FG9KumA/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9hc3Nl/dHMuc3RpY2twbmcu/Y29tL2ltYWdlcy81/ODdiNTczNzQ0MDYw/OTA5YWE2MDNhYTgu/cG5n"
+                    alt="">
+                <p>Pepito Grillo en acción</p>
+            </article>
+
+            <article>
+                <img class="post-image"
+                    src="https://imgs.search.brave.com/RB6hZ4oGv9OeVRcnsPm39FXsqOeS8Mrwm77djH0X2yU/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pMC53/cC5jb20vd3d3LmZp/ZXN0YWlkZWFzY2x1/Yi5jb20vd3AtY29u/dGVudC91cGxvYWRz/LzIwMTQvMDEvZm9u/ZG9fZGVfdGlua2Vy/YmVsbF93cF8xXzEw/MjR4NzY4LmpwZz9y/ZXNpemU9NjQwLDQ4/MA"
+                    alt="">
+                <p>Toda un hada, para soñar</p>
+            </article>-->
+        </div>
     </div>
 
+    <script src="data.js"></script>
+    <script src="views/register.js"></script>
+    <script src="views/login.js"></script>
+    <script src="views/home.js"></script>
     <script src="main.js"></script>
 </body>
 
