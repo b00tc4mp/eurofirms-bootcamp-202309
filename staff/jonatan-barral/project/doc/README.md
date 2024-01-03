@@ -127,6 +127,8 @@ TODO
 
 - id (string, unique, required)
 - competition (Competition.id, rquired)
+- test (test.id, required)
+- reprise (reprise.id, required)
 - judge (User.id, required)
 - competitor (Competitor.id, required)
 - horse (Horse.id, required)
