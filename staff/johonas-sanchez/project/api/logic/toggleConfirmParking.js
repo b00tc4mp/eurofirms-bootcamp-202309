@@ -23,12 +23,12 @@ function toggleConfirmParking(userId, parkingId, callback) {
                         return
                     }
 
-                    const index = parking.confirm.findIndex(userObjectId => userObjectId.toString() === userId)
+                    const index = parking.confirmations.findIndex(userObjectId => userObjectId.toString() === userId)
 
                     if (index < 0)
-                        parking.confirm.push(userId)
+                        parking.confirmations.push(userId)
                     else
-                        parking.confirm.splice(index, 1)
+                        parking.confirmations.splice(index, 1)
 
                     parking.save()
                         .then(() => callback(null))
