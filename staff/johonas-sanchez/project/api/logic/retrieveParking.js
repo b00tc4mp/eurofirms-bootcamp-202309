@@ -1,10 +1,10 @@
 const { validate } = require("./helpers")
-const { User, Review } = require("../data/models")
+const { User, Parking } = require("../data/models")
 const { NotFoundError, SystemError } = require("./errors")
 
-function retrieveParkingReview(userId, reviewId, callback) {
+function retrieveParking(userId, parkingId, callback) {
    validate.id(userId, "user id")
-   validate.id(reviewId, "review id")
+   validate.id(parkingId, "parking id")
    validate.function(callback, "callback")
 
    User.findById(userId)
@@ -15,19 +15,19 @@ function retrieveParkingReview(userId, reviewId, callback) {
             return
          }
 
-         Review.findById(reviewId).select('-__v')
-            .then(review => {
-               if (!review) {
-                  callback(new NotFoundError("review not found"))
+         Parking.findById(parkingId).select('-__v')
+            .then(parking => {
+               if (!parking) {
+                  callback(new NotFoundError("parking not found"))
 
                   return
                }
 
-               callback(null, review)
+               callback(null, parking)
             })
             .catch((error) => callback(new SystemError(error.message)))
       })
       .catch((error) => callback(new SystemError(error.message)))
 }
 
-module.exports = retrieveParkingReview
+module.exports = retrieveParking
