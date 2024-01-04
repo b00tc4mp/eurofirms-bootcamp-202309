@@ -3,9 +3,9 @@ const { ContentError, DuplicityError } = require('../logic/errors')
 
 module.exports = (req, res) => {
     try {
-       const { name, email, password, role } = req.body
+       const { lat, long} = req.body
 
-       logic.registerUser(name, email, password, role)
+       logic.createParking(lat, long)
        .then(() => res.status(201).send())
        .catch(error => {
              let status = 500

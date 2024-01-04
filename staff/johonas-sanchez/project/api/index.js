@@ -9,6 +9,7 @@ const {
    authenticateUserHandler,
    registerUserHandler,
    retrieveUserHandler,
+   createParkingHandler,
 } = require('./handlers')
 
 mongoose.connect(process.env.MONGODB_URL).then(() => {
@@ -29,6 +30,11 @@ mongoose.connect(process.env.MONGODB_URL).then(() => {
    // Implement retrieveUser endpoint
 
    api.get("/users", retrieveUserHandler)
+
+   // Implement createParking endpoint
+
+   api.post("/parking", jsonBodyParser, createParkingHandler)
+
 
 
    api.listen(process.env.PORT, () => console.log(`API listening on port ${process.env.PORT}`))
