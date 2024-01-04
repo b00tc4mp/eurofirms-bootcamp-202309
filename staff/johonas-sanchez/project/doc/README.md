@@ -36,17 +36,19 @@ User
 - role (string, manager|user)
 - saved ([Parking.id])
 
+Point
+- type (string, default, required)
+- coodinates ([number, number], required)
+
 Parking
 - id (string, unique, required)
-- location ({
-    lat: number required, 
-    long: number required
-    })
-- reviews ([Review.id])
-- confirm (boolean, required)
+- location (point, required)
+- locator (User.Id, required)
+- confirmations ([User.id])
 
 Review
 - id (string, unique, required)
+- parking (Parking.Id, required)
 - author (User.id, required)
-- comment (string, required)
+- comment (string)
 - valuation (number, required)
