@@ -56,24 +56,23 @@ const parking = new Schema({
       required: true,
       ref: "User"
    },
-   reviews: {
-      type: [ObjectId],
-      required: true,
-      ref: "Review"
-   },
    confirmations: {
       type: [ObjectId],
-      required: true,
-      ref: "User"
+      ref: 'User'
    },
 
 })
 
 const review = new Schema({
+   parking: {
+      type: ObjectId,
+      ref: 'Parking',
+      required: true,
+   },
     author: {
        type: ObjectId,
        required: true,
-       ref: "User",
+       ref: 'User',
     },
     comment: {
         type: String,

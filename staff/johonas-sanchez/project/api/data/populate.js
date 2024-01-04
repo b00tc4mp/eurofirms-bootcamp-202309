@@ -24,7 +24,7 @@ mongoose
    .then(([user1, user2, user3]) => {
       const point1 = new Point({ coordinates: [40.03098, -6.086394] })
 
-      // Crear el parking1 y asignarle el locator como el _id de user1
+      // Crear el parking y asignarle el locator como el _id de user1
       const parking1 = new Parking({ location: point1, locator: user1._id, point1 })
 
       const point2 = new Point({ coordinates: [40.031595, -6.085502] })
@@ -64,8 +64,24 @@ mongoose
       ]
 
       // Guardar el parking
-      return Promise.all(parkingPromise)
+      return Promise.all(parkingPromise).then(([p1, p2, p7, p8]) => {
+         const review1 = new Review({ parking: p1.id, author: user3.id, comment: "Siempre ocupada", valuation: 6 })
+         const review2 = new Review({ parking: p2.id, author: user1.id, comment: "Fácil aparcamiento y suele estar libre", valuation: 8 })
+         const review3 = new Review({ parking: p2.id, author: user2.id, comment: "Aparca gente no autorizada", valuation: 5 })
+         const review4 = new Review({
+            parking: p7.id,
+            author: user2.id,
+            comment: "Itinerario completamente adaptado y tiene alternativas cerca",
+            valuation: 9,
+         })
+         const review5 = new Review({ parking: p8.id, author: user1.id, comment: "Espacio muy justo", valuation: 4 })
+
+         const reviewPromise = [review1.save(), review2.save(), review3.save(), review4.save(), review5.save()]
+
+         return Promise.all(reviewPromise)
+      })
    })
+
    .then(() => {
       console.log("Saved...")
    })
