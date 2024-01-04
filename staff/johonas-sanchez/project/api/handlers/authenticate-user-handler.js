@@ -10,7 +10,7 @@ module.exports = (req, res) => {
       logic.authenticateUser(email, password)
          .then((userId) => {
             // const token = jwt.sign({ sub: userId }, "es posible que pronto sea abuelo", { expiresIn: '10s' }  ) // Ponemos la fecha de expiración del token
-            const token = jwt.sign({ sub: userId }, process.env.JWT_SECRET, { expiresIn: "1m" })
+            const token = jwt.sign({ sub: userId }, process.env.JWT_SECRET )
 
             res.json(token)
          })
