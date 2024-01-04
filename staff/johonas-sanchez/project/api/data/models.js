@@ -40,7 +40,7 @@ const point = new Schema({
       required: true,
    },
    coordinates: {
-      type: [Number, Number],
+      type: [Number],
       required: true,
    },
 })
