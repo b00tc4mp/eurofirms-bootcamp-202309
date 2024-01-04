@@ -40,7 +40,7 @@ function retrieveParkingsByGeo(userId, lat, long, dist, callback) {
                     parking.saved = user.saved.some(parkingObjectId => parkingObjectId.toString() === parking.id)
                 })
 
-                callback(null, parkings);
+                callback(null, parkings)
             })
             .catch(error => callback(new SystemError(error.message)))
         })
