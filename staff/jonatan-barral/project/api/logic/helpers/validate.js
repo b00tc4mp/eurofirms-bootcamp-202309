@@ -7,13 +7,6 @@ const validate = {
         if (text.trim().length === 0) throw new ContentError(explain + ' is empty string')
     },
 
-    email(email, explain) {
-        this.text(email, explain)
-
-        if (!email.includes('@')) throw new ContentError(explain + ' is not a valid email')
-        if (!email.includes('.')) throw new ContentError(explain + ' is not a valid email')
-    },
-
     password(password, explain) {
         this.text(password, explain)
 
@@ -36,6 +29,16 @@ const validate = {
 
     id(id, explain) {
         if (!isValidObjectId(id)) throw new TypeError(explain + ' is not a valid id')
+    },
+
+    role(role, explain) {
+        this.text(role, explain)
+
+        const allowedRoles = ['Administrador', 'Secretaría', 'Juez', 'Juez C']
+
+        if (!allowedRoles.includes(role)) {
+            throw new Error(role + ' is not a valid role')
+        }
     }
 }
 

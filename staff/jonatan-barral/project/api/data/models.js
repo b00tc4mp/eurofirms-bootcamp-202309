@@ -10,7 +10,7 @@ const user = new Schema({
     },
 
 
-    username: {
+    userName: {
         type: String,
         required: true,
         unique: true
@@ -62,7 +62,19 @@ const competition = new Schema({
     location: {
         type: String,
         required: true
-    }
+    },
+
+    competitors: [{
+        type: ObjectId,
+        ref: 'Competitor',
+        required: true
+    }],
+
+    horses: [{
+        type: ObjectId,
+        ref: 'Horse',
+        required: true
+    }]
 })
 
 
@@ -103,7 +115,8 @@ const test = new Schema({
 
     level: {
         type: String,
-        enum: ['0', '1', '2', '3', '4', 'San Jorge', 'Intermedia 1', 'Intermedia 2', 'intermedia A-B', 'Gran Premio', 'Doma Paralímpica']
+        enum: ['0', '1', '2', '3', '4', 'San Jorge', 'Intermedia 1', 'Intermedia 2', 'intermedia A-B', 'Gran Premio', 'Doma Paralímpica'],
+        required: true
     },
 
     reprise: {
@@ -121,32 +134,17 @@ const reprise = new Schema({
         required: true
     },
 
-    exercises: [{
-        type: ObjectId,
-        ref: 'Exercise',
-        required: true
-    }],
-
-    totalExercises: {
-        type: Number,
-        required: true
-    },
-
-    collectiveMark: [{
-        type: ObjectId,
-        ref: 'CollectiveMark',
-        required: true
-    }],
-
-    totalRepris: {
-        type: Number,
-        required: true
-    }
 
 })
 
 
 const exercise = new Schema({
+    reprise: {
+        type: ObjectId,
+        ref: 'Reprise',
+        required: true
+    },
+
     order: {
         type: Number,
         required: true
@@ -162,6 +160,12 @@ const exercise = new Schema({
         required: true
     },
 
+    points: {
+        type: Number,
+        default: 10,
+        required: true
+    },
+
     coefficient: {
         type: Number,
         enum: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
@@ -175,9 +179,26 @@ const exercise = new Schema({
     }
 })
 
-const collectiveMark = new Schema({
-    directives: {
+const collectiveNote = new Schema({
+    reprise: {
+        type: ObjectId,
+        ref: 'reprise',
+        required: true
+    },
+
+    order: {
+        type: number,
+        required: true
+    },
+
+    aspects: {
         type: String,
+        required: true
+    },
+
+    points: {
+        type: Number,
+        default: 10,
         required: true
     },
 
@@ -190,9 +211,134 @@ const collectiveMark = new Schema({
 
 })
 
+const failure = new Schema({
+    coment: {
+        type: String
+    }
+})
+
+const mark = new Schema({
+    competition: {
+        type: ObjectId,
+        ref: 'Competition',
+        required: true
+    },
+
+    test: {
+        type: ObjectId,
+        ref: 'Test',
+        required: true
+    },
+
+    reprise: {
+        type: ObjectId,
+        ref: 'Reprise',
+        required: true
+    },
+
+    exercise: {
+        type: ObjectId,
+        ref: 'Exercise',
+        required: true
+    },
+
+    judge: {
+        type: ObjectId,
+        ref: 'User',
+        required: true
+
+    },
+
+    judgePosition: {
+        type: String,
+        required: true
+    },
+
+    competitor: {
+        type: ObjectId,
+        ref: 'Competitor',
+        required: true
+    },
+
+    horse: {
+        type: ObjectId,
+        ref: 'Horse',
+        required: true
+    },
+
+    mark: {
+        type: Number,
+        required: true
+    },
 
 
-const valuation = new Schema({
+    coment: {
+        type: String
+    },
+
+    failures: {
+        type: [failure]
+    }
+})
+
+
+const collectiveMark = new Schema({
+    competition: {
+        type: ObjectId,
+        ref: 'Competition',
+        required: true
+    },
+
+    test: {
+        type: ObjectId,
+        ref: 'Test',
+        required: true
+    },
+
+    reprise: {
+        type: ObjectId,
+        ref: 'Reprise',
+        required: true
+    },
+
+    collectiveNote: {
+        type: ObjectId,
+        ref: 'CollectiveNote',
+        required: true
+    },
+
+    judge: {
+        type: ObjectId,
+        ref: 'User',
+        required: true
+
+    },
+
+    judgePosition: {
+        type: String,
+        required: true
+    },
+
+    competitor: {
+        type: ObjectId,
+        ref: 'Competitor',
+        required: true
+    },
+
+    horse: {
+        type: ObjectId,
+        ref: 'Horse',
+        required: true
+    },
+
+    mark: {
+        type: Number,
+        required: true
+    },
+
+})
+
+const generalComent = new Schema({
     competition: {
         type: ObjectId,
         ref: 'Competition',
@@ -235,35 +381,10 @@ const valuation = new Schema({
         required: true
     },
 
-    exercise: {
-        type: ObjectId,
-        ref: 'Exercise',
-        required: true
-    },
-
-    collectiveMark: {
-        type: ObjectId,
-        ref: 'CollectiveMark',
-        required: true
-    },
-
-    mark: {
-        type: Number,
-        required: true
-    },
-
-
     coment: {
         type: String
-    },
-
-    generalRemarks: {
-        type: String
     }
-
 })
-
-
 const User = model('User', user)
 
 const Competition = model('Competition', competition)
@@ -278,9 +399,15 @@ const Reprise = model('Reprise', reprise)
 
 const Exercise = model('Exercise', exercise)
 
-const Valuation = model('Valuation', valuation)
+const CollectiveNote = model('CollectiveNote', collectiveNote)
+
+const Failure = model('Failure', failure)
+
+const Mark = model('Mark', mark)
 
 const CollectiveMark = model('CollectiveMark', collectiveMark)
+
+const GeneralComent = model('GeneralComent', generalComent)
 
 module.exports = {
     User,
@@ -290,6 +417,10 @@ module.exports = {
     Test,
     Reprise,
     Exercise,
-    Valuation,
-    CollectiveMark
+    CollectiveNote,
+    Failure,
+    Mark,
+    CollectiveMark,
+    GeneralComent
+
 }
