@@ -30,7 +30,7 @@ const user = new Schema({
     active: {
         type: Boolean,
         default: true
-    },
+    }
 
 })
 
@@ -74,9 +74,14 @@ const competition = new Schema({
         type: ObjectId,
         ref: 'Horse',
         required: true
-    }]
-})
+    }],
 
+    active: {
+        type: Boolean,
+        default: true
+    }
+
+})
 
 const competitor = new Schema({
     fullName: {
