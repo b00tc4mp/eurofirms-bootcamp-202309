@@ -33,7 +33,7 @@ mongoose.connect(process.env.MONGODB_URL).then(() => {
 
    // Implement createParking endpoint
 
-   api.post("/parking", jsonBodyParser, createParkingHandler)
+   api.post("/parkings", jsonBodyParser, createParkingHandler)
 
 
 

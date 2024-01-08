@@ -4,7 +4,10 @@
   "description": "## Install dependencies",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node .",
+    "watch": "node --watch .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "inspect": "node --inspect-brk ."
   },
   "keywords": [],
   "author": "",

@@ -1,24 +1,31 @@
-const logic = require('../logic')
-const { ContentError, DuplicityError } = require('../logic/errors')
+const jwt = require("jsonwebtoken")
+
+const logic = require("../logic")
+const { ContentError, DuplicityError } = require("../logic/errors")
 
 module.exports = (req, res) => {
-    try {
-       const { lat, long} = req.body
+   try {
+      const token = req.headers.authorization.slice(7)
 
-       logic.createParking(lat, long)
-       .then(() => res.status(201).send())
-       .catch(error => {
-             let status = 500
+      const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
 
-             if (error instanceof DuplicityError) status = 409
+      const { lat, long } = req.body
 
-             res.status(status).json({ error: error.constructor.name, message: error.message })
-       })
-    } catch (error) {
-       let status = 500
+      logic
+         .createParking(userId, lat, long)
+         .then(() => res.status(201).send())
+         .catch((error) => {
+            let status = 500
 
-       if (error instanceof TypeError || error instanceof ContentError || error instanceof RangeError) status = 406
+            if (error instanceof DuplicityError) status = 409
 
-       res.status(status).json({ error: error.constructor.name, message: error.message })
-    }
- }
+            res.status(status).json({ error: error.constructor.name, message: error.message })
+         })
+   } catch (error) {
+      let status = 500
+
+      if (error instanceof TypeError || error instanceof ContentError || error instanceof RangeError) status = 406
+
+      res.status(status).json({ error: error.constructor.name, message: error.message })
+   }
+}
