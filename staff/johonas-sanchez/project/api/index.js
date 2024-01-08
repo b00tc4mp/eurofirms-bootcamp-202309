@@ -10,6 +10,7 @@ const {
    registerUserHandler,
    retrieveUserHandler,
    createParkingHandler,
+   retrieveParkingsHandler
 } = require('./handlers')
 
 mongoose.connect(process.env.MONGODB_URL).then(() => {
@@ -34,6 +35,10 @@ mongoose.connect(process.env.MONGODB_URL).then(() => {
    // Implement createParking endpoint
 
    api.post("/parkings", jsonBodyParser, createParkingHandler)
+
+   // Implement retrieveParkings endpoint
+
+   api.get("/parkings", jsonBodyParser, retrieveParkingsHandler)
 
 
 
