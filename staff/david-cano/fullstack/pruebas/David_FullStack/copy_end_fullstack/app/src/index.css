@@ -1,9 +1,16 @@
+/* Importamos la fuente "Inter" desde Google Fonts con los pesos 400 (Regular) y 700 (Negrita) */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
+/* Incluimos las reglas base de Tailwind CSS para normalizar el estilo en el navegador */
 @tailwind base;
+
+/* Incluimos las reglas de los componentes de Tailwind CSS */
 @tailwind components;
+
+/* Incluimos las reglas de utilidades de Tailwind CSS que permiten aplicar estilos de manera rápida */
 @tailwind utilities;
 
+/* Seleccionamos todos los elementos (*) de la página y establecemos la fuente "Inter" como la fuente predeterminada */
 * {
     font-family: Inter;
 }
