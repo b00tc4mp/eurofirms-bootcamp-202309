@@ -11,6 +11,7 @@ const {
    retrieveUserHandler,
    createParkingHandler,
    retrieveParkingsHandler, 
+   retrieveParkingHandler,
    toggleSaveParkingHandler
 } = require('./handlers')
 
@@ -40,6 +41,10 @@ mongoose.connect(process.env.MONGODB_URL).then(() => {
    // Implement retrieveParkings endpoint
 
    api.get("/parkings", jsonBodyParser, retrieveParkingsHandler)
+
+   // Implement retrieveParking endpoint
+
+   api.get("/parkings/:parkingId", jsonBodyParser, retrieveParkingHandler)
 
    // Implement toggleSaveParking endpoint
 

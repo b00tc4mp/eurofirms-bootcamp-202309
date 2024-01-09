@@ -3,6 +3,7 @@ const retrieveUser = require('./retrieveUser')
 const authenticateUser = require('./authenticateUser')
 const createParking = require('./createParking')
 const retrieveParkings = require('./retrieveParkings')
+const retrieveParking = require('./retrieveParking')
 const toggleSaveParking = require('./toggleSaveParking')
 
 const logic = {
@@ -11,6 +12,7 @@ const logic = {
     retrieveUser,
     createParking,
     retrieveParkings,
+    retrieveParking,
     toggleSaveParking,
 }
 
