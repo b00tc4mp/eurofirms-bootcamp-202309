@@ -3,6 +3,7 @@ const registerUserHandler = require('./register-user-handler')
 const retrieveUserHandler = require('./retrieve-user-handler')
 const createParkingHandler = require('./create-parking-handler')
 const retrieveParkingsHandler = require('./retrieve-parkings-handler')
+const toggleSaveParkingHandler = require('./toggle-save-parking-handler')
 
 
 module.exports = {
@@ -10,5 +11,6 @@ module.exports = {
     registerUserHandler,
     retrieveUserHandler,
     createParkingHandler,
-    retrieveParkingsHandler
+    retrieveParkingsHandler,
+    toggleSaveParkingHandler,
 }
