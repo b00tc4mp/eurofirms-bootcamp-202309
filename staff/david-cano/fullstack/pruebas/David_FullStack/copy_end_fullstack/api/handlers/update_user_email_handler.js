@@ -3,9 +3,9 @@ const jwt = require('jsonwebtoken')
 
 // Importa la lógica del negocio y las clases de errores desde archivos externos
 const logic = require('../logic')
-const { ContentError, NotFoundError, ClearanceError } = require('../logic/errors')
+const { ContentError, NotFoundError, CredentialsError } = require('../logic/errors')
 
-// Exporta una función que maneja la eliminación de una publicación cuando llega una solicitud HTTP
+// Exporta una función que maneja la acción de actualizar el correo electrónico de un usuario cuando llega una solicitud HTTP
 module.exports = (req, res) => {
     try {
         // Extrae el token de autorización del encabezado (headers) de la solicitud y elimina el prefijo 'Bearer '
@@ -14,21 +14,21 @@ module.exports = (req, res) => {
         // Verifica y decodifica el token para obtener el ID del usuario (sub)
         const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
 
-        // Extrae el identificador de la publicación (postId) de los parámetros de la solicitud
-        const postId = req.params.postId
+        // Extrae los datos relacionados con la actualización del correo electrónico desde el cuerpo (body) de la solicitud
+        const { password, email, newEmail, repeatNewEmail } = req.body
 
-        // Llama a la función 'deletePost' de la lógica de negocio para eliminar una publicación
-        logic.deletePost(userId, postId, error => {
-            // Si hay un error al eliminar la publicación, maneja diferentes tipos de errores
+        // Llama a la función 'updateUserEmail' de la lógica de negocio para actualizar el correo electrónico del usuario
+        logic.updateUserEmail(userId, password, email, newEmail, repeatNewEmail, (error) => {
+            // Si hay un error al actualizar el correo electrónico, maneja diferentes tipos de errores
             if (error) {
                 let status = 500
 
                 // Si el error es de tipo 'NotFoundError', establece el estado a 404 (No encontrado)
                 if (error instanceof NotFoundError)
                     status = 404
-                // Si el error es de tipo 'ClearanceError', establece el estado a 403 (Prohibido)
-                else if (error instanceof ClearanceError)
-                    status = 403
+                // Si el error es de tipo 'CredentialsError', establece el estado a 401 (Credenciales incorrectas)
+                else if (error instanceof CredentialsError)
+                    status = 401
 
                 // Envía una respuesta con el código de estado y un mensaje de error en formato JSON
                 res.status(status).json({ error: error.constructor.name, message: error.message })
@@ -37,14 +37,14 @@ module.exports = (req, res) => {
                 return
             }
 
-            // Si la eliminación de la publicación es exitosa, envía una respuesta con el código de estado 204 (Sin contenido)
+            // Si la actualización del correo electrónico es exitosa, envía una respuesta con el código de estado 204 (Sin contenido)
             res.status(204).send()
         })
     } catch (error) {
         let status = 500
 
-        // Maneja diferentes tipos de errores (TypeError, ContentError, JsonWebTokenError)
-        if (error instanceof TypeError || error instanceof ContentError)
+        // Maneja diferentes tipos de errores (TypeError, ContentError, RangeError, JsonWebTokenError)
+        if (error instanceof TypeError || error instanceof ContentError || error instanceof RangeError)
             status = 406
         else if (error instanceof jwt.JsonWebTokenError)
             status = 401
