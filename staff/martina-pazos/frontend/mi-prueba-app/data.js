@@ -14,7 +14,7 @@ users[1] = {
 
 users[2] = {
     name: "Mafalda Niña",
-    email: "mafalda@niña.com",
+    email: "mafalda@nina.com",
     password: "123123123"
 }
 

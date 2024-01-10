@@ -4,7 +4,7 @@ var loginView = document.getElementById("login-view")
 loginView.style.display = ""
 
 
-//login to navigate a register
+//login  navigate a register
 var registerLink = loginView.querySelector("#register-link")
 registerLink.onclick = function (event) {
     event.preventDefault()
@@ -56,8 +56,19 @@ loginForm.onsubmit = function (event) {
     emailInput.value = ""
     passwordInput.value = ""
 
+    loggedInEmail = foundUser.email
+
 
     loginView.style.display = "none"
+    //cd apagamos login y encedemos la home, para pintar los nombres de los usuarios tenemos que pedir a home la clase de  los usuarios, que esta en html, en home view.
+
+
+    //render user name en la header de la home.quiero cambiar el texto que tenia antes (hello worl ), y poner otro.Esto hace que en lugar de aparece Hello word, aparezca el nombre del usuario que conectado a la app en ese momento
+    var userNameSpan = homeView.querySelector("#user-name-span")
+    userNameSpan.innerText = foundUser.name
+
+
+    //render posts is body en la home
     //cd apagamos login y encedemos la home, para pintar los posts tenemos que pedir a home el contenedor de  los post, que esta en html, en home view
     var postsList = homeView.querySelector("#posts-list")
     for (var i = 0; i < posts.length; i++) {
@@ -88,8 +99,4 @@ loginForm.onsubmit = function (event) {
 
 
     homeView.style.display = ""
-
-
-
-
 }

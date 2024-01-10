@@ -1,3 +1,8 @@
+h1,
+h2 {
+    margin: 0;
+}
+
 .view {
     display: flex;
     flex-direction: column;
@@ -11,6 +16,10 @@
     padding: 10vw;
     max-width: 500px;
     gap: 0.50vw;
+}
+
+.panel-lightskyblue {
+    background-color: lightskyblue;
 }
 
 
@@ -28,23 +37,23 @@
 
 
 .name-input {
-    border-radius: 0, 75vw;
-    border-width: 0.75vw;
+    border-radius: 0.75vw;
+    border-width: 0.25vw;
     border-color: black;
 }
 
 
 .email-input {
     border-radius: 0.75vw;
-    border-width: 0.75vw;
+    border-width: 0.25vw;
     border-color: black;
 }
 
 
 
 .password-input {
-    border-radius: 0, 75vw;
-    border-width: 0.75vw;
+    border-radius: 0.75vw;
+    border-width: 0.25vw;
     border-color: black;
 }
 
@@ -52,21 +61,21 @@
 #register {
     font-size: 6mm;
     border-radius: 0.75vw;
-    border-width: 0.75vw;
+    border-width: 0.25vw;
     border-color: black;
 }
 
 #clear {
     font-size: 6mm;
     border-radius: 0, 75vw;
-    border-width: 0.75vw;
+    border-width: 0.25vw;
     border-color: black
 }
 
 #login {
     font-size: 6mm;
     border-radius: 0.75vw;
-    border-width: 0.75vw;
+    border-width: 0.25vw;
     border-color: black;
 }
 
@@ -75,24 +84,32 @@
 #login-link {
     font-size: 6mm;
     border-radius: 0.75vw;
-    border-width: 0.75vw;
+    border-width: 0.25vw;
     border-color: blac
 }
 
 #register-link {
     font-size: 6mm;
     border-radius: 0.75vw;
-    border-width: 0.75vw;
+    border-width: 0.25vw;
     border-color: black
 }
 
 #logout-button {
     font-size: 6mm;
     border-radius: 0.75vw;
-    border-width: 0.75vw;
+    border-width: 0.25vw;
     border-color: black
 }
 
 .post-image {
     max-width: 300px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: cadetblue;
+
 }

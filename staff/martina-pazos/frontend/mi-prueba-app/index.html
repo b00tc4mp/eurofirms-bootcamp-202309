@@ -46,24 +46,32 @@
 
 
     <div id="home-view">
-        <h1>Hello World!</h1>
-        <button id="logout-button">Logout</button>
+        <header class="header">
+            <h1>Home</h1>
+            <span id="user-name-span">Hello world</span>
+            <button id="post-button">+</button>
+            <button id="logout-button">Logout</button>
+        </header>
+
+        <!--aqui hacemos el formulario para crear un post, se abre en el  boton +-->
+        <div id="post-panel" class="panel-lightskyblue">
+            <H2>Create post</H2>
+            <form id="post-form" class="form">
+                <label for="image-input">Image</label>
+                <input type="url" id="image-input">
+
+                <label for="text-input">Text</label>
+                <input type="text" id="text-input">
+
+                <button type="submit" id="post-button">Post</button>
+                <button id="cancel-post-button">Cancel</button>
+            </form>
+        </div>
 
         <div id="posts-list">
-            <!--article>
-                <img class="post-image"
-                    src="https://imgs.search.brave.com/KYetCiw1rgr1fq3bX8kvtM1NJmcbuTbh10z4FG9KumA/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9hc3Nl/dHMuc3RpY2twbmcu/Y29tL2ltYWdlcy81/ODdiNTczNzQ0MDYw/OTA5YWE2MDNhYTgu/cG5n"
-                    alt="">
-                <p>Pepito Grillo en acción</p>
-            </article>
-
-            <article>
-                <img class="post-image"
-                    src="https://imgs.search.brave.com/RB6hZ4oGv9OeVRcnsPm39FXsqOeS8Mrwm77djH0X2yU/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pMC53/cC5jb20vd3d3LmZp/ZXN0YWlkZWFzY2x1/Yi5jb20vd3AtY29u/dGVudC91cGxvYWRz/LzIwMTQvMDEvZm9u/ZG9fZGVfdGlua2Vy/YmVsbF93cF8xXzEw/MjR4NzY4LmpwZz9y/ZXNpemU9NjQwLDQ4/MA"
-                    alt="">
-                <p>Toda un hada, para soñar</p>
-            </article>-->
         </div>
+
+
     </div>
 
     <script src="data.js"></script>
