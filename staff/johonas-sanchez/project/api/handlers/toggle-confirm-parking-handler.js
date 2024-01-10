@@ -11,7 +11,7 @@ module.exports = (req, res) => {
 
       logic
          .toggleConfirmParking(userId, parkingId)
-         .then(() => res.status(201).send())
+         .then(() => res.status(200).send())
          .catch((error) => {
                let status = 500
 

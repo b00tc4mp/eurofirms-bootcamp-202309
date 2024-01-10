@@ -13,9 +13,10 @@ const {
    retrieveParkingsHandler,
    retrieveParkingHandler,
    toggleSaveParkingHandler,
-   createParkingReviewHandler,
+   createReviewHandler,
    toggleConfirmParkingHandler,
-   retrieveReviewHandler
+   retrieveReviewHandler,
+   deleteReviewHandler,
 } = require("./handlers")
 
 mongoose.connect(process.env.MONGODB_URL).then(() => {
@@ -55,7 +56,7 @@ mongoose.connect(process.env.MONGODB_URL).then(() => {
 
    // Create createParkingReview endpoint
 
-   api.post("/parkings/:parkingId/reviews", jsonBodyParser, createParkingReviewHandler)
+   api.post("/parkings/:parkingId/reviews", jsonBodyParser, createReviewHandler)
 
    // Create toggleConfirmParking endpoint
 
@@ -65,7 +66,11 @@ mongoose.connect(process.env.MONGODB_URL).then(() => {
 
    api.get("/reviews/:reviewId", retrieveReviewHandler)
 
+   // Create deleteReview endpoint
 
+   api.delete("/reviews/:reviewId", deleteReviewHandler)
+
+   
 
    api.listen(process.env.PORT, () => console.log(`API listening on port ${process.env.PORT}`))
 })

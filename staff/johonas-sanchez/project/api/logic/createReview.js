@@ -2,7 +2,7 @@ const { validate } = require("./helpers")
 const { User, Review, Parking } = require("../data/models")
 const { NotFoundError, SystemError, DuplicityError } = require("./errors")
 
-function createParkingReview(userId, parkingId, comment, valuation) {
+function createReview(userId, parkingId, comment, valuation) {
    validate.id(userId, "user id")
    validate.id(parkingId, "parking id")
    validate.text(comment, "comment")
@@ -43,4 +43,4 @@ function createParkingReview(userId, parkingId, comment, valuation) {
       })
 }
 
-module.exports = createParkingReview
+module.exports = createReview

@@ -11,7 +11,7 @@ module.exports = (req, res) => {
       const { comment, valuation } = req.body
 
       logic
-         .createParkingReview(userId, parkingId, comment, valuation)
+         .createReview(userId, parkingId, comment, valuation)
          .then(() => res.status(201).send())
          .catch((error) => {
             let status = 500
