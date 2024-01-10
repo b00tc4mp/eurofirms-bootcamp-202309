@@ -9,6 +9,7 @@ const createReview = require('./createReview')
 const toggleConfirmParking = require('./toggleConfirmParking')
 const retrieveReview = require('./retrieveReview')
 const deleteReview = require('./deleteReview')
+const deleteParking = require('./deleteParking')
 
 const logic = {
     registerUser,
@@ -22,6 +23,7 @@ const logic = {
     toggleConfirmParking,
     retrieveReview,
     deleteReview,
+    deleteParking,
 }
 
 module.exports = logic

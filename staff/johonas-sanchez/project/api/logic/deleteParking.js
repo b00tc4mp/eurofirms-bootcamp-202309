@@ -1,55 +1,40 @@
-const { validate } = require('./helpers')
-const { User, Parking } = require('../data/models')
-const { NotFoundError, ClearanceError, SystemError } = require('./errors')
+const { validate } = require("./helpers")
+const { User, Parking } = require("../data/models")
+const { NotFoundError, ClearanceError, SystemError } = require("./errors")
 
-function deleteParking(userId, parkingId, callback) {
-    validate.id(userId, 'user id')
-    validate.id(parkingId, 'parking id')
-    validate.function(callback, 'callback')
+function deleteParking(userId, parkingId) {
+   validate.id(userId, "user id")
+   validate.id(parkingId, "parking id")
 
-    User.findById(userId)
-        .then(user => {
-            if (!user) {
-                callback(new NotFoundError('user not found'))
+   return User.findById(userId)
+      .catch((error) => {
+         throw new SystemError(error.message)
+      })
+      .then((user) => {
+         if (!user) throw new NotFoundError("user not found")
 
-                return
-            }
+         return Parking.findById(parkingId)
+            .catch((error) => {
+               throw new SystemError(error.message)
+            })
+            .then((parking) => {
+               if (!parking) throw new NotFoundError("parking not found")
 
-            Parking.findById(parkingId)
-                .then(parking => {
-                    if (!parking) {
-                        callback(new NotFoundError('parking not found'))
+               if (parking.locator.toString() !== userId) throw new ClearanceError("parking does not belong to user")
 
-                        return
-                    }
+               if (parking.confirmations.length > 0) throw new ClearanceError("you can not delete a confirmed parking space")
 
-                    if (parking.locator.toString() !== userId) {
-                        callback(new ClearanceError('parking does not belong to user'))
+               return Parking.deleteOne({ _id: parkingId })
+                  .catch((error) => {
+                     throw new SystemError(error.message)
+                  })
+                  .then((result) => {
+                     if (result.deletedCount === 0) throw new SystemError("parking can not be deleted")
 
-                        return
-                    }
-
-                    if (parking.confirmations.length > 0) {
-                        callback(new ClearanceError('you can not delete a confirmed parking space'))
-
-                        return
-                    }
-
-                    Parking.deleteOne({ _id: parkingId })
-                        .then(result => {
-                            if(result.deletedCount === 0) {
-                                callback(new SystemError('parking can not be deleted'))
-
-                                return
-                            }
-                            
-                            callback(null)
-                        })
-                        .catch(error => callback(new SystemError(error.message)))
-                })
-                .catch(error => callback(new SystemError(error.message)))
-        })
-        .catch(error => callback(new SystemError(error.message)))
+                     return { success: true }
+                  })
+            })
+      })
 }
 
 module.exports = deleteParking

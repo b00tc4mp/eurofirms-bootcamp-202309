@@ -9,6 +9,7 @@ const createReviewHandler = require("./create-review-handler")
 const toggleConfirmParkingHandler = require("./toggle-confirm-parking-handler")
 const retrieveReviewHandler = require("./retrieve-review-handler")
 const deleteReviewHandler = require("./delete-review-handler")
+const deleteParkingHandler = require("./delete-parking-handler")
 
 module.exports = {
    authenticateUserHandler,
@@ -22,5 +23,6 @@ module.exports = {
    toggleConfirmParkingHandler,
    retrieveReviewHandler,
    deleteReviewHandler,
+   deleteParkingHandler,
 
 }

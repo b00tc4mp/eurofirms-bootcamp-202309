@@ -1,1 +1,1 @@
-curl -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NTk2ZDE1Mzc5N2ZmYTg0MWI0MTNlODYiLCJpYXQiOjE3MDQ4MDA2NzV9.vY74DpSJqCCa5JrujpzwWt1DRiHGkIqMs2lscy__yvU' -X PATCH localhost:4000/parkings/659e61c3b1aee9e66a5e40a5/confirm -v
+curl -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NTllYmIzYzBlNTQ0YzVjMzdmZTQ1NTgiLCJpYXQiOjE3MDQ5MDQ2MjF9.DoYtHzfgK_eZIic_i7AodoOGE8IxNJAxfPz0Pxa5Pko' -X PATCH localhost:4000/parkings/659eba96ae7cb83921688298/confirm -v

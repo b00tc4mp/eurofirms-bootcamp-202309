@@ -7,10 +7,10 @@ module.exports = (req, res) => {
    try {
       const token = req.headers.authorization.slice(7)
       const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
-      const reviewId = req.params.reviewId
+      const parkingId = req.params.parkingId
 
       logic
-         .deleteReview(userId, reviewId)
+         .deleteParking(userId, parkingId)
          .then(() => res.status(202).send())
          .catch((error) => {
             let status = 500
