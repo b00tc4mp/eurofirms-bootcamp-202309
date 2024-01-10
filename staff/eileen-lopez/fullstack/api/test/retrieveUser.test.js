@@ -1,7 +1,7 @@
 const req = {
     method: 'GET',
     headers: {
-        Authorization: 'Bearer 6565d569fd874b98654ee32f',
+        Authorization: 'Bearer 656db3fad816cd234ffab874',
     },
 }
 

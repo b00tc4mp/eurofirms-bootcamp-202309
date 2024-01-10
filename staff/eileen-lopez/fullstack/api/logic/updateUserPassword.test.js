@@ -1,18 +1,18 @@
 const mongoose = require('mongoose')
 
-const retrievePost = require('./retrievePost')
+const updateUserPassword = require('./updateUserPassword')
 
 mongoose.connect('mongodb://127.0.0.1:27017/test')
     .then(() => {
         try {
-            retrievePost('', '6565d569fd874b98654ee32f', (error, post) => {
+            updateUserPassword('65608715bab5d765008aa494', '123123123', '345345345', '345345345', error => {
                 if (error) {
                     console.error(error)
 
                     return
                 }
 
-                console.log(post)
+                console.log('updated password')
             })
         } catch (error) {
             console.error(error)

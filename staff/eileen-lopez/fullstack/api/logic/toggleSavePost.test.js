@@ -1,14 +1,17 @@
 const mongoose = require('mongoose')
+
 const toggleSavePost = require('./toggleSavePost')
 
 mongoose.connect('mongodb://127.0.0.1/test')
     .then(() => {
         try {
-            toggleSavePost('6565d569fd874b98654ee32f', '6565d5c37b007c99782d1323', error => {
+            toggleSavePost('65608715bab5d765008aa494', '6560899f724c642d12657e2b', error => {
                 if (error) {
                     console.error(error)
+
                     return
                 }
+
                 console.log('toggled save post')
             })
         } catch (error) {

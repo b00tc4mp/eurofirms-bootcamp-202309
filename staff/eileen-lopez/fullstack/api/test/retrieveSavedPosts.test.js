@@ -1,15 +1,15 @@
 const req = {
     method: 'GET',
     headers: {
-        Authorization: 'Bearer 6565d569fd874b98654ee32f',
+        Authorization: 'Bearer ',
     },
 }
 
 fetch('http://localhost:4000/posts/saved', req)
     .then(res => {
-        if(!res.ok) {
+        if (!res.ok) {
             res.json()
-                .then(body => console.error(body))
+                .then(body => consoler.error(body))
                 .catch(error => console.error(error))
 
             return

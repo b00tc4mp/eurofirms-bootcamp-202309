@@ -1,11 +1,11 @@
 const req = {
     method: 'PATCH',
     headers: {
-        Authorization: 'Bearer 6565d569fd874b98654ee32f'
-    },
+        Authorization: 'Bearer 656db3fad816cd234ffab874'
+    }
 }
 
-fetch('https://localhost:4000/posts/6565d5c37b007c99782d1323/likes', req)
+fetch('http://localhost:4000/posts/65686c275ef8e443ccc48336/likes', req)
     .then(res => {
         if (!res.ok) {
             res.json()
