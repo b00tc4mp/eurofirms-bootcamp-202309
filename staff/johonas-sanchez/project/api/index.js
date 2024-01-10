@@ -14,6 +14,7 @@ const {
    retrieveParkingHandler,
    toggleSaveParkingHandler,
    createParkingReviewHandler,
+   toggleConfirmParkingHandler,
 } = require("./handlers")
 
 mongoose.connect(process.env.MONGODB_URL).then(() => {
@@ -54,6 +55,10 @@ mongoose.connect(process.env.MONGODB_URL).then(() => {
    // Create createParkingReview endpoint
 
    api.post("/parkings/:parkingId/reviews", jsonBodyParser, createParkingReviewHandler)
+
+   // Create toggleConfirmParking endpoint
+
+   api.patch("/parkings/:parkingId/confirm", toggleConfirmParkingHandler)
 
 
 

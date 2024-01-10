@@ -6,6 +6,7 @@ const retrieveParkingsHandler = require("./retrieve-parkings-handler")
 const retrieveParkingHandler = require("./retrieve-parking-handler")
 const toggleSaveParkingHandler = require("./toggle-save-parking-handler")
 const createParkingReviewHandler = require("./create-parking-review-handler")
+const toggleConfirmParkingHandler = require("./toggle-confirm-parking-handler")
 
 module.exports = {
    authenticateUserHandler,
@@ -16,4 +17,5 @@ module.exports = {
    retrieveParkingHandler,
    toggleSaveParkingHandler,
    createParkingReviewHandler,
+   toggleConfirmParkingHandler,
 }

@@ -1,42 +1,37 @@
-const { validate } = require('./helpers')
-const { User, Parking } = require('../data/models')
-const { NotFoundError, SystemError } = require('./errors')
+const { validate } = require("./helpers")
+const { User, Parking } = require("../data/models")
+const { NotFoundError, SystemError } = require("./errors")
 
-function toggleConfirmParking(userId, parkingId, callback) {
-    validate.id(userId, 'user id')
-    validate.id(parkingId, 'parking id')
-    validate.function(callback, 'callback')
+function toggleConfirmParking(userId, parkingId) {
+   validate.id(userId, "user id")
+   validate.id(parkingId, "parking id")
 
-    User.findById(userId)
-        .then(user => {
-            if (!user) {
-                callback(new NotFoundError('user not found'))
+   return User.findById(userId)
+      .catch((error) => {
+         throw new SystemError(error.message)
+      })
+      .then((user) => {
+         if (!user) throw new NotFoundError("user not found")
 
-                return
-            }
+         return Parking.findById(parkingId)
+            .catch((error) => {
+               throw new SystemError(error.message)
+            })
+            .then((parking) => {
+               if (!parking) throw new NotFoundError("parking not found")
 
-            Parking.findById(parkingId)
-                .then(parking => {
-                    if (!parking) {
-                        callback(new NotFoundError('parking not found'))
+               const index = parking.confirmations.findIndex((userObjectId) => userObjectId.toString() === userId)
 
-                        return
-                    }
+               if (index < 0) parking.confirmations.push(userId)
+               else parking.confirmations.splice(index, 1)
 
-                    const index = parking.confirmations.findIndex(userObjectId => userObjectId.toString() === userId)
-
-                    if (index < 0)
-                        parking.confirmations.push(userId)
-                    else
-                        parking.confirmations.splice(index, 1)
-
-                    parking.save()
-                        .then(() => callback(null))
-                        .catch(error => callback(new SystemError(error.message)))
-                })
-                .catch(error => callback(new SystemError(error.message)))
-        })
-        .catch(error => callback(new SystemError(error.message)))
+               parking
+                  .save()
+                  .catch((error) => {
+                     throw new SystemError(error.message)
+                  })
+                  .then(() => null)
+            })
+      })
 }
-
 module.exports = toggleConfirmParking

@@ -1,0 +1,1 @@
+curl -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NTk2ZDE1Mzc5N2ZmYTg0MWI0MTNlODYiLCJpYXQiOjE3MDQ4MDA2NzV9.vY74DpSJqCCa5JrujpzwWt1DRiHGkIqMs2lscy__yvU' -X PATCH localhost:4000/parkings/659e61c3b1aee9e66a5e40a5/confirm -v

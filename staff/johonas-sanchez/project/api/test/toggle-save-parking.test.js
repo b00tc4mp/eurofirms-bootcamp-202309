@@ -2,7 +2,7 @@ const req = {
    method: "PATCH",
    headers: {
       Authorization:
-         "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NTk2ZDE1Mzc5N2ZmYTg0MWI0MTNlODYiLCJpYXQiOjE3MDQzODY4MzR9.trl0VRnqMmo-bbwSoSwwrvrTCB3Y5He0GkgNUKmUtfo",
+         "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NTk2ZDE1Mzc5N2ZmYTg0MWI0MTNlODYiLCJpYXQiOjE3MDQ4MDA2NzV9.vY74DpSJqCCa5JrujpzwWt1DRiHGkIqMs2lscy__yvU",
    },
 }
 
