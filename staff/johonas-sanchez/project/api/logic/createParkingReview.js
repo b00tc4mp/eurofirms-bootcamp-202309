@@ -1,42 +1,46 @@
-const { validate } = require('./helpers')
-const { User, Review, Parking } = require('../data/models')
-const { NotFoundError, SystemError } = require('./errors')
+const { validate } = require("./helpers")
+const { User, Review, Parking } = require("../data/models")
+const { NotFoundError, SystemError, DuplicityError } = require("./errors")
 
-function createParkingReview(userId, parkingId, comment, valuation, callback) {
-    validate.id(userId, 'user id')
-    validate.id(parkingId, 'parking id')
-    validate.text(comment, 'comment')
-    validate.number(valuation, 'valuation')
-    validate.function(callback, 'callback')
+function createParkingReview(userId, parkingId, comment, valuation) {
+   validate.id(userId, "user id")
+   validate.id(parkingId, "parking id")
+   validate.text(comment, "comment")
+   validate.range(valuation, 1, 5, "valuation")
 
-    User.findById(userId)
-        .then(user => {
-            if (!user) {
-                callback(new NotFoundError('user not found'))
+   return User.findById(userId)
+      .catch((error) => {
+         throw new SystemError(error.message)
+      })
+      .then((user) => {
+         if (!user) throw new NotFoundError("user not found")
 
-                return
-            }
+         return Parking.findById(parkingId)
+            .catch((error) => {
+               throw new SystemError(error.message)
+            })
+            .then((parking) => {
+               if (!parking) throw new NotFoundError("parking not found")
 
-            Parking.findById(parkingId)
-                .then(parking => {
-                    if (!parking) {
-                        callback(new NotFoundError('parking not found'))
+               return Review.findOne({ author: userId, parking: parkingId })
+                  .catch((error) => {
+                     throw new SystemError(error.message)
+                  })
+                  .then((review) => {
 
-                        return
-                    }
+                     if (review) {
+                        throw new DuplicityError("Review already exists for this user and parking")
+                     }
 
-                    // Crear la revisión y agregar su ID al array de revisiones en Parking
-                    Review.create({ author: userId, comment, valuation })
-                        .then(review => {
-                            parking.reviews.push(review._id) // Agregar el ID de la revisión al array
-                            return parking.save() // Guardar el parking actualizado
+                     // Crear la revisión si no existe review de ese usuario para ese parking
+                     return Review.create({ author: userId, parking: parkingId, comment, valuation })
+                        .catch((error) => {
+                           throw new SystemError(error.message)
                         })
-                        .then(() => callback(null))
-                        .catch(error => callback(new SystemError(error.message)))
-                })
-                .catch(error => callback(new SystemError(error.message)))
-        })
-        .catch(error => callback(new SystemError(error.message)))
+                        .then(() => null)
+                  })
+            })
+      })
 }
 
 module.exports = createParkingReview

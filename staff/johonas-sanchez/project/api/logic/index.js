@@ -5,6 +5,7 @@ const createParking = require('./createParking')
 const retrieveParkings = require('./retrieveParkings')
 const retrieveParking = require('./retrieveParking')
 const toggleSaveParking = require('./toggleSaveParking')
+const createParkingReview = require('./createParkingReview')
 
 const logic = {
     registerUser,
@@ -14,6 +15,7 @@ const logic = {
     retrieveParkings,
     retrieveParking,
     toggleSaveParking,
+    createParkingReview,
 }
 
 module.exports = logic

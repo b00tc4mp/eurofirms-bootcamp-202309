@@ -10,10 +10,11 @@ const {
    registerUserHandler,
    retrieveUserHandler,
    createParkingHandler,
-   retrieveParkingsHandler, 
+   retrieveParkingsHandler,
    retrieveParkingHandler,
-   toggleSaveParkingHandler
-} = require('./handlers')
+   toggleSaveParkingHandler,
+   createParkingReviewHandler,
+} = require("./handlers")
 
 mongoose.connect(process.env.MONGODB_URL).then(() => {
    const api = express()
@@ -22,33 +23,37 @@ mongoose.connect(process.env.MONGODB_URL).then(() => {
 
    api.use(cors)
 
-   // Implement registerUser endpoint
+   // Create registerUser endpoint
 
    api.post("/users", cors, jsonBodyParser, registerUserHandler)
 
-   // Implement authenticate endpoint
+   // Create authenticate endpoint
 
    api.post("/users/auth", jsonBodyParser, authenticateUserHandler)
 
-   // Implement retrieveUser endpoint
+   // Create retrieveUser endpoint
 
    api.get("/users", retrieveUserHandler)
 
-   // Implement createParking endpoint
+   // Create createParking endpoint
 
    api.post("/parkings", jsonBodyParser, createParkingHandler)
 
-   // Implement retrieveParkings endpoint
+   // Create retrieveParkings endpoint
 
    api.get("/parkings", jsonBodyParser, retrieveParkingsHandler)
 
-   // Implement retrieveParking endpoint
+   // Create retrieveParking endpoint
 
    api.get("/parkings/:parkingId", jsonBodyParser, retrieveParkingHandler)
 
-   // Implement toggleSaveParking endpoint
+   // Create toggleSaveParking endpoint
 
    api.patch("/parkings/:parkingId/saved", toggleSaveParkingHandler)
+
+   // Create createParkingReview endpoint
+
+   api.post("/parkings/:parkingId/reviews", jsonBodyParser, createParkingReviewHandler)
 
 
 

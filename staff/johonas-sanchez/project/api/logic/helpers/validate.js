@@ -37,6 +37,12 @@ const validate = {
    id(id, explain) {
       if (!isValidObjectId(id)) throw new TypeError(explain + " is not a valid id")
    },
+
+   range(value, min, max, explain) {
+      this.number(value, explain)
+      if (value < min) throw new RangeError(explain + " is out of range")
+      if (value > max) throw new RangeError(explain + " is out of range")
+   },
 }
 
 module.exports = validate

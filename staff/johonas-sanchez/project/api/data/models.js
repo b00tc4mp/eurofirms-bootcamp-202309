@@ -79,6 +79,9 @@ const review = new Schema({
    valuation: {
       type: Number,
       required: true,
+      min: 1,
+      max: 5
+      
    },
 })
 
