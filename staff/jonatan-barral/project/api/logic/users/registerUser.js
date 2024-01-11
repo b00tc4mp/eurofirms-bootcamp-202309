@@ -1,15 +1,15 @@
 const bcrypt = require('bcryptjs')
 
-const { validate } = require('./helpers')
+const { validate } = require('../helpers')
 
-const { User } = require('../data/models')
+const { User } = require('../../data/models')
 
-const { SystemError, DuplicityError, NotFoundError, ClearanceError } = require('./errors')
+const { SystemError, DuplicityError, NotFoundError, ClearanceError } = require('../errors')
 
-function registerUser(userId, name, userName, password, role) {
+function registerUser(userId, name, username, password, role) {
     validate.id(userId, 'user id')
     validate.text(name, 'name')
-    validate.text(userName, 'userName')
+    validate.text(username, 'username')
     validate.password(password, 'password')
     validate.role(role, 'role')
 
@@ -20,17 +20,17 @@ function registerUser(userId, name, userName, password, role) {
 
             }
 
-            if (user.role !== 'Administrador' && user.role !== 'Secretaría') {
+            if (user.role !== 'administrador' && user.role !== 'secretaria') {
                 throw new ClearanceError(`User with role ${user.role}$ has not permission to create Users`)
 
             }
 
-            if (user.role === 'Secretaría' && (role === 'Secretaría' || role === 'Administrador')) {
+            if (user.role === 'secretaria' && (role === 'secretaria' || role === 'administrador')) {
                 throw new ClearanceError(`User with role ${user.role}$ has not permission to create this type of user`)
 
             }
             return bcrypt.hash(password, 8)
-                .then(hash => User.create({ name, userName, password: hash, role }))
+                .then(hash => User.create({ name, username, password: hash, role }))
                 .then(() => { })
                 .catch(error => {
                     if (error.code === 11000)
@@ -39,6 +39,7 @@ function registerUser(userId, name, userName, password, role) {
                     throw new SystemError(error.message)
                 })
         })
+
 }
 
 module.exports = registerUser

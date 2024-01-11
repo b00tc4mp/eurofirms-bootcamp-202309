@@ -1,16 +1,16 @@
 const bcrypt = require('bcryptjs')
 
-const { validate } = require('./helpers')
+const { validate } = require('../helpers')
 
-const { User } = require('../data/models')
+const { User } = require('../../data/models')
 
-const { NotFoundError, CredentialsError, SystemError } = require('./errors')
+const { NotFoundError, CredentialsError, SystemError } = require('../errors')
 
-function authenticateUser(userName, password) {
-    validate.text(userName, 'userName')
+function authenticateUser(username, password) {
+    validate.text(username, 'username')
     validate.password(password, 'password')
 
-    return User.findOne({ userName })
+    return User.findOne({ username })
         .then(user => {
             if (!user) {
                 throw new NotFoundError('User not found')

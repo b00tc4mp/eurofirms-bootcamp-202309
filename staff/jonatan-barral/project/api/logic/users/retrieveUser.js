@@ -1,8 +1,8 @@
-const { validate } = require("./helpers")
+const { validate } = require("../helpers")
 
-const { User } = require("../data/models")
+const { User } = require("../../data/models")
 
-const { NotFoundError, SystemError } = require("./errors")
+const { NotFoundError, SystemError } = require("../errors")
 
 function retrieveUser(userId) {
     validate.id(userId, "user id")

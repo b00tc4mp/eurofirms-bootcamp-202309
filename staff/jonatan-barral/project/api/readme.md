@@ -17,14 +17,28 @@ $ npm start
 ### Authenticate a user
 
 ```
-Request: POST /users/auth { email, password }
+Request: POST /users/auth { username, passwoerd }
 Response: 200 token
 ```
 
 ### Register a user
 
 ```
-Request: POST /users { name, email, password }
+Request: POST /users { userId, name, username, password, role }
 Response: 201
 Response (error): 409|406|500 { error, message }
 ```
+
+### Retrieve a user
+
+```
+Request: GET /users 'Authorization: Bearer token'
+Response: 200 { name }
+```
+
+### Retrieve Users
+
+Request: GET /users 'Authorization: Bearer token'
+Response: 200 { [Users] }
+```
+

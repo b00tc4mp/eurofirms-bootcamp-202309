@@ -34,7 +34,7 @@ const validate = {
     role(role, explain) {
         this.text(role, explain)
 
-        const allowedRoles = ['Administrador', 'Secretaría', 'Juez', 'Juez C']
+        const allowedRoles = ['administrador', 'secretaria', 'juez', 'juez-c']
 
         if (!allowedRoles.includes(role)) {
             throw new Error(role + ' is not a valid role')

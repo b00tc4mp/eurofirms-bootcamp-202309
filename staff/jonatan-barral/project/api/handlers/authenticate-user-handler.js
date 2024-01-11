@@ -5,11 +5,11 @@ const { ContentError, CredentialsError } = require('../logic/errors')
 
 module.exports = (req, res) => {
     try {
-        const { email, password } = req.body
+        const { username, password } = req.body
 
-        logic.authenticateUser(email, password)
+        logic.authenticateUser(username, password)
             .then(userId => {
-                const token = jwt.sign({ sub: userId }, process.env.JWT_SECRET, { expiresIn: '1m' })
+                const token = jwt.sign({ sub: userId }, process.env.JWT_SECRET, { expiresIn: '10h' })
 
                 res.json(token)
             })

@@ -79,6 +79,7 @@ TODO
 - competitors ([Competitor.id])
 - horses ([horse.id])
 - location (string, required)
+- active (boolean, defoult true)
         
 #### Competitor
 

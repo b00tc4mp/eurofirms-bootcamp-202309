@@ -10,7 +10,7 @@ const user = new Schema({
     },
 
 
-    userName: {
+    username: {
         type: String,
         required: true,
         unique: true
@@ -23,7 +23,7 @@ const user = new Schema({
 
     role: {
         type: String,
-        enum: ['Administrador', 'Secretaría', 'Juez', 'Juez C'],
+        enum: ['administrador', 'secretaria', 'juez', 'juez-c'],
         required: true
     },
 

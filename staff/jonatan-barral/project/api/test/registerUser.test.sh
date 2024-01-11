@@ -1,0 +1,1 @@
+curl -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NTllODVmM2IxMTE5OWZmY2JkZjJiZjUiLCJpYXQiOjE3MDQ4ODgwMjAsImV4cCI6MTcwNDkyNDAyMH0.kFk4jSeyV-8eBf8p9vEFJEXEFenBkSVy0VddeJENxpc' -H 'Content-Type: application/json' -d '{ "name": "Jonatan", "username": "Secretaryj", "password": "c4b4ll0s", "role": "secretaria" }' localhost:4000/users -v
