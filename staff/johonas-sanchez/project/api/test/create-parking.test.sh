@@ -1,1 +1,1 @@
-curl -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NTk2ZDE1Mzc5N2ZmYTg0MWI0MTNlODYiLCJpYXQiOjE3MDQ4MDA2NzV9.vY74DpSJqCCa5JrujpzwWt1DRiHGkIqMs2lscy__yvU' -H 'Content-Type: application/json' -d '{ "lat": 40.029520, "long": -6.085075 }' localhost:4000/parkings -v
+curl -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NTk2ZDE1Mzc5N2ZmYTg0MWI0MTNlODYiLCJpYXQiOjE3MDQ5ODU4MTd9.mu1gTXpWRCkh9dtxwjmPZfqh0Uh5EYuWv97Caxt2Fiw' -H 'Content-Type: application/json' -d '{ "lat": 40.029520, "long": -6.085075 }' localhost:4000/parkings -v
