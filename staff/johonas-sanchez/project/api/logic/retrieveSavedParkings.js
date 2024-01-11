@@ -1,40 +1,47 @@
-const { validate } = require('./helpers')
-const { User, Parking } = require('../data/models')
-const { NotFoundError, SystemError } = require('./errors')
+const { validate } = require("./helpers")
+const { User, Parking } = require("../data/models")
+const { NotFoundError, SystemError } = require("./errors")
 
-function retrieveSavedParkings(userId, callback) {
-    validate.id(userId, 'user id')
-    validate.function(callback, 'callback')
+function retrieveSavedParkings(userId) {
+   validate.id(userId, "user id")
 
-    User.findById(userId)
-        .then(user => {
-            if (!user) {
-                callback(new NotFoundError('user not found'))
+   return User.findById(userId)
+      .catch((error) => {
+         throw new SystemError(error.message)
+      })
+      .then((user) => {
+         if (!user) throw new NotFoundError("user not found")
 
-                return
-            }
+         user.saved // [ObjectId('asfasdf'), ObjectId('asfasdfasdfasd'), ...]
 
-            user.saved // [ObjectId('asfasdf'), ObjectId('asfasdfasdfasd'), ...]
+         return Parking.find({ _id: { $in: user.saved } })
+            .select("-__v")
+            .populate("locator", "name")
+            .lean()
+            .then((parkings) => {
+               parkings.forEach((parking) => {
+                  parking.id = parking._id.toString()
+                  delete parking._id
 
-            Parking.find({ _id: { $in: user.saved } }).select('-__v').populate('locator', 'name').lean()
-                .then(parkings => {
-                    parkings.forEach(parking => {
-                        parking.id = parking._id.toString()
-                        delete parking._id
+                  if (parking.locator._id) {
+                     parking.locator.id = parking.locator._id.toString()
+                     delete parking.locator._id
+                  }
 
-                        if (parking.locator._id) {
-                            parking.locator.id = parking.locator._id.toString()
-                            delete parking.locator._id
-                        }
+                  if (parking.location._id) {
+                     parking.location.id = parking.location._id.toString()
+                     delete parking.location._id
+                  }
 
-                        parking.saved = user.saved.some(parkingObjectId => parkingObjectId.toString() === parking.id)
-                    })
+                  parking.saved = user.saved.some((parkingObjectId) => parkingObjectId.toString() === parking.id)
+               })
 
-                    callback(null, parkings)
-                })
-                .catch(error => callback(new SystemError(error.message)))
-        })
-        .catch(error => callback(new SystemError(error.message)))
+               return parkings
+            })
+            .catch((error) => {
+               throw new SystemError(error.message)
+            })
+      })
 }
 
 module.exports = retrieveSavedParkings

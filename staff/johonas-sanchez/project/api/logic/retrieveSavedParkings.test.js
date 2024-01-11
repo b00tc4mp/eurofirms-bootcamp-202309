@@ -7,14 +7,9 @@ mongoose
 
    .then(() => {
       try {
-         retrieveSavedParkings("6593d3059ea31c753328c2fd", (error, parkings) => {
-            if (error) {
-               console.error(error)
-
-               return
-            }
-            console.log(parkings)
-         })
+         retrieveSavedParkings("659ff26f17960df7a90bae07")
+            .then((parkings) => console.log(parkings))
+            .catch((error) => console.error(error))
       } catch (error) {
          console.error(error)
       }

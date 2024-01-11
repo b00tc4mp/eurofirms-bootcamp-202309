@@ -1,20 +1,13 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose")
 
-const retrieveReview = require('./retrieveReview')
+const retrieveReview = require("./retrieveReview")
 
-mongoose.connect('mongodb://127.0.0.1:27017/projectTest')
-    .then(() => {
-        try {
-            retrieveReview('6593d3059ea31c753328c2fd', '65952b9b0b24c7c8f3fcbcc7', (error, review) => {
-                if (error) {
-                    console.error(error)
-
-                    return
-                }
-
-                console.log(review)
-            })
-        } catch (error) {
-            console.error(error)
-        }
-    })
+mongoose.connect("mongodb://127.0.0.1:27017/projectTest").then(() => {
+   try {
+      retrieveReview("659ff26f17960df7a90bae07", "659ffb5495ee2c755e8c0266")
+         .then((review) => console.log(review))
+         .catch((error) => console.error(error))
+   } catch (error) {
+      console.error(error)
+   }
+})

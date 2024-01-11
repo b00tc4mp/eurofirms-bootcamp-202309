@@ -6,7 +6,7 @@ function toggleSaveParking(userId, parkingId) {
    validate.id(userId, "user id")
    validate.id(parkingId, "parking id")
 
-   return User.findById(userId)
+     return User.findById(userId)
       .catch((error) => {
          throw new SystemError(error.message)
       })
@@ -32,6 +32,7 @@ function toggleSaveParking(userId, parkingId) {
                   .then(() => null)
             })
       })
+   
 }
 
 module.exports = toggleSaveParking

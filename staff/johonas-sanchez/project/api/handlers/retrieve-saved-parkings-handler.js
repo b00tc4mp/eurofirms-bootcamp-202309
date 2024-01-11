@@ -10,7 +10,7 @@ module.exports = (req, res) => {
       const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
 
       logic
-         .retrieveParkings(userId)
+         .retrieveSavedParkings(userId)
          .then((parkings) => res.json(parkings))
          .catch((error) => {
             let status = 500

@@ -39,8 +39,7 @@ function retrieveParkings(userId) {
             .catch((error) => {
                 throw new SystemError(error.message)
              })
-      })
-      
+      }) 
 }
 
 module.exports = retrieveParkings
