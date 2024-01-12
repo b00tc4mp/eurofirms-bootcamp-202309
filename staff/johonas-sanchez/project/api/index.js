@@ -19,6 +19,7 @@ const {
    deleteReviewHandler,
    deleteParkingHandler,
    retrieveSavedParkingsHandler,
+   retrieveParkingsByGeoHandler,
 } = require("./handlers")
 
 mongoose.connect(process.env.MONGODB_URL).then(() => {
@@ -52,6 +53,10 @@ mongoose.connect(process.env.MONGODB_URL).then(() => {
 
    api.get("/parkings", retrieveParkingsHandler)
 
+   // Create retrieveParkingsByGeo endpoint
+
+   api.get("/parkings/geo", retrieveParkingsByGeoHandler)
+
    // Create retrieveParking endpoint
 
    api.get("/parkings/:parkingId", retrieveParkingHandler)
@@ -79,6 +84,8 @@ mongoose.connect(process.env.MONGODB_URL).then(() => {
    // Create deleteParking endpoint
 
    api.delete("/parkings/:parkingId", deleteParkingHandler)
+
+   
 
    api.listen(process.env.PORT, () => console.log(`API listening on port ${process.env.PORT}`))
 })

@@ -11,6 +11,7 @@ const retrieveReviewHandler = require("./retrieve-review-handler")
 const deleteReviewHandler = require("./delete-review-handler")
 const deleteParkingHandler = require("./delete-parking-handler")
 const retrieveSavedParkingsHandler = require("./retrieve-saved-parkings-handler")
+const retrieveParkingsByGeoHandler = require("./retrieve-parkings-by-geo-handler")
 
 module.exports = {
    authenticateUserHandler,
@@ -26,5 +27,6 @@ module.exports = {
    deleteReviewHandler,
    deleteParkingHandler,
    retrieveSavedParkingsHandler,
+   retrieveParkingsByGeoHandler,
 
 }

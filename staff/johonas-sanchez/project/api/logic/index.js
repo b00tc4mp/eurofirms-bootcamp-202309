@@ -11,6 +11,7 @@ const retrieveReview = require('./retrieveReview')
 const deleteReview = require('./deleteReview')
 const deleteParking = require('./deleteParking')
 const retrieveSavedParkings = require('./retrieveSavedParkings')
+const retrieveParkingsByGeo = require('./retrieveParkingsByGeo')
 
 const logic = {
     registerUser,
@@ -26,6 +27,7 @@ const logic = {
     deleteReview,
     deleteParking,
     retrieveSavedParkings,
+    retrieveParkingsByGeo
 }
 
 module.exports = logic
