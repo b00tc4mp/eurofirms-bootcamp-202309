@@ -37,6 +37,56 @@ cancelPostButton.onclick = function (event) {
     //para que desaparezca
     postPanel.style.display = "none"
 }
-
 //sumit post form (subir el formulario de los post)
+postForm.onsubmit = function (event) {
+    event.preventDefault()
+
+    var imageInput = postForm.querySelector("#image-input")
+    var textInput = postForm.querySelector("#text-input")
+
+    var image = imageInput.value
+    var text = textInput.value
+    //nos falta el imail que quien publica el post, nos vamos a main.js(loggedInEmail)
+
+    // estoy añadiendo propiedades a los objetos, estos mutando los objetos
+    var post = {}
+    post.author = loggedInEmail
+    post.image = image
+    post.text = text
+    // el push, se usa para insertar en la base de datos , en este caso los posts
+    posts.push(post)
+    //que se resete el formulario
+    postForm.reset()
+    //apagar el paner cdo se publique el post
+    postPanel.style.display = "none"
+    //para que no se repitan los post
+
+
+    //ahora tenemos que hacer que se refreque el listado de posts q ya esta publicado, hay q tener en cuenta  estamos publicando uno nuevo (lo estamos copiando de login)
+    //render posts
+
+    var postsList = homeView.querySelector("#posts-list")
+    //tengo q limpiar los posts anterios, pq sino me los va a acumular con los nuevos posts
+    postsList.innerHTML = ""
+    for (var i = posts.length - 1; i >= 0; i--) {
+        var post = posts[i]
+        var article = document.createElement("article")
+        article.setAttribute("class", "post")
+        var span = document.createElement("span")
+        span.innerText = post.author
+
+        var image = document.createElement("img")
+        image.setAttribute("class", "post-image")
+        image.src = post.image
+
+        var paragraph = document.createElement("p")
+        paragraph.innerText = post.text
+        article.appendChild(span)
+        article.appendChild(image)
+        article.appendChild(paragraph)
+
+        postsList.appendChild(article)
+
+    }
+}
 

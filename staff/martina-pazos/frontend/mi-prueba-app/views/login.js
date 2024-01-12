@@ -55,7 +55,7 @@ loginForm.onsubmit = function (event) {
 
     emailInput.value = ""
     passwordInput.value = ""
-
+    //esta var sale del main, es una var global, sirve para saber el email del usuario que se conecta justo antes de apagar loguin
     loggedInEmail = foundUser.email
 
 
@@ -71,11 +71,12 @@ loginForm.onsubmit = function (event) {
     //render posts is body en la home
     //cd apagamos login y encedemos la home, para pintar los posts tenemos que pedir a home el contenedor de  los post, que esta en html, en home view
     var postsList = homeView.querySelector("#posts-list")
-    for (var i = 0; i < posts.length; i++) {
+    for (var i = posts.length - 1; i >= 0; i--) {
         var post = posts[i]
 
         //el createElement te permite crear de la nada un documento html
         var article = document.createElement("article")
+        article.setAttribute("class", "post")
         // que aparezca en email del usuario que publica el post
         var span = document.createElement("span")
         span.innerText = post.author
