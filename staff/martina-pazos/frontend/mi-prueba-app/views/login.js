@@ -1,11 +1,11 @@
 //login view
-var loginView = document.getElementById("login-view")
+loginView = document.getElementById("login-view")
 
 loginView.style.display = ""
 
 
 //login  navigate a register
-var registerLink = loginView.querySelector("#register-link")
+registerLink = loginView.querySelector("#register-link")
 registerLink.onclick = function (event) {
     event.preventDefault()
 
@@ -14,7 +14,7 @@ registerLink.onclick = function (event) {
 }
 
 //login onSubmit
-var loginForm = loginView.querySelector("#login-form")
+loginForm = loginView.querySelector("#login-form")
 loginForm.onsubmit = function (event) {
     event.preventDefault()
 

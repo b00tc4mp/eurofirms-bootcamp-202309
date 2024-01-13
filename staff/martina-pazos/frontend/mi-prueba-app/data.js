@@ -1,5 +1,8 @@
 //data (lo que vamos a hacer es crear una array que guarde los usuarios que usen esta app, una base de datos de juguete)
 var users = []
+var posts = []
+
+//populate some users
 users[0] = {
     name: "Pepito Grillo",
     email: "pepito@grillo.com",
@@ -20,7 +23,7 @@ users[2] = {
 
 
 
-var posts = []
+//populate some posts
 posts[0] = {
     author: "pepito@grillo.com",
     image: "https://imgs.search.brave.com/KYetCiw1rgr1fq3bX8kvtM1NJmcbuTbh10z4FG9KumA/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9hc3Nl/dHMuc3RpY2twbmcu/Y29tL2ltYWdlcy81/ODdiNTczNzQ0MDYw/OTA5YWE2MDNhYTgu/cG5n",
