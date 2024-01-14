@@ -16,7 +16,7 @@ var loginForm
 // estan en home
 var homeView
 var logoutButton
-var postPanel
-var postForm
-var postButton
-var cancelPostButton
+var newPostPanel
+var newPostForm
+var newPostButton
+var cancelnewPostButton

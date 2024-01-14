@@ -38,9 +38,7 @@ registerForm.onsubmit = function (event) {
     users.push(user)
 
     //para que se borre el campo del input una vez registrados
-    nameInput.value = ""
-    emailInput.value = ""
-    password.value = ""
+    registerForm.reset()
     // una vez introducido los datos, se apague register y se encienda login
     registerView.style.display = "none"
     loginView.style.display = ""

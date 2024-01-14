@@ -17,32 +17,32 @@ logoutButton.onclick = function () {
 }
 // vamos a mecanizar el button +, el del form del post
 //post form, este es es formulario para crear un post, se hace esto para que cdo se abra la app el formulario aparezca oculto
-postPanel = homeView.querySelector("#post-panel")
-postPanel.style.display = "none"
+newPostPanel = homeView.querySelector("#new-post-panel")
+newPostPanel.style.display = "none"
 
-postForm = postPanel.querySelector("#post-form")
+newPostForm = newPostPanel.querySelector("#new-post-form")
 
 //cdo se haga click q aparezca el formulario
-postButton = homeView.querySelector("#post-button")
-postButton.onclick = function () {
-    postPanel.style.display = ""
+newPostButton = homeView.querySelector("#new-post-button")
+newPostButton.onclick = function () {
+    newPostPanel.style.display = ""
 }
 
 //que se cierre el formulario cd se de a este boton +
-cancelPostButton = postForm.querySelector("#cancel-post-button")
-cancelPostButton.onclick = function (event) {
+cancelnewPostButton = newPostForm.querySelector("#cancel-new-post-button")
+cancelnewPostButton.onclick = function (event) {
     event.preventDefault()
     //para que se limpien los campos
-    postForm.reset()
+    newPostForm.reset()
     //para que desaparezca
-    postPanel.style.display = "none"
+    newPostPanel.style.display = "none"
 }
 //sumit post form (subir el formulario de los post)
-postForm.onsubmit = function (event) {
+newPostForm.onsubmit = function (event) {
     event.preventDefault()
 
-    var imageInput = postForm.querySelector("#image-input")
-    var textInput = postForm.querySelector("#text-input")
+    var imageInput = newPostForm.querySelector("#image-input")
+    var textInput = newPostForm.querySelector("#text-input")
 
     var image = imageInput.value
     var text = textInput.value
@@ -56,31 +56,36 @@ postForm.onsubmit = function (event) {
     // el push, se usa para insertar en la base de datos , en este caso los posts
     posts.push(post)
     //que se resete el formulario
-    postForm.reset()
+    newPostForm.reset()
     //apagar el paner cdo se publique el post
-    postPanel.style.display = "none"
+    newPostPanel.style.display = "none"
     //para que no se repitan los post
-
-
-    //ahora tenemos que hacer que se refreque el listado de posts q ya esta publicado, hay q tener en cuenta  estamos publicando uno nuevo (lo estamos copiando de login)
-    //render posts
-
+    renderPosts()
+}
+// Vamos a crear una function para que pinte (render en ingles es) los nuevos posts 
+function renderPosts() {
     var postsList = homeView.querySelector("#posts-list")
-    //tengo q limpiar los posts anterios, pq sino me los va a acumular con los nuevos posts
+
     postsList.innerHTML = ""
+
     for (var i = posts.length - 1; i >= 0; i--) {
         var post = posts[i]
+
+        //el createElement te permite crear de la nada un documento html
         var article = document.createElement("article")
         article.setAttribute("class", "post")
+        // que aparezca en email del usuario que publica el post
         var span = document.createElement("span")
         span.innerText = post.author
-
+        //el src y la imagen son propiedades del post como dice data
         var image = document.createElement("img")
-        image.setAttribute("class", "post-image")
         image.src = post.image
+        image.setAttribute("class", "post-image")
 
         var paragraph = document.createElement("p")
+        //innerText,el text es una propiedad de p, como dice data, es el texto interior en el párrafo
         paragraph.innerText = post.text
+        //appendChild es poner dentro, en este caso dentro del article
         article.appendChild(span)
         article.appendChild(image)
         article.appendChild(paragraph)
@@ -88,5 +93,6 @@ postForm.onsubmit = function (event) {
         postsList.appendChild(article)
 
     }
+
 }
 

@@ -53,8 +53,7 @@ loginForm.onsubmit = function (event) {
         return
     }
 
-    emailInput.value = ""
-    passwordInput.value = ""
+    loginForm.reset()
     //esta var sale del main, es una var global, sirve para saber el email del usuario que se conecta justo antes de apagar loguin
     loggedInEmail = foundUser.email
 
@@ -70,33 +69,8 @@ loginForm.onsubmit = function (event) {
 
     //render posts is body en la home
     //cd apagamos login y encedemos la home, para pintar los posts tenemos que pedir a home el contenedor de  los post, que esta en html, en home view
-    var postsList = homeView.querySelector("#posts-list")
-    for (var i = posts.length - 1; i >= 0; i--) {
-        var post = posts[i]
 
-        //el createElement te permite crear de la nada un documento html
-        var article = document.createElement("article")
-        article.setAttribute("class", "post")
-        // que aparezca en email del usuario que publica el post
-        var span = document.createElement("span")
-        span.innerText = post.author
-        //el src y la imagen son propiedades del post como dice data
-        var image = document.createElement("img")
-        image.src = post.image
-        image.setAttribute("class", "post-image")
-
-        var paragraph = document.createElement("p")
-        //innerText,el text es una propiedad de p, como dice data, es el texto interior en el párrafo
-        paragraph.innerText = post.text
-        //appendChild es poner dentro, en este caso dentro del article
-        article.appendChild(span)
-        article.appendChild(image)
-        article.appendChild(paragraph)
-
-        postsList.appendChild(article)
-
-        console.log(post)
-    }
+    renderPosts()
 
 
     homeView.style.display = ""
