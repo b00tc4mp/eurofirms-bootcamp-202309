@@ -8,20 +8,15 @@ function Home(props) {
    const [name, setName] = useState(null)
 
    useEffect(() => {
-      try {
-         logic.retrieveUser((error, user) => {
-            if (error) {
-               props.onError(error)
-
-               return
-            }
-
+      logic
+         .retrieveUser()
+         .then((user) => {
             setName(user.name)
          })
-      } catch (error) {
-         props.onError(error)
-      }
-   }, [])
+         .catch((error) => {
+            props.onError(error)
+         })
+   }, [props])
 
    function handleLogoutClick() {
       logic.logoutUser()
