@@ -17,7 +17,7 @@ function Login(props) {
       try {
          logic.loginUser(email, password, (error) => {
             if (error) {
-               // props.onError(error)
+               props.onError(error)
 
                return
             }
@@ -26,7 +26,7 @@ function Login(props) {
 
          })
       } catch (error) {
-         // props.onError(error)
+         props.onError(error)
       }
    }
 
