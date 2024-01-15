@@ -17,7 +17,7 @@ function loginUser(email, password, callback) {
         body: JSON.stringify({ email, password })
     }
 
-    fetch(`${import.meta.env.VITE_API_URL}/users/authenticate`, req)
+    fetch(`${import.meta.env.VITE_API_URL}/users/auth`, req)
         .then(res => {
             if (!res.ok) {
                 res.json()

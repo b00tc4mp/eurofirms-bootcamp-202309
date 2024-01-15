@@ -1,13 +1,11 @@
-
-import isUserLoggedIn from './isUserLoggedIn'
-import loginUser from './loginUser'
-
+import isUserLoggedIn from "./isUserLoggedIn"
+import loginUser from "./loginUser"
+import logoutUser from "./logoutUser"
 
 const logic = {
-
-    isUserLoggedIn,
-    loginUser,
-
+   isUserLoggedIn,
+   loginUser,
+   logoutUser,
 }
 
 export default logic
