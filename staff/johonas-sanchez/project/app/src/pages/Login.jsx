@@ -1,14 +1,9 @@
 import { Button, Link, Field, Form, Container } from "../library"
 
-import { useNavigate } from 'react-router-dom'
-
 import logic from "../logic"
 
 function Login(props) {
    console.log("Login")
-
-   // Inicializa el gancho navigate
-   const navigate = useNavigate()
 
    function handleLoginSubmit(event) {
       event.preventDefault()
@@ -28,8 +23,7 @@ function Login(props) {
             }
 
             props.onSuccess()
-            // Redirige a la página de inicio después de un inicio de sesión exitoso
-            navigate('/home')
+
          })
       } catch (error) {
          // props.onError(error)

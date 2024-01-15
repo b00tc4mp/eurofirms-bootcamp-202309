@@ -1,9 +1,7 @@
 import logic from '../logic'
-import { Routes, Route, useNavigate } from "react-router-dom"
 
 function Home(props) {
    console.log("Home")
-   const navigate = useNavigate()
 
    function handleLogoutClick() {
       logic.logoutUser()
