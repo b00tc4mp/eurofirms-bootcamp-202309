@@ -14,20 +14,15 @@ function Login(props) {
       const email = emailInput.value
       const password = passwordInput.value
 
-      try {
-         logic.loginUser(email, password, (error) => {
-            if (error) {
-               props.onError(error)
-
-               return
-            }
-
+      logic.loginUser(email, password)
+         .then(() => {
+            // Acciones en caso de éxito
             props.onSuccess()
-
          })
-      } catch (error) {
-         props.onError(error)
-      }
+         .catch((error) => {
+            // Acciones en caso de error
+            props.onError(error)
+         })
    }
 
    // function handleRegisterClick(event) {
