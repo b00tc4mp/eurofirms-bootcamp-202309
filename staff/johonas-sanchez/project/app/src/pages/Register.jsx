@@ -17,19 +17,15 @@ function Register(props) {
       const password = passwordInput.value
       const role = 'User'
 
-      try {
-         logic.registerUser(name, email, password, role, (error) => {
-            if (error) {
-               props.onError(error)
-
-               return
-            }
-
+         logic.registerUser(name, email, password, role)
+         .then(() => {
+            // Acciones en caso de éxito
             props.onSuccess()
          })
-      } catch (error) {
-         props.onError(error)
-      }
+         .catch((error) => {
+            // Acciones en caso de error
+            props.onError(error)
+         })
    }
 
    function handleLoginClick(event) {

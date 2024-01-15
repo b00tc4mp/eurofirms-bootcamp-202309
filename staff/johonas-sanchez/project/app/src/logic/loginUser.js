@@ -18,10 +18,12 @@ function loginUser(email, password) {
    return fetch(`${import.meta.env.VITE_API_URL}/users/auth`, req)
       .then((res) => {
          if (!res.ok) {
-            return res.json().then((body) => {
+            return res.json()
+            .then((body) => {
                const constructor = errors[body.error]
                throw new constructor(body.message)
             })
+            .catch(error => {throw new SystemError(error.message)})
          }
 
          return res
