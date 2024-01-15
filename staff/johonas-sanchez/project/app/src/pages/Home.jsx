@@ -2,6 +2,8 @@ import { useState, useEffect } from "react"
 
 import logic from "../logic"
 
+import { Button, Link, Container } from "../library"
+
 function Home(props) {
    console.log("Home")
 
@@ -31,14 +33,16 @@ function Home(props) {
    //    }
 
    return (
-      <>
+      <Container align="center">
+         <header className="flex justify-between items-center w-full mt-0 mb-5 bg-[ghostwhite] px-4 py-2" aria-label="Header">
+            <span aria-label="User name">Hola <strong>{name}</strong></span>
+            <Button onClick={handleLogoutClick}>Logout</Button>
+         </header>
+
          <div className="">
             <h1>Home</h1>
-            <span aria-label="User name">Hola {name}</span>
          </div>
-
-         <button onClick={handleLogoutClick}>Logout</button>
-      </>
+      </Container>
    )
 }
 
