@@ -42,7 +42,7 @@ function App() {
         <Route path="/" element={ <Home /> } />
       </Routes> */}
          <Routes>
-            <Route path="/login" element={logic.isUserLoggedIn() ? <Navigate to="/" /> : <Login onSuccess={handleHomeShow} onError={handleError}/>} />
+            <Route path="/login" element={logic.isUserLoggedIn() ? <Navigate to="/" /> : <Login onSuccess={handleHomeShow} onRegisterClick={handleRegisterShow} onError={handleError}/>} />
 
             <Route
                path="/register"

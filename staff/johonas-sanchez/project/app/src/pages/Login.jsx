@@ -25,11 +25,11 @@ function Login(props) {
          })
    }
 
-   // function handleRegisterClick(event) {
-   //    event.preventDefault()
+   function handleRegisterClick(event) {
+      event.preventDefault()
 
-   //    props.onRegisterClick()
-   // }
+      props.onRegisterClick()
+   }
 
    return (
       <Container align="center">
@@ -51,7 +51,7 @@ function Login(props) {
             <Button type="submit">Login</Button>
          </Form>
 
-         {/* <Link onClick={handleRegisterClick}>Register</Link> */}
+         <Link onClick={handleRegisterClick}>Register</Link>
       </Container>
    )
 }
