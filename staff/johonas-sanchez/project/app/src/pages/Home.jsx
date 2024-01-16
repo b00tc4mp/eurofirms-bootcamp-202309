@@ -6,7 +6,8 @@ import logic from "../logic"
 import { Button, Link, Container } from "../library"
 
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
-import SavedParkings from "../components/savedParkings"
+
+import { SavedParkings, UserProfile } from "../components"
 
 function Home(props) {
    console.log("Home")
@@ -47,6 +48,12 @@ function Home(props) {
       navigate("/")
    }
 
+   function handleUserClick(event) {
+      event.preventDefault()
+
+      navigate("/user-profile")
+   }
+
    function handleLogoutClick() {
       logic.logoutUser()
 
@@ -69,15 +76,12 @@ function Home(props) {
                Saved
             </Link>
             <span aria-label="User name">
-               Hola <strong>{name}</strong>
+               Hola <Link onClick={handleUserClick}><strong>{name}</strong></Link>
             </span>
             <Button onClick={handleLogoutClick}>Logout</Button>
          </header>
 
          <div className="">
-            <h1>
-               <strong>Home</strong>
-            </h1>
             {/* <h2>
                <strong>Lista de Parkings:</strong>
             </h2>
@@ -110,7 +114,7 @@ function Home(props) {
             
             <Route path="/saved" element={<SavedParkings />} />
 
-            {/* <Route path="/user-profile/*" element={<UserProfile  onError={props.onError} />} /> */}
+            <Route path="/user-profile/*" element={<UserProfile  onError={props.onError} />} />
 
 
          </Routes>
