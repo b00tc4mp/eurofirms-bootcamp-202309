@@ -69,21 +69,16 @@ function Home(props) {
             </ul>
          </div>
          <div>
-            <MapContainer center={[41.38879, 2.15899]} zoom={13} scrollWheelZoom={false} style={{ width: 400, height: 200 }}>
+            <MapContainer center={[40.0311600, -6.0884500]} zoom={13} scrollWheelZoom={true} style={{ width: 400, height: 200 }}>
                <TileLayer
                   attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                />
-               <Marker position={[41.38879, 2.15899]}>
-                  <Popup>
-                     A pretty CSS3 popup. <br /> Easily customizable.
-                  </Popup>
-               </Marker>
-               <Marker position={[41.38879, 2.16899]}>
-                  <Popup>
-                     A pretty CSS3 popup. <br /> Easily customizable.
-                  </Popup>
-               </Marker>
+               {parkings.map((parking) => (
+                  <Marker key={parking.id} position={[parking.location.coordinates[1], parking.location.coordinates[0]]}>
+                     <Popup>Ubicación: {`${parking.location.coordinates[1]}, ${parking.location.coordinates[0]}`}</Popup>
+                  </Marker>
+               ))}
             </MapContainer>
          </div>
       </Container>
