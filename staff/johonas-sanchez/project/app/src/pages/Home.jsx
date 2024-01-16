@@ -1,16 +1,19 @@
 import { useState, useEffect } from "react"
+import { Routes, Route, useNavigate } from "react-router-dom"
 
 import logic from "../logic"
 
 import { Button, Link, Container } from "../library"
 
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
+import SavedParkings from "../components/savedParkings"
 
 function Home(props) {
    console.log("Home")
 
    const [name, setName] = useState(null)
    const [parkings, setParkings] = useState([])
+   const navigate = useNavigate()
 
    useEffect(() => {
       logic
@@ -32,6 +35,18 @@ function Home(props) {
          })
    }, [props])
 
+   function handleSavedClick(event) {
+      event.preventDefault()
+
+      navigate("/saved")
+   }
+
+   function handleHomeClick(event) {
+      event.preventDefault()
+
+      navigate("/")
+   }
+
    function handleLogoutClick() {
       logic.logoutUser()
 
@@ -47,6 +62,12 @@ function Home(props) {
    return (
       <Container align="center">
          <header className="flex justify-between items-center w-full mt-0 mb-5 bg-[ghostwhite] px-4 py-2" aria-label="Header">
+            <Link className="p-0" onClick={handleHomeClick}>
+               Inicio
+            </Link>
+            <Link className="p-0" onClick={handleSavedClick}>
+               Saved
+            </Link>
             <span aria-label="User name">
                Hola <strong>{name}</strong>
             </span>
@@ -68,8 +89,11 @@ function Home(props) {
                ))}
             </ul> */}
          </div>
-         <div>
-            <MapContainer center={[40.0311600, -6.0884500]} zoom={13} scrollWheelZoom={true} style={{ width: 400, height: 200 }}>
+         <Routes>
+
+            <Route path="/" element={
+               <div>
+            <MapContainer center={[40.03116, -6.08845]} zoom={13} scrollWheelZoom={true} style={{ width: 400, height: 200 }}>
                <TileLayer
                   attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -81,6 +105,16 @@ function Home(props) {
                ))}
             </MapContainer>
          </div>
+            } />
+
+            
+            <Route path="/saved" element={<SavedParkings />} />
+
+            {/* <Route path="/user-profile/*" element={<UserProfile  onError={props.onError} />} /> */}
+
+
+         </Routes>
+         
       </Container>
    )
 }
