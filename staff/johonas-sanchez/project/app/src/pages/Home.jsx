@@ -4,6 +4,8 @@ import logic from "../logic"
 
 import { Button, Link, Container } from "../library"
 
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
+
 function Home(props) {
    console.log("Home")
 
@@ -11,11 +13,13 @@ function Home(props) {
    const [parkings, setParkings] = useState([])
 
    useEffect(() => {
-      logic.retrieveUser()
+      logic
+         .retrieveUser()
          .then((user) => {
             setName(user.name)
             // Llamar a retrieveParkings y actualizar el estado parkings
-            logic.retrieveParkings()
+            logic
+               .retrieveParkings()
                .then((parkingsData) => {
                   setParkings(parkingsData)
                })
@@ -50,15 +54,37 @@ function Home(props) {
          </header>
 
          <div className="">
-            <h1><strong>Home</strong></h1>
-            <h2><strong>Lista de Parkings:</strong></h2>
+            <h1>
+               <strong>Home</strong>
+            </h1>
+            <h2>
+               <strong>Lista de Parkings:</strong>
+            </h2>
             <ul>
-            {parkings.map((parking) => (
-               <li key={parking.id}>
-                  <p>Ubicación: {`${parking.location.coordinates[1]}, ${parking.location.coordinates[0]}`}</p>
-               </li>
-            ))}
-         </ul>
+               {parkings.map((parking) => (
+                  <li key={parking.id}>
+                     <p>Ubicación: {`${parking.location.coordinates[1]}, ${parking.location.coordinates[0]}`}</p>
+                  </li>
+               ))}
+            </ul>
+         </div>
+         <div>
+            <MapContainer center={[41.38879, 2.15899]} zoom={13} scrollWheelZoom={false} style={{ width: 400, height: 200 }}>
+               <TileLayer
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+               />
+               <Marker position={[41.38879, 2.15899]}>
+                  <Popup>
+                     A pretty CSS3 popup. <br /> Easily customizable.
+                  </Popup>
+               </Marker>
+               <Marker position={[41.38879, 2.16899]}>
+                  <Popup>
+                     A pretty CSS3 popup. <br /> Easily customizable.
+                  </Popup>
+               </Marker>
+            </MapContainer>
          </div>
       </Container>
    )
