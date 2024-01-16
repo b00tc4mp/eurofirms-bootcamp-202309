@@ -57,7 +57,7 @@ function Home(props) {
             <h1>
                <strong>Home</strong>
             </h1>
-            <h2>
+            {/* <h2>
                <strong>Lista de Parkings:</strong>
             </h2>
             <ul>
@@ -66,7 +66,7 @@ function Home(props) {
                      <p>Ubicación: {`${parking.location.coordinates[1]}, ${parking.location.coordinates[0]}`}</p>
                   </li>
                ))}
-            </ul>
+            </ul> */}
          </div>
          <div>
             <MapContainer center={[40.0311600, -6.0884500]} zoom={13} scrollWheelZoom={true} style={{ width: 400, height: 200 }}>
@@ -75,8 +75,8 @@ function Home(props) {
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                />
                {parkings.map((parking) => (
-                  <Marker key={parking.id} position={[parking.location.coordinates[1], parking.location.coordinates[0]]}>
-                     <Popup>Ubicación: {`${parking.location.coordinates[1]}, ${parking.location.coordinates[0]}`}</Popup>
+                  <Marker key={parking.id} position={[parking.location.coordinates[0], parking.location.coordinates[1]]}>
+                     <Popup>Ubicación: {`${parking.location.coordinates[0]}, ${parking.location.coordinates[1]}`}</Popup>
                   </Marker>
                ))}
             </MapContainer>

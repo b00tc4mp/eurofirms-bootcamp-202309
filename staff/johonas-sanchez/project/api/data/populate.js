@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")
+const bcrypt = require("bcryptjs")
 const { User, Point, Parking, Review } = require("./models")
 
 const {
@@ -6,14 +7,18 @@ const {
 } = mongoose
 
 mongoose
-   .connect("mongodb://127.0.0.1:27017/projectTest")
+   .connect("mongodb://127.0.0.1:27017/project")
    .then(() => {
       return mongoose.connection.db.dropDatabase()
    })
    .then(() => {
-      const manolo = new User({ name: "Manolo García", email: "manolo@garcia.com", password: "123123123", role: "Manager" })
-      const paco = new User({ name: "Paco Martín", email: "paco@martin.com", password: "123123123", role: "User" })
-      const lucia = new User({ name: "Lucia López", email: "lucia@lopez.com", password: "123123123", role: "User" })
+      const password = "123123123"
+      return bcrypt.hash(password, 8)
+   })
+   .then((hashedPassword) => {
+      const manolo = new User({ name: "Manolo García", email: "manolo@garcia.com", password: hashedPassword, role: "Manager" })
+      const paco = new User({ name: "Paco Martín", email: "paco@martin.com", password: hashedPassword, role: "User" })
+      const lucia = new User({ name: "Lucia López", email: "lucia@lopez.com", password: hashedPassword, role: "User" })
 
       // Guardar todas las promesas en un array
       const userPromises = [manolo.save(), paco.save(), lucia.save()]
@@ -66,14 +71,14 @@ mongoose
       // Guardar el parking
       return Promise.all(parkingPromise).then((parkings) => {
          const [parking1, parking2, parking3, parking4, parking5, parking6, parking7, parking8, parking9] = parkings
-         const review1 = new Review({ parking: parking1.id, author: user3.id, comment: "Siempre ocupada", valuation: 6 })
-         const review2 = new Review({ parking: parking2.id, author: user1.id, comment: "Fácil aparcamiento y suele estar libre", valuation: 8 })
-         const review3 = new Review({ parking: parking2.id, author: user2.id, comment: "Aparca gente no autorizada", valuation: 5 })
+         const review1 = new Review({ parking: parking1.id, author: user3.id, comment: "Siempre ocupada", valuation: 3 })
+         const review2 = new Review({ parking: parking2.id, author: user1.id, comment: "Fácil aparcamiento y suele estar libre", valuation: 4 })
+         const review3 = new Review({ parking: parking2.id, author: user2.id, comment: "Aparca gente no autorizada", valuation: 3 })
          const review4 = new Review({
             parking: parking7.id,
             author: user2.id,
             comment: "Itinerario completamente adaptado y tiene alternativas cerca",
-            valuation: 9,
+            valuation: 4,
          })
          const review5 = new Review({ parking: parking8.id, author: user1.id, comment: "Espacio muy justo", valuation: 4 })
 
