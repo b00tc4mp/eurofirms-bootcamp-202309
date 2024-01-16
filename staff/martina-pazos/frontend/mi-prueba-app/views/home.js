@@ -42,9 +42,11 @@ newPostForm.onsubmit = function (event) {
     event.preventDefault()
 
     var imageInput = newPostForm.querySelector("#image-input")
+    var imageDescriptionInput = newPostForm.querySelector("#image-description-input")
     var textInput = newPostForm.querySelector("#text-input")
 
     var image = imageInput.value
+    var imageDescription = imageDescriptionInput.value
     var text = textInput.value
     //nos falta el imail que quien publica el post, nos vamos a main.js(loggedInEmail)
 
@@ -52,6 +54,7 @@ newPostForm.onsubmit = function (event) {
     var post = {}
     post.author = loggedInEmail
     post.image = image
+    post.imageDescription = imageDescription
     post.text = text
     // el push, se usa para insertar en la base de datos , en este caso los posts
     posts.push(post)
@@ -77,10 +80,12 @@ function renderPosts() {
         // que aparezca en email del usuario que publica el post
         var span = document.createElement("span")
         span.innerText = post.author
+        span.setAttribute("aria-label", "author")
         //el src y la imagen son propiedades del post como dice data
         var image = document.createElement("img")
         image.src = post.image
         image.setAttribute("class", "post-image")
+        image.alt = post.imageDescription
 
         var paragraph = document.createElement("p")
         //innerText,el text es una propiedad de p, como dice data, es el texto interior en el párrafo

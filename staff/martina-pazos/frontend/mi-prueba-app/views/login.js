@@ -24,54 +24,35 @@ loginForm.onsubmit = function (event) {
     var email = emailInput.value
     var password = passwordInput.value
 
-    // cdo se registra, pasa a login, tiene que comprobarse que todos los datos son correctos (email, password), de no ser así saltar un mensaje de error. Para buscar en la array que guarda los usuarios registrados se hace un for.
 
-    //creo esta variable, pq aun no encontre al usuario, por lo tanto es null
-    var foundUser = null
+    // try es intenta y captura.LLama a la funcion y captura el error en el catch
+    try {
+        authenticateUser(email, password)
+        loginForm.reset()
 
-    for (var i = 0; i < users.length; i++) {
-        //cd encuentro el usuario de foundUser paso a users (ya no es null)
-        var user = users[i]
+        //loggedInEmail = foundUser.email
 
-        if (user.email === email) {
-            foundUser = user
-            //break se usa para para el for, si ya encontro el email que pare de buscar
-            break
-        }
+        loginView.style.display = "none"
+        //cd apagamos login y encedemos la home, para pintar los nombres de los usuarios tenemos que pedir a home la clase de  los usuarios, que esta en html, en home view.
+
+
+        //render user name en la header de la home.quiero cambiar el texto que tenia antes (hello worl ), y poner otro.Esto hace que en lugar de aparece Hello word, aparezca el nombre del usuario que conectado a la app en ese momento
+
+        var userNameSpan = homeView.querySelector("#user-name-span")
+
+        var user = retrieverUser(email)
+        userNameSpan.innerText = user.name
+
+
+        //render posts is body en la home
+        //cd apagamos login y encedemos la home, para pintar los posts tenemos que pedir a home el contenedor de  los post, que esta en html, en home view
+
+        renderPosts()
+
+
+        homeView.style.display = ""
+    } catch (error) {
+        alert(error.message)
     }
 
-    //sino encuentro el usuario, return salgo de esta busqueda, y voy a la siguiente 
-    if (foundUser === null) {
-        alert("Wrong credentials")
-
-        return
-    }
-
-    if (foundUser.password !== password) {
-        alert("Wrong credentials")
-
-        return
-    }
-
-    loginForm.reset()
-    //esta var sale del main, es una var global, sirve para saber el email del usuario que se conecta justo antes de apagar loguin
-    loggedInEmail = foundUser.email
-
-
-    loginView.style.display = "none"
-    //cd apagamos login y encedemos la home, para pintar los nombres de los usuarios tenemos que pedir a home la clase de  los usuarios, que esta en html, en home view.
-
-
-    //render user name en la header de la home.quiero cambiar el texto que tenia antes (hello worl ), y poner otro.Esto hace que en lugar de aparece Hello word, aparezca el nombre del usuario que conectado a la app en ese momento
-    var userNameSpan = homeView.querySelector("#user-name-span")
-    userNameSpan.innerText = foundUser.name
-
-
-    //render posts is body en la home
-    //cd apagamos login y encedemos la home, para pintar los posts tenemos que pedir a home el contenedor de  los post, que esta en html, en home view
-
-    renderPosts()
-
-
-    homeView.style.display = ""
 }

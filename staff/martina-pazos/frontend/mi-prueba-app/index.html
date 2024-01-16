@@ -46,10 +46,10 @@
 
 
     <div id="home-view">
-        <header class="header">
+        <header class="header" aria-label="header">
             <h1>Home</h1>
-            <span id="user-name-span">Hello world</span>
-            <button id="new-post-button">+</button>
+            <span id="user-name-span" aria-label="User name">Hello world</span>
+            <button id="new-post-button" title="New post" aria-label="New post">+</button>
             <button id="logout-button">Logout</button>
         </header>
 
@@ -60,26 +60,36 @@
                 <label for="image-input">Image</label>
                 <input type="url" id="image-input">
 
+                <label for="image-description-input">Image description</label>
+                <input type="text" id="image-description-input">
+
                 <label for="text-input">Text</label>
                 <input type="text" id="text-input">
 
-                <button type="submit" id="new-post-panel">Post</button>
+                <button type="submit">Post</button>
                 <button id="cancel-new-post-button">Cancel</button>
             </form>
         </div>
 
-        <div id="posts-list">
+        <div id="posts-list" aria-label="posts-list">
         </div>
-
-
     </div>
 
-    <script src="data.js"></script>
 
+    <!--utils-->
+    <script src="utils/find.js"></script>
+    <!--data-->
+    <script src="data.js"></script>
+    <!--business logic (negocio)-->
+    <script src="logic/authenticateUser.js"></script>
+    <script src="logic/retrieveUser.js"></script>
+    <!--presentacion-->
     <script src="main.js"></script>
     <script src="views/register.js"></script>
     <script src="views/login.js"></script>
     <script src="views/home.js"></script>
+
+
 
 </body>
 
