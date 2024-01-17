@@ -7,6 +7,7 @@ import retrieveParkings from "./retrieveParkings"
 import updateUserEmail from "./updateUserEmail"
 import updateUserPassword from "./updateUserPassword"
 import retrieveParkingsByGeo from "./retrieveParkingsByGeo"
+import retrieveSavedParkings from "./retrieveSavedParkings"
 
 const logic = {
    isUserLoggedIn,
@@ -17,7 +18,8 @@ const logic = {
    retrieveParkings, 
    updateUserEmail,
    updateUserPassword,
-   retrieveParkingsByGeo
+   retrieveParkingsByGeo,
+   retrieveSavedParkings
 }
 
 export default logic

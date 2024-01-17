@@ -105,7 +105,7 @@ function Home(props) {
                path="/"
                element={
                   <div>
-                     <MapContainer center={[40.03116, -6.08845]} zoom={13} scrollWheelZoom={true} style={{ width: 400, height: 200 }}>
+                     <MapContainer center={[40.03116, -6.08845]} zoom={15} scrollWheelZoom={true} style={{ width: 550, height: 300 }}>
                         <TileLayer
                            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -120,7 +120,7 @@ function Home(props) {
                }
             />
 
-            <Route path="/saved" element={<SavedParkings />} />
+            <Route path="/saved" element={<SavedParkings onError={props.onError} />} />
 
             <Route path="/user-profile/*" element={<UserProfile onError={props.onError} />} />
          </Routes>
