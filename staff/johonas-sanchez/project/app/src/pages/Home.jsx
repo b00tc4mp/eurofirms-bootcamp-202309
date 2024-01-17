@@ -16,6 +16,10 @@ function Home(props) {
    const [parkings, setParkings] = useState([])
    const navigate = useNavigate()
 
+   const long = 40.030403
+   const lat = -6.087581
+   const dist = 1000
+
    useEffect(() => {
       logic
          .retrieveUser()
@@ -23,7 +27,7 @@ function Home(props) {
             setName(user.name)
             // Llamar a retrieveParkings y actualizar el estado parkings
             logic
-               .retrieveParkings()
+               .retrieveParkingsByGeo(lat, long, dist)
                .then((parkingsData) => {
                   setParkings(parkingsData)
                })
@@ -76,7 +80,10 @@ function Home(props) {
                Saved
             </Link>
             <span aria-label="User name">
-               Hola <Link onClick={handleUserClick}><strong>{name}</strong></Link>
+               Hola{" "}
+               <Link onClick={handleUserClick}>
+                  <strong>{name}</strong>
+               </Link>
             </span>
             <Button onClick={handleLogoutClick}>Logout</Button>
          </header>
@@ -94,31 +101,29 @@ function Home(props) {
             </ul> */}
          </div>
          <Routes>
+            <Route
+               path="/"
+               element={
+                  <div>
+                     <MapContainer center={[40.03116, -6.08845]} zoom={13} scrollWheelZoom={true} style={{ width: 400, height: 200 }}>
+                        <TileLayer
+                           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        />
+                        {parkings.map((parking) => (
+                           <Marker key={parking.id} position={[parking.location.coordinates[0], parking.location.coordinates[1]]}>
+                              <Popup>Ubicación: {`${parking.location.coordinates[0]}, ${parking.location.coordinates[1]}`}</Popup>
+                           </Marker>
+                        ))}
+                     </MapContainer>
+                  </div>
+               }
+            />
 
-            <Route path="/" element={
-               <div>
-            <MapContainer center={[40.03116, -6.08845]} zoom={13} scrollWheelZoom={true} style={{ width: 400, height: 200 }}>
-               <TileLayer
-                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-               />
-               {parkings.map((parking) => (
-                  <Marker key={parking.id} position={[parking.location.coordinates[0], parking.location.coordinates[1]]}>
-                     <Popup>Ubicación: {`${parking.location.coordinates[0]}, ${parking.location.coordinates[1]}`}</Popup>
-                  </Marker>
-               ))}
-            </MapContainer>
-         </div>
-            } />
-
-            
             <Route path="/saved" element={<SavedParkings />} />
 
-            <Route path="/user-profile/*" element={<UserProfile  onError={props.onError} />} />
-
-
+            <Route path="/user-profile/*" element={<UserProfile onError={props.onError} />} />
          </Routes>
-         
       </Container>
    )
 }

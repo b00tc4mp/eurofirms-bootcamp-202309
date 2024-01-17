@@ -21,6 +21,7 @@ const {
    retrieveSavedParkingsHandler,
    retrieveParkingsByGeoHandler,
    updateUserEmailHandler,
+   updateUserPasswordHandler,
 } = require("./handlers")
 
 mongoose.connect(process.env.MONGODB_URL).then(() => {
