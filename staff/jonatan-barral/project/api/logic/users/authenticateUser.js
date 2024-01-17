@@ -11,6 +11,8 @@ function authenticateUser(username, password) {
     validate.password(password, 'password')
 
     return User.findOne({ username })
+        .catch(error => { throw new SystemError(error.message) })
+
         .then(user => {
             if (!user) {
                 throw new NotFoundError('User not found')
@@ -21,16 +23,16 @@ function authenticateUser(username, password) {
             }
 
             return bcrypt.compare(password, user.password)
+                .catch(error => { throw new SystemError(error.message) })
+
                 .then(match => {
                     if (match) {
-                        return user.id
+                        return { id: user.id, role: user.role }
                     } else {
                         throw new CredentialsError('Wrong credentials')
                     }
                 })
-                .catch(error => { throw new SystemError(error.message) })
         })
-        .catch(error => { throw new SystemError(error.message) })
 }
 
 module.exports = authenticateUser

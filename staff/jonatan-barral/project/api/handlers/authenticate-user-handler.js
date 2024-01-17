@@ -8,8 +8,9 @@ module.exports = (req, res) => {
         const { username, password } = req.body
 
         logic.authenticateUser(username, password)
-            .then(userId => {
-                const token = jwt.sign({ sub: userId }, process.env.JWT_SECRET, { expiresIn: '10h' })
+            .then(user => {
+
+                const token = jwt.sign({ sub: user.id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '10h' })
 
                 res.json(token)
             })

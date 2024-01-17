@@ -1,16 +1,16 @@
 import { useState } from 'react'
 import { Routes, Route, useNavigate, Navigate } from 'react-router-dom'
 
-import { Feedback } from './library'
+import Feedback from './library/Feedback'
 
-import { Register, Login, Home } from './pages'
+import Login from './pajes/Login'
+import Home from './pajes/Home'
 
-import { isUserLoggedIn, logoutUser } from './logic'
+import logic from './logic'
+import { CredentialsError, JWTError, SystemError, ClearanceError } from './logic/errors'
 
-import { JWTError } from './logic/errors'
-
-
-function App() {
+export default function App() {
+  console.log('App')
 
   const [feedback, setFeedback] = useState(null)
   const navigate = useNavigate()
@@ -32,11 +32,16 @@ function App() {
 
   function handleError(error) {
     if (error instanceof JWTError) {
-      logoutUser()
+      logic.logoutUser()
 
       navigate('/login')
       setFeedback('Session expired, please login again')
-    } else setFeedback(error.message)
+    } else if (error instanceof CredentialsError) {
+      setFeedback('Wrong credentials, try again')
+    } else if (error instanceof SystemError) {
+      setFeedback('Something went wrong. Please, try again later')
+    }
+    else setFeedback(error.message)
   }
 
   function handleAcceptFeedback() {
@@ -45,11 +50,10 @@ function App() {
 
   return <>
     <Routes>
-      <Route path="/login" element={isUserLoggedIn() ? <Navigate to="/" /> : <Login onSuccess={handleHomeShow} onRegisterClick={handleRegisterShow} onError={handleError} />} />
 
-      <Route path="/register" element={isUserLoggedIn() ? <Navigate to="/" /> : <Register onSuccess={handleLoginShow} onLoginClick={handleLoginShow} onError={handleError} />} />
+      <Route path="/login" element={logic.isUserLoggedIn() ? <Navigate to="/" /> : <Login onSuccess={handleHomeShow} onRegisterClick={handleRegisterShow} onError={handleError} />} />
 
-      <Route path="/*" element={isUserLoggedIn() ? <Home onLogout={handleLoginShow} onError={handleError} /> : <Navigate to="/login" />} />
+      <Route path="/*" element={logic.isUserLoggedIn() ? <Home onLogout={handleLoginShow} onError={handleError} /> : <Navigate to="/login" />} />
 
 
     </Routes>
@@ -57,5 +61,3 @@ function App() {
     {feedback ? <Feedback message={feedback} onAccept={handleAcceptFeedback} /> : null}
   </>
 }
-
-export default Ap p

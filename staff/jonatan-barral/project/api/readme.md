@@ -36,9 +36,9 @@ Request: GET /users 'Authorization: Bearer token'
 Response: 200 { name }
 ```
 
-### Retrieve Users
+### Retrieve Secretaries
 
 Request: GET /users 'Authorization: Bearer token'
-Response: 200 { [Users] }
+Response: 200 { [Secretaries] }
 ```
 

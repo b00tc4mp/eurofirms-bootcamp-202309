@@ -66,7 +66,7 @@ TODO
 - name (string, required)
 - username (string, unique, required)
 - password (string, required)
-- role (string, admin|secretary|judge)
+- role (string, administrador|secretaria|juez@juec-c)
 - active (boolean, defoult true)
 
 #### Competition

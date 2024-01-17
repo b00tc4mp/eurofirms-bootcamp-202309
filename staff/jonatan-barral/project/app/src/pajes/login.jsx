@@ -7,14 +7,14 @@ export default function Login(props) {
     function handleLoginSubmit(event) {
         event.preventDefault()
 
-        const emailInput = event.target.querySelector('#email-field')
+        const usernameInput = event.target.querySelector('#username-field')
         const passwordInput = event.target.querySelector('#password-field')
 
-        const email = emailInput.value
+        const username = usernameInput.value
         const password = passwordInput.value
 
         try {
-            logic.loginUser(email, password, error => {
+            logic.loginUser(username, password, error => {
                 if (error) {
                     props.onError(error)
 
@@ -34,11 +34,12 @@ export default function Login(props) {
         <h1>Login</h1>
 
         <Form onSubmit={handleLoginSubmit}>
-            <Field type="email" id="email-field" title="E-mail" required>E-mail</Field>
+            <Field type="username" id="username-field" title="username" required>Username</Field>
 
             <Field type="password" id="password-field" title="Password" required>Password</Field>
 
             <Button type="submit">Login</Button>
+
         </Form>
 
     </Container>
