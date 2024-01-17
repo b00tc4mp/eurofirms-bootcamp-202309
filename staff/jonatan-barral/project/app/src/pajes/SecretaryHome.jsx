@@ -5,6 +5,7 @@ import logic from '../logic'
 
 import { Button, Link, Container } from '../library'
 
+import { RegisterUserBySecretary } from '../components'
 
 
 export default function SecretaryHome(props) {
@@ -38,6 +39,18 @@ export default function SecretaryHome(props) {
         props.onLogout()
     }
 
+    function handleRegisterUserClick() {
+        navigate('/register-user')
+    }
+
+    function handleRegisterUserCancelClick() {
+        navigate('/')
+    }
+
+    function handleRegisterUserSubmit() {
+        navigate('/')
+    }
+
     return <Container align="center">
         <header className="flex justify-between items-center md:min-w-[500px] lg:min-w-[768px]" aria-label="Header">
 
@@ -46,9 +59,15 @@ export default function SecretaryHome(props) {
         </header>
 
         <Routes>
+            <Route path="/register-user" element={<>
+                <RegisterUserBySecretary onRegisterUserSubmit={handleRegisterUserSubmit} onRegisterUserCancelClick={handleRegisterUserCancelClick} onError={props.onError} />
+            </>} />
         </Routes>
 
         <div className="h-[2rem]"></div>
+        <footer className="bg-white fixed bottom-0 w-full flex justify-center items-center h-[2rem] lg:hidden">
+            <Button title="Registrar Usuario" aria-label="Registrar usuario" onClick={handleRegisterUserClick}> 🔏</Button>
+        </footer>
 
     </Container>
 }

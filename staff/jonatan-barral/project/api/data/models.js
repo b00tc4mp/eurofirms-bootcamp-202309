@@ -4,9 +4,15 @@ const { number } = require('../logic/helpers/validate')
 const { Schema, model, Types: { ObjectId } } = mongoose
 
 const user = new Schema({
+    creator: {
+        type: ObjectId,
+        ref: 'User',
+        required: true
+    },
+
     name: {
         type: String,
-        required: true,
+        required: true
     },
 
 

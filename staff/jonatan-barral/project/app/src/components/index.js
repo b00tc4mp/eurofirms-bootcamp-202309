@@ -1,5 +1,7 @@
-import RegisterUser from './RegisterUser'
+import RegisterUserByAdmin from './admin/RegisterUserByAdmin'
+import RegisterUserBySecretary from './secretary/RegisterUserBySecretary'
 
 export {
-    RegisterUser
+    RegisterUserByAdmin,
+    RegisterUserBySecretary
 }

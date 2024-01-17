@@ -39,7 +39,8 @@ const validate = {
         if (!allowedRoles.includes(role)) {
             throw new Error(role + ' is not a valid role')
         }
-    }
+    },
+
 }
 
 

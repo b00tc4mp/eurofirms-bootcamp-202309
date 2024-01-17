@@ -49,9 +49,7 @@ export default function AdminHome(props) {
 
     function handleRegisterUserSubmit() {
         navigate('/')
-        setTimestamp(Date.now())
     }
-
 
     return <Container align="center">
         <header className="flex justify-between items-center md:min-w-[500px] lg:min-w-[768px]" aria-label="Header">

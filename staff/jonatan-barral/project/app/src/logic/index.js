@@ -7,6 +7,7 @@ import isUserAdmin from './users/isUserAdmin'
 import isUserSecretaria from './users/isUserSecretaria'
 import isUserJuezC from './users/isUserJuezC'
 import isUserJuez from './users/isUserJuez'
+import registerUser from './users/registerUser'
 
 const logic = {
     getLoggedInUserId,
@@ -17,7 +18,8 @@ const logic = {
     isUserAdmin,
     isUserSecretaria,
     isUserJuezC,
-    isUserJuez
+    isUserJuez,
+    registerUser
 }
 
 export default logic

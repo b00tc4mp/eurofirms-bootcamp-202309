@@ -1,4 +1,4 @@
-import { validate } from './helpers'
+import { validate } from '../helpers'
 import context from '../context'
 import errors, { SystemError, ClearanceError } from '../errors'
 

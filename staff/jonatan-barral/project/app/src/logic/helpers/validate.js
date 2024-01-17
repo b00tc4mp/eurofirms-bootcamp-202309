@@ -24,6 +24,16 @@ const validate = {
     jwt(jwt) {
         if (!jwt || !(jwt instanceof JWT)) throw new JWTError('JWT not valid')
         if (jwt.isExpired()) throw new JWTError('JWT expired')
+    },
+
+    role(role, explain) {
+        this.text(role, explain)
+
+        const allowedRoles = ['administrador', 'secretaria', 'juez', 'juez-c']
+
+        if (!allowedRoles.includes(role)) {
+            throw new Error(role + ' is not a valid role')
+        }
     }
 }
 

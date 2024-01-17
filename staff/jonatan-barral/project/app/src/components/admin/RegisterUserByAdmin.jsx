@@ -1,21 +1,22 @@
-import { Button, Container, Field, Form } from '../library'
+import { Button, Container, Field, Label, Select, Form } from '../../library'
 
-import logic from '../logic'
+import logic from '../../logic'
 
 export default function NewPost(props) {
-    console.log('NewPost')
+    console.log('Register UserByAdmin')
 
-    function handleNewPostSubmit(event) {
+    function handleRegisterUserSubmit(event) {
         event.preventDefault()
 
         const nameInput = event.target.querySelector('#name-field')
         const usernameInput = event.target.querySelector('#username-field')
         const passwordInput = event.target.querySelector('#password-field')
-        const roleInput = event.target.querySelector('#role-field')
+        const roleSelect = event.target.querySelector('#role-select')
 
         const name = nameInput.value
         const username = usernameInput.value
-        const passwor = passwordInput.value
+        const password = passwordInput.value
+        const role = roleSelect.value
 
         try {
             logic.registerUser(name, username, password, role, error => {
@@ -44,7 +45,12 @@ export default function NewPost(props) {
 
             <Field type="text" id="username-field" required>Nombre de usuario</Field>
 
-            <Field type="text" id="role-field" required>Rol de usuario</Field>
+            <Label htmlFor="role-field">Rol de usuario</Label>
+            <select id="role-select" required>
+                <option value="">Selecciona un rol</option>
+                <option value="secretaria">Secretaría</option>
+                <option value="administrador">Administrador</option>
+            </select>
 
             <Field type="password" id="password-field" required>Contraseña</Field>
 
