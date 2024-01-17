@@ -4,6 +4,8 @@ import logoutUser from "./logoutUser"
 import retrieveUser from "./retrieveUser"
 import registerUser from "./registerUser"
 import retrieveParkings from "./retrieveParkings"
+import updateUserEmail from "./updateUserEmail"
+import updateUserPassword from "./updateUserPassword"
 
 const logic = {
    isUserLoggedIn,
@@ -11,7 +13,9 @@ const logic = {
    logoutUser,
    retrieveUser, 
    registerUser,
-   retrieveParkings
+   retrieveParkings, 
+   updateUserEmail,
+   updateUserPassword
 }
 
 export default logic

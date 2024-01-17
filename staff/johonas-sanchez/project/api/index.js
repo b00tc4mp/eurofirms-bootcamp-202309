@@ -20,6 +20,7 @@ const {
    deleteParkingHandler,
    retrieveSavedParkingsHandler,
    retrieveParkingsByGeoHandler,
+   updateUserEmailHandler,
 } = require("./handlers")
 
 mongoose.connect(process.env.MONGODB_URL).then(() => {
@@ -84,6 +85,14 @@ mongoose.connect(process.env.MONGODB_URL).then(() => {
    // Create deleteParking endpoint
 
    api.delete("/parkings/:parkingId", deleteParkingHandler)
+
+   // Create updateUserEmail endpoint
+
+   api.patch("/users/email", jsonBodyParser, updateUserEmailHandler)
+
+   // Create updateUserPassword endpoint
+
+   api.patch("/users/password", jsonBodyParser, updateUserPasswordHandler)
 
    
 
