@@ -71,6 +71,11 @@ mongoose
       // Guardar el parking
       return Promise.all(parkingPromise).then((parkings) => {
          const [parking1, parking2, parking3, parking4, parking5, parking6, parking7, parking8, parking9] = parkings
+
+         // Añadir los IDs de los parkings 1 y 2 al array 'saved' del usuario 1 y guardarlo
+         user1.saved.push(parking1.id, parking2.id)
+         user1.save()
+
          const review1 = new Review({ parking: parking1.id, author: user3.id, comment: "Siempre ocupada", valuation: 3 })
          const review2 = new Review({ parking: parking2.id, author: user1.id, comment: "Fácil aparcamiento y suele estar libre", valuation: 4 })
          const review3 = new Review({ parking: parking2.id, author: user2.id, comment: "Aparca gente no autorizada", valuation: 3 })
