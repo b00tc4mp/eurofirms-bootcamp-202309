@@ -49,6 +49,7 @@ export default function NewPost(props) {
             <select id="role-select" required>
                 <option value="">Selecciona un rol</option>
                 <option value="secretaria">Secretaría</option>
+                <option value="juez">Juez</option>
                 <option value="administrador">Administrador</option>
             </select>
 

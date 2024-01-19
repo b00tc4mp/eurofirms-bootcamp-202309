@@ -1,13 +1,13 @@
 const registerUser = require('./users/registerUser')
 const authenticateUser = require('./users/authenticateUser')
 const retrieveUser = require('./users/retrieveUser')
-const retrieveSecretaries = require('./users/retrieveSecretaries')
+const retrieveJudges = require('./users/retrieveJudges')
 
 const logic = {
     registerUser,
     authenticateUser,
     retrieveUser,
-    retrieveSecretaries
+    retrieveJudges
 }
 
 module.exports = logic

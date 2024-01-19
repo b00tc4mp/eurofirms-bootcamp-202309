@@ -5,7 +5,7 @@ import logic from '../logic'
 
 import { Button, Link, Container } from '../library'
 
-import { RegisterUserByAdmin } from '../components'
+import { RegisterUser } from '../components'
 
 export default function AdminHome(props) {
     console.log('Home')
@@ -69,6 +69,7 @@ export default function AdminHome(props) {
         <div className="h-[2rem]"></div>
         <footer className="bg-white fixed bottom-0 w-full flex justify-center items-center h-[2rem] lg:hidden">
             <Button title="Registrar Usuario" aria-label="Registrar usuario" onClick={handleRegisterUserClick}> 🔏</Button>
+            <a href="#" role='tab' className={`tab-link ${activeTab === 1 ? 'active-tab' : ''}`} onClick={handlejudjesClick}>Ver jueces</a>
         </footer>
 
     </Container>

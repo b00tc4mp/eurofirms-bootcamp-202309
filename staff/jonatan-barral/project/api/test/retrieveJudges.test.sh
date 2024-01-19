@@ -1,0 +1,1 @@
+curl -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWE2NGU5MTRjOGQxYmQ2ZDA2M2Y2OGUiLCJyb2xlIjoic2VjcmV0YXJpYSIsImlhdCI6MTcwNTY2NTg3MSwiZXhwIjoxNzA1NzAxODcxfQ.oiZpK17F9kZNIeqJXv2GOAEHTe80yHhtzFsk2txZWnI' localhost:4000/users/judges -v

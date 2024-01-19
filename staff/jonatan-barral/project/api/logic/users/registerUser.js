@@ -6,7 +6,7 @@ const { User } = require('../../data/models')
 
 const { SystemError, DuplicityError, NotFoundError, ClearanceError } = require('../errors')
 
-function registerUser(userId, name, username, password, role) {
+function registerUser(userId, creator, name, username, password, role) {
     validate.id(userId, 'user id')
     validate.text(name, 'name')
     validate.text(username, 'username')
@@ -20,15 +20,11 @@ function registerUser(userId, name, username, password, role) {
 
             }
 
-            if (user.role !== 'administrador' && user.role !== 'secretaria') {
+            if (user.role !== 'administrador') {
                 throw new ClearanceError(`User with role ${user.role}$ has not permission to create Users`)
 
             }
 
-            if (user.role === 'secretaria' && (role === 'secretaria' || role === 'administrador')) {
-                throw new ClearanceError(`User with role ${user.role}$ has not permission to create this type of user`)
-
-            }
             return bcrypt.hash(password, 8)
                 .then(hash => User.create({ creator, userId, name, username, password: hash, role }))
                 .then(() => { })

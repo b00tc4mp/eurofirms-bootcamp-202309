@@ -4,20 +4,19 @@ const logic = require('../logic')
 const { ContentError, NotFoundError } = require('../logic/errors')
 
 module.exports = (req, res) => {
-    debugger
     try {
         const token = req.headers.authorization.slice(7)
 
         const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
 
-        logic.retrieveSecretaries(userId)
+        logic.retrieveJudges(userId)
             .then(users => res.json(users))
             .catch(error => {
                 let status = 500
 
                 if (error instanceof NotFoundError) status = 404
+                res.status(status).json({ error: error.constructor.name, message: error.message })
             })
-        res.status(status).json({ error: error.constructor.name, message: error.message })
     } catch (error) {
         let status = 500
 
