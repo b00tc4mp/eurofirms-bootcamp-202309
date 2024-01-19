@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react"
 import { Routes, Route, useNavigate } from "react-router-dom"
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
+import L from "leaflet"
 
 import logic from "../logic"
 
 import { Button, Link, Container } from "../library"
-
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
 
 import { SavedParkings, UserProfile } from "../components"
 
@@ -14,6 +14,8 @@ function Home(props) {
 
    const [name, setName] = useState(null)
    const [parkings, setParkings] = useState([])
+   const [selectedMarker, setSelectedMarker] = useState(null)
+
    const navigate = useNavigate()
 
    const long = 40.030403
@@ -70,6 +72,34 @@ function Home(props) {
    //       navigate("/")
    //    }
 
+   const iconClicked = new L.Icon({
+      iconUrl: "/red-marker.svg",
+      iconRetinaUrl: "/red-marker.svg",
+      iconAnchor: null,
+      popupAnchor: null,
+      shadowUrl: null,
+      shadowSize: null,
+      shadowAnchor: null,
+      iconSize: new L.Point(60, 75),
+      className: "leaflet-div-icon-no-border",
+   })
+
+   const defaultIcon = new L.Icon({
+      iconUrl: "/blue-marker.png",
+      iconRetinaUrl: "/blue-marker.png",
+      iconAnchor: null,
+      popupAnchor: null,
+      shadowUrl: null,
+      shadowSize: null,
+      shadowAnchor: null,
+      iconSize: new L.Point(30, 45),
+      className: "leaflet-div-icon-no-border",
+   })
+
+   function handleMarkerClick(parkingId) {
+      setSelectedMarker(parkingId)
+   }
+
    return (
       <Container align="center">
          <header className="flex justify-between items-center w-full mt-0 mb-5 bg-[ghostwhite] px-4 py-2" aria-label="Header">
@@ -111,8 +141,19 @@ function Home(props) {
                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         />
                         {parkings.map((parking) => (
-                           <Marker key={parking.id} position={[parking.location.coordinates[0], parking.location.coordinates[1]]}>
-                              <Popup>Ubicación: {`${parking.location.coordinates[0]}, ${parking.location.coordinates[1]}`}</Popup>
+                           <Marker
+                              icon={parking.id === selectedMarker ? iconClicked : defaultIcon}
+                              key={parking.id}
+                              position={[parking.location.coordinates[0], parking.location.coordinates[1]]}
+                              eventHandlers={{
+                                 click: (e) => {
+                                    handleMarkerClick(parking.id)
+                                 },
+                              }}
+                           >
+                              {/* <Popup>
+                                 Ubicación: {`${parking.location.coordinates[0]}, ${parking.location.coordinates[1]}`} {parking.locator.name}
+                              </Popup> */}
                            </Marker>
                         ))}
                      </MapContainer>
