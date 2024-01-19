@@ -100,6 +100,10 @@ function Home(props) {
       setSelectedMarker(parkingId)
    }
 
+   function handleMarkerUnClick() {
+      setSelectedMarker(false)
+   }
+
    return (
       <Container align="center">
          <header className="flex justify-between items-center w-full mt-0 mb-5 bg-[ghostwhite] px-4 py-2" aria-label="Header">
@@ -157,6 +161,26 @@ function Home(props) {
                            </Marker>
                         ))}
                      </MapContainer>
+                     {selectedMarker && (
+                        <div>
+                           <div className="my-4">
+                              <Button onClick={() => handleMarkerUnClick()}>Eliminar seleccion</Button>
+                           </div>
+                           <div className="border-solid border border-black p-3">
+                              {parkings.find((parking) => parking.id === selectedMarker)?.saved ? (
+                                 <Button>Desguardar Marcador</Button>
+                              ) : (
+                                 <Button>Guardar Marcador</Button>
+                              )}
+
+                              {parkings.find((parking) => parking.id === selectedMarker)?.confirmed?.includes(userId) ? (
+                                 <Button>Desconfirmar Marcador</Button>
+                              ) : (
+                                 <Button>Confirmar Marcador</Button>
+                              )}
+                           </div>
+                        </div>
+                     )}
                   </div>
                }
             />
