@@ -5,7 +5,7 @@ import logic from '../logic'
 
 import { Button, Link, Container } from '../library'
 
-import { RegisterUser } from '../components'
+import { RegisterUserByAdmin } from '../components'
 
 export default function AdminHome(props) {
     console.log('Home')

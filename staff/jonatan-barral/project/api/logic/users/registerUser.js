@@ -30,7 +30,7 @@ function registerUser(userId, name, username, password, role) {
 
             }
             return bcrypt.hash(password, 8)
-                .then(hash => User.create({ name, username, password: hash, role }))
+                .then(hash => User.create({ creator, userId, name, username, password: hash, role }))
                 .then(() => { })
                 .catch(error => {
                     if (error.code === 11000)

@@ -5,7 +5,6 @@ const { User } = require('../../data/models')
 const { NotFoundError, SystemError, ClearanceError } = require('../errors')
 
 function retrieveSecretaries(userId) {
-    debugger
     validate.id(userId, 'user id')
 
     return User.findById(userId)
