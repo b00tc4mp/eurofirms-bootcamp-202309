@@ -15,6 +15,7 @@ function Home(props) {
    const [name, setName] = useState(null)
    const [parkings, setParkings] = useState([])
    const [selectedMarker, setSelectedMarker] = useState(null)
+   const [user, setUser] = useState(null)
 
    const navigate = useNavigate()
 
@@ -27,6 +28,7 @@ function Home(props) {
          .retrieveUser()
          .then((user) => {
             setName(user.name)
+            setUser(user)
             // Llamar a retrieveParkings y actualizar el estado parkings
             logic
                .retrieveParkingsByGeo(lat, long, dist)
@@ -167,6 +169,11 @@ function Home(props) {
                               <Button onClick={() => handleMarkerUnClick()}>Eliminar seleccion</Button>
                            </div>
                            <div className="border-solid border border-black p-3">
+                              {user.role === "Manager" && <Button>Eliminar Parking</Button>}
+                              
+                              {user.role === "User" && parkings.find((parking) => parking.id === selectedMarker 
+                              && parking.locator.id === user.id && parking.confirmations.length === 0) !== undefined && (<Button>Borrar parking</Button>)}
+                              
                               {parkings.find((parking) => parking.id === selectedMarker)?.saved ? (
                                  <Button>Desguardar Marcador</Button>
                               ) : (
