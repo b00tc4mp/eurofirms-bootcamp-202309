@@ -53,7 +53,7 @@ function Home(props) {
    function handleDetailClick(event) {
       event.preventDefault()
 
-      navigate("/parking-detail")
+      navigate(`/parking-detail/${selectedMarker}`)
    }
 
    function handleHomeClick(event) {
@@ -221,7 +221,7 @@ function Home(props) {
                }
             />
 
-            <Route path="/parking-detail" element={<ParkingDetail onError={props.onError} />} />
+            <Route path="/parking-detail/:parkingId" element={<ParkingDetail onError={props.onError} />} />
 
             <Route path="/saved" element={<SavedParkings onError={props.onError} />} />
 

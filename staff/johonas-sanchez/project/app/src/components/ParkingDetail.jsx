@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react"
 
-import { useNavigate } from "react-router-dom"
-
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
+import { useNavigate, useParams } from "react-router-dom"
 
 import { Button, Link, Container } from "../library"
 
@@ -11,20 +9,22 @@ import logic from "../logic"
 function ParkingDetail(props) {
    console.log("Parking Detail")
 
-   const navigate = useNavigate();
 
-   const [parkings, setParkings] = useState([])
+   const navigate = useNavigate()
+   
+   const { parkingId } = useParams()
+   // const [parkingData, setParkingData] = useState(null)
 
    // useEffect(() => {
    //    logic
-   //       .retrieveSavedParkings()
-   //       .then((parkingsData) => {
-   //          setParkings(parkingsData)
+   //       .retrieveParking(parkingId)
+   //       .then((data) => {
+   //          setParkingData(data)
    //       })
    //       .catch((error) => {
    //          props.onError(error)
    //       })
-   // }, [props])
+   // }, [parkingId,props])
 
    function handleReturnClick() {
       navigate("/")
@@ -36,6 +36,9 @@ function ParkingDetail(props) {
             &lt; Volver
          </Link>
          <h1 className="mt-4">Parking Detail</h1> 
+            <p>
+               Parking ID: <strong>{parkingId}</strong>
+            </p>
       </div>
    )
 }

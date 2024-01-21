@@ -1,3 +1,5 @@
+import { useState } from "react"
+
 import { Routes, Route, useNavigate, Navigate } from "react-router-dom"
 import "./App.css"
 import Login from "./pages/Login"
@@ -8,6 +10,8 @@ import logic from "./logic"
 import { CredentialsError, JWTError, SystemError } from "./logic/errors"
 
 function App() {
+
+   const [feedback, setFeedback] = useState(null)
    const navigate = useNavigate()
 
    function handleRegisterShow() {
