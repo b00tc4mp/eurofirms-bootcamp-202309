@@ -10,7 +10,7 @@ function ParkingDetail(props) {
    console.log("Parking Detail")
 
    const navigate = useNavigate()
-   
+
    const { parkingId } = useParams()
    const [parkingData, setParkingData] = useState(null)
 
@@ -23,7 +23,7 @@ function ParkingDetail(props) {
          .catch((error) => {
             props.onError(error)
          })
-   }, [parkingId,props])
+   }, [parkingId, props])
 
    function handleReturnClick() {
       navigate("/")
@@ -34,15 +34,19 @@ function ParkingDetail(props) {
          <Link className="text-blue-700 hover:underline" onClick={handleReturnClick}>
             &lt; Volver
          </Link>
-         <h1 className="my-4">Parking Detail</h1> 
+         <h1 className="my-4">Parking Detail</h1>
          <div className="border-solid border border-black p-3">
-            <p className="mb-3">
-               Parking ID: <strong>{parkingId}</strong>
-            </p>
-            <p>
-               Parking confirmado por: <strong>{parkingData.confirmations.length} usuarios</strong>
-            </p>
-            </div>
+            {parkingData && (
+               <div>
+                  <p className="mb-3">
+                     Parking ID: <strong>{parkingId}</strong>
+                  </p>
+                  <p>
+                     Parking confirmado por: <strong>{parkingData.confirmations.length} usuarios</strong>
+                  </p>
+               </div>
+            )}
+         </div>
       </div>
    )
 }
