@@ -6,7 +6,7 @@ const { User } = require('../../data/models')
 
 const { SystemError, DuplicityError, NotFoundError, ClearanceError } = require('../errors')
 
-function registerUser(userId, creator, name, username, password, role) {
+function registerUser(userId, name, username, password, role) {
     validate.id(userId, 'user id')
     validate.text(name, 'name')
     validate.text(username, 'username')
@@ -26,7 +26,7 @@ function registerUser(userId, creator, name, username, password, role) {
             }
 
             return bcrypt.hash(password, 8)
-                .then(hash => User.create({ creator, userId, name, username, password: hash, role }))
+                .then(hash => User.create({ creator: userId, name, username, password: hash, role }))
                 .then(() => { })
                 .catch(error => {
                     if (error.code === 11000)

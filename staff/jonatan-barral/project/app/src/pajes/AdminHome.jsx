@@ -3,12 +3,18 @@ import { Routes, Route, useNavigate } from 'react-router-dom'
 
 import logic from '../logic'
 
-import { Button, Link, Container } from '../library'
+import { Button, Link, Container, } from '../library'
 
 import { RegisterUser } from '../components'
 
 export default function AdminHome(props) {
     console.log('Home')
+
+    const [activeTab, setActiveTab] = useState(1)
+
+    const handleTabClick = (tabIndex) => {
+        setActiveTab(tabIndex)
+    }
 
     const [name, setName] = useState(null)
     const [timestamp, setTimestamp] = useState(null)
@@ -51,6 +57,18 @@ export default function AdminHome(props) {
         navigate('/')
     }
 
+    function handleJudjesClick(event) {
+        event.preventDefault
+
+        navigate('/judjes')
+    }
+
+    function handleSecretariesClick(event) {
+        event.preventDefault
+
+        navigate('/secretaries')
+    }
+
     return <Container align="center">
         <header className="flex justify-between items-center md:min-w-[500px] lg:min-w-[768px]" aria-label="Header">
 
@@ -68,8 +86,11 @@ export default function AdminHome(props) {
 
         <div className="h-[2rem]"></div>
         <footer className="bg-white fixed bottom-0 w-full flex justify-center items-center h-[2rem] lg:hidden">
-            <Button title="Registrar Usuario" aria-label="Registrar usuario" onClick={handleRegisterUserClick}> 🔏</Button>
-            <a href="#" role='tab' className={`tab-link ${activeTab === 1 ? 'active-tab' : ''}`} onClick={handlejudjesClick}>Ver jueces</a>
+
+            <a href="#" role='tab' className={`tab-link ${activeTab === 1 ? 'active-tab' : ''}`} onClick={handleJudjesClick}>Ver jueces</a>
+            <a href="#" role='tab' className={`tab-link ${activeTab === 1 ? 'active-tab' : ''}`} onClick={handleSecretariesClick}>Ver secretarías</a>
+
+            <button title="Registrar Usuario" role="tab" className={`tab-link ${activeTab === 1 ? 'active-tab' : ''}`} aria-label="Registrar usuario" onClick={handleRegisterUserClick}> 🔏</button>
         </footer>
 
     </Container>

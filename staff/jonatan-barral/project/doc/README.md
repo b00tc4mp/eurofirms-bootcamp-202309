@@ -68,7 +68,7 @@ TODO
 - username (string, unique, required)
 - password (string, required)
 - role (string, administrador|secretaria|juez@juec-c)
-- active (boolean, defoult true)
+- status(string, "first"/"activated"/"deactivated", defoult first)
 
 #### Competition
 

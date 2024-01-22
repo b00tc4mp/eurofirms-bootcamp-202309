@@ -17,7 +17,7 @@ mongoose.connect(process.env.MONGODB_URL)
 
         api.use(cors)
 
-        api.post('/users', cors, jsonBodyParser, registerUserHandler)
+        api.post('/users', jsonBodyParser, registerUserHandler)
 
         api.post('/users/auth', jsonBodyParser, authenticateUserHandler)
 

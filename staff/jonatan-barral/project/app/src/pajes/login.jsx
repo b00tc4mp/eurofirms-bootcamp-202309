@@ -34,11 +34,11 @@ export default function Login(props) {
         <h1>Login</h1>
 
         <Form onSubmit={handleLoginSubmit}>
-            <Field type="username" id="username-field" title="username" required>Username</Field>
+            <Field type="text" id="username-field" title="Nombre de usuario" required>Nombre de usuario</Field>
 
-            <Field type="password" id="password-field" title="Password" required>Password</Field>
+            <Field type="password" id="password-field" title="Contraseña" required>Contraseña</Field>
 
-            <Button type="submit">Login</Button>
+            <Button type="submit">Iniciar sesión</Button>
 
         </Form>
 

@@ -15,7 +15,6 @@ module.exports = (req, res) => {
         logic.registerUser(userId, name, username, password, role)
             .then(() => res.status(201).send())
             .catch(error => {
-                debugger
                 let status = 500
 
                 if (error instanceof DuplicityError)
@@ -24,7 +23,6 @@ module.exports = (req, res) => {
                 res.status(status).json({ error: error.constructor.name, message: error.message })
             })
     } catch (error) {
-        debugger
         let status = 500
 
         if (error instanceof TypeError || error instanceof ContentError || error instanceof RangeError)
