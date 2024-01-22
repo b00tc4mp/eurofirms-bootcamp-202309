@@ -33,7 +33,9 @@ const errors = {
     ContentError,
     SystemError,
     CredentialsError,
-    ClearanceError
+    ClearanceError,
+    TypeError,
+    RangeError
 }
 
 export default errors
