@@ -8,6 +8,7 @@ const toggleSaveParking = require('./toggleSaveParking')
 const createReview = require('./createReview')
 const toggleConfirmParking = require('./toggleConfirmParking')
 const retrieveReview = require('./retrieveReview')
+const retrieveReviews = require('./retrieveReviews')
 const deleteReview = require('./deleteReview')
 const deleteParking = require('./deleteParking')
 const retrieveSavedParkings = require('./retrieveSavedParkings')
@@ -24,6 +25,7 @@ const logic = {
     createReview,
     toggleConfirmParking,
     retrieveReview,
+    retrieveReviews,
     deleteReview,
     deleteParking,
     retrieveSavedParkings,

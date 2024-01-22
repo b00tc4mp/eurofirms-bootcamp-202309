@@ -16,6 +16,7 @@ const {
    createReviewHandler,
    toggleConfirmParkingHandler,
    retrieveReviewHandler,
+   retrieveReviewsHandler,
    deleteReviewHandler,
    deleteParkingHandler,
    retrieveSavedParkingsHandler,
@@ -75,6 +76,10 @@ mongoose.connect(process.env.MONGODB_URL).then(() => {
 
    api.patch("/parkings/:parkingId/confirm", toggleConfirmParkingHandler)
 
+   // Create retrieveReviews endpoint
+
+   api.get("/reviews/:parkingId", retrieveReviewsHandler)
+
    // Create retrieveReview endpoint
 
    api.get("/reviews/:reviewId", retrieveReviewHandler)
@@ -94,8 +99,6 @@ mongoose.connect(process.env.MONGODB_URL).then(() => {
    // Create updateUserPassword endpoint
 
    api.patch("/users/password", jsonBodyParser, updateUserPasswordHandler)
-
-   
 
    api.listen(process.env.PORT, () => console.log(`API listening on port ${process.env.PORT}`))
 })
