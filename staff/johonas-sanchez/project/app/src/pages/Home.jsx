@@ -7,7 +7,7 @@ import logic from "../logic"
 
 import { Button, Link, Container } from "../library"
 
-import { ParkingDetail, SavedParkings, UserProfile } from "../components"
+import { ParkingDetail, SavedParkings, SelectedMarkerOptions, UserProfile } from "../components"
 
 function Home(props) {
    console.log("Home")
@@ -169,52 +169,13 @@ function Home(props) {
                         ))}
                      </MapContainer>
                      {selectedMarker && (
-                        <div>
-                           <div className="my-4">
-                              <button className="bg-blue-500 text-white px-2 py-1 rounded" onClick={() => handleMarkerUnClick()}>
-                                 Eliminar seleccion
-                              </button>
-                           </div>
-                           <div className="border-solid border border-black p-3">
-                              {parkings.find((parking) => parking.id === selectedMarker)?.saved ? (
-                                 <div className="flex items-center mb-4">
-                                    <p className="font-bold mr-4">Plaza guardada</p>
-                                    <button className="bg-blue-500 text-white px-2 py-1 rounded">UnSave Plaza</button>
-                                 </div>
-                              ) : (
-                                 <div className="flex items-center mb-4">
-                                    <p className="font-bold mr-4">Plaza no guardada</p>
-                                    <button className="bg-blue-500 text-white px-2 py-1 rounded">Save Plaza</button>
-                                 </div>
-                              )}
-
-                              {selectedMarker && parkings.find((parking) => parking.id === selectedMarker)?.confirmations.includes(user.id) ? (
-                                 <div className="flex items-center mb-4">
-                                    <p className="font-bold mr-4">Plaza confirmada por ti</p>
-                                    <button className="bg-blue-500 text-white px-2 py-1 rounded">Desconfirmar Plaza</button>
-                                 </div>
-                              ) : (
-                                 <div className="flex items-center mb-4">
-                                    <p className="font-bold mr-4">Plaza no confirmada por ti</p>
-                                    <button className="bg-blue-500 text-white px-2 py-1 rounded">Confirmar Plaza</button>
-                                 </div>
-                              )}
-
-                              <div className="flex items-center justify-start mb-4">
-                                 {user.role === "Manager" && <button className="bg-blue-500 text-white px-2 py-1 rounded">EliminarParking</button>}
-
-                                 {user.role === "User" &&
-                                    parkings.find(
-                                       (parking) =>
-                                          parking.id === selectedMarker && parking.locator.id === user.id && parking.confirmations.length === 0
-                                    ) !== undefined && <button className="bg-blue-500 text-white px-2 py-1 rounded">EliminarParking</button>}
-                              </div>
-
-                              <div className="flex items-center mb-4">
-                                 <Link className="hover:text-blue-700" onClick={handleDetailClick}>Ver detalle</Link>
-                              </div>
-                           </div>
-                        </div>
+                        <SelectedMarkerOptions
+                           selectedMarker={selectedMarker}
+                           handleMarkerUnClick={handleMarkerUnClick}
+                           handleDetailClick={handleDetailClick}
+                           parkings={parkings}
+                           user={user}
+                        />
                      )}
                   </div>
                }
