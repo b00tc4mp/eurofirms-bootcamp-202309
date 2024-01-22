@@ -24,7 +24,7 @@ const user = new Schema({
    },
    role: {
       type: String,
-      enum: ["Manager", "User"],
+      enum: ["manager", "regular"],
       required: true,
    },
    saved: {

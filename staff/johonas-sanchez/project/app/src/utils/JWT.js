@@ -26,6 +26,10 @@ class JWT {
     getSubject() {
         return this.payload.sub
     }
+    
+    getRole() {
+        return this.payload.role
+    }
 }
 
 export default JWT

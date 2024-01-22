@@ -16,9 +16,9 @@ mongoose
       return bcrypt.hash(password, 8)
    })
    .then((hashedPassword) => {
-      const manolo = new User({ name: "Manolo García", email: "manolo@garcia.com", password: hashedPassword, role: "Manager" })
-      const paco = new User({ name: "Paco Martín", email: "paco@martin.com", password: hashedPassword, role: "User" })
-      const lucia = new User({ name: "Lucia López", email: "lucia@lopez.com", password: hashedPassword, role: "User" })
+      const manolo = new User({ name: "Manolo García", email: "manolo@garcia.com", password: hashedPassword, role: "manager" })
+      const paco = new User({ name: "Paco Martín", email: "paco@martin.com", password: hashedPassword, role: "regular" })
+      const lucia = new User({ name: "Lucia López", email: "lucia@lopez.com", password: hashedPassword, role: "regular" })
 
       // Guardar todas las promesas en un array
       const userPromises = [manolo.save(), paco.save(), lucia.save()]

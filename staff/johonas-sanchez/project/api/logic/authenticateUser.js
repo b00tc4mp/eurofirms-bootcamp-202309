@@ -19,7 +19,7 @@ function authenticateUser(email, password) {
                 .catch(error => { throw new SystemError(error.message) })
                 .then(match => {
                     if (match)
-                        return user.id
+                    return { id: user.id, role: user.role }
 
                     throw new CredentialsError('wrong password')
                 })

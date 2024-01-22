@@ -153,13 +153,11 @@ function Home(props) {
             />
 
             <Route
-               path="/parkings/:parkingId"
+               path="/parkings/:parkingId/*"
                element={
                   <Map onError={props.onError}/>
                }
             />
-
-            
 
             <Route path="/saved" element={<SavedParkings onError={props.onError} />} />
 
