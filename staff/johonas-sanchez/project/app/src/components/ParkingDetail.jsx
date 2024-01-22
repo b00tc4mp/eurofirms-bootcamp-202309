@@ -13,12 +13,20 @@ function ParkingDetail(props) {
 
    const { parkingId } = useParams()
    const [parkingData, setParkingData] = useState(null)
+   const [reviewsData, setReviewsData] = useState(null)
 
    useEffect(() => {
       logic
          .retrieveParking(parkingId)
          .then((data) => {
             setParkingData(data)
+            logic.retrieveReviews(parkingId)
+               .then((reviewsData) => {
+                  setReviewsData(reviewsData)
+               })
+               .catch((error) => {
+                  props.onError(error)
+               })
          })
          .catch((error) => {
             props.onError(error)

@@ -5,6 +5,7 @@ import retrieveUser from "./retrieveUser"
 import registerUser from "./registerUser"
 import retrieveParkings from "./retrieveParkings"
 import retrieveParking from "./retrieveParking"
+import retrieveReviews from "./retrieveReviews"
 import updateUserEmail from "./updateUserEmail"
 import updateUserPassword from "./updateUserPassword"
 import retrieveParkingsByGeo from "./retrieveParkingsByGeo"
@@ -17,7 +18,8 @@ const logic = {
    retrieveUser, 
    registerUser,
    retrieveParkings,
-   retrieveParking, 
+   retrieveParking,
+   retrieveReviews, 
    updateUserEmail,
    updateUserPassword,
    retrieveParkingsByGeo,

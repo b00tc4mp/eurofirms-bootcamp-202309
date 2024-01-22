@@ -29,7 +29,6 @@ function Home(props) {
          .then((user) => {
             setName(user.name)
             setUser(user)
-            // Llamar a retrieveParkings y actualizar el estado parkings
             logic
                .retrieveParkingsByGeo(lat, long, dist)
                .then((parkingsData) => {
