@@ -15,24 +15,24 @@ function ParkingDetail(props) {
    const [parkingData, setParkingData] = useState(null)
    const [reviewsData, setReviewsData] = useState(null)
 
-   useEffect(() => {
-      logic
-         .retrieveParking(parkingId)
-         .then((data) => {
-            setParkingData(data)
-            logic
-               .retrieveReviews(parkingId)
-               .then((reviewsData) => {
-                  setReviewsData(reviewsData)
-               })
-               .catch((error) => {
-                  props.onError(error)
-               })
-         })
-         .catch((error) => {
-            props.onError(error)
-         })
-   }, [parkingId, props])
+   // useEffect(() => {
+   //    logic
+   //       .retrieveParking(parkingId)
+   //       .then((data) => {
+   //          setParkingData(data)
+   //          logic
+   //             .retrieveReviews(parkingId)
+   //             .then((reviewsData) => {
+   //                setReviewsData(reviewsData)
+   //             })
+   //             .catch((error) => {
+   //                props.onError(error)
+   //             })
+   //       })
+   //       .catch((error) => {
+   //          props.onError(error)
+   //       })
+   // }, [parkingId, props])
 
    function handleReturnClick() {
       navigate("/")
@@ -40,9 +40,9 @@ function ParkingDetail(props) {
 
    return (
       <div className="text-center">
-         <Link className="text-blue-700 hover:underline" onClick={handleReturnClick}>
+         {/* <Link className="text-blue-700 hover:underline" onClick={handleReturnClick}>
             &lt; Volver
-         </Link>
+         </Link> */}
          <h1 className="my-4">Parking Detail</h1>
          <div className="border-solid border border-black p-3">
             {parkingData && (

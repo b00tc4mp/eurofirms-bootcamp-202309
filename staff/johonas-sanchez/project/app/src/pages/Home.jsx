@@ -7,7 +7,7 @@ import logic from "../logic"
 
 import { Button, Link, Container } from "../library"
 
-import { ParkingDetail, SavedParkings, SelectedMarkerOptions, UserProfile } from "../components"
+import { ParkingDetail, SavedParkings, SelectedMarkerOptions, UserProfile, Map } from "../components"
 
 function Home(props) {
    console.log("Home")
@@ -15,6 +15,7 @@ function Home(props) {
    const [name, setName] = useState(null)
    const [parkings, setParkings] = useState([])
    const [selectedMarker, setSelectedMarker] = useState(null)
+   const [showDetails, setShowDetails] = useState(null)
    const [user, setUser] = useState(null)
 
    const navigate = useNavigate()
@@ -52,7 +53,8 @@ function Home(props) {
    function handleDetailClick(event) {
       event.preventDefault()
 
-      navigate(`/parking-detail/${selectedMarker}`)
+      // navigate(`/parking-detail/${selectedMarker}`)
+      setShowDetails(true)
    }
 
    function handleHomeClick(event) {
@@ -104,7 +106,8 @@ function Home(props) {
    })
 
    function handleMarkerClick(parkingId) {
-      setSelectedMarker(parkingId)
+      // setSelectedMarker(parkingId)
+      navigate(`/parkings/${parkingId}`)
    }
 
    function handleMarkerUnClick() {
@@ -145,43 +148,18 @@ function Home(props) {
             <Route
                path="/"
                element={
-                  <div className="mb-8">
-                     <MapContainer center={[40.03116, -6.08845]} zoom={15} scrollWheelZoom={true} style={{ width: 550, height: 300 }}>
-                        <TileLayer
-                           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                        />
-                        {parkings.map((parking) => (
-                           <Marker
-                              icon={parking.id === selectedMarker ? iconClicked : defaultIcon}
-                              key={parking.id}
-                              position={[parking.location.coordinates[0], parking.location.coordinates[1]]}
-                              eventHandlers={{
-                                 click: (e) => {
-                                    handleMarkerClick(parking.id)
-                                 },
-                              }}
-                           >
-                              {/* <Popup>
-                                 Ubicación: {`${parking.location.coordinates[0]}, ${parking.location.coordinates[1]}`} {parking.locator.name}
-                              </Popup> */}
-                           </Marker>
-                        ))}
-                     </MapContainer>
-                     {selectedMarker && (
-                        <SelectedMarkerOptions
-                           selectedMarker={selectedMarker}
-                           handleMarkerUnClick={handleMarkerUnClick}
-                           handleDetailClick={handleDetailClick}
-                           parkings={parkings}
-                           user={user}
-                        />
-                     )}
-                  </div>
+                  <Map onError={props.onError}/>
                }
             />
 
-            <Route path="/parking-detail/:parkingId" element={<ParkingDetail onError={props.onError} />} />
+            <Route
+               path="/parkings/:parkingId"
+               element={
+                  <Map onError={props.onError}/>
+               }
+            />
+
+            
 
             <Route path="/saved" element={<SavedParkings onError={props.onError} />} />
 
