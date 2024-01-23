@@ -17,10 +17,7 @@ fetch("http://localhost:4000/users", req)
       }
 
       res.json()
-         .then((user) => {// Convert userId to ObjectId
-         const userId = new ObjectId(user.id)
-         console.log(res.status, userId)
-   })
-         .catch((error) => console.error(error))
-   })
+      .then(body => console.log(res.status, body))
+      .catch(error => console.error(error))
+})
    .catch((error) => console.error(error))
