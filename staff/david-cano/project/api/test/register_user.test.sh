@@ -1,0 +1,1 @@
+curl -H 'Content-Type: application/json' -d '{ "name": "Rogert Rabit", "email": "rogert@rabit.com", "password": "123123123", "role": "regular" }' localhost:8080/users -v
