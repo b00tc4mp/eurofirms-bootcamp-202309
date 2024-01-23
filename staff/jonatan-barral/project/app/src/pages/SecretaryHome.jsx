@@ -5,7 +5,7 @@ import logic from '../logic'
 
 import { Button, Link, Container, FooterTabs } from '../library'
 
-
+import { Judges } from '../components'
 
 export default function SecretaryHome(props) {
     console.log('Secretaría Home')
@@ -45,11 +45,12 @@ export default function SecretaryHome(props) {
         props.onLogout()
     }
 
-    function handlejudjesClick(event) {
-        event.preventDefault
+    function handleJudjesClick(event) {
+        event.preventDefault()
 
-        navigate('/judjes')
+        navigate('/judges')
     }
+
     return <Container align="center">
         <header className="flex justify-between items-center md:min-w-[500px] lg:min-w-[768px]" aria-label="Header">
 
@@ -58,13 +59,15 @@ export default function SecretaryHome(props) {
         </header>
 
         <Routes>
-            <Route path="/judges" element={<retrieveJudges onError={props.onError} />} />
+
+            <Route path="/judges" element={<Judges onError={props.onError} />} />
+
 
         </Routes>
         <div className="h-[2rem]"></div>
         <footer className="bg-white fixed bottom-0 w-full flex justify-center items-center h-[2rem] lg:hidden">
-            <a href="#" role='tab' className={`tab-link ${activeTab === 1 ? 'active-tab' : ''}`} onClick={handlejudjesClick}>Ver jueces activos</a>
 
+            <a href="#" role='tab' className={`tab-link ${activeTab === 1 ? 'active-tab' : ''}`} onClick={handleJudjesClick}>Ver jueces</a>
         </footer>
 
     </Container>

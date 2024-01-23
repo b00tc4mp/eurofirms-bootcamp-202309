@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react'
 
-import { Container, Button } from '../library'
+import { Container, Button } from '../../library'
 
-import logic from '../logic'
+import logic from '../../logic'
 
-export default function Judges(props) {
-    console.log('jueces')
+export default function Secretaries(props) {
+    console.log('Secretarías')
 
     const [users, setUsers] = useState([])
 
     useEffect(() => {
-        logic.retrieveJudges()
-            .then((judges) => {
-                setUsers(judges)
+        logic.retrieveSecretaries()
+            .then((secretaries) => {
+                setUsers(secretaries)
             })
             .catch((error) => {
                 props.onError(error)
@@ -32,7 +32,6 @@ export default function Judges(props) {
                     <tr>
                         <th>Nombre</th>
                         <th>Nombre de usuario</th>
-                        <th>Rol</th>
                         <th>Status</th>
                         <th>Edit</th>
                     </tr>
@@ -43,7 +42,6 @@ export default function Judges(props) {
                             <tr key={user.id}>
                                 <td>{user.name}</td>
                                 <td>{user.username}</td>
-                                <td>{user.role}</td>
                                 <td>{user.status}</td>
                                 <td>
                                     <Button onClick={() => handleEditUserClick}>🖊</Button>

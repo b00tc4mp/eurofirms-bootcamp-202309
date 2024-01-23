@@ -2,7 +2,7 @@ import { validate } from '../helpers'
 import context from '../context'
 import errors, { SystemError } from '../errors'
 
-function retrieveJudges() {
+function retrieveSecretaries() {
     validate.jwt(context.jwt)
 
     const req = {
@@ -12,7 +12,7 @@ function retrieveJudges() {
         },
     }
 
-    return fetch(`${import.meta.env.VITE_API_URL}/users/judges`, req)
+    return fetch(`${import.meta.env.VITE_API_URL}/users/secretaries`, req)
         .then((res) => {
             if (!res.ok) {
                 return res.json().then((body) => {
@@ -27,4 +27,4 @@ function retrieveJudges() {
         })
 }
 
-export default retrieveJudges   
+export default retrieveSecretaries   

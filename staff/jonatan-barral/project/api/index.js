@@ -6,7 +6,7 @@ const mongoose = require('mongoose')
 
 const { cors } = require('./utils')
 
-const { registerUserHandler, authenticateUserHandler, retrieveUserHandler, retrieveJudgesHandler } = require('./handlers')
+const { registerUserHandler, authenticateUserHandler, retrieveUserHandler, retrieveJudgesHandler, retrieveSecretariesHandler } = require('./handlers')
 
 mongoose.connect(process.env.MONGODB_URL)
     .then(() => {
@@ -25,6 +25,7 @@ mongoose.connect(process.env.MONGODB_URL)
 
         api.get('/users/judges', retrieveJudgesHandler)
 
+        api.get('/users/secretaries', retrieveSecretariesHandler)
 
         api.listen(process.env.PORT, () => console.log(`API listening on port ${process.env.PORT}`))
     })

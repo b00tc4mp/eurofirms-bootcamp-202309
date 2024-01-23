@@ -3,8 +3,7 @@ import { Routes, Route, useNavigate, Navigate } from 'react-router-dom'
 
 import Feedback from './library/Feedback'
 
-import Login from './pajes/Login'
-import Home from './pajes/Home'
+import { Login, Home } from './pages'
 
 import logic from './logic'
 import { CredentialsError, JWTError, SystemError, ClearanceError } from './logic/errors'

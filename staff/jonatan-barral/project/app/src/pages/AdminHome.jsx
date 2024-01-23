@@ -5,7 +5,7 @@ import logic from '../logic'
 
 import { Button, Link, Container, } from '../library'
 
-import { RegisterUser } from '../components'
+import { RegisterUser, Judges, Secretaries } from '../components'
 
 export default function AdminHome(props) {
     console.log('Home')
@@ -58,13 +58,13 @@ export default function AdminHome(props) {
     }
 
     function handleJudjesClick(event) {
-        event.preventDefault
+        event.preventDefault()
 
-        navigate('/judjes')
+        navigate('/judges')
     }
 
     function handleSecretariesClick(event) {
-        event.preventDefault
+        event.preventDefault()
 
         navigate('/secretaries')
     }
@@ -81,6 +81,10 @@ export default function AdminHome(props) {
             <Route path="/register-user" element={<>
                 <RegisterUser onRegisterUserSubmit={handleRegisterUserSubmit} onRegisterUserCancelClick={handleRegisterUserCancelClick} onError={props.onError} />
             </>} />
+
+            <Route path="/judges" element={<Judges onError={props.onError} />} />
+
+            <Route path="/secretaries" element={<Secretaries onError={props.onError} />} />
 
         </Routes>
 
