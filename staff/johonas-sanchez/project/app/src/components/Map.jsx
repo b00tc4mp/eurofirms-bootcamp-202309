@@ -24,10 +24,6 @@ function Map(props) {
    const params = useParams()
    const { parkingId } = params
 
-   //    const long = 40.030403
-   //    const lat = -6.087581
-   //    const dist = 1000
-
    useEffect(() => {
       if (parkingId) {
          logic
@@ -67,7 +63,6 @@ function Map(props) {
    function handleDetailClick(event) {
       event.preventDefault()
 
-      // navigate(`/parking-detail/${selectedMarker}`)
       setShowDetails(true)
    }
 
@@ -96,13 +91,13 @@ function Map(props) {
    })
 
    function handleMarkerClick(parkingId) {
-      // setSelectedMarker(parkingId)
       navigate(`/parkings/${parkingId}`)
       console.log(parkingId)
    }
 
    function handleMarkerUnClick() {
       setSelectedMarker(false)
+      setShowDetails(false)
    }
 
    return (
@@ -124,9 +119,7 @@ function Map(props) {
                         },
                      }}
                   >
-                     {/* <Popup>
-                                 Ubicación: {`${parking.location.coordinates[0]}, ${parking.location.coordinates[1]}`} {parking.locator.name}
-                              </Popup> */}
+
                   </Marker>
                ))}
             </MapContainer>
@@ -136,7 +129,6 @@ function Map(props) {
                   handleMarkerUnClick={handleMarkerUnClick}
                   handleDetailClick={handleDetailClick}
                   parkings={parkings}
-                //   user={user}
                />
             )}
 
