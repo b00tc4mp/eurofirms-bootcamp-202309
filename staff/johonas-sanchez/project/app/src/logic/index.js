@@ -1,4 +1,7 @@
+import getLoggedInUserId from "./geLoggedInUserId"
 import isUserLoggedIn from "./isUserLoggedIn"
+import isUserManager from "./isUserManager"
+import isUserRegular from "./isUserRegular"
 import loginUser from "./loginUser"
 import logoutUser from "./logoutUser"
 import retrieveUser from "./retrieveUser"
@@ -12,7 +15,10 @@ import retrieveParkingsByGeo from "./retrieveParkingsByGeo"
 import retrieveSavedParkings from "./retrieveSavedParkings"
 
 const logic = {
+   getLoggedInUserId,
    isUserLoggedIn,
+   isUserManager,
+   isUserRegular,
    loginUser,
    logoutUser,
    retrieveUser, 

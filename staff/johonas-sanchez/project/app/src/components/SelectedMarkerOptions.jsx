@@ -1,8 +1,12 @@
 import React from "react"
 import { Link } from "../library"
+import logic from "../logic"
 
-function SelectedMarkerOptions({ selectedMarker, handleMarkerUnClick, handleDetailClick, parkings, user }) {
+function SelectedMarkerOptions({ selectedMarker, handleMarkerUnClick, handleDetailClick, parkings }) {
    const parking = parkings.find((parking) => parking.id === selectedMarker)
+   const userId = logic.getLoggedInUserId()
+   const isManager = logic.isUserManager()
+   const isRegular = logic.isUserRegular()
 
    return (
       <div>
@@ -24,7 +28,7 @@ function SelectedMarkerOptions({ selectedMarker, handleMarkerUnClick, handleDeta
                </div>
             )}
 
-            {/* {selectedMarker && parking?.confirmations.includes(user.id) ? (
+            {selectedMarker && parking?.confirmations.includes(userId) ? (
                <div className="flex items-center mb-4">
                   <p className="font-bold mr-4">Plaza confirmada por ti</p>
                   <button className="bg-blue-500 text-white px-2 py-1 rounded">Desconfirmar Plaza</button>
@@ -34,15 +38,14 @@ function SelectedMarkerOptions({ selectedMarker, handleMarkerUnClick, handleDeta
                   <p className="font-bold mr-4">Plaza no confirmada por ti</p>
                   <button className="bg-blue-500 text-white px-2 py-1 rounded">Confirmar Plaza</button>
                </div>
-            )} */}
+            )}
 
-            {/* <div className="flex items-center justify-start mb-4">
-               {user.role === "Manager" && <button className="bg-blue-500 text-white px-2 py-1 rounded">Eliminar Parking</button>}
-
-               {user.role === "User" && parking && parking.locator.id === user.id && parking.confirmations.length === 0 && (
-                  <button className="bg-blue-500 text-white px-2 py-1 rounded">Eliminar Parking</button>
+            <div className="flex items-center justify-start mb-4">
+               {isManager && <button className="bg-blue-500 text-white px-2 py-1 rounded">Eliminar Parking (Manager)</button>}
+               {isRegular && parking.locator.id === userId && parking.confirmations.length === 0 && (
+                  <button className="bg-blue-500 text-white px-2 py-1 rounded">Eliminar Parking (Regular)</button>
                )}
-            </div> */}
+            </div>
 
             <div className="flex items-center mb-4">
                <Link className="hover:text-blue-700" onClick={handleDetailClick}>
