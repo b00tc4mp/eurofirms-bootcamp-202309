@@ -10,20 +10,23 @@ function authenticateUser(email, password) {
    validate.password(password, "password")
 
    return User.findOne({ email })
-        .catch(error => { throw new SystemError(error.message) })
-        .then(user => {
-            if (!user)
-                throw new CredentialsError('wrong email')
+      .catch((error) => {
+         throw new SystemError(error.message)
+      })
+      .then((user) => {
+         if (!user) throw new CredentialsError("wrong email")
 
-            return bcrypt.compare(password, user.password)
-                .catch(error => { throw new SystemError(error.message) })
-                .then(match => {
-                    if (match)
-                    return { id: user.id, role: user.role }
+         return bcrypt
+            .compare(password, user.password)
+            .catch((error) => {
+               throw new SystemError(error.message)
+            })
+            .then((match) => {
+               if (match) return { id: user.id, role: user.role }
 
-                    throw new CredentialsError('wrong password')
-                })
-        })
+               throw new CredentialsError("wrong password")
+            })
+      })
 }
 
 module.exports = authenticateUser

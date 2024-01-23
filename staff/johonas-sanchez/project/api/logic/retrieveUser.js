@@ -7,14 +7,13 @@ function retrieveUser(userId) {
 
    return (
       User.findById(userId)
-         .select("-password -__v")
+         .select("name")
          .lean()
          // User.findById(userId).lean() Con el select en negativo puedo eliminar las propiedades que me devuelve
 
          .then(user => {
             if (!user) throw new NotFoundError("user not found")
 
-            user.id = user._id.toString()
             delete user._id
 
             return user
