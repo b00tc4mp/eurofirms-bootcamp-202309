@@ -1,4 +1,7 @@
 function authenticateUser(email, password) {
+
+    validateEmail(email)
+    validatePassword(password)
     // vamos a utilizar este método find para buscar en la array , le pasamos un callback (funcion (user))
     var foundUser = find(users, function (user) {
         return user.email === email

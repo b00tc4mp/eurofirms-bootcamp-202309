@@ -1,7 +1,8 @@
 //lo que hacemos aqui es llamar al usuarios por el email y el nombre de usuario
 function retrieverUser(email) {
-    var foundUser = null
-    // vamos a utilizar este método find para buscar en la array , le pasamos un callback (funcion (user))
+
+    validateEmail(email)
+
     var foundUser = find(users, function (user) {
         return user.email === email
     })

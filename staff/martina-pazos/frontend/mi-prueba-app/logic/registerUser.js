@@ -1,6 +1,10 @@
 function registerUser(name, email, password) {
-    var foundUser = null
 
+    validateText(name, "name")
+    validateEmail(email)
+    validatePassword(password)
+
+    var foundUser = null
     for (var i = 0; i < users.length; i++) {
         var user = users[i]
 
