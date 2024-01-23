@@ -26,20 +26,14 @@ registerForm.onsubmit = function (event) {
     var name = nameInput.value
     var email = emailInput.value
     var password = passwordInput.value
-
-
-    //se crea una array con un objeto vacio, 
-    var user = {}
-    //a cada objeto se le asigna una propiedad, que recoge los datos del formulacio (name, email, password)
-    user.name = name
-    user.email = email
-    user.password = password
-    //con esto el ultimo usuario que se registre se incorpora en la array
-    users.push(user)
-
-    //para que se borre el campo del input una vez registrados
-    registerForm.reset()
-    // una vez introducido los datos, se apague register y se encienda login
-    registerView.style.display = "none"
-    loginView.style.display = ""
+    try {
+        registerUser(name, email, password)
+        //para que se borre el campo del input una vez registrados
+        registerForm.reset()
+        // una vez introducido los datos, se apague register y se encienda login
+        registerView.style.display = "none"
+        loginView.style.display = ""
+    } catch (error) {
+        alert(error.message)
+    }
 }
