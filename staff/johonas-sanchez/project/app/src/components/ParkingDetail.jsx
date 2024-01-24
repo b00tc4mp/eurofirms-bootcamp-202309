@@ -40,13 +40,10 @@ function ParkingDetail(props) {
 
    return (
       <div className="text-center">
-         <h1 className="my-4">Parking Detail</h1>
+         <h1 className="my-4 font-bold mt-8">Parking Detail</h1>
          <div className="border-solid border border-black p-3">
             {parking && (
                <div>
-                  <p className="mb-3">
-                     Parking ID: <strong>{parkingId}</strong>
-                  </p>
                   <p>
                      Parking confirmado por: <strong>{parking.confirmations.length} usuarios</strong>
                   </p>
@@ -54,11 +51,11 @@ function ParkingDetail(props) {
             )}
          </div>
 
-         <h2 className="my-4">Reviews</h2>
-         <div className="border-solid border border-black p-3">
+         <h2 className="font-bold my-4">Reviews</h2>
+         
             {reviews && reviews.length > 0 ? (
                reviews.map((review) => (
-                  <div key={review.id} className="mb-3">
+                  <div  key={review.id} className="border-solid border border-black p-3 mb-6">
                      <p>
                         Author: <strong>{review.author.name}</strong>
                      </p>
@@ -66,12 +63,13 @@ function ParkingDetail(props) {
                         Valuation: <strong>{review.valuation}</strong>
                      </p>
                      <p>Comentario: {review.comment}</p>
+                     <button className="bg-blue-500 text-white px-2 py-1 rounded mt-3">Eliminar review</button>
                   </div>
                ))
             ) : (
                <p>Parking sin comentarios</p>
             )}
-         </div>
+        
 
          {reviews && reviews.length > 0 && (
             <div className="mt-4">
