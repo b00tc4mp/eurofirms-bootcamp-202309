@@ -14,10 +14,22 @@ function retrieveReviews(userId, parkingId) {
          if (!user) throw new NotFoundError("user not found")
 
          return Review.find({ parking: parkingId })
-            .select("-__v")
+            .select("-__v -parking")
+            .populate("author", "name")
+            .lean() // Añadidos .lean() para obtener un objeto plano
             .then((reviews) => {
+               reviews.forEach((review) => {
+                  review.id = review._id.toString()
+                  delete review._id
+
+                  if (review.author._id) {
+                     review.author.id = review.author._id.toString()
+                     delete review.author._id
+                  }
+               })
                return reviews
             })
+
             .catch((error) => {
                throw new SystemError(error.message)
             })

@@ -13,7 +13,7 @@ function ParkingDetail(props) {
 
    const { parkingId } = useParams()
    const [parkingData, setParkingData] = useState(null)
-   const [reviewsData, setReviewsData] = useState(null)
+   const [reviews, setReviews] = useState(null)
 
    useEffect(() => {
       logic
@@ -22,8 +22,8 @@ function ParkingDetail(props) {
             setParkingData(data)
             logic
                .retrieveReviews(parkingId)
-               .then((reviewsData) => {
-                  setReviewsData(reviewsData)
+               .then((reviews) => {
+                  setReviews(reviews)
                })
                .catch((error) => {
                   props.onError(error)
@@ -37,7 +37,7 @@ function ParkingDetail(props) {
    function handleReturnClick() {
       navigate("/")
    }
-
+   
    return (
       <div className="text-center">
          <h1 className="my-4">Parking Detail</h1>
@@ -56,8 +56,8 @@ function ParkingDetail(props) {
 
          <h2 className="my-4">Reviews</h2>
          <div className="border-solid border border-black p-3">
-            {reviewsData && reviewsData.length > 0 ? (
-               reviewsData.map((review) => (
+            {reviews && reviews.length > 0 ? (
+               reviews.map((review) => (
                   <div key={review.id} className="mb-3">
                      <p>
                         Valuation: <strong>{review.valuation}</strong>
@@ -70,12 +70,12 @@ function ParkingDetail(props) {
             )}
          </div>
 
-         {reviewsData && reviewsData.length > 0 && (
+         {reviews && reviews.length > 0 && (
             <div className="mt-4">
                <h3 className="my-4">Puntuación media del parking</h3>
                <p>
                   La media de las valuaciones es:{" "}
-                  <strong>{(reviewsData.reduce((sum, review) => sum + review.valuation, 0) / reviewsData.length).toFixed(1)}</strong>
+                  <strong>{(reviews.reduce((sum, review) => sum + review.valuation, 0) / reviews.length).toFixed(1)}</strong>
                </p>
             </div>
          )}
