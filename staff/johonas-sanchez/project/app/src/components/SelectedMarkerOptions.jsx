@@ -2,7 +2,7 @@ import React from "react"
 import { Link } from "../library"
 import logic from "../logic"
 
-function SelectedMarkerOptions({ selectedMarker, onMarkerUnClick, onDetailClick, parkings, onParkingSaveToggled, onError }) {
+function SelectedMarkerOptions({ selectedMarker, onMarkerUnClick, onDetailClick, parkings, onParkingSaveToggled, onParkingConfirmToggled, onError }) {
    const parking = parkings.find((parking) => parking.id === selectedMarker)
    const userId = logic.getLoggedInUserId()
    const isManager = logic.isUserManager()
@@ -14,6 +14,21 @@ function SelectedMarkerOptions({ selectedMarker, onMarkerUnClick, onDetailClick,
             .toggleSaveParking(parking.id)
             .then(() => {
                onParkingSaveToggled()
+            })
+            .catch((error) => {
+               props.onError(error)
+            })
+      } catch (error) {
+         onError(error)
+      }
+   }
+
+   function handleParkingConfirmToggled() {
+      try {
+         logic
+            .toggleConfirmParking(parking.id)
+            .then(() => {
+               onParkingConfirmToggled()
             })
             .catch((error) => {
                props.onError(error)
@@ -50,12 +65,12 @@ function SelectedMarkerOptions({ selectedMarker, onMarkerUnClick, onDetailClick,
             {selectedMarker && parking?.confirmations.includes(userId) ? (
                <div className="flex items-center mb-4">
                   <p className="font-bold mr-4">Plaza confirmada por ti</p>
-                  <button className="bg-blue-500 text-white px-2 py-1 rounded">Desconfirmar Plaza</button>
+                  <button onClick={handleParkingConfirmToggled} className="bg-blue-500 text-white px-2 py-1 rounded">Desconfirmar Plaza</button>
                </div>
             ) : (
                <div className="flex items-center mb-4">
                   <p className="font-bold mr-4">Plaza no confirmada por ti</p>
-                  <button className="bg-blue-500 text-white px-2 py-1 rounded">Confirmar Plaza</button>
+                  <button onClick={handleParkingConfirmToggled} className="bg-blue-500 text-white px-2 py-1 rounded">Confirmar Plaza</button>
                </div>
             )}
 

@@ -108,6 +108,10 @@ function Map({ onError }) {
       refreshParkings()
    }
 
+   function handleParkingConfirmToggle() {
+      refreshParkings()
+   }
+
    return (
       <Container align="center">
          <div className="mb-8">
@@ -137,6 +141,7 @@ function Map({ onError }) {
                   parkings={parkings}
                   onError={onError}
                   onParkingSaveToggled={handleParkingSaveToggle}
+                  onParkingConfirmToggled={handleParkingConfirmToggle}
                />
             )}
 
