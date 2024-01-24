@@ -2,7 +2,7 @@ import React from "react"
 import { Link } from "../library"
 import logic from "../logic"
 
-function SelectedMarkerOptions({ selectedMarker, handleMarkerUnClick, handleDetailClick, parkings, onParkingSaveToggled }) {
+function SelectedMarkerOptions({ selectedMarker, onMarkerUnClick, onDetailClick, parkings, onParkingSaveToggled, onError }) {
    const parking = parkings.find((parking) => parking.id === selectedMarker)
    const userId = logic.getLoggedInUserId()
    const isManager = logic.isUserManager()
@@ -10,24 +10,23 @@ function SelectedMarkerOptions({ selectedMarker, handleMarkerUnClick, handleDeta
 
    function handleParkingSaveToggled() {
       try {
-         logic.toggleSaveParking(parking.id, (error) => {
-            if (error) {
+         logic
+            .toggleSaveParking(parking.id)
+            .then(() => {
+               onParkingSaveToggled()
+            })
+            .catch((error) => {
                props.onError(error)
-
-               return
-            }
-
-            props.onParkingSaveToggled()
-         })
+            })
       } catch (error) {
-         props.onError(error)
+         onError(error)
       }
    }
 
    return (
       <div>
          <div className="my-4">
-            <button className="bg-blue-500 text-white px-2 py-1 rounded" onClick={() => handleMarkerUnClick()}>
+            <button className="bg-blue-500 text-white px-2 py-1 rounded" onClick={onMarkerUnClick}>
                Eliminar seleccion
             </button>
          </div>
@@ -35,12 +34,16 @@ function SelectedMarkerOptions({ selectedMarker, handleMarkerUnClick, handleDeta
             {parking?.saved ? (
                <div className="flex items-center mb-4">
                   <p className="font-bold mr-4">Plaza guardada</p>
-                  <button onClick={handleParkingSaveToggled} className="bg-blue-500 text-white px-2 py-1 rounded">UnSave Plaza</button>
+                  <button onClick={handleParkingSaveToggled} className="bg-blue-500 text-white px-2 py-1 rounded">
+                     UnSave Plaza
+                  </button>
                </div>
             ) : (
                <div className="flex items-center mb-4">
                   <p className="font-bold mr-4">Plaza no guardada</p>
-                  <button onClick={handleParkingSaveToggled} className="bg-blue-500 text-white px-2 py-1 rounded">Save Plaza</button>
+                  <button onClick={handleParkingSaveToggled} className="bg-blue-500 text-white px-2 py-1 rounded">
+                     Save Plaza
+                  </button>
                </div>
             )}
 
@@ -64,7 +67,7 @@ function SelectedMarkerOptions({ selectedMarker, handleMarkerUnClick, handleDeta
             </div>
 
             <div className="flex items-center mb-4">
-               <Link className="hover:text-blue-700" onClick={handleDetailClick}>
+               <Link className="hover:text-blue-700" onClick={onDetailClick}>
                   Ver detalle
                </Link>
             </div>

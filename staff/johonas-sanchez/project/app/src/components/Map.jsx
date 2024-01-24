@@ -9,7 +9,7 @@ import { Button, Link, Container } from "../library"
 
 import { ParkingDetail, SavedParkings, SelectedMarkerOptions, UserProfile } from "../components"
 
-function Map(props) {
+function Map({ onError }) {
    console.log("Map")
 
    const [parkings, setParkings] = useState([])
@@ -24,7 +24,7 @@ function Map(props) {
    const params = useParams()
    const { parkingId } = params
 
-   useEffect(() => {
+   function refreshParkings() {
       if (parkingId) {
          logic
             .retrieveParking(parkingId)
@@ -41,11 +41,11 @@ function Map(props) {
                      setParkings(parkingsData)
                   })
                   .catch((error) => {
-                     props.onError(error)
+                     onError(error)
                   })
             })
             .catch((error) => {
-               props.onError(error)
+               onError(error)
             })
       } else {
          logic
@@ -55,10 +55,14 @@ function Map(props) {
                setSelectedMarker(null)
             })
             .catch((error) => {
-               props.onError(error)
+               onError(error)
             })
       }
-   }, [props])
+   }
+
+   useEffect(() => {
+      refreshParkings()
+   }, [parkingId])
 
    function handleDetailClick(event) {
       event.preventDefault()
@@ -100,6 +104,10 @@ function Map(props) {
       setShowDetails(false)
    }
 
+   function handleParkingSaveToggle() {
+      refreshParkings()
+   }
+
    return (
       <Container align="center">
          <div className="mb-8">
@@ -118,24 +126,22 @@ function Map(props) {
                            handleMarkerClick(parking.id)
                         },
                      }}
-                  >
-
-                  </Marker>
+                  ></Marker>
                ))}
             </MapContainer>
             {selectedMarker && (
                <SelectedMarkerOptions
                   selectedMarker={selectedMarker}
-                  handleMarkerUnClick={handleMarkerUnClick}
-                  handleDetailClick={handleDetailClick}
+                  onMarkerUnClick={handleMarkerUnClick}
+                  onDetailClick={handleDetailClick}
                   parkings={parkings}
-                  onParkingSaveToggled={props.onParkingSaveToggled}
+                  onError={onError}
+                  onParkingSaveToggled={handleParkingSaveToggle}
                />
             )}
 
-            {showDetails && <ParkingDetail parkingId={selectedMarker} onError={props.onError} />}
+            {showDetails && <ParkingDetail parkingId={selectedMarker} onError={onError} />}
          </div>
-
       </Container>
    )
 }
