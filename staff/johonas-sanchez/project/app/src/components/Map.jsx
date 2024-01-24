@@ -129,15 +129,13 @@ function Map(props) {
                   handleMarkerUnClick={handleMarkerUnClick}
                   handleDetailClick={handleDetailClick}
                   parkings={parkings}
+                  onParkingSaveToggled={props.onParkingSaveToggled}
                />
             )}
 
             {showDetails && <ParkingDetail parkingId={selectedMarker} onError={props.onError} />}
          </div>
 
-         <Routes>
-            <Route path="/parking-detail/:parkingId" element={<ParkingDetail onError={props.onError} />} />
-         </Routes>
       </Container>
    )
 }
