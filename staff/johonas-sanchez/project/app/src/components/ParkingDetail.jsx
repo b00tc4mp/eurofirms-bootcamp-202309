@@ -12,14 +12,14 @@ function ParkingDetail(props) {
    const navigate = useNavigate()
 
    const { parkingId } = useParams()
-   const [parkingData, setParkingData] = useState(null)
+   const [parking, setParking] = useState(null)
    const [reviews, setReviews] = useState(null)
 
    useEffect(() => {
       logic
          .retrieveParking(parkingId)
          .then((data) => {
-            setParkingData(data)
+            setParking(data)
             logic
                .retrieveReviews(parkingId)
                .then((reviews) => {
@@ -37,18 +37,18 @@ function ParkingDetail(props) {
    function handleReturnClick() {
       navigate("/")
    }
-   
+
    return (
       <div className="text-center">
          <h1 className="my-4">Parking Detail</h1>
          <div className="border-solid border border-black p-3">
-            {parkingData && (
+            {parking && (
                <div>
                   <p className="mb-3">
                      Parking ID: <strong>{parkingId}</strong>
                   </p>
                   <p>
-                     Parking confirmado por: <strong>{parkingData.confirmations.length} usuarios</strong>
+                     Parking confirmado por: <strong>{parking.confirmations.length} usuarios</strong>
                   </p>
                </div>
             )}
@@ -59,6 +59,9 @@ function ParkingDetail(props) {
             {reviews && reviews.length > 0 ? (
                reviews.map((review) => (
                   <div key={review.id} className="mb-3">
+                     <p>
+                        Author: <strong>{review.author.name}</strong>
+                     </p>
                      <p>
                         Valuation: <strong>{review.valuation}</strong>
                      </p>
