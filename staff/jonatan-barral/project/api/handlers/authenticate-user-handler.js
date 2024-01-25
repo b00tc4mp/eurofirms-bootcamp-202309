@@ -4,13 +4,14 @@ const logic = require('../logic')
 const { ContentError, CredentialsError } = require('../logic/errors')
 
 module.exports = (req, res) => {
+    debugger
     try {
         const { username, password } = req.body
 
         logic.authenticateUser(username, password)
             .then(user => {
-
-                const token = jwt.sign({ sub: user.id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '10h' })
+                debugger
+                const token = jwt.sign({ sub: user.id, role: user.role, status: user.status }, process.env.JWT_SECRET, { expiresIn: '10h' })
 
                 res.json(token)
             })

@@ -20,6 +20,10 @@ function registerUser(userId, name, username, password, role) {
 
             }
 
+            if (user.status !== 'activated') {
+                throw new ClearanceError(`User has not permission to create Users`)
+            }
+
             if (user.role !== 'administrador') {
                 throw new ClearanceError(`User with role ${user.role}$ has not permission to create Users`)
 

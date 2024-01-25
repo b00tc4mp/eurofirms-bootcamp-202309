@@ -41,6 +41,17 @@ const validate = {
         }
     },
 
+
+    status(status, explain) {
+        this.text(status, explain)
+
+        const allowedStatus = ['starting', 'activated', 'deactivated']
+
+        if (!allowedStatus.includes(status)) {
+            throw new Error(status + ' is not a valid status')
+        }
+    },
+
 }
 
 

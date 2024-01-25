@@ -1,6 +1,6 @@
 import { validate } from '../helpers'
 import context from '../context'
-import errors, { SystemError } from '../errors'
+import errors, { SystemError, ClearanceError } from '../errors'
 
 function retrieveJudges() {
     validate.jwt(context.jwt)

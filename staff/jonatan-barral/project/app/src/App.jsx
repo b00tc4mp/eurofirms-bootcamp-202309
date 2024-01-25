@@ -20,8 +20,9 @@ export default function App() {
   }
 
   function handleLoginShow() {
-    navigate('/login')
+    logic.logoutUser()
     setFeedback(null)
+    navigate('/login')
   }
 
   function handleHomeShow() {

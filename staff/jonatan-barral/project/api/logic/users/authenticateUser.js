@@ -27,7 +27,7 @@ function authenticateUser(username, password) {
 
                 .then(match => {
                     if (match) {
-                        return { id: user.id, role: user.role }
+                        return { id: user.id, role: user.role, status: user.status }
                     } else {
                         throw new CredentialsError('Wrong credentials')
                     }

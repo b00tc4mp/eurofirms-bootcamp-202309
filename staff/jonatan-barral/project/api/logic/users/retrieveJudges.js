@@ -13,6 +13,10 @@ function retrieveJudges(userId) {
                 throw new NotFoundError('user not found')
             }
 
+            if (user.status !== 'activated') {
+                throw new ClearanceError(`User has not permission to view users`)
+            }
+
             if (user.role !== 'administrador' && user.role !== 'secretaria') {
                 throw new ClearanceError(`User with role ${user.role} has not permission to view users`)
             }

@@ -29,6 +29,9 @@ class JWT {
     getRole() {
         return this.payload.role
     }
+    getStatus() {
+        return this.payload.status
+    }
 }
 
 export default JWT

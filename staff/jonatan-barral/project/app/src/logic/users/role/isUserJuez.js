@@ -1,4 +1,5 @@
-import context from '../context'
+import context from '../../context'
+
 function isUserJuez() {
     return context.jwt.getRole() === 'juez'
 }
