@@ -18,7 +18,7 @@ function ParkingDetail(props) {
    const [reviews, setReviews] = useState(null)
    const [showNewReviews, setShowNewReviews] = useState(null)
 
-   useEffect(() => {
+   function refreshReviews() {
       logic
          .retrieveParking(parkingId)
          .then((data) => {
@@ -35,7 +35,11 @@ function ParkingDetail(props) {
          .catch((error) => {
             props.onError(error)
          })
-   }, [parkingId, props])
+   }
+
+   useEffect(() => {
+      refreshReviews()
+   }, [parkingId])
 
    function handleReturnClick() {
       navigate("/")
@@ -45,9 +49,7 @@ function ParkingDetail(props) {
       logic
          .deleteReview(reviewId)
          .then(() => {
-            // Actualizar la lista de revisiones después de la eliminación
-            const updatedReviews = reviews.filter((review) => review.id !== reviewId)
-            setReviews(updatedReviews)
+          refreshReviews()
          })
          .catch((error) => {
             props.onError(error)
@@ -63,6 +65,7 @@ function ParkingDetail(props) {
    }
 
    function handleNewReviewSubmit() {
+      refreshReviews()
       setShowNewReviews(false)
    }
 

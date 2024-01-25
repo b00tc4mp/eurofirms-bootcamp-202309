@@ -34,11 +34,11 @@ function Map({ onError }) {
 
                logic
                   .retrieveParkingsByGeo(lat, long, dist)
-                  .then((parkingsData) => {
+                  .then((parkings) => {
                      setSelectedMarker(parkingId)
                      setLat(lat)
                      setLong(long)
-                     setParkings(parkingsData)
+                     setParkings(parkings)
                   })
                   .catch((error) => {
                      onError(error)
@@ -50,8 +50,8 @@ function Map({ onError }) {
       } else {
          logic
             .retrieveParkingsByGeo(lat, long, dist)
-            .then((parkingsData) => {
-               setParkings(parkingsData)
+            .then((parkings) => {
+               setParkings(parkings)
                setSelectedMarker(null)
             })
             .catch((error) => {

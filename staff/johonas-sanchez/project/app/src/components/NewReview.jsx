@@ -29,7 +29,6 @@ function NewReview(props) {
             props.onError(error)
          })
       }
-   
 
    function handleCancelClick() {
       props.onNewReviewCancelClick()
