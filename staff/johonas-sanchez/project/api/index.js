@@ -68,7 +68,7 @@ mongoose.connect(process.env.MONGODB_URL).then(() => {
 
    api.patch("/parkings/:parkingId/saved", toggleSaveParkingHandler)
 
-   // Create createParkingReview endpoint
+   // Create createReview endpoint
 
    api.post("/parkings/:parkingId/reviews", jsonBodyParser, createReviewHandler)
 

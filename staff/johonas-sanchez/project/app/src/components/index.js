@@ -5,5 +5,6 @@ import UpdatePassword from "./UpdatePassword"
 import ParkingDetail from "./ParkingDetail"
 import SelectedMarkerOptions from "./SelectedMarkerOptions"
 import Map from "./Map"
+import NewReview from "./NewReview"
 
-export { SavedParkings, UserProfile, UpdateEmail, UpdatePassword, ParkingDetail, SelectedMarkerOptions, Map }
+export { SavedParkings, UserProfile, UpdateEmail, UpdatePassword, ParkingDetail, SelectedMarkerOptions, Map, NewReview }

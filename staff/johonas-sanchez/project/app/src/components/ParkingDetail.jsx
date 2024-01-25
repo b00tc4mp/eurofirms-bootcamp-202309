@@ -6,6 +6,8 @@ import { Button, Link, Container } from "../library"
 
 import logic from "../logic"
 
+import NewReview from "./NewReview"
+
 function ParkingDetail(props) {
    console.log("Parking Detail")
 
@@ -14,6 +16,7 @@ function ParkingDetail(props) {
    const { parkingId } = useParams()
    const [parking, setParking] = useState(null)
    const [reviews, setReviews] = useState(null)
+   const [showNewReviews, setShowNewReviews] = useState(null)
 
    useEffect(() => {
       logic
@@ -39,7 +42,8 @@ function ParkingDetail(props) {
    }
 
    function handleDeleteReviewClick(reviewId) {
-      logic.deleteReview(reviewId)
+      logic
+         .deleteReview(reviewId)
          .then(() => {
             // Actualizar la lista de revisiones después de la eliminación
             const updatedReviews = reviews.filter((review) => review.id !== reviewId)
@@ -47,7 +51,19 @@ function ParkingDetail(props) {
          })
          .catch((error) => {
             props.onError(error)
-         });
+         })
+   }
+
+   function handleNewReviewClick() {
+      setShowNewReviews(true)
+   }
+
+   function handleNewReviewCancelClick() {
+      setShowNewReviews(false)
+   }
+
+   function handleNewReviewSubmit() {
+      setShowNewReviews(false)
    }
 
    return (
@@ -63,25 +79,34 @@ function ParkingDetail(props) {
             )}
          </div>
 
-         <h2 className="font-bold my-4">Reviews</h2>
-         
-            {reviews && reviews.length > 0 ? (
-               reviews.map((review) => (
-                  <div  key={review.id} className="border-solid border border-black p-3 mb-6">
-                     <p>
-                        Author: <strong>{review.author.name}</strong>
-                     </p>
-                     <p>
-                        Valuation: <strong>{review.valuation}</strong>
-                     </p>
-                     <p>Comentario: {review.comment}</p>
-                     <button onClick={() => handleDeleteReviewClick(review.id)} className="bg-blue-500 text-white px-2 py-1 rounded mt-3">Eliminar review</button>
-                  </div>
-               ))
-            ) : (
-               <p>Parking sin comentarios</p>
+         <div>
+            <h2 className="font-bold mt-4">Reviews</h2>
+            <button title="New review" aria-label="New review (+)" onClick={handleNewReviewClick}>
+               +
+            </button>
+            {showNewReviews && (
+               <NewReview onNewReviewSubmit={handleNewReviewSubmit} onNewReviewCancelClick={handleNewReviewCancelClick} parkingId={parkingId} />
             )}
-        
+         </div>
+
+         {reviews && reviews.length > 0 ? (
+            reviews.map((review) => (
+               <div key={review.id} className="border-solid border border-black p-3 mb-6">
+                  <p>
+                     Author: <strong>{review.author.name}</strong>
+                  </p>
+                  <p>
+                     Valuation: <strong>{review.valuation}</strong>
+                  </p>
+                  <p>Comentario: {review.comment}</p>
+                  <button onClick={() => handleDeleteReviewClick(review.id)} className="bg-blue-500 text-white px-2 py-1 rounded mt-3">
+                     Eliminar review
+                  </button>
+               </div>
+            ))
+         ) : (
+            <p>Parking sin comentarios</p>
+         )}
 
          {reviews && reviews.length > 0 && (
             <div className="mt-4">
