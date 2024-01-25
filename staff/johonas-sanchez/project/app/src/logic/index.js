@@ -15,6 +15,7 @@ import retrieveParkingsByGeo from "./retrieveParkingsByGeo"
 import retrieveSavedParkings from "./retrieveSavedParkings"
 import toggleSaveParking from "./toggleSaveParking"
 import toggleConfirmParking from "./toggleConfirmParking"
+import deleteReview from "./deleteReview"
 
 const logic = {
    getLoggedInUserId,
@@ -33,7 +34,8 @@ const logic = {
    retrieveParkingsByGeo,
    retrieveSavedParkings, 
    toggleSaveParking,
-   toggleConfirmParking
+   toggleConfirmParking,
+   deleteReview
 }
 
 export default logic

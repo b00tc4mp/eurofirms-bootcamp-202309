@@ -38,6 +38,18 @@ function ParkingDetail(props) {
       navigate("/")
    }
 
+   function handleDeleteReviewClick(reviewId) {
+      logic.deleteReview(reviewId)
+         .then(() => {
+            // Actualizar la lista de revisiones después de la eliminación
+            const updatedReviews = reviews.filter((review) => review.id !== reviewId)
+            setReviews(updatedReviews)
+         })
+         .catch((error) => {
+            props.onError(error)
+         });
+   }
+
    return (
       <div className="text-center">
          <h1 className="my-4 font-bold mt-8">Parking Detail</h1>
@@ -63,7 +75,7 @@ function ParkingDetail(props) {
                         Valuation: <strong>{review.valuation}</strong>
                      </p>
                      <p>Comentario: {review.comment}</p>
-                     <button className="bg-blue-500 text-white px-2 py-1 rounded mt-3">Eliminar review</button>
+                     <button onClick={() => handleDeleteReviewClick(review.id)} className="bg-blue-500 text-white px-2 py-1 rounded mt-3">Eliminar review</button>
                   </div>
                ))
             ) : (
