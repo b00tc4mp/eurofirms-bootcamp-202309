@@ -50,27 +50,41 @@ function SelectedMarkerOptions({ selectedMarker, onMarkerUnClick, onDetailClick,
                <div className="flex items-center mb-4">
                   <p className="font-bold mr-4">Plaza guardada</p>
                   <button onClick={handleParkingSaveToggled} className="bg-blue-500 text-white px-2 py-1 rounded">
-                     UnSave Plaza
+                     Desmarcar Plaza
                   </button>
                </div>
             ) : (
                <div className="flex items-center mb-4">
                   <p className="font-bold mr-4">Plaza no guardada</p>
                   <button onClick={handleParkingSaveToggled} className="bg-blue-500 text-white px-2 py-1 rounded">
-                     Save Plaza
+                     Marcar Plaza
                   </button>
                </div>
             )}
 
+            <div className="mb-4">
+               {parking && (
+                  <div>
+                     <p>
+                        Parking confirmado por: <strong>{parking.confirmations.length} usuarios</strong>
+                     </p>
+                  </div>
+               )}
+            </div>
+
             {selectedMarker && parking?.confirmations.includes(userId) ? (
                <div className="flex items-center mb-4">
                   <p className="font-bold mr-4">Plaza confirmada por ti</p>
-                  <button onClick={handleParkingConfirmToggled} className="bg-blue-500 text-white px-2 py-1 rounded">Desconfirmar Plaza</button>
+                  <button onClick={handleParkingConfirmToggled} className="bg-blue-500 text-white px-2 py-1 rounded">
+                     Desconfirmar Plaza
+                  </button>
                </div>
             ) : (
                <div className="flex items-center mb-4">
                   <p className="font-bold mr-4">Plaza no confirmada por ti</p>
-                  <button onClick={handleParkingConfirmToggled} className="bg-blue-500 text-white px-2 py-1 rounded">Confirmar Plaza</button>
+                  <button onClick={handleParkingConfirmToggled} className="bg-blue-500 text-white px-2 py-1 rounded">
+                     Confirmar Plaza
+                  </button>
                </div>
             )}
 
@@ -83,7 +97,7 @@ function SelectedMarkerOptions({ selectedMarker, onMarkerUnClick, onDetailClick,
 
             <div className="flex items-center mb-4">
                <Link className="hover:text-blue-700" onClick={onDetailClick}>
-                  Ver detalle
+                  Ver comentarios
                </Link>
             </div>
          </div>

@@ -49,7 +49,7 @@ function ParkingDetail(props) {
       logic
          .deleteReview(reviewId)
          .then(() => {
-          refreshReviews()
+            refreshReviews()
          })
          .catch((error) => {
             props.onError(error)
@@ -70,23 +70,20 @@ function ParkingDetail(props) {
    }
 
    return (
-      <div className="text-center">
-         <h1 className="my-4 font-bold mt-8">Parking Detail</h1>
-         <div className="border-solid border border-black p-3">
-            {parking && (
-               <div>
+      <div className="text-center mt-8">
+         <div>
+            <h2 className="font-bold mt-4">Comentarios</h2>
+            <button className="mb-3" title="New review" aria-label="New review (+)" onClick={handleNewReviewClick}>
+               +
+            </button>
+            {reviews && reviews.length > 0 && (
+               <div className="my-4">
                   <p>
-                     Parking confirmado por: <strong>{parking.confirmations.length} usuarios</strong>
+                     La media de las valuaciones es:{" "}
+                     <strong>{(reviews.reduce((sum, review) => sum + review.valuation, 0) / reviews.length).toFixed(1)}</strong>
                   </p>
                </div>
             )}
-         </div>
-
-         <div>
-            <h2 className="font-bold mt-4">Reviews</h2>
-            <button title="New review" aria-label="New review (+)" onClick={handleNewReviewClick}>
-               +
-            </button>
             {showNewReviews && (
                <NewReview onNewReviewSubmit={handleNewReviewSubmit} onNewReviewCancelClick={handleNewReviewCancelClick} parkingId={parkingId} />
             )}
@@ -109,16 +106,6 @@ function ParkingDetail(props) {
             ))
          ) : (
             <p>Parking sin comentarios</p>
-         )}
-
-         {reviews && reviews.length > 0 && (
-            <div className="mt-4">
-               <h3 className="my-4">Puntuación media del parking</h3>
-               <p>
-                  La media de las valuaciones es:{" "}
-                  <strong>{(reviews.reduce((sum, review) => sum + review.valuation, 0) / reviews.length).toFixed(1)}</strong>
-               </p>
-            </div>
          )}
       </div>
    )
