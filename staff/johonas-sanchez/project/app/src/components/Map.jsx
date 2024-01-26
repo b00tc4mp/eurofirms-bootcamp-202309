@@ -14,7 +14,7 @@ function Map({ onError }) {
 
    const [parkings, setParkings] = useState([])
    const [selectedMarker, setSelectedMarker] = useState(null)
-   const [showDetails, setShowDetails] = useState(true)
+   const [showDetails, setShowDetails] = useState(null)
    const [lat, setLat] = useState(-6.087581)
    const [long, setLong] = useState(40.030403)
    const [dist, setDist] = useState(1000)
@@ -62,7 +62,7 @@ function Map({ onError }) {
 
    useEffect(() => {
       refreshParkings()
-   }, [parkingId])
+   }, [parkingId, selectedMarker])
 
    function handleDetailClick(event) {
       event.preventDefault()
