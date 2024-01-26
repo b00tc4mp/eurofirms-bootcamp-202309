@@ -14,7 +14,7 @@ function Map({ onError }) {
 
    const [parkings, setParkings] = useState([])
    const [selectedMarker, setSelectedMarker] = useState(null)
-   const [showDetails, setShowDetails] = useState(null)
+   const [showDetails, setShowDetails] = useState(true)
    const [lat, setLat] = useState(-6.087581)
    const [long, setLong] = useState(40.030403)
    const [dist, setDist] = useState(1000)
@@ -67,7 +67,7 @@ function Map({ onError }) {
    function handleDetailClick(event) {
       event.preventDefault()
 
-      setShowDetails(true)
+      setShowDetails(!showDetails)
    }
 
    const iconClicked = new L.Icon({
@@ -142,6 +142,7 @@ function Map({ onError }) {
                   onError={onError}
                   onParkingSaveToggled={handleParkingSaveToggle}
                   onParkingConfirmToggled={handleParkingConfirmToggle}
+                  showDetails={showDetails}
                />
             )}
 
