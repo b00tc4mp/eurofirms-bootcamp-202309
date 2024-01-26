@@ -5,7 +5,7 @@ import L from "leaflet"
 
 import logic from "../logic"
 
-import { Button, Link, Container } from "../library"
+import { Container } from "../library"
 
 import { ParkingDetail, SavedParkings, SelectedMarkerOptions, UserProfile } from "../components"
 
@@ -14,7 +14,7 @@ function Map({ onError }) {
 
    const [parkings, setParkings] = useState([])
    const [selectedMarker, setSelectedMarker] = useState(null)
-   const [showDetails, setShowDetails] = useState(null)
+   const [showComments, setShowComments] = useState(null)
    const [lat, setLat] = useState(-6.087581)
    const [long, setLong] = useState(40.030403)
    const [dist, setDist] = useState(1000)
@@ -62,12 +62,12 @@ function Map({ onError }) {
 
    useEffect(() => {
       refreshParkings()
-   }, [parkingId, selectedMarker])
+   }, [parkingId])
 
-   function handleDetailClick(event) {
+   function handleCommentsClick(event) {
       event.preventDefault()
 
-      setShowDetails(!showDetails)
+      setShowComments(!showComments)
    }
 
    const iconClicked = new L.Icon({
@@ -101,7 +101,7 @@ function Map({ onError }) {
 
    function handleMarkerUnClick() {
       setSelectedMarker(false)
-      setShowDetails(false)
+      setShowComments(false)
    }
 
    function handleParkingSaveToggle() {
@@ -133,20 +133,22 @@ function Map({ onError }) {
                   ></Marker>
                ))}
             </MapContainer>
-            {selectedMarker && (
-               <SelectedMarkerOptions
-                  selectedMarker={selectedMarker}
-                  onMarkerUnClick={handleMarkerUnClick}
-                  onDetailClick={handleDetailClick}
-                  parkings={parkings}
-                  onError={onError}
-                  onParkingSaveToggled={handleParkingSaveToggle}
-                  onParkingConfirmToggled={handleParkingConfirmToggle}
-                  showDetails={showDetails}
-               />
-            )}
+            <div className="mt-8">
+               {selectedMarker && (
+                  <SelectedMarkerOptions
+                     selectedMarker={selectedMarker}
+                     onMarkerUnClick={handleMarkerUnClick}
+                     onDetailClick={handleCommentsClick}
+                     parkings={parkings}
+                     onError={onError}
+                     onParkingSaveToggled={handleParkingSaveToggle}
+                     onParkingConfirmToggled={handleParkingConfirmToggle}
+                     showComments={showComments}
+                  />
+               )}
+            </div>
 
-            {showDetails && <ParkingDetail parkingId={selectedMarker} onError={onError} />}
+            {showComments && <ParkingDetail parkingId={selectedMarker} onError={onError} />}
          </div>
       </Container>
    )

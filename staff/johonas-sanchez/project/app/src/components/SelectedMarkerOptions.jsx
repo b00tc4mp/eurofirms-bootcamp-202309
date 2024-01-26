@@ -2,7 +2,15 @@ import React from "react"
 import { Link } from "../library"
 import logic from "../logic"
 
-function SelectedMarkerOptions({ selectedMarker, onMarkerUnClick, onDetailClick, parkings, onParkingSaveToggled, onParkingConfirmToggled, showDetails, onError }) {
+function SelectedMarkerOptions({
+   selectedMarker,
+   onDetailClick,
+   parkings,
+   onParkingSaveToggled,
+   onParkingConfirmToggled,
+   showComments,
+   onError,
+}) {
    const parking = parkings.find((parking) => parking.id === selectedMarker)
    const userId = logic.getLoggedInUserId()
    const isManager = logic.isUserManager()
@@ -40,11 +48,11 @@ function SelectedMarkerOptions({ selectedMarker, onMarkerUnClick, onDetailClick,
 
    return (
       <div>
-         <div className="my-4">
+         {/* <div className="my-4">
             <button className="bg-blue-500 text-white px-2 py-1 rounded" onClick={onMarkerUnClick}>
                Eliminar seleccion
             </button>
-         </div>
+         </div> */}
          <div className="border-solid border border-black p-3">
             {parking?.saved ? (
                <div className="flex items-center mb-4">
@@ -66,7 +74,7 @@ function SelectedMarkerOptions({ selectedMarker, onMarkerUnClick, onDetailClick,
                {parking && (
                   <div>
                      <p>
-                        Parking confirmado por: <strong>{parking.confirmations.length} usuarios</strong>
+                        Plaza confirmada por: <strong>{parking.confirmations.length} usuarios</strong>
                      </p>
                   </div>
                )}
@@ -97,7 +105,7 @@ function SelectedMarkerOptions({ selectedMarker, onMarkerUnClick, onDetailClick,
 
             <div className="flex items-center mb-4">
                <Link className="hover:text-blue-700" onClick={onDetailClick}>
-               {showDetails ? "Ocultar comentarios" : "Ver comentarios"}
+                  {showComments ? "Ocultar comentarios" : "Ver comentarios"}
                </Link>
             </div>
          </div>

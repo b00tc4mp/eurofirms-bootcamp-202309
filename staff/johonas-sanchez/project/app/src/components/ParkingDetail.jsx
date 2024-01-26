@@ -19,10 +19,10 @@ function ParkingDetail(props) {
    const [showNewReviews, setShowNewReviews] = useState(null)
 
    function refreshReviews() {
-      logic
-         .retrieveParking(parkingId)
-         .then((data) => {
-            setParking(data)
+      // logic
+      //    .retrieveParking(parkingId)
+      //    .then((data) => {
+      //       setParking(data)
             logic
                .retrieveReviews(parkingId)
                .then((reviews) => {
@@ -31,19 +31,19 @@ function ParkingDetail(props) {
                .catch((error) => {
                   props.onError(error)
                })
-         })
-         .catch((error) => {
-            props.onError(error)
-         })
+         // })
+         // .catch((error) => {
+         //    props.onError(error)
+         // })
    }
 
    useEffect(() => {
       refreshReviews()
    }, [parkingId])
 
-   function handleReturnClick() {
-      navigate("/")
-   }
+   // function handleReturnClick() {
+   //    navigate("/")
+   // }
 
    function handleDeleteReviewClick(reviewId) {
       logic
