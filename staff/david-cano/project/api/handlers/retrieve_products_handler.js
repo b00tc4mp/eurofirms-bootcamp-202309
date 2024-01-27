@@ -9,7 +9,7 @@ module.exports = (req, res) => {
 
         const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
 
-        logic.retrieveUser(userId, (error, user) => {
+        logic.retrieveProducts(userId, (error, products) => {
             if (error) {
                 let status = 500
 
@@ -21,7 +21,7 @@ module.exports = (req, res) => {
                 return
             }
 
-            res.json(user)
+            res.json(products)
         })
     } catch (error) {
         let status = 500

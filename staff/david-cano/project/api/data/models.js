@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const { Schema, model } = mongoose
+const { Schema, model, Types: { ObjectId } } = mongoose
 
 const user = new Schema({
     name: {
@@ -21,13 +21,47 @@ const user = new Schema({
 
     role: {
         type: String,
-        enum:['regular', 'admin'],
+        enum: ['regular', 'admin'],
         default: 'regular'
     }
 })
 
-const User = model("User", user)
+const product = new Schema({
+    author: {
+        type: ObjectId,
+        ref: 'Admin',
+        required: true
+    },
 
+    name: {
+        type: String,
+        required: true
+    },
+
+    img: {
+        type: String,
+        required: true
+    },
+
+    description: {
+        type: String,
+        required: true
+    },
+
+    price: {
+        type: Number,
+        required: true
+    },
+
+    quantity: {
+        type: Number,
+        required: true
+    },
+})
+
+const User = model("User", user)
+const Product = model("Product", product)
 module.exports = {
-    User
+    User,
+    Product
 }

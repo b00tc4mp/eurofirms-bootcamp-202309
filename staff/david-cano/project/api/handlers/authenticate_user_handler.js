@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 
-const logic = require('../logic')
+const logic = require('../logic/indexLogic')
 const { ContentError, CredentialsError } = require('../logic/errors')
 
 module.exports = (req, res) => {
