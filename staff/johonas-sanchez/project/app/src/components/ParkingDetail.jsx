@@ -90,7 +90,7 @@ function ParkingDetail(props) {
          </div>
 
          {reviews && reviews.length > 0 ? (
-            reviews.map((review) => (
+            reviews.reverse().map((review) => (
                <div key={review.id} className="border-solid border border-black p-3 mb-6">
                   <p>
                      Author: <strong>{review.author.name}</strong>
