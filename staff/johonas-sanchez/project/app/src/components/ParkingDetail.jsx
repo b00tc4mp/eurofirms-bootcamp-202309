@@ -38,8 +38,10 @@ function ParkingDetail(props) {
    }
 
    useEffect(() => {
-      refreshReviews()
-   }, [parkingId])
+      if (parkingId) {
+        refreshReviews()
+      }
+    }, [parkingId])
 
    // function handleReturnClick() {
    //    navigate("/")
