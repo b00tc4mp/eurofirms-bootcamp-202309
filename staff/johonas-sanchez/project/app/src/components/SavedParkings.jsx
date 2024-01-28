@@ -106,6 +106,7 @@ function SavedParkings(props) {
 
    function handleParkingSaveToggle() {
       refreshSavedParkings()
+      navigate("/saved")
    }
 
    function handleParkingConfirmToggle() {
