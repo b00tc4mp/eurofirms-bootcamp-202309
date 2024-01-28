@@ -7,7 +7,7 @@ import logic from "../logic"
 
 import { Container } from "../library"
 
-import { ParkingDetail, SavedParkings, SelectedMarkerOptions, UserProfile } from "../components"
+import { ParkingDetail, SelectedMarkerOptions } from "../components"
 
 function Map({ onError }) {
    console.log("Map")

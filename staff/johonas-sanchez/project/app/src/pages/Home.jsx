@@ -81,38 +81,38 @@ function Home(props) {
    //       navigate("/")
    //    }
 
-   const iconClicked = new L.Icon({
-      iconUrl: "/red-marker.svg",
-      iconRetinaUrl: "/red-marker.svg",
-      iconAnchor: null,
-      popupAnchor: null,
-      shadowUrl: null,
-      shadowSize: null,
-      shadowAnchor: null,
-      iconSize: new L.Point(60, 75),
-      className: "leaflet-div-icon-no-border",
-   })
+   // const iconClicked = new L.Icon({
+   //    iconUrl: "/red-marker.svg",
+   //    iconRetinaUrl: "/red-marker.svg",
+   //    iconAnchor: null,
+   //    popupAnchor: null,
+   //    shadowUrl: null,
+   //    shadowSize: null,
+   //    shadowAnchor: null,
+   //    iconSize: new L.Point(60, 75),
+   //    className: "leaflet-div-icon-no-border",
+   // })
 
-   const defaultIcon = new L.Icon({
-      iconUrl: "/blue-marker.png",
-      iconRetinaUrl: "/blue-marker.png",
-      iconAnchor: null,
-      popupAnchor: null,
-      shadowUrl: null,
-      shadowSize: null,
-      shadowAnchor: null,
-      iconSize: new L.Point(30, 45),
-      className: "leaflet-div-icon-no-border",
-   })
+   // const defaultIcon = new L.Icon({
+   //    iconUrl: "/blue-marker.png",
+   //    iconRetinaUrl: "/blue-marker.png",
+   //    iconAnchor: null,
+   //    popupAnchor: null,
+   //    shadowUrl: null,
+   //    shadowSize: null,
+   //    shadowAnchor: null,
+   //    iconSize: new L.Point(30, 45),
+   //    className: "leaflet-div-icon-no-border",
+   // })
 
-   function handleMarkerClick(parkingId) {
-      // setSelectedMarker(parkingId)
-      navigate(`/parkings/${parkingId}`)
-   }
+   // function handleMarkerClick(parkingId) {
+   //    // setSelectedMarker(parkingId)
+   //    navigate(`/parkings/${parkingId}`)
+   // }
 
-   function handleMarkerUnClick() {
-      setSelectedMarker(false)
-   }
+   // function handleMarkerUnClick() {
+   //    setSelectedMarker(false)
+   // }
 
    return (
       <Container align="center">
@@ -160,6 +160,13 @@ function Home(props) {
             />
 
             <Route path="/saved" element={<SavedParkings onError={props.onError} />} />
+
+            <Route
+               path="/saved/:parkingId/*"
+               element={
+                  <SavedParkings onError={props.onError}/>
+               }
+            />
 
             <Route path="/user-profile/*" element={<UserProfile onError={props.onError} />} />
          </Routes>
