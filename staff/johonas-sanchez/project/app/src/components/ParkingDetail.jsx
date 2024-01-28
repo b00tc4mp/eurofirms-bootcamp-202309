@@ -39,7 +39,7 @@ function ParkingDetail(props) {
 
    useEffect(() => {
       refreshReviews()
-   }, [parkingId])
+   }, [parkingId, props])
 
    // function handleReturnClick() {
    //    navigate("/")

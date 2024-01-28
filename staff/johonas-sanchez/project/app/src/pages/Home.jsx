@@ -42,7 +42,7 @@ function Home(props) {
          .catch((error) => {
             props.onError(error)
          })
-   }, [props])
+   }, [])
 
    function handleSavedClick(event) {
       event.preventDefault()
