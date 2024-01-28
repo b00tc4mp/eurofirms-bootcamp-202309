@@ -53,6 +53,7 @@ function Map({ onError }) {
             .then((parkings) => {
                setParkings(parkings)
                setSelectedMarker(null)
+               setShowComments(null)
             })
             .catch((error) => {
                onError(error)
