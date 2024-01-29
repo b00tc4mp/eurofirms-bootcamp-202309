@@ -11,7 +11,7 @@ module.exports = (req, res) => {
 
       logic
          .updateUserPassword(userId, password, newPassword, repeatNewPassword)
-         .then(() => res.status(201).send())
+         .then(() => res.status(200).send())
          .catch((error) => {
             let status = 500
 
