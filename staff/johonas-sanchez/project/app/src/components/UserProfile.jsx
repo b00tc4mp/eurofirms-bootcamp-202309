@@ -22,6 +22,10 @@ function UserProfile(props) {
 
    }
 
+   function handleUpdatePasswordSubmit() {
+
+   }
+
 
    return (
       <>
@@ -32,7 +36,7 @@ function UserProfile(props) {
 
          <Routes>
             <Route path="/update-email" element={<UpdateEmail onUpdateEmailSubmit={handleUpdateEmailSubmit} onError={props.onError} />} />
-            <Route path="/update-password" element={<UpdatePassword onError={props.onError} />} />
+            <Route path="/update-password" element={<UpdatePassword onUpdatePasswordSubmit={handleUpdatePasswordSubmit} onError={props.onError} />} />
         </Routes>
 
       </>

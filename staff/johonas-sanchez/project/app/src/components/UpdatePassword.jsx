@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom'
 
-import updateUserPassword from "../logic/updateUserPassword"
-
 import Container from "../library/Container"
 import Field from "../library/Field"
 import Form from "../library/Form"
 import Button from "../library/Button"
+
+import logic from "../logic"
 
 function UpdatePassword(props) {
     const navigate = useNavigate()
@@ -21,19 +21,24 @@ function UpdatePassword(props) {
         const newPassword = newPasswordInput.value
         const repeatNewPassword = repeatNewPasswordInput.value
     
-        try {
-           updateUserPassword(password, newPassword, repeatNewPassword, error => {
-              if (error) {
-                 props.onError(error)
-              } else {
-                 alert('password updated')
-                 
-                 navigate("/user-profile")
-              }
-           })
-        } catch (error) {
-           props.onError(error)
-        }
+        logic.
+           updateUserPassword(password, newPassword, repeatNewPassword)
+           .then(() => {
+            // Manejar la actualización exitosa del password
+            console.log("Password updated")
+            props.onUpdatePasswordSubmit()
+
+            // Mostrar la alerta
+            window.alert("Password actualizada correctamente")
+
+            // Navegar a user profile
+            navigate("/user-profile")
+         })
+         .catch((error) => {
+            // Manejar el error
+            console.error("Error updating password:", error)
+            props.onError(error)
+         })
      }
 
      function handleCancelClick() {
