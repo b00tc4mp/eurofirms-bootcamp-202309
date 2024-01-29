@@ -20,7 +20,6 @@ function deleteReview(reviewId) {
                throw new constructor(body.message)
             })
          }
-         return res.json()
       })
       .catch((error) => {
          throw new SystemError(error.message)
