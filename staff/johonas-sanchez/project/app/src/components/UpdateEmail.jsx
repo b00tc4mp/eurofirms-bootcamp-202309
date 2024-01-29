@@ -1,13 +1,13 @@
-import { useNavigate } from "react-router-dom"
+import React, { useRef } from "react"
 
-import updateUserEmail from "../logic/updateUserEmail"
+import { useNavigate } from "react-router-dom"
 
 import Container from "../library/Container"
 import Field from "../library/Field"
 import Form from "../library/Form"
 import Button from "../library/Button"
 
-import logic from '../logic'
+import logic from "../logic"
 
 function UpdateEmail(props) {
    const navigate = useNavigate()
@@ -25,17 +25,24 @@ function UpdateEmail(props) {
       const newEmail = newEmailInput.value
       const repeatNewEmail = repeatNewEmailInput.value
 
-      logic.updateUserEmail(password, oldEmail, newEmail, repeatNewEmail)
-      .then(() => {
-         // Manejar la actualización exitosa del email
-         console.log("Email updated")
-         props.onUpdateEmailSubmit()
-      })
-      .catch((error) => {
-         // Manejar el error
-         console.error("Error updating email:", error)
-         props.onError(error)
-      })
+      logic
+         .updateUserEmail(password, oldEmail, newEmail, repeatNewEmail)
+         .then(() => {
+            // Manejar la actualización exitosa del email
+            console.log("Email updated")
+            props.onUpdateEmailSubmit()
+
+            // Mostrar la alerta
+            window.alert("Email actualizado correctamente")
+
+            // Navegar a user profile
+            navigate("/user-profile")
+         })
+         .catch((error) => {
+            // Manejar el error
+            console.error("Error updating email:", error)
+            props.onError(error)
+         })
    }
 
    function handleCancelClick() {
