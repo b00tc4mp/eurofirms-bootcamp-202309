@@ -19,44 +19,37 @@ function ParkingDetail(props) {
    const [showNewReviews, setShowNewReviews] = useState(null)
 
    function refreshReviews() {
-      // logic
-      //    .retrieveParking(parkingId)
-      //    .then((data) => {
-      //       setParking(data)
-            logic
-               .retrieveReviews(parkingId)
-               .then((reviews) => {
-                  setReviews(reviews)
-               })
-               .catch((error) => {
-                  props.onError(error)
-               })
-         // })
-         // .catch((error) => {
-         //    props.onError(error)
-         // })
-   }
-
-   useEffect(() => {
-      if (parkingId) {
-        refreshReviews()
-      }
-    }, [parkingId])
-
-   // function handleReturnClick() {
-   //    navigate("/")
-   // }
-
-   function handleDeleteReviewClick(reviewId) {
       logic
-         .deleteReview(reviewId)
-         .then(() => {
-            refreshReviews()
+         .retrieveReviews(parkingId)
+         .then((reviews) => {
+            setReviews(reviews)
          })
          .catch((error) => {
             props.onError(error)
          })
    }
+
+   useEffect(() => {
+      if (parkingId) {
+         refreshReviews()
+      }
+   }, [parkingId])
+
+   function handleDeleteReviewClick(reviewId) {
+       // Utilizar window.confirm para mostrar un mensaje de confirmación
+       const confirmDelete = window.confirm("¿Estás seguro de que quieres eliminar esta revisión?")
+
+       if (confirmDelete) {
+          logic
+             .deleteReview(reviewId)
+             .then(() => {
+                refreshReviews()
+             })
+             .catch((error) => {
+                props.onError(error)
+             })
+       }
+    }
 
    function handleNewReviewClick() {
       setShowNewReviews(true)
