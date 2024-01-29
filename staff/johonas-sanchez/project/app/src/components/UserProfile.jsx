@@ -18,6 +18,10 @@ function UserProfile(props) {
       navigate('update-password')
    }
 
+   function handleUpdateEmailSubmit() {
+
+   }
+
 
    return (
       <>
@@ -27,7 +31,7 @@ function UserProfile(props) {
          </Container>
 
          <Routes>
-            <Route path="/update-email" element={<UpdateEmail onError={props.onError} />} />
+            <Route path="/update-email" element={<UpdateEmail onUpdateEmailSubmit={handleUpdateEmailSubmit} onError={props.onError} />} />
             <Route path="/update-password" element={<UpdatePassword onError={props.onError} />} />
         </Routes>
 

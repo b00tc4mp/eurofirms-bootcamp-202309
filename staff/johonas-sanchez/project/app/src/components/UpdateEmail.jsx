@@ -7,6 +7,8 @@ import Field from "../library/Field"
 import Form from "../library/Form"
 import Button from "../library/Button"
 
+import logic from '../logic'
+
 function UpdateEmail(props) {
    const navigate = useNavigate()
 
@@ -23,21 +25,17 @@ function UpdateEmail(props) {
       const newEmail = newEmailInput.value
       const repeatNewEmail = repeatNewEmailInput.value
 
-      try {
-         updateUserEmail(password, oldEmail, newEmail, repeatNewEmail, (error) => {
-            if (error) {
-               props.onError(error)
-
-               return
-            }
-
-            alert("email updated")
-            
-            navigate("/user-profile")
-         })
-      } catch (error) {
+      logic.updateUserEmail(password, oldEmail, newEmail, repeatNewEmail)
+      .then(() => {
+         // Manejar la actualización exitosa del email
+         console.log("Email updated")
+         props.onUpdateEmailSubmit()
+      })
+      .catch((error) => {
+         // Manejar el error
+         console.error("Error updating email:", error)
          props.onError(error)
-      }
+      })
    }
 
    function handleCancelClick() {
