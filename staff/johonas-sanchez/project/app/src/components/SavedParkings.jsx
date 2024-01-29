@@ -36,63 +36,30 @@ function SavedParkings(props) {
       refreshSavedParkings()
    }, [props])
 
-   // function refreshParkings() {
-   //    try {
-   //       logic.retrieveSavedParkings((error, parkings) => {
-   //          if (error) {
-   //             props.onError(error)
-
-   //             return
-   //          }
-
-   //          setParkings(parkings)
-   //       })
-   //    } catch (error) {
-   //       props.onError(error)
-   //    }
-   // }
-
-   // function handlePostLikeToggled() {
-   //    refreshPosts()
-   // }
-
-   // function handlePostSaveToggled() {
-   //    refreshPosts()
-   // }
-
-   // function handlePostDeleted() {
-   //    refreshPosts()
-   // }
-
    function handleCommentsClick(event) {
       event.preventDefault()
 
       setShowComments(!showComments)
    }
 
-   const iconClicked = new L.Icon({
-      iconUrl: "/red-marker.svg",
-      iconRetinaUrl: "/red-marker.svg",
-      iconAnchor: null,
-      popupAnchor: null,
-      shadowUrl: null,
-      shadowSize: null,
-      shadowAnchor: null,
-      iconSize: new L.Point(60, 75),
-      className: "leaflet-div-icon-no-border",
+   const redIcon = new L.Icon({
+      iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png",
+      shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41],
    })
 
    const defaultIcon = new L.Icon({
-      iconUrl: "/blue-marker.png",
-      iconRetinaUrl: "/blue-marker.png",
-      iconAnchor: null,
-      popupAnchor: null,
-      shadowUrl: null,
-      shadowSize: null,
-      shadowAnchor: null,
-      iconSize: new L.Point(30, 45),
-      className: "leaflet-div-icon-no-border",
+      iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png",
+      shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41],
    })
+
 
    function handleMarkerClick(parkingId) {
       navigate(`/saved/${parkingId}`)
@@ -123,7 +90,7 @@ function SavedParkings(props) {
             />
             {parkings.map((parking) => (
                <Marker
-               icon={parking.id === selectedMarker ? iconClicked : defaultIcon}
+               icon={parking.id === selectedMarker ? redIcon : defaultIcon}
                key={parking.id}
                position={[parking.location.coordinates[0], parking.location.coordinates[1]]}
                eventHandlers={{

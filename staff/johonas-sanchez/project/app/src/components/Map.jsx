@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { Routes, Route, useNavigate, useParams } from "react-router-dom"
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
+import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from "react-leaflet"
 import L from "leaflet"
 
 import logic from "../logic"
@@ -96,22 +96,22 @@ function Map({ onError }) {
    // })
 
    const redIcon = new L.Icon({
-      iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
-      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+      iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png",
+      shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
       iconSize: [25, 41],
       iconAnchor: [12, 41],
       popupAnchor: [1, -34],
-      shadowSize: [41, 41]
-    })
+      shadowSize: [41, 41],
+   })
 
    const defaultIcon = new L.Icon({
-      iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
-      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+      iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png",
+      shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
       iconSize: [25, 41],
       iconAnchor: [12, 41],
       popupAnchor: [1, -34],
-      shadowSize: [41, 41]
-    })
+      shadowSize: [41, 41],
+   })
 
    function handleMarkerClick(parkingId) {
       navigate(`/parkings/${parkingId}`)
@@ -131,10 +131,20 @@ function Map({ onError }) {
       refreshParkings()
    }
 
+   function MapPosition() {
+      const map = useMapEvents({
+         click(e) {
+             console.log(e.latlng);
+         },
+     });
+     return null;
+    }
+    
+
    return (
       <Container align="center">
          <div className="mb-8">
-            <MapContainer center={[40.03116, -6.08845]} zoom={15} scrollWheelZoom={true} style={{ width: 550, height: 300 }}>
+            <MapContainer center={[40.03116, -6.08845]} zoom={15}  scrollWheelZoom={true} style={{ width: 550, height: 300 }} >
                <TileLayer
                   attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -151,6 +161,8 @@ function Map({ onError }) {
                      }}
                   ></Marker>
                ))}
+               <MapPosition/>
+
             </MapContainer>
             <div className="mt-8">
                {selectedMarker && (
