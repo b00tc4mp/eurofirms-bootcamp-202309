@@ -1,5 +1,5 @@
 import React from "react"
-import { Routes, Route, useNavigate, useParams } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { Link } from "../library"
 import logic from "../logic"
 
@@ -9,7 +9,6 @@ function SelectedMarkerOptions({
    parkings,
    onParkingSaveToggled,
    onParkingConfirmToggled,
-   onDeleteParking,
    showComments,
    onError,
 }) {
@@ -67,11 +66,6 @@ function SelectedMarkerOptions({
 
    return (
       <div>
-         {/* <div className="my-4">
-            <button className="bg-blue-500 text-white px-2 py-1 rounded" onClick={onMarkerUnClick}>
-               Eliminar seleccion
-            </button>
-         </div> */}
          <div className="border-solid border border-black p-3">
             {parking?.saved ? (
                <div className="flex items-center mb-4">
@@ -118,7 +112,7 @@ function SelectedMarkerOptions({
             <div className="flex items-center justify-start mb-4">
                {isManager && <button className="bg-blue-500 text-white px-2 py-1 rounded" onClick={handleDeleteParking}>Eliminar Parking (Manager)</button>}
                {isRegular && parking.locator.id === userId && parking.confirmations.length === 0 && (
-                  <button className="bg-blue-500 text-white px-2 py-1 rounded">Eliminar Parking (Regular)</button>
+                  <button className="bg-blue-500 text-white px-2 py-1 rounded" onClick={handleDeleteParking}>Eliminar Parking (Regular)</button>
                )}
             </div>
 
