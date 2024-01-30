@@ -18,6 +18,7 @@ import toggleConfirmParking from "./toggleConfirmParking"
 import deleteReview from "./deleteReview"
 import createReview from "./createReview"
 import createParking from "./createParking"
+import deleteParking from "./deleteParking"
 
 const logic = {
    getLoggedInUserId,
@@ -40,6 +41,7 @@ const logic = {
    deleteReview, 
    createReview,
    createParking,
+   deleteParking,
 }
 
 export default logic
