@@ -71,17 +71,17 @@ function Map({ onError }) {
       setShowComments(!showComments)
    }
 
-   const iconClicked = new L.Icon({
-      iconUrl: "/red-marker.svg",
-      iconRetinaUrl: "/red-marker.svg",
-      iconAnchor: null,
-      popupAnchor: null,
-      shadowUrl: null,
-      shadowSize: null,
-      shadowAnchor: null,
-      iconSize: new L.Point(60, 75),
-      className: "leaflet-div-icon-no-border",
-   })
+   // const iconClicked = new L.Icon({
+   //    iconUrl: "/red-marker.svg",
+   //    iconRetinaUrl: "/red-marker.svg",
+   //    iconAnchor: null,
+   //    popupAnchor: null,
+   //    shadowUrl: null,
+   //    shadowSize: null,
+   //    shadowAnchor: null,
+   //    iconSize: new L.Point(60, 75),
+   //    className: "leaflet-div-icon-no-border",
+   // })
 
    // const defaultIcon = new L.Icon({
    //    iconUrl: "/blue-marker.png",
@@ -134,10 +134,10 @@ function Map({ onError }) {
    function MapPosition() {
       const map = useMapEvents({
          click(e) {
-             console.log(e.latlng);
+             console.log(e.latlng)
          },
-     });
-     return null;
+     })
+     return null
     }
     
 
