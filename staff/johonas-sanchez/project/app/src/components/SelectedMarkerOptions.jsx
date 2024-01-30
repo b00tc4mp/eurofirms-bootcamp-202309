@@ -1,4 +1,5 @@
 import React from "react"
+import { Routes, Route, useNavigate, useParams } from "react-router-dom"
 import { Link } from "../library"
 import logic from "../logic"
 
@@ -8,6 +9,7 @@ function SelectedMarkerOptions({
    parkings,
    onParkingSaveToggled,
    onParkingConfirmToggled,
+   onDeleteParking,
    showComments,
    onError,
 }) {
@@ -15,6 +17,8 @@ function SelectedMarkerOptions({
    const userId = logic.getLoggedInUserId()
    const isManager = logic.isUserManager()
    const isRegular = logic.isUserRegular()
+
+   const navigate = useNavigate()
 
    function handleParkingSaveToggled() {
       try {
@@ -24,7 +28,7 @@ function SelectedMarkerOptions({
                onParkingSaveToggled()
             })
             .catch((error) => {
-               props.onError(error)
+               onError(error)
             })
       } catch (error) {
          onError(error)
@@ -39,7 +43,22 @@ function SelectedMarkerOptions({
                onParkingConfirmToggled()
             })
             .catch((error) => {
-               props.onError(error)
+               onError(error)
+            })
+      } catch (error) {
+         onError(error)
+      }
+   }
+
+   function handleDeleteParking() {
+      try {
+         logic
+            .deleteParking(parking.id)
+            .then(() => {
+               navigate('/')
+            })
+            .catch((error) => {
+               onError(error)
             })
       } catch (error) {
          onError(error)
@@ -97,7 +116,7 @@ function SelectedMarkerOptions({
             )}
 
             <div className="flex items-center justify-start mb-4">
-               {isManager && <button className="bg-blue-500 text-white px-2 py-1 rounded">Eliminar Parking (Manager)</button>}
+               {isManager && <button className="bg-blue-500 text-white px-2 py-1 rounded" onClick={handleDeleteParking}>Eliminar Parking (Manager)</button>}
                {isRegular && parking.locator.id === userId && parking.confirmations.length === 0 && (
                   <button className="bg-blue-500 text-white px-2 py-1 rounded">Eliminar Parking (Regular)</button>
                )}

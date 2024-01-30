@@ -131,6 +131,10 @@ function Map({ onError }) {
       refreshParkings()
    }
 
+   function handleDeleteParking() {
+      refreshParkings()
+   }
+
    function MapPosition() {
       const map = useMapEvents({
          click(e) {
@@ -189,6 +193,7 @@ function Map({ onError }) {
                      onError={onError}
                      onParkingSaveToggled={handleParkingSaveToggle}
                      onParkingConfirmToggled={handleParkingConfirmToggle}
+                     onDeleteParking={handleDeleteParking}
                      showComments={showComments}
                   />
                )}
