@@ -134,17 +134,33 @@ function Map({ onError }) {
    function MapPosition() {
       const map = useMapEvents({
          click(e) {
-             console.log(e.latlng)
+            const lat = e.latlng.lat
+            const long = e.latlng.lng
+
+            // Pide confirmación al usuario antes de crear el estacionamiento
+            const userConfirmed = window.confirm("¿Quieres crear un nuevo estacionamiento en esta ubicación?")
+
+            if (userConfirmed) {
+               // Llama a la función createParking de logic con las coordenadas obtenidas
+               logic
+                  .createParking(long, lat)
+                  .then(() => {
+                     // Actualiza los estacionamientos después de crear uno
+                     refreshParkings()
+                  })
+                  .catch((error) => {
+                     onError(error)
+                  })
+            }
          },
-     })
-     return null
-    }
-    
+      })
+      return null
+   }
 
    return (
       <Container align="center">
          <div className="mb-8">
-            <MapContainer center={[40.03116, -6.08845]} zoom={15}  scrollWheelZoom={true} style={{ width: 550, height: 300 }} >
+            <MapContainer center={[40.03116, -6.08845]} zoom={15} scrollWheelZoom={true} style={{ width: 550, height: 300 }}>
                <TileLayer
                   attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -161,8 +177,7 @@ function Map({ onError }) {
                      }}
                   ></Marker>
                ))}
-               <MapPosition/>
-
+               <MapPosition />
             </MapContainer>
             <div className="mt-8">
                {selectedMarker && (
