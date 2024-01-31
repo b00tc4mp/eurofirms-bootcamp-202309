@@ -15,7 +15,7 @@ function Map({ onError }) {
    const [parkings, setParkings] = useState([])
    const [selectedMarker, setSelectedMarker] = useState(null)
    const [showComments, setShowComments] = useState(null)
-   const [lat, setLat] = useState(-6.087581)
+   const [lat, setLat] = useState(null)
    const [long, setLong] = useState(40.030403)
    const [dist, setDist] = useState(500)
    const [enableParkingPositioner, setEnableParkingPositioner] = useState(false)
@@ -26,45 +26,47 @@ function Map({ onError }) {
    const { parkingId } = params
 
    function refreshParkings() {
-      if (parkingId) {
-         logic
-            .retrieveParking(parkingId)
-            .then((parking) => {
-               const long = parking.location.coordinates[0]
-               const lat = parking.location.coordinates[1]
+      if (lat !== null && long !== null) {
+         if (parkingId) {
+            logic
+               .retrieveParking(parkingId)
+               .then((parking) => {
+                  const long = parking.location.coordinates[0]
+                  const lat = parking.location.coordinates[1]
 
-               logic
-                  .retrieveParkingsByGeo(lat, long, dist)
-                  .then((parkings) => {
-                     setSelectedMarker(parkingId)
-                     setLat(lat)
-                     setLong(long)
-                     setParkings(parkings)
-                  })
-                  .catch((error) => {
-                     onError(error)
-                  })
-            })
-            .catch((error) => {
-               onError(error)
-            })
-      } else {
-         logic
-            .retrieveParkingsByGeo(lat, long, dist)
-            .then((parkings) => {
-               setParkings(parkings)
-               setSelectedMarker(null)
-               setShowComments(null)
-            })
-            .catch((error) => {
-               onError(error)
-            })
+                  logic
+                     .retrieveParkingsByGeo(lat, long, dist)
+                     .then((parkings) => {
+                        setSelectedMarker(parkingId)
+                        setLat(lat)
+                        setLong(long)
+                        setParkings(parkings)
+                     })
+                     .catch((error) => {
+                        onError(error)
+                     })
+               })
+               .catch((error) => {
+                  onError(error)
+               })
+         } else {
+            logic
+               .retrieveParkingsByGeo(lat, long, dist)
+               .then((parkings) => {
+                  setParkings(parkings)
+                  setSelectedMarker(null)
+                  setShowComments(null)
+               })
+               .catch((error) => {
+                  onError(error)
+               })
+         }
       }
    }
 
    useEffect(() => {
       refreshParkings()
-   }, [parkingId, dist])
+   }, [parkingId, lat, long, dist])
 
    function handleCommentsClick(event) {
       event.preventDefault()
@@ -152,68 +154,74 @@ function Map({ onError }) {
    return (
       <Container align="center">
          <div className="mb-8 font-bold">
-            <div className="mb-3">
-               Distancia de búsqueda de plazas
-               <select className="ml-2 font-normal" value={dist} onChange={handleDistChange}>
-                  <option value={100}>100 m</option>
-                  <option value={200}>200 m</option>
-                  <option value={300}>300 m</option>
-                  <option value={400}>400 m</option>
-                  <option value={500}>500 m</option>
-                  <option value={1000}>1000 m</option>
-               </select>
-            </div>
-            <input className="mb-5" type="checkbox" checked={enableParkingPositioner} onChange={handleCheckboxChange} />
-            <label className="ml-2">Habilitar Posicionar Plaza</label>
+            {lat === null || long === null ? (
+               <p>Tu posición aún no ha sido fijada</p>
+            ) : (
+               <>
+                  <div className="mb-3">
+                     Distancia de búsqueda de plazas
+                     <select className="ml-2 font-normal" value={dist} onChange={handleDistChange}>
+                        <option value={100}>100 m</option>
+                        <option value={200}>200 m</option>
+                        <option value={300}>300 m</option>
+                        <option value={400}>400 m</option>
+                        <option value={500}>500 m</option>
+                        <option value={1000}>1000 m</option>
+                     </select>
+                  </div>
+                  <input className="mb-5" type="checkbox" checked={enableParkingPositioner} onChange={handleCheckboxChange} />
+                  <label className="ml-2">Habilitar Posicionar Plaza</label>
 
-            <MapContainer center={[40.03116, -6.08845]} zoom={15} scrollWheelZoom={true} style={{ width: 550, height: 300 }}>
-               <TileLayer
-                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-               />
-               {parkings.map((parking) => (
-                  <Marker
-                     icon={parking.id === selectedMarker ? greenIcon : defaultIcon}
-                     key={parking.id}
-                     position={[parking.location.coordinates[0], parking.location.coordinates[1]]}
-                     eventHandlers={{
-                        click: (e) => {
-                           handleMarkerClick(parking.id)
-                        },
-                        mouseover: (e) => {
-                           if (e.target && e.target.setIcon) {
-                              e.target.setIcon(greenIcon)
-                           }
-                        },
-                        mouseout: (e) => {
-                           if (e.target && e.target.setIcon && parking.id !== selectedMarker) {
-                              e.target.setIcon(defaultIcon)
-                           }
-                        },
-                     }}
-                  ></Marker>
-               ))}
-               {enableParkingPositioner && <MapPosition />}
-               <DragMap isDraggable={!enableParkingPositioner} />
-            </MapContainer>
+                  <MapContainer center={[40.03116, -6.08845]} zoom={15} scrollWheelZoom={true} style={{ width: 550, height: 300 }}>
+                     <TileLayer
+                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                     />
+                     {parkings.map((parking) => (
+                        <Marker
+                           icon={parking.id === selectedMarker ? greenIcon : defaultIcon}
+                           key={parking.id}
+                           position={[parking.location.coordinates[0], parking.location.coordinates[1]]}
+                           eventHandlers={{
+                              click: (e) => {
+                                 handleMarkerClick(parking.id)
+                              },
+                              mouseover: (e) => {
+                                 if (e.target && e.target.setIcon) {
+                                    e.target.setIcon(greenIcon)
+                                 }
+                              },
+                              mouseout: (e) => {
+                                 if (e.target && e.target.setIcon && parking.id !== selectedMarker) {
+                                    e.target.setIcon(defaultIcon)
+                                 }
+                              },
+                           }}
+                        ></Marker>
+                     ))}
+                     {enableParkingPositioner && <MapPosition />}
+                     <DragMap isDraggable={!enableParkingPositioner} />
+                  </MapContainer>
 
-            <div className="mt-8">
-               {selectedMarker && (
-                  <SelectedMarkerOptions
-                     selectedMarker={selectedMarker}
-                     onMarkerUnClick={handleMarkerUnClick}
-                     onDetailClick={handleCommentsClick}
-                     parkings={parkings}
-                     onError={onError}
-                     onParkingSaveToggled={handleParkingSaveToggle}
-                     onParkingConfirmToggled={handleParkingConfirmToggle}
-                     onDeleteParking={handleDeleteParking}
-                     showComments={showComments}
-                  />
-               )}
-            </div>
+                  <div className="mt-8">
+                     {selectedMarker && (
+                        <SelectedMarkerOptions
+                           selectedMarker={selectedMarker}
+                           onMarkerUnClick={handleMarkerUnClick}
+                           onDetailClick={handleCommentsClick}
+                           parkings={parkings}
+                           onError={onError}
+                           onParkingSaveToggled={handleParkingSaveToggle}
+                           onParkingConfirmToggled={handleParkingConfirmToggle}
+                           onDeleteParking={handleDeleteParking}
+                           showComments={showComments}
+                        />
+                     )}
+                  </div>
 
-            {showComments && <ParkingDetail parkingId={selectedMarker} onError={onError} />}
+                  {showComments && <ParkingDetail parkingId={selectedMarker} onError={onError} />}
+               </>
+            )}
          </div>
       </Container>
    )

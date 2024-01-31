@@ -16,29 +16,29 @@ function Home(props) {
 
    const navigate = useNavigate()
 
-   const long = 40.030403
-   const lat = -6.087581
-   const dist = 1000
+   // const long = 40.030403
+   // const lat = -6.087581
+   // const dist = 1000
 
-   useEffect(() => {
-      logic
-         .retrieveUser()
-         .then((user) => {
-            setName(user.name)
-            setUser(user)
-            logic
-               .retrieveParkingsByGeo(lat, long, dist)
-               .then((parkings) => {
-                  setParkings(parkings)
-               })
-               .catch((error) => {
-                  props.onError(error)
-               })
-         })
-         .catch((error) => {
-            props.onError(error)
-         })
-   }, [])
+   // useEffect(() => {
+   //    logic
+   //       .retrieveUser()
+   //       .then((user) => {
+   //          setName(user.name)
+   //          setUser(user)
+   //          logic
+   //             .retrieveParkingsByGeo(lat, long, dist)
+   //             .then((parkings) => {
+   //                setParkings(parkings)
+   //             })
+   //             .catch((error) => {
+   //                props.onError(error)
+   //             })
+   //       })
+   //       .catch((error) => {
+   //          props.onError(error)
+   //       })
+   // }, [])
 
    function handleSavedClick(event) {
       event.preventDefault()
