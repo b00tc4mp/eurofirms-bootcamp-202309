@@ -18,7 +18,7 @@ function Map({ onError }) {
    const [lat, setLat] = useState(-6.087581)
    const [long, setLong] = useState(40.030403)
    const [dist, setDist] = useState(1000)
-   const [habilitarPosicionar, setHabilitarPosicionar] = useState(false)
+   const [enableParkingPositioner, setEnableParkingPositioner] = useState(false)
 
    const navigate = useNavigate()
 
@@ -160,7 +160,7 @@ function Map({ onError }) {
    }
 
    const handleCheckboxChange = () => {
-      setHabilitarPosicionar(!habilitarPosicionar) // Cambia el estado contrario al actual
+      setEnableParkingPositioner(!enableParkingPositioner) // Cambia el estado contrario al actual
    }
 
    function DragMap({isDraggable}){
@@ -171,7 +171,7 @@ function Map({ onError }) {
    return (
       <Container align="center">
          <div className="mb-8">
-            <input className="mb-5" type="checkbox" checked={habilitarPosicionar} onChange={handleCheckboxChange} />
+            <input className="mb-5" type="checkbox" checked={enableParkingPositioner} onChange={handleCheckboxChange} />
             <label className="ml-2">Habilitar Posicionar Plaza</label>
             <MapContainer
                center={[40.03116, -6.08845]}
@@ -195,8 +195,8 @@ function Map({ onError }) {
                      }}
                   ></Marker>
                ))}
-               {habilitarPosicionar && <MapPosition />}
-               <DragMap isDraggable={!habilitarPosicionar}/>
+               {enableParkingPositioner && <MapPosition />}
+               <DragMap isDraggable={!enableParkingPositioner}/>
             </MapContainer>
            
             <div className="mt-8">
