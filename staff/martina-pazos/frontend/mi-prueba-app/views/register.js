@@ -1,4 +1,5 @@
-// En una app cdo se entra el register esta oculto, lo que se ve es el login. Apagamos la vistar de register.
+
+/// En una app cdo se entra el register esta oculto, lo que se ve es el login. Apagamos la vistar de register.
 
 //register view
 registerView = document.getElementById("register-view")

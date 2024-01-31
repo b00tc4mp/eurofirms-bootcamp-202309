@@ -18,8 +18,8 @@ loginForm = loginView.querySelector("#login-form")
 loginForm.onsubmit = function (event) {
     event.preventDefault()
 
-    var emailInput = loginForm.querySelector("#email-input-login")
-    var passwordInput = loginForm.querySelector("#password-input-login")
+    var emailInput = loginForm.querySelector("#email-input")
+    var passwordInput = loginForm.querySelector("#password-input")
 
     var email = emailInput.value
     var password = passwordInput.value
@@ -30,7 +30,7 @@ loginForm.onsubmit = function (event) {
         authenticateUser(email, password)
         loginForm.reset()
 
-        //loggedInEmail = foundUser.email
+        loggedInEmail = email
 
         loginView.style.display = "none"
         //cd apagamos login y encedemos la home, para pintar los nombres de los usuarios tenemos que pedir a home la clase de  los usuarios, que esta en html, en home view.

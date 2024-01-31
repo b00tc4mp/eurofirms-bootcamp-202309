@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+* {
+    font-family: Inter;
+}
+
 h1,
 h2 {
     margin: 0;
@@ -7,6 +13,8 @@ h2 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 1rem;
+    padding-bottom: 1rem;
 }
 
 .form {
@@ -18,89 +26,54 @@ h2 {
     gap: 0.50vw;
 }
 
-.panel-lightskyblue {
-    background-color: lightskyblue;
+.label {
+    align-items: center;
+    border-width: 2;
+    border-radius: 5px;
+    line-height: 1.5rem;
+    padding-left: 5px;
 }
 
-
-.name {
-    font-size: 6mm;
+.input {
+    background-color: white;
+    border-width: 2.5;
+    border-radius: 5px;
+    line-height: 1.5rem;
+    padding-left: 5px;
 }
 
-.email {
-    font-size: 6mm;
-}
+.button {
+    background-color: white;
+    border-width: 2.5;
+    border-radius: 5px;
+    line-height: 1.5rem;
+    padding-left: 5px;
 
-.password {
-    font-size: 6mm;
-}
-
-
-.name-input {
-    border-radius: 0.75vw;
-    border-width: 0.25vw;
-    border-color: black;
-}
-
-
-.email-input {
-    border-radius: 0.75vw;
-    border-width: 0.25vw;
-    border-color: black;
 }
 
 
 
-.password-input {
-    border-radius: 0.75vw;
-    border-width: 0.25vw;
-    border-color: black;
-}
-
-
-#register {
-    font-size: 6mm;
-    border-radius: 0.75vw;
-    border-width: 0.25vw;
-    border-color: black;
-}
-
-#clear {
-    font-size: 6mm;
-    border-radius: 0, 75vw;
-    border-width: 0.25vw;
-    border-color: black
-}
-
-#login {
-    font-size: 6mm;
-    border-radius: 0.75vw;
-    border-width: 0.25vw;
-    border-color: black;
-}
 
 
 
-#login-link {
-    font-size: 6mm;
-    border-radius: 0.75vw;
-    border-width: 0.25vw;
-    border-color: blac
-}
 
-#register-link {
-    font-size: 6mm;
-    border-radius: 0.75vw;
-    border-width: 0.25vw;
-    border-color: black
-}
 
-#logout-button {
-    font-size: 6mm;
-    border-radius: 0.75vw;
-    border-width: 0.25vw;
-    border-color: black
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .post-image {
     max-width: 250px;

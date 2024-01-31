@@ -1,3 +1,4 @@
+
 //home view
 homeView = document.getElementById("home-view")
 
@@ -50,20 +51,20 @@ newPostForm.onsubmit = function (event) {
     var text = textInput.value
     //nos falta el imail que quien publica el post, nos vamos a main.js(loggedInEmail)
 
-    // estoy añadiendo propiedades a los objetos, estos mutando los objetos
-    var post = {}
-    post.author = loggedInEmail
-    post.image = image
-    post.imageDescription = imageDescription
-    post.text = text
-    // el push, se usa para insertar en la base de datos , en este caso los posts
-    posts.push(post)
-    //que se resete el formulario
-    newPostForm.reset()
-    //apagar el paner cdo se publique el post
-    newPostPanel.style.display = "none"
-    //para que no se repitan los post
-    renderPosts()
+    try {
+        createNewPost(loggedInEmail, image, imageDescription, text)
+
+
+        newPostForm.reset()
+
+        newPostPanel.style.display = "none"
+
+        renderPosts()
+    }
+    catch (error) {
+        alert(error.message)
+    }
+
 }
 // Vamos a crear una function para que pinte (render en ingles es) los nuevos posts 
 function renderPosts() {
@@ -76,22 +77,22 @@ function renderPosts() {
 
         //el createElement te permite crear de la nada un documento html
         var article = document.createElement("article")
-        article.setAttribute("class", "post")
+        article.setAttribute("aria-label", "Post")
         // que aparezca en email del usuario que publica el post
-        var span = document.createElement("span")
-        span.innerText = post.author
-        span.setAttribute("aria-label", "author")
+        var h3 = document.createElement("h3")
+        h3.innerText = post.author
+        h3.setAttribute("aria-label", "author")
         //el src y la imagen son propiedades del post como dice data
         var image = document.createElement("img")
-        image.src = post.image
         image.setAttribute("class", "post-image")
         image.alt = post.imageDescription
+        image.src = post.image
 
         var paragraph = document.createElement("p")
         //innerText,el text es una propiedad de p, como dice data, es el texto interior en el párrafo
         paragraph.innerText = post.text
         //appendChild es poner dentro, en este caso dentro del article
-        article.appendChild(span)
+        article.appendChild(h3)
         article.appendChild(image)
         article.appendChild(paragraph)
 

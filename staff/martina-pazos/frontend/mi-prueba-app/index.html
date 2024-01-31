@@ -16,17 +16,16 @@
     <div id="register-view" class="view">
         <h1>Register</h1>
         <form id="register-form" class="form">
-            <label for="name-input" class="name">Name</label>
-            <input type="text" id="name-input" class="name-input">
+            <label class="label" for="name-input">Name</label>
+            <input class="input" type="text" id="name-input" title="Name" required>
 
-            <label for="email-input" class="email">Email</label>
-            <input type="email" id="email-input" class="email-input">
+            <label class="label" for="email-input">Email</label>
+            <input class="input" type="email" id="email-input" title="Email" required>
 
-            <label for=" password-input" class="password">Password</label>
-            <input type="password" id="password-input" class="password-input">
+            <label class="label" for=" password-input">Password</label>
+            <input class="input" type="password" id="password-input" title="Password" required>
 
-            <button type="submit" id="register">Register</button>
-            <button type="reset" id="clear">Clear</button>
+            <button class="button" type="submit">Register</button>
         </form>
         <a id="login-link" href="">Login</a>
     </div>
@@ -35,46 +34,46 @@
     <div id="login-view" class="view">
         <h1>Login</h1>
         <form id="login-form" class="form">
-            <label for="email-input-login" class="name">Email</label>
-            <input type="email" id="email-input-login" class="name-input">
+            <label class="label" for="email-input">Email</label>
+            <input class="input" type="email" id="email-input" title="Email" required>
 
-            <label for="password-input-login" class="password">Password</label>
-            <input type="password" id="password-input-login" class="password-input">
+            <label class="label" for=password-input>Password</label>
+            <input class="input" type="password" id="password-input" title="Password" required>
 
-            <button type="submit" id="login">Login</button>
-            <button type="reset" id="clear">Clear</button>
+            <button class="button" type="submit">Login</button>
         </form>
+
         <a id="register-link" href="">Register</a>
     </div>
 
 
     <div id="home-view">
-        <header class="header" aria-label="header">
+        <header class="header" aria-label="Header">
             <h1>Home</h1>
             <span id="user-name-span" aria-label="User name">Hello world</span>
-            <button id="new-post-button" title="New post" aria-label="New post">+</button>
-            <button id="logout-button">Logout</button>
+            <button id="new-post-button" title="New post" aria-label="New post" class="button">+</button>
+            <button id="logout-button" class="button">Logout</button>
         </header>
 
         <!--aqui hacemos el formulario para crear un post, se abre en el  boton +-->
-        <div id="new-post-panel" class="panel-lightskyblue">
+        <div id="new-post-panel" class="view">
             <h2>New Post</H2>
             <form id="new-post-form" class="form">
-                <label for="image-input">Image</label>
-                <input type="url" id="image-input">
+                <label for="image-input" class="label">Image</label>
+                <input type="url" id="image-input" class="input" required>
 
-                <label for="image-description-input">Image description</label>
-                <input type="text" id="image-description-input">
+                <label for="image-description-input" class="label">Image description</label>
+                <input type="text" id="image-description-input" class="input" required>
 
-                <label for="text-input">Text</label>
-                <input type="text" id="text-input">
+                <label for="text-input" class="label">Text</label>
+                <input type="text" id="text-input" class="input" required>
 
-                <button type="submit">Post</button>
-                <button id="cancel-new-post-button">Cancel</button>
+                <button type="submit" class="button">Post</button>
+                <button id="cancel-new-post-button" class="button">Cancel</button>
             </form>
         </div>
 
-        <div id="posts-list" aria-label="posts-list">
+        <div id="posts-list" aria-label="Posts-list" class="view">
         </div>
     </div>
 
@@ -88,6 +87,7 @@
     <script src="logic/authenticateUser.js"></script>
     <script src="logic/retrieveUser.js"></script>
     <script src="logic/registerUser.js"></script>
+    <script src="logic/createNewPost.js"></script>
     <!--presentacion-->
     <script src="main.js"></script>
     <script src="views/register.js"></script>

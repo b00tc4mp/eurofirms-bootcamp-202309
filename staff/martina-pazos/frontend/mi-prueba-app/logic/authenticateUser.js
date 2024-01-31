@@ -13,6 +13,4 @@ function authenticateUser(email, password) {
 
     if (foundUser.password !== password)
         throw new Error("Wrong credentials")
-
-
 }

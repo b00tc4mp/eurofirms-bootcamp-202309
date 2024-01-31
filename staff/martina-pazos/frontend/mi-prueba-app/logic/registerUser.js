@@ -4,20 +4,13 @@ function registerUser(name, email, password) {
     validateEmail(email)
     validatePassword(password)
 
-    var foundUser = null
-    for (var i = 0; i < users.length; i++) {
-        var user = users[i]
-
-        if (user.email === email) {
-            foundUser = user
-            break
-        }
-    }
-
-
-    if (foundUser !== null) {
+    var foundUser = find(users, function (user) {
+        return user.email === email
+    })
+    //sino encuentro el usuario
+    if (foundUser !== undefined)
         throw new Error("User alredy exists")
-    }
+
     //se crea una array con un objeto vacio, 
     var user = {}
     //a cada objeto se le asigna una propiedad, que recoge los datos del formulacio (name, email, password)
