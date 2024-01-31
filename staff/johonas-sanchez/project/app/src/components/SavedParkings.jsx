@@ -42,8 +42,8 @@ function SavedParkings(props) {
       setShowComments(!showComments)
    }
 
-   const redIcon = new L.Icon({
-      iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png",
+   const greenIcon = new L.Icon({
+      iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png",
       shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
       iconSize: [25, 41],
       iconAnchor: [12, 41],
@@ -90,12 +90,22 @@ function SavedParkings(props) {
             />
             {parkings.map((parking) => (
                <Marker
-               icon={parking.id === selectedMarker ? redIcon : defaultIcon}
+               icon={parking.id === selectedMarker ? greenIcon : defaultIcon}
                key={parking.id}
                position={[parking.location.coordinates[0], parking.location.coordinates[1]]}
                eventHandlers={{
                   click: (e) => {
                      handleMarkerClick(parking.id)
+                  },
+                  mouseover: (e) => {
+                     if (e.target && e.target.setIcon) {
+                        e.target.setIcon(greenIcon)
+                     }
+                  },
+                  mouseout: (e) => {
+                     if (e.target && e.target.setIcon && parking.id !== selectedMarker) {
+                        e.target.setIcon(defaultIcon)
+                     }
                   },
                }}
             ></Marker>
