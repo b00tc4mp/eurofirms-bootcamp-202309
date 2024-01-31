@@ -1,0 +1,58 @@
+import { Button, Link, Field, Form, Container } from "../library"
+
+import logic from "../logic"
+
+function Login(props) {
+   console.log("Login")
+
+   function handleLoginSubmit(event) {
+      event.preventDefault()
+
+      const emailInput = event.target.querySelector("#email-field")
+      const passwordInput = event.target.querySelector("#password-field")
+
+      const email = emailInput.value
+      const password = passwordInput.value
+
+      logic.loginUser(email, password)
+         .then(() => {
+            // Acciones en caso de éxito
+            props.onSuccess()
+         })
+         .catch((error) => {
+            // Acciones en caso de error
+            props.onError(error)
+         })
+   }
+
+   function handleRegisterClick(event) {
+      event.preventDefault()
+
+      props.onRegisterClick()
+   }
+
+   return (
+      <Container align="center">
+         <h1>Login</h1>
+
+         <Form onSubmit={handleLoginSubmit}>
+            <div>
+               <Field type="email" id="email-field" title="E-mail" required>
+                  E-mail
+               </Field>
+            </div>
+
+            <div>
+               <Field type="password" id="password-field" title="Password" required>
+                  Password
+               </Field>
+            </div>
+            <Button type="submit">Login</Button>
+         </Form>
+
+         <Link onClick={handleRegisterClick}>Register</Link>
+      </Container>
+   )
+}
+
+export default Login

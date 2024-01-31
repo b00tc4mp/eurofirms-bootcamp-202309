@@ -1,0 +1,1 @@
+curl -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NTk2ZDE1Mzc5N2ZmYTg0MWI0MTNlODYiLCJpYXQiOjE3MDQ5ODU4MTd9.mu1gTXpWRCkh9dtxwjmPZfqh0Uh5EYuWv97Caxt2Fiw' localhost:4000/parkings/saved -v
