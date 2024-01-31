@@ -47,7 +47,6 @@ function Login(props) {
                   Password
                </Field>
             </div>
-            {/* <button className="button" type="submit">Login</button> */}
             <Button type="submit">Login</Button>
          </Form>
 

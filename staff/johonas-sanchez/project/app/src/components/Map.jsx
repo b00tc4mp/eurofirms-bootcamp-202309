@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { Routes, Route, useNavigate, useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { MapContainer, TileLayer, Marker, useMapEvents, useMap } from "react-leaflet"
 import L from "leaflet"
 
@@ -72,32 +72,8 @@ function Map({ onError }) {
       setShowComments(!showComments)
    }
 
-   // const iconClicked = new L.Icon({
-   //    iconUrl: "/red-marker.svg",
-   //    iconRetinaUrl: "/red-marker.svg",
-   //    iconAnchor: null,
-   //    popupAnchor: null,
-   //    shadowUrl: null,
-   //    shadowSize: null,
-   //    shadowAnchor: null,
-   //    iconSize: new L.Point(60, 75),
-   //    className: "leaflet-div-icon-no-border",
-   // })
-
-   // const defaultIcon = new L.Icon({
-   //    iconUrl: "/blue-marker.png",
-   //    iconRetinaUrl: "/blue-marker.png",
-   //    iconAnchor: null,
-   //    popupAnchor: null,
-   //    shadowUrl: null,
-   //    shadowSize: null,
-   //    shadowAnchor: null,
-   //    iconSize: new L.Point(30, 45),
-   //    className: "leaflet-div-icon-no-border",
-   // })
-
-   const redIcon = new L.Icon({
-      iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png",
+   const greenIcon = new L.Icon({
+      iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png",
       shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
       iconSize: [25, 41],
       iconAnchor: [12, 41],
@@ -197,7 +173,7 @@ function Map({ onError }) {
                />
                {parkings.map((parking) => (
                   <Marker
-                     icon={parking.id === selectedMarker ? redIcon : defaultIcon}
+                     icon={parking.id === selectedMarker ? greenIcon : defaultIcon}
                      key={parking.id}
                      position={[parking.location.coordinates[0], parking.location.coordinates[1]]}
                      eventHandlers={{
