@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { Routes, Route, useNavigate, useParams } from "react-router-dom"
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from "react-leaflet"
+import { MapContainer, TileLayer, Marker, useMapEvents, useMap } from "react-leaflet"
 import L from "leaflet"
 
 import logic from "../logic"
@@ -18,6 +18,7 @@ function Map({ onError }) {
    const [lat, setLat] = useState(-6.087581)
    const [long, setLong] = useState(40.030403)
    const [dist, setDist] = useState(1000)
+   const [habilitarPosicionar, setHabilitarPosicionar] = useState(false)
 
    const navigate = useNavigate()
 
@@ -141,15 +142,12 @@ function Map({ onError }) {
             const lat = e.latlng.lat
             const long = e.latlng.lng
 
-            // Pide confirmación al usuario antes de crear el estacionamiento
-            const userConfirmed = window.confirm("¿Quieres crear un nuevo estacionamiento en esta ubicación?")
+            const confirmacionUsuario = window.confirm("¿Quieres crear un nuevo estacionamiento en esta ubicación?")
 
-            if (userConfirmed) {
-               // Llama a la función createParking de logic con las coordenadas obtenidas
+            if (confirmacionUsuario) {
                logic
                   .createParking(long, lat)
                   .then(() => {
-                     // Actualiza los estacionamientos después de crear uno
                      refreshParkings()
                   })
                   .catch((error) => {
@@ -161,10 +159,26 @@ function Map({ onError }) {
       return null
    }
 
+   const handleCheckboxChange = () => {
+      setHabilitarPosicionar(!habilitarPosicionar) // Cambia el estado contrario al actual
+   }
+
+   function DragMap({isDraggable}){
+      const map = useMap()
+      isDraggable ? map.dragging.enable() : map.dragging.disable()
+   }
+
    return (
       <Container align="center">
          <div className="mb-8">
-            <MapContainer center={[40.03116, -6.08845]} zoom={15} scrollWheelZoom={true} style={{ width: 550, height: 300 }}>
+            <input className="mb-5" type="checkbox" checked={habilitarPosicionar} onChange={handleCheckboxChange} />
+            <label className="ml-2">Habilitar Posicionar Plaza</label>
+            <MapContainer
+               center={[40.03116, -6.08845]}
+               zoom={15}
+               scrollWheelZoom={true}
+               style={{ width: 550, height: 300 }}
+            >
                <TileLayer
                   attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -181,8 +195,10 @@ function Map({ onError }) {
                      }}
                   ></Marker>
                ))}
-               <MapPosition />
+               {habilitarPosicionar && <MapPosition />}
+               <DragMap isDraggable={!habilitarPosicionar}/>
             </MapContainer>
+           
             <div className="mt-8">
                {selectedMarker && (
                   <SelectedMarkerOptions
