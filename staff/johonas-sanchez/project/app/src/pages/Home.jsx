@@ -20,12 +20,12 @@ function Home(props) {
    // const lat = -6.087581
    // const dist = 1000
 
-   // useEffect(() => {
-   //    logic
-   //       .retrieveUser()
-   //       .then((user) => {
-   //          setName(user.name)
-   //          setUser(user)
+   useEffect(() => {
+      logic
+         .retrieveUser()
+         .then((user) => {
+            setName(user.name)
+            setUser(user)
    //          logic
    //             .retrieveParkingsByGeo(lat, long, dist)
    //             .then((parkings) => {
@@ -34,11 +34,11 @@ function Home(props) {
    //             .catch((error) => {
    //                props.onError(error)
    //             })
-   //       })
-   //       .catch((error) => {
-   //          props.onError(error)
-   //       })
-   // }, [])
+         })
+         .catch((error) => {
+            props.onError(error)
+         })
+   }, [])
 
    function handleSavedClick(event) {
       event.preventDefault()
