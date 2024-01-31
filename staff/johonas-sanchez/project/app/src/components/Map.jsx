@@ -180,6 +180,16 @@ function Map({ onError }) {
                         click: (e) => {
                            handleMarkerClick(parking.id)
                         },
+                        mouseover: (e) => {
+                           if (e.target && e.target.setIcon) {
+                              e.target.setIcon(greenIcon)
+                           }
+                        },
+                        mouseout: (e) => {
+                           if (e.target && e.target.setIcon && parking.id !== selectedMarker) {
+                              e.target.setIcon(defaultIcon)
+                           }
+                        },
                      }}
                   ></Marker>
                ))}
