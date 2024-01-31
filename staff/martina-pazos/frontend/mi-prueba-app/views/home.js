@@ -68,37 +68,41 @@ newPostForm.onsubmit = function (event) {
 }
 // Vamos a crear una function para que pinte (render en ingles es) los nuevos posts 
 function renderPosts() {
-    var postsList = homeView.querySelector("#posts-list")
+    try {
+        var posts = retrievePosts(loggedInEmail)
+        var postsList = homeView.querySelector("#posts-list")
 
-    postsList.innerHTML = ""
+        postsList.innerHTML = ""
 
-    for (var i = posts.length - 1; i >= 0; i--) {
-        var post = posts[i]
+        for (var i = posts.length - 1; i >= 0; i--) {
+            var post = posts[i]
 
-        //el createElement te permite crear de la nada un documento html
-        var article = document.createElement("article")
-        article.setAttribute("aria-label", "Post")
-        // que aparezca en email del usuario que publica el post
-        var h3 = document.createElement("h3")
-        h3.innerText = post.author
-        h3.setAttribute("aria-label", "author")
-        //el src y la imagen son propiedades del post como dice data
-        var image = document.createElement("img")
-        image.setAttribute("class", "post-image")
-        image.alt = post.imageDescription
-        image.src = post.image
+            //el createElement te permite crear de la nada un documento html
+            var article = document.createElement("article")
+            article.setAttribute("aria-label", "Post")
+            // que aparezca en email del usuario que publica el post
+            var h3 = document.createElement("h3")
+            h3.innerText = post.author
+            h3.setAttribute("aria-label", "author")
+            //el src y la imagen son propiedades del post como dice data
+            var image = document.createElement("img")
+            image.setAttribute("class", "post-image")
+            image.alt = post.imageDescription
+            image.src = post.image
 
-        var paragraph = document.createElement("p")
-        //innerText,el text es una propiedad de p, como dice data, es el texto interior en el párrafo
-        paragraph.innerText = post.text
-        //appendChild es poner dentro, en este caso dentro del article
-        article.appendChild(h3)
-        article.appendChild(image)
-        article.appendChild(paragraph)
+            var paragraph = document.createElement("p")
+            //innerText,el text es una propiedad de p, como dice data, es el texto interior en el párrafo
+            paragraph.innerText = post.text
+            //appendChild es poner dentro, en este caso dentro del article
+            article.appendChild(h3)
+            article.appendChild(image)
+            article.appendChild(paragraph)
 
-        postsList.appendChild(article)
+            postsList.appendChild(article)
 
+        }
+
+    } catch (error) {
+        alert(error.message)
     }
-
 }
-
