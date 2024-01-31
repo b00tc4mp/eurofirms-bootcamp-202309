@@ -17,6 +17,9 @@ function ParkingDetail(props) {
    const [parking, setParking] = useState(null)
    const [reviews, setReviews] = useState(null)
    const [showNewReviews, setShowNewReviews] = useState(null)
+   const userId = logic.getLoggedInUserId()
+   const isManager = logic.isUserManager()
+   const isRegular = logic.isUserRegular()
 
    function refreshReviews() {
       logic
@@ -36,20 +39,20 @@ function ParkingDetail(props) {
    }, [parkingId])
 
    function handleDeleteReviewClick(reviewId) {
-       // Utilizar window.confirm para mostrar un mensaje de confirmación
-       const confirmDelete = window.confirm("¿Estás seguro de que quieres eliminar esta revisión?")
+      // Utilizar window.confirm para mostrar un mensaje de confirmación
+      const confirmDelete = window.confirm("¿Estás seguro de que quieres eliminar esta revisión?")
 
-       if (confirmDelete) {
-          logic
-             .deleteReview(reviewId)
-             .then(() => {
-                refreshReviews()
-             })
-             .catch((error) => {
-                props.onError(error)
-             })
-       }
-    }
+      if (confirmDelete) {
+         logic
+            .deleteReview(reviewId)
+            .then(() => {
+               refreshReviews()
+            })
+            .catch((error) => {
+               props.onError(error)
+            })
+      }
+   }
 
    function handleNewReviewClick() {
       setShowNewReviews(true)
@@ -94,9 +97,18 @@ function ParkingDetail(props) {
                      Valuation: <strong>{review.valuation}</strong>
                   </p>
                   <p>Comentario: {review.comment}</p>
-                  <button onClick={() => handleDeleteReviewClick(review.id)} className="bg-blue-500 text-white px-2 py-1 rounded mt-3">
-                     Eliminar review
-                  </button>
+                  <div className="flex items-center justify-center mt-2">
+                     {isManager && (
+                        <button className="bg-blue-500 text-white px-2 py-1 rounded" onClick={() => handleDeleteReviewClick(review.id)}>
+                           Eliminar Comentario (Manager)
+                        </button>
+                     )}
+                     {isRegular && review.author.id === userId && (
+                        <button className="bg-blue-500 text-white px-2 py-1 rounded" onClick={() => handleDeleteReviewClick(review.id)}>
+                           Eliminar Comentario (Regular)
+                        </button>
+                     )}
+                  </div>
                </div>
             ))
          ) : (
