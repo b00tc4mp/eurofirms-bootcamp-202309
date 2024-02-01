@@ -1,10 +1,10 @@
 const req = {
     method: 'POST',
     headers: {
-        Authorization: 'Bearer (token admin)',
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWJiZGY0ODExNzI2NzQwYjhhNTFmZjgiLCJpYXQiOjE3MDY4MTEyNTAsImV4cCI6MTcwOTQwMzI1MH0.OXyUjSzFyPtz9KpMkDegrO5k4NiiMHTxouaSFDKUY-4',
         'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ name: 'movil 2', image: 'https://images.unsplash.comphoto-1567581935884-3349723552caw=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8bW9iaWxlfGVufDB8fDB8fHww.jpg', description: 'descripción del móvil', price: '345 €', quantity: '5' })
+    body: JSON.stringify({ name: 'movil 0', img: 'https://i.blogs.es/422d7f/xiaomi-mi-mix-fold-6/1366_2000.jpg', description: 'descripción del móvil', price: '425 €', quantity: 2 })
 }
 
 fetch('http://localhost:8080/products', req)

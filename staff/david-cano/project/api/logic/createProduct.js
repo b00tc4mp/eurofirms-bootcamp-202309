@@ -1,14 +1,14 @@
 const { validate } = require('./helpers')
 const { User, Product } = require('../data/models')
-const { NotFoundError, SystemError } = require('./errors')
+const { NotFoundError, SystemError, ClearanceError } = require('./errors')
 
 function createProduct(userId, name, img, description, price, quantity, callback) {
     validate.text(userId, 'user id')
     validate.text(name, 'name')
     validate.text(img, 'image')
     validate.text(description, 'description')
-    validate.number(price, 'price')
-    validate.number(quantity, 'quanty')
+    validate.text(price, 'price')
+    validate.number(quantity, 'quantity')
     validate.function(callback, 'callback')
 
     User.findById(userId)
@@ -16,6 +16,11 @@ function createProduct(userId, name, img, description, price, quantity, callback
             if (!user) {
                 callback(new NotFoundError('user not found'))
 
+                return
+            }
+
+            if (user.role === 'regular') {
+                callback(new ClearanceError('user unauthorized'))
                 return
             }
 

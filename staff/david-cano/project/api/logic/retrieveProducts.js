@@ -15,7 +15,7 @@ function retrieveProducts(userId, callback) {
                 return
             }
 
-            Product.find().select('-__v').populate('author', 'name').lean()
+            Product.find().select('-__v').populate('author', 'role').lean()
                 .then(products => {
                     products.forEach(product => {
                         product.id = product._id.toString()

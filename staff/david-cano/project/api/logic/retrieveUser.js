@@ -8,7 +8,7 @@ function retrieveUser(userId, callback) {
     
     validate.function(callback, 'callback')
 
-    User.findById(userId).select('-_id -email -password -role -__v').lean()
+    User.findById(userId).select('-_id -email -password -__v').lean()
         .then(user => {
             if (!user) {
                 callback(new NotFoundError('user not found'))

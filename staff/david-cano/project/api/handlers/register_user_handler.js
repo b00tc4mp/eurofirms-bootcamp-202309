@@ -1,4 +1,4 @@
-const logic = require('../logic/indexLogic')
+const logic = require('../logic')
 const { ContentError, DuplicityError } = require('../logic/errors')
 
 module.exports = (req, res) => {

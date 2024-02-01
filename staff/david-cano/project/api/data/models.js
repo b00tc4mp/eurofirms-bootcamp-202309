@@ -29,7 +29,7 @@ const user = new Schema({
 const product = new Schema({
     author: {
         type: ObjectId,
-        ref: 'Admin',
+        ref: 'User',
         required: true
     },
 
@@ -49,7 +49,7 @@ const product = new Schema({
     },
 
     price: {
-        type: Number,
+        type: String,
         required: true
     },
 
