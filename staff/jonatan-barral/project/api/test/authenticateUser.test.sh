@@ -1,0 +1,1 @@
+curl -H 'Content-Type: application/json' -d '{ "username": "IProfe", "password": "987654321" }' localhost:4000/users/auth -v
