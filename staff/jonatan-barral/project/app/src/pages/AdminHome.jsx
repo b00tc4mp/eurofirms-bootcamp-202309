@@ -94,7 +94,7 @@ export default function AdminHome(props) {
             <a href="#" role='tab' className={`tab-link ${activeTab === 1 ? 'active-tab' : ''}`} onClick={handleJudjesClick}>Ver jueces</a>
             <a href="#" role='tab' className={`tab-link ${activeTab === 1 ? 'active-tab' : ''}`} onClick={handleSecretariesClick}>Ver secretarías</a>
 
-            <button title="Registrar Usuario" role="tab" className={`tab-link ${activeTab === 1 ? 'active-tab' : ''}`} aria-label="Registrar usuario" onClick={handleRegisterUserClick}> 🔏</button>
+            <button title="Registrar Usuario" role="tab" className={`tab-link ${activeTab === 1 ? 'active-tab' : ''}`} aria-label="Registrar usuario" onClick={handleRegisterUserClick}>Registrar Usuario </button>
         </footer>
 
     </Container>

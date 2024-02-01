@@ -51,6 +51,12 @@ const validate = {
             throw new Error(status + ' is not a valid status')
         }
     },
+    date(date, explain) {
+        this.text(date, explain)
+        if (isNaN(new Date(date))) {
+            throw new Error(explain + 'is not a valid date')
+        }
+    }
 
 }
 

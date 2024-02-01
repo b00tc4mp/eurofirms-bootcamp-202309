@@ -18,7 +18,7 @@ function authenticateUser(username, password) {
                 throw new NotFoundError('User not found')
             }
 
-            if (user.statuss === 'deactivated') {
+            if (user.status === 'deactivated') {
                 throw new ClearanceError('this user is not active')
             }
 

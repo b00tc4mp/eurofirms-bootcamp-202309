@@ -1,23 +1,23 @@
 const jwt = require('jsonwebtoken')
 
 const logic = require('../logic')
-const { ContentError, CredentialsError } = require('../logic/errors')
+const { ClearanceError, NotFoundError, SistemError } = require('../logic/errors')
 
 module.exports = (req, res) => {
     try {
-        const { username, password } = req.body
+        const token = req.headers.authorization.slice(7)
 
-        logic.authenticateUser(username, password)
-            .then(user => {
-                const token = jwt.sign({ sub: user.id, role: user.role, status: user.status }, process.env.JWT_SECRET, { expiresIn: '10h' })
+        const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
 
-                res.json(token)
-            })
+        const { startdate, enddate, location } = req.body
+
+        logic.createCompetition(userId, startdate, enddate, location)
+            .then(() => res.status(201).send())
             .catch(error => {
                 let status = 500
 
-                if (error instanceof CredentialsError)
-                    status = 401
+                if (error instanceof ClearanceError || error instanceof NotFoundError)
+                    status = 409
 
                 res.status(status).json({ error: error.constructor.name, message: error.message })
             })

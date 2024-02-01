@@ -73,7 +73,8 @@ TODO
 #### Competition
 
 - id (object-id, unique, required)
-- date (string, required)
+- startdate (Date, required)
+- enddate (Date, required)
 - organizer (object-id, User.id, required)
 - judges ([object-id, User.id])
 - president (object-id, User.id)

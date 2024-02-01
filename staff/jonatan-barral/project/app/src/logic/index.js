@@ -14,6 +14,7 @@ import isUserStarting from './users/status/isUserStarting'
 import isUserActivated from './users/status/isUserActivated'
 import isUserDeactivated from './users/status/isUserDeactivated'
 import updateUserPasswordStarting from './users/updateUserPasswordStarting'
+import createCompetition from './competition/createCompetition'
 
 const logic = {
     getLoggedInUserId,
@@ -31,7 +32,8 @@ const logic = {
     registerUser,
     retrieveJudges,
     retrieveSecretaries,
-    updateUserPasswordStarting
+    updateUserPasswordStarting,
+    createCompetition
 }
 
 export default logic

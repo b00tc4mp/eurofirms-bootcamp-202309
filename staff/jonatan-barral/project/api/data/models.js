@@ -42,8 +42,13 @@ const user = new Schema({
 })
 
 const competition = new Schema({
-    date: {
-        type: String,
+    startdate: {
+        type: Date,
+        required: true
+    },
+
+    enddate: {
+        type: Date,
         required: true
     },
 
@@ -55,14 +60,12 @@ const competition = new Schema({
 
     judges: [{
         type: ObjectId,
-        ref: 'User',
-        required: true
+        ref: 'User'
     }],
 
     president: {
         type: ObjectId,
-        ref: 'User',
-        required: true
+        ref: 'User'
     },
 
 
@@ -73,21 +76,19 @@ const competition = new Schema({
 
     competitors: [{
         type: ObjectId,
-        ref: 'Competitor',
-        required: true
+        ref: 'Competitor'
     }],
 
     horses: [{
         type: ObjectId,
-        ref: 'Horse',
-        required: true
+        ref: 'Horse'
     }],
 
-    active: {
-        type: Boolean,
-        default: true
+    status: {
+        type: String,
+        enum: ['starting', 'activated', 'deactivated'],
+        default: 'starting'
     }
-
 })
 
 const competitor = new Schema({

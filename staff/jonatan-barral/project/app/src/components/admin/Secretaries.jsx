@@ -5,24 +5,20 @@ import { Container, Button } from '../../library'
 import logic from '../../logic'
 
 export default function Secretaries(props) {
-    console.log('Secretarías')
-
-    const [users, setUsers] = useState([])
+    const [users, setUsers] = useState([]);
 
     useEffect(() => {
-        logic.retrieveSecretaries()
-            .then((secretaries) => {
-                setUsers(secretaries)
-            })
-            .catch((error) => {
-                props.onError(error)
-            })
-    }, [props])
-
-
+        logic.retrieveSecretaries((error, secretaries) => {
+            if (error) {
+                props.onError(error);
+            } else {
+                setUsers(secretaries);
+            }
+        });
+    }, [props]);
 
     function handleEditUserClick() {
-        props.navigate('/users/edit')
+        props.navigate('/users/edit');
     }
 
     return (

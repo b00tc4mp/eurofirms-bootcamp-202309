@@ -4,7 +4,6 @@ const logic = require('../logic')
 const { ContentError, DuplicityError } = require('../logic/errors')
 
 module.exports = (req, res) => {
-    debugger
     try {
         const token = req.headers.authorization.slice(7)
 

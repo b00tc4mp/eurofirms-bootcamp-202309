@@ -1,10 +1,9 @@
 const jwt = require("jsonwebtoken")
 
 const logic = require("../logic")
-const { ContentError, DuplicityError } = require("../logic/errors")
+const { ContentError, CredentialsError, NotFoundError } = require("../logic/errors")
 
 module.exports = (req, res) => {
-    debugger
     try {
         const token = req.headers.authorization.slice(7)
         const { sub: userId } = jwt.verify(token, process.env.JWT_SECRET)
@@ -14,6 +13,8 @@ module.exports = (req, res) => {
             .then(() => res.status(201).send())
             .catch((error) => {
                 let status = 500
+
+                if (error instanceof CredentialsError || error instanceof NotFoundError) status = 401
 
                 res.status(status).json({ error: error.constructor.name, message: error.message })
             })

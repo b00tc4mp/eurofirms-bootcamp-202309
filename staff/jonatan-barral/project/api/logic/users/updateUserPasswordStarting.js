@@ -14,6 +14,8 @@ function updateUserPasswordStarting(userId, password, newPassword, repeatNewPass
 
     if (newPassword !== repeatNewPassword) throw new ContentError("new password does not match repeat new password")
 
+    if (password === newPassword) throw new ContentError("new password must be different from the current password")
+
     return User.findById(userId)
         .catch((error) => {
             throw new SystemError(error.message)
@@ -21,26 +23,27 @@ function updateUserPasswordStarting(userId, password, newPassword, repeatNewPass
         .then((user) => {
             if (!user) throw new NotFoundError("user not found")
 
-            if (password === newPassword) throw new ContentError("new password must be different from the current password")
 
-            bcrypt.compare(password, user.password).then((match) => {
-                if (!match) throw new CredentialsError("wrong credentials")
+            return bcrypt.compare(password, user.password)
+                .catch((error) => {
+                    throw new SystemError(error.message)
+                })
+                .then((match) => {
+                    if (!match) throw new CredentialsError("wrong credentials")
 
-                bcrypt
-                    .hash(newPassword, 8)
-                    .then((hash) => {
-                        user.password = hash
-                        user.status = 'activated'
-                        user.save()
-                            .then(() => null)
-                            .catch((error) => {
-                                throw new SystemError(error.message)
-                            })
-                    })
-                    .catch((error) => {
-                        throw new SystemError(error.message)
-                    })
-            })
+                    bcrypt
+                        .hash(newPassword, 8)
+                        .then((hash) => {
+                            user.password = hash
+                            user.status = 'activated'
+                            user.save()
+                                .then(() => null)
+                                .catch((error) => {
+                                    throw new SystemError(error.message)
+                                })
+                        })
+
+                })
         })
 }
 

@@ -17,17 +17,16 @@ function updateUserPasswordStarting(props) {
         const password = passwordInput.value
         const newPassword = newPasswordInput.value
         const repeatNewPassword = repeatNewPasswordInput.value
-        logic.updateUserPasswordStarting(password, newPassword, repeatNewPassword)
-            .then(() => {
-                alert('Contraseña actualizada')
-                props.onChangePassword()
-            })
-            .catch(error => {
-                props.onError(error)
-            })
+
+        logic.updateUserPasswordStarting(password, newPassword, repeatNewPassword, (error) => {
+            if (error) {
+                props.onError(error);
+            } else {
+                alert('Contraseña actualizada');
+                props.onChangePassword();
+            }
+        });
     }
-
-
 
     return <Container align="center">
         <h2>Modifica la contraseña para continuar</h2>

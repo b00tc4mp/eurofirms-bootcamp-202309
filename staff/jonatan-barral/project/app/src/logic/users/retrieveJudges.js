@@ -2,7 +2,8 @@ import { validate } from '../helpers'
 import context from '../context'
 import errors, { SystemError, ClearanceError } from '../errors'
 
-function retrieveJudges() {
+function retrieveJudges(callback) {
+    validate.function(callback, 'callback')
     validate.jwt(context.jwt)
 
     const req = {
@@ -12,19 +13,24 @@ function retrieveJudges() {
         },
     }
 
-    return fetch(`${import.meta.env.VITE_API_URL}/users/judges`, req)
-        .then((res) => {
+    fetch(`${import.meta.env.VITE_API_URL}/users/judges`, req)
+        .then(res => {
             if (!res.ok) {
-                return res.json().then((body) => {
-                    const constructor = errors[body.error]
-                    throw new constructor(body.message)
-                })
+                res.json()
+                    .then(body => {
+                        const constructor = errors[body.error]
+                        callback(new constructor(body.message))
+                    })
+                    .catch(error => callback(new SystemError(error.message)))
+
+                return
             }
-            return res.json()
+
+            res.json()
+                .then(judges => callback(null, judges))
+                .catch(error => callback(new SystemError(error.message)))
         })
-        .catch((error) => {
-            throw new SystemError(error.message)
-        })
+        .catch(error => callback(new SystemError(error.message)))
 }
 
-export default retrieveJudges   
+export default retrieveJudges

@@ -2,7 +2,7 @@ import { Button, Container, Field, Label, Select, Form } from '../../library'
 
 import logic from '../../logic'
 
-export default function NewPost(props) {
+export default function registerUser(props) {
     console.log('Register UserByAdmin')
 
     function handleRegisterUserSubmit(event) {
