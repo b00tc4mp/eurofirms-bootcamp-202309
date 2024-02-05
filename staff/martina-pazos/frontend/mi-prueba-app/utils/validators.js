@@ -22,3 +22,7 @@ function validateUrl(url, explain) {
     //startswith significa q comience por...en este caso http
     if (!url.startsWith("http")) throw new Error(explain + "is not valid")
 }
+
+function validateNumber(number, explain) {
+    if (typeof number !== "number") throw new TypeError(explain + "is not a number")
+}

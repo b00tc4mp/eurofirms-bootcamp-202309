@@ -74,7 +74,7 @@ function renderPosts() {
 
         postsList.innerHTML = ""
 
-        for (var i = posts.length - 1; i >= 0; i--) {
+        for (var i = posts.length - 1; i > -1; i--) {
             var post = posts[i]
 
             //el createElement te permite crear de la nada un documento html
@@ -94,9 +94,32 @@ function renderPosts() {
             //innerText,el text es una propiedad de p, como dice data, es el texto interior en el párrafo
             paragraph.innerText = post.text
             //appendChild es poner dentro, en este caso dentro del article
+
+            //vamos a crear el boton de los likes
+            var likeButton = document.createElement("button")
+            likeButton.setAttribute = ("class", "button")
+
+            //para los me gusta 
+            var liked = post.likes.includes(loggedInEmail)
+            // esto es un ternario, el ternario evelua lo q esta antes del interrogante ,si le das a me gusta corazon rojo: sino corazón blanco (es parecido a un if/else)
+            likeButton.innerText = (liked ? "💖" : "🤍") + " " + post.likes.lenght + " likes"
+
+
+            function createLikeButtonOnClick(postIndex) {
+
+                return function () {// closure
+                    toggleLikePost(loggedInEmail, postIndex)
+
+                    renderPosts()
+                }
+            }
+
+            likeButton.onclick = createLikeButtonOnClick(i)
+
             article.appendChild(h3)
             article.appendChild(image)
             article.appendChild(paragraph)
+            article.appendChild(likeButton)
 
             postsList.appendChild(article)
 
