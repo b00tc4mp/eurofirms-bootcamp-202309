@@ -3,10 +3,9 @@ import { validate } from './helpers'
 import context from './context'
 import errors, { SystemError } from './errors'
 
-function loginUser(email, password, role, callback) {
+function loginUser(email, password, callback) {
     validate.email(email)
     validate.password(password)
-    validate.text(role, 'role')
     validate.function(callback, 'callback')
 
     const req = {
@@ -14,7 +13,7 @@ function loginUser(email, password, role, callback) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ email, password, role })
+        body: JSON.stringify({ email, password })
     }
 
     fetch(`${import.meta.env.VITE_API_URL}/users/auth`, req)
