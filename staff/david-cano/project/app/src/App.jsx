@@ -13,6 +13,8 @@ function App() {
   console.log('App')
 
   const [feedback, setFeedback] = useState(null)
+  const [user, setUser] = useState(null)
+
   const navigate = useNavigate()
 
   function handleRegisterShow() {
@@ -21,7 +23,24 @@ function App() {
   }
 
   function handleLoginSuccess() {
-    navigate('/')
+    try {
+      logic.retrieveUser((error, user) => {
+          if (error instanceof SystemError) {
+            new SystemError(error.message)
+          }
+
+          if (user.role === 'admin') {
+            navigate ('/dashboard')
+          }else{
+            navigate ('/cart')
+          }
+
+          setUser(user)
+      })
+  } catch (error) {
+    new SystemError(error.message)
+  }
+
     setFeedback(null)
   }
 
@@ -51,11 +70,11 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path='/' element={<Home onError={handleError} />} />
+        <Route path='/' element={<Home />} />
 
-        <Route path="/register" element={logic.isUserLoggedIn() ? <Navigate to="/" /> : <Register onSuccess={handleLoginShow} onLoginClick={handleLoginShow} onError={handleError} />} />
+        <Route path="/register" element={ <Register onSuccess={handleLoginShow} onLoginClick={handleLoginShow} onError={handleError} />} />
 
-        <Route path="/login" element={logic.isUserLoggedIn() ? <Navigate to="/dashboard" /> : <Login onSuccess={handleLoginSuccess} onRegisterClick={handleRegisterShow} onError={handleError} />} />
+        <Route path="/login" element={ <Login onSuccess={handleLoginSuccess} onRegisterClick={handleRegisterShow} onError={handleError} />} />
 
         <Route path='/cart' element={<Cart />} />
 

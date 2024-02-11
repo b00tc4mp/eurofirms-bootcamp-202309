@@ -8,7 +8,8 @@ const { cors } = require('./utils')
 const {
     registerUserHandler,
     authenticateUserHandler,
-    retrieveUserHandler, createProductHandler,
+    retrieveUserHandler, 
+    createProductHandler,
     deleteProductHandler,
     retrieveProductsHandler
 } = require('./handlers')
