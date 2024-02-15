@@ -1,0 +1,38 @@
+TEST('forEach')
+//El método forEach() ejecuta la función indicada una vez por cada elemento del array.
+CASE('print each char from [a, b, c] in console')
+// declaramos la var (chars) = ['a', 'b', 'c']
+var chars = ['a', 'b', 'c']
+function printChar(char) {
+    console.log(char)
+}
+
+forEach(chars, printChar)
+// 'a'
+// 'b'
+// 'c'
+
+CASE('muliply each number from [10, 20, 30] and print it in console')
+//declaramos la variable
+var nums = [10, 20, 30]
+//aplicamos método forEach
+forEach(nums, function (num) {
+    console.log(num * 100)
+})
+//10000
+//20000
+//30000
+
+CASE('print each word with length 4 from [nice, rice, hide, letter, tomato, banana, rain, off, to, from, car]')
+// declaramos la var
+var things = ['nice', 'rice', 'hide', 'letter', 'tomato', 'banana', 'rain', 'odd', 'to', 'from', 'car']
+forEach(things, function (thing) {
+    if (thing.length === 4)
+        console.log(thing)
+})
+
+//nice
+//rice
+//hide
+//rain
+//from
