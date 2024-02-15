@@ -8,7 +8,17 @@ function Login(props) {
         const email = emailInput.value
         const password = passwordInput.value
 
-        console.log("TODO login", email, password)
+
+        try {
+            authenticateUser(email, password)
+
+            loggeInEmail = email
+
+            props.onSuccess()
+
+        } catch (error) {
+            alert(error.message)
+        }
     }
 
     function handleRegisterClick(event) {
