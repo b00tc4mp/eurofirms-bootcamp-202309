@@ -11,7 +11,8 @@ const {
     retrieveUserHandler, 
     createProductHandler,
     deleteProductHandler,
-    retrieveProductsHandler
+    retrieveProductsHandler,
+    retrieveCartItemsHandler
 } = require('./handlers')
 
 mongoose.connect(process.env.MONGODB_URL)
@@ -33,6 +34,8 @@ mongoose.connect(process.env.MONGODB_URL)
         api.delete('/products/:productId', deleteProductHandler)
 
         api.get('/products', retrieveProductsHandler)
+
+        api.get('/products/cartItems', retrieveCartItemsHandler)
 
         api.listen(process.env.PORT, () => console.log(`API listening on port ${process.env.PORT}`))
     })

@@ -1,6 +1,7 @@
 import Button from '../library/Button'
 
 import logic from '../logic'
+///const [cart, setCart] = useState([])
 
 export default function Product(props) {
     console.log('Product')
@@ -26,12 +27,31 @@ export default function Product(props) {
             }
     }
 
+function handleAddCart() {
+    console.log('Product Add Cart')
+
+    try {
+        logic.retrieveCartItems(product.id, error => {
+            if (error) {
+                props.onError(error)
+
+                return
+            }
+
+            props.onDeleted()
+        })
+    } catch (error) {
+        props.onError(error)
+    }
+}
+
     return <article className="flex flex-col p-[.5rem] hover:bg-[skyblue]">
         {/* <h3 className="self-start">{product.author.name}</h3> */}
         <p>{product.name}</p>
         <img className="max-w-[300px]" src={product.img} />
         <p>{product.description}</p>
         <p>{product.price}</p>
+        <Button onClick = {handleAddCart}>Add Cart</Button>
 
         {/* <div className="flex">
 

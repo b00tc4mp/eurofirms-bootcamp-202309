@@ -22,6 +22,11 @@ const user = new Schema({
         type: String,
         enum: ['regular', 'admin'],
         default: 'regular'
+    },
+
+    cartItems: {
+        type: [ObjectId],
+        ref: 'Product'
     }
 })
 
