@@ -28,10 +28,6 @@ function retrieveCartItems(userId, callback) {
                             delete product.author._id
                         }
 
-                        // post.likes = post.likes.map(userObjectId => userObjectId.toString())
-
-                        // post.liked = post.likes.includes(userId)
-
                         product.cartItems = user.cartItems.some(productObjectId => productObjectId.toString() === product.id)
                     })
 

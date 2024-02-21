@@ -8,7 +8,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/ecommerce_test')
         try {
             retrieveCartItems
             //id de usuario
-            ('6560873e8f3518573cbf334c', (error, products) => {
+            ('65aef47b2cf08f81288d857c', (error, products) => {
                 if (error) {
                     console.error(error)
 
