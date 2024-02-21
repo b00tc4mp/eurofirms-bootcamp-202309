@@ -1,8 +1,11 @@
 import React from 'react'
+import Logo from './Logo'
 
 function header() {
     return (
-        <div>header</div>
+        <>
+            <Logo />
+        </>
     )
 }
 

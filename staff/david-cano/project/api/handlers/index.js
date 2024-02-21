@@ -5,7 +5,7 @@ const createProductHandler = require('./create_product_handler.js')
 const deleteProductHandler = require('./delete_product_handler.js')
 const retrieveProductsHandler = require('./retrieve_products_handler.js')
 const retrieveCartItemsHandler = require('./retrieve_cart_items_handler.js')
-
+const addCartItemHandler = require('./add_cart_item_handler.js')
 
 module.exports = {
     registerUserHandler,
@@ -14,5 +14,6 @@ module.exports = {
     createProductHandler,
     deleteProductHandler,
     retrieveProductsHandler,
-    retrieveCartItemsHandler
+    retrieveCartItemsHandler,
+    addCartItemHandler
 }

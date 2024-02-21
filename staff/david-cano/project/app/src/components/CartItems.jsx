@@ -34,5 +34,11 @@ export default function cartItems(props) {
         refreshProducts()
     }
 
-    return <Products products={products} onProductDeleted={handleProductDeleted} onError={props.onError} />
+    function handleCartItemAdd() {
+        refreshProducts()
+    }
+
+    return <Products products={products}
+    onCartItemAdd={handleCartItemAdd}
+    onProductDeleted={handleProductDeleted} onError={props.onError} />
 }

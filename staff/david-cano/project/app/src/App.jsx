@@ -4,7 +4,7 @@ import Home from './pages/Home'
 import Cart from './pages/Cart'
 import Dashboard from './pages/Dashboard'
 import { useState } from 'react'
-import { Routes, Route, useNavigate, Navigate } from 'react-router-dom'
+import { Routes, Route, useNavigate } from 'react-router-dom'
 import Feedback from './library/Feedback'
 import logic from './logic'
 import { CredentialsError, JWTError, SystemError } from './logic/errors'
@@ -70,15 +70,15 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path='/' element={<Home />} />
+        <Route path='/' element={<Home onError={handleError} />} />
 
         <Route path="/register" element={ <Register onSuccess={handleLoginShow} onLoginClick={handleLoginShow} onError={handleError} />} />
 
         <Route path="/login" element={ <Login onSuccess={handleLoginSuccess} onRegisterClick={handleRegisterShow} onError={handleError} />} />
 
-        <Route path='/cart' element={<Cart />} />
+        <Route path='/cart/*' element={<Cart onError={handleError}/>} />
 
-        <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/dashboard' element={<Dashboard onError={handleError} />} />
 
       </Routes>
 

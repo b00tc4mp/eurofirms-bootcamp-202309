@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-import Products from './products'
+import Products from './Products'
 
 import logic from '../logic'
 
@@ -29,9 +29,9 @@ export default function AllProducts(props) {
         }
     }
 
-    function handleProductDeleted() {
+    function handleCartItemAdd() {
         refreshProducts()
     }
 
-    return <Products products={products}  onProductDeleted={handleProductDeleted} onError={props.onError} />
+    return <Products products={products}  onCartItemAdd={handleCartItemAdd} onError={props.onError} />
 }

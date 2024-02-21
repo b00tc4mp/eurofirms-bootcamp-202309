@@ -5,7 +5,7 @@ const Home = (props) => {
     return (
         <div>
             <Header />
-            <AllProducts />
+            <AllProducts onError={props.onError}/>
             <Footer />
         </div>
     )

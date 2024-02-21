@@ -1,8 +1,15 @@
 import React from 'react'
-
-const Cart = () => {
+import { Routes, Route, } from 'react-router-dom'
+import { CartItems, Header, Footer } from '../components'
+const Cart = (props) => {
     return (
-        <div>Cart</div>
+        <>
+        <Header />
+        <Routes>
+                <Route path="/cart" element={<CartItems onError={props.onError} />} />
+        </Routes>
+        <Footer />
+        </>
     )
 }
 

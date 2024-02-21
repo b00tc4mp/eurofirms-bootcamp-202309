@@ -29,7 +29,7 @@ function retrieveCartItems(callback) {
             }
 
             res.json()
-                .then(posts => callback(null, posts))
+                .then(products => callback(null, products))
                 .catch(error => callback(new SystemError(error.message)))
         })
         .catch(error => callback(new SystemError(error.message)))
