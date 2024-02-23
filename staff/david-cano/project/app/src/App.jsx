@@ -17,6 +17,11 @@ function App() {
 
   const navigate = useNavigate()
 
+  function handleHomeShow() {
+    navigate('/')
+    setFeedback(null)
+  }
+
   function handleRegisterShow() {
     navigate('/register')
     setFeedback(null)
@@ -32,7 +37,7 @@ function App() {
           if (user.role === 'admin') {
             navigate ('/dashboard')
           }else{
-            navigate ('/cart')
+            navigate ('/')
           }
 
           setUser(user)
@@ -76,9 +81,9 @@ function App() {
 
         <Route path="/login" element={ <Login onSuccess={handleLoginSuccess} onRegisterClick={handleRegisterShow} onError={handleError} />} />
 
-        <Route path='/cart/*' element={<Cart onError={handleError}/>} />
+        <Route path='/cart/*' element={<Cart onLogout={handleHomeShow}  onError={handleError}/>} />
 
-        <Route path='/dashboard' element={<Dashboard onError={handleError} />} />
+        <Route path='/dashboard' element={<Dashboard onLogout={handleLoginShow} onError={handleError} />} />
 
       </Routes>
 

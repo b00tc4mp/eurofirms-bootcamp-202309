@@ -1,15 +1,17 @@
 import React from 'react'
-import { Routes, Route, } from 'react-router-dom'
-import { CartItems, Header, Footer } from '../components'
+'react-router-dom'
+import { CartItems, UserHeader, Footer } from '../components'
+import { Container } from '../library'
+
 const Cart = (props) => {
     return (
-        <>
-        <Header />
-        <Routes>
-                <Route path="/cart" element={<CartItems onError={props.onError} />} />
-        </Routes>
+        <Container align="center">
+        <UserHeader onLogout={props.onLogout} />
+        
+    <CartItems onError={props.onError} />
+        
         <Footer />
-        </>
+        </Container>
     )
 }
 
