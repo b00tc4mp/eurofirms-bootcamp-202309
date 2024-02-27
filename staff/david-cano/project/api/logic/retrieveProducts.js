@@ -17,19 +17,19 @@ function retrieveProducts(callback) {
     //             return
     //         }
 
-            // Product.find().select('-__v').populate('author', 'role').lean()
-            Product.find()
+            Product.find().select('-__v').populate('author', 'role').lean()
+            // Product.find()
                 .then(products => {
-                    // products.forEach(product => {
-                    //     product.id = product._id.toString()
-                    //     delete product._id
+                    products.forEach(product => {
+                        product.id = product._id.toString()
+                        delete product._id
 
-                    //     if (product.author._id) {
-                    //         product.author.id = product.author._id.toString()
-                    //         delete product.author._id
-                    //     }
+                        if (product.author._id) {
+                            product.author.id = product.author._id.toString()
+                            delete product.author._id
+                        }
 
-                    // })
+                    })
 
                     callback(null, products.reverse())
                 })

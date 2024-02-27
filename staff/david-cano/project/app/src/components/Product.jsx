@@ -11,7 +11,7 @@ function handleAddCart() {
     console.log('Product Add Cart')
 
     try {
-        logic.addCartItem(product._id, error => {
+        logic.addCartItem(product.id, error => {
             if (error) {
                 props.onError(error)
 
