@@ -1,5 +1,5 @@
 import React from 'react'
-import Logo from './Logo'
+import AdminLogo from './AdminLogo'
 import { Link, Container, Button } from '../library'
 import { useNavigate } from 'react-router-dom'
 import logic from '../logic'
@@ -14,31 +14,24 @@ function AdminHeader(props) {
         logic.logoutUser()
     }
 
-    function handleHomeClick(event) {
-        event.preventDefault()
+    function handleNewProductClick() {
 
-        navigate('/')
-    }
+        navigate('/new-product')
+        // props.onCreateNewProduct()
 
-    function handleNewProductClick(event) {
-        event.preventDefault()
-
-        if (logic.isUserLoggedIn()) {
-            navigate('/')
-        } else {
-            navigate('/register')
-        }
+        //logic.createNewProduct()
     }
 
     return (
         <Container align="center">
         <div className="flex justify-between items-center md:min-w-[500px] lg:min-w-[768px]" aria-label="Header">
-            <Link onClick={handleHomeClick}>
-                <Logo />
-            </Link>
-            <Link onClick={handleNewProductClick}>
+
+                <AdminLogo />
+            
+            <Button onClick={handleNewProductClick}>
                 Create New Product
-            </Link>
+            </Button>
+
             <Button onClick={handleLogoutClick}>
                 Logout
             </Button>

@@ -1,13 +1,17 @@
+import { useState } from 'react'
+import { Routes, Route, useNavigate } from 'react-router-dom'
+
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Home from './pages/Home'
 import Cart from './pages/Cart'
 import Dashboard from './pages/Dashboard'
-import { useState } from 'react'
-import { Routes, Route, useNavigate } from 'react-router-dom'
-import Feedback from './library/Feedback'
+import { CreateNewProduct } from './components'
+
 import logic from './logic'
 import { CredentialsError, JWTError, SystemError } from './logic/errors'
+
+import Feedback from './library/Feedback'
 
 function App() {
   console.log('App')
@@ -54,6 +58,20 @@ function App() {
     setFeedback(null)
   }
 
+//   function handleCreateNewProduct() {
+//     navigate('/new-product')
+//     setFeedback(null)
+//   }
+
+//   function handleNewProductSubmit() {
+//     navigate("/")
+//     setTimestamp(Date.now())
+// }
+
+// function handleNewProductCancelClick() {
+//     navigate("/dashboard")
+// }
+
   function handleError(error) {
     if (error instanceof JWTError) {
       logic.logoutUser()
@@ -83,7 +101,9 @@ function App() {
 
         <Route path='/cart/*' element={<Cart onLogout={handleHomeShow}  onError={handleError}/>} />
 
-        <Route path='/dashboard' element={<Dashboard onLogout={handleLoginShow} onError={handleError} />} />
+        <Route path='/dashboard/*' element={<Dashboard onLogout={handleHomeShow} onError={handleError} />} />
+
+        <Route path='/new-product' element={<CreateNewProduct onError={handleError} />} />
 
       </Routes>
 

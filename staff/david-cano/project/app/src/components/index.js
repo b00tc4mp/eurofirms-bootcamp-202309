@@ -8,6 +8,7 @@ import CartTotal from './CartTotal'
 import Logo from './Logo'
 import AdminHeader from './AdminHeader'
 import UserHeader from './UserHeader'
+import CreateNewProduct from './CreateNewProduct'
 
 export {
     AllProducts,
@@ -19,5 +20,6 @@ export {
     CartTotal,
     Logo,
     AdminHeader,
-    UserHeader
+    UserHeader,
+    CreateNewProduct
 }

@@ -1,2 +1,2 @@
-curl -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWJiZGViNWUyM2MwODliMjM5N2ZkYmIiLCJpYXQiOjE3MDY4MTY3NjMsImV4cCI6MTcwOTQwODc2M30.NADIRlknT5Xf4PpN-8oDYj2x-6ml3CCC-8OT8P2IlPQ' -X DELETE localhost:8080/products/65bbf54e5be1ea6ad0ee9ebc -v
+curl -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWJiZGY0ODExNzI2NzQwYjhhNTFmZjgiLCJpYXQiOjE3MDkyNjc1MDEsImV4cCI6MTcxMTg1OTUwMX0.7qcEJJzdkHguyFJ6Rtgs-5VLCJcsIN6PRRH5CdnqxeI' -X DELETE localhost:8080/products/'65ca2cfb51408bd6c6283369' -v
 

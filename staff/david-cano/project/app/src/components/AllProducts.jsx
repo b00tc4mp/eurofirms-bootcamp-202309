@@ -11,7 +11,7 @@ export default function AllProducts(props) {
 
     useEffect(() => {
         refreshProducts()
-    }, [])
+    }, [props.timestamp])
 
     function refreshProducts() {
         try {
@@ -33,5 +33,9 @@ export default function AllProducts(props) {
         refreshProducts()
     }
 
-    return <Products products={products}  onCartItemAdd={handleCartItemAdd} onError={props.onError} />
+    return (
+        <Products products={products} onCartItemAdd={handleCartItemAdd} onError={props.onError} />
+
+        
+    )
 }

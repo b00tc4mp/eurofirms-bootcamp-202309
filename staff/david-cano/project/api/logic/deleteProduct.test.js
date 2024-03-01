@@ -4,7 +4,7 @@ const deleteProduct = require('./deleteProduct')
 mongoose.connect('mongodb://127.0.0.1:27017/ecommerce_test')
     .then(() => {
         try {
-            deleteProduct('65ae4884a4c8aaa5bb6c229c', '65bb7a2e60c941fdd4b0b6fa', error => {
+            deleteProduct('65ae4884a4c8aaa5bb6c229c', '65e13ff07c1a2f977e47711d', error => {
                 if (error) {
                     console.error(error)
 

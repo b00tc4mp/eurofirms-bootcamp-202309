@@ -1,17 +1,20 @@
 import { validate } from './helpers'
+import context from './context'
 import errors, { SystemError } from './errors'
 
-function retrieveProducts(callback) {
+function deleteProduct(productId, callback) {
+    validate.text(productId, 'product id')
     validate.function(callback, 'callback')
+    validate.jwt(context.jwt)
 
     const req = {
-        method: 'GET',
+        method: 'DELETE',
         headers: {
-            Authorization: `Bearer`,
-        },
+            Authorization: `Bearer ${context.storage.token}`
+        }
     }
 
-    fetch(`${import.meta.env.VITE_API_URL}/products`, req)
+    fetch(`${import.meta.env.VITE_API_URL}/products/${productId}`, req)
         .then(res => {
             if (!res.ok) {
                 res.json()
@@ -25,11 +28,9 @@ function retrieveProducts(callback) {
                 return
             }
 
-            res.json()
-                .then(products => callback(null, products))
-                .catch(error => callback(new SystemError(error.message)))
+            callback(null)
         })
         .catch(error => callback(new SystemError(error.message)))
 }
 
-export default retrieveProducts
+export default deleteProduct

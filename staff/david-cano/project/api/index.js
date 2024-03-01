@@ -24,17 +24,17 @@ mongoose.connect(process.env.MONGODB_URL)
 
         api.use(cors)
 
-        api.post('/users/auth', jsonBodyParser, authenticateUserHandler)
-
         api.post('/users', cors, jsonBodyParser, registerUserHandler)
+
+        api.post('/users/auth', jsonBodyParser, authenticateUserHandler)
 
         api.get('/users', retrieveUserHandler)
 
         api.post('/products', jsonBodyParser, createProductHandler)
 
-        api.delete('/products/:productId', deleteProductHandler)
-
         api.get('/products', retrieveProductsHandler)
+
+        api.delete('/products/:productId', deleteProductHandler)
 
         api.get('/products/cartItems', retrieveCartItemsHandler)
 

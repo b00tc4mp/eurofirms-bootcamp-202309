@@ -37,7 +37,4 @@ function UserHeader(props) {
     )
 }
 
-
-
-
 export default UserHeader
