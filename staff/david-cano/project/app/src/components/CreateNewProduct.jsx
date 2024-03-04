@@ -37,7 +37,7 @@ function CreateNewProduct(props) {
     }
 
     function handleCancelClick() {
-        props.onNewProductCancelClick()
+        props.onNewProductCancelClick
     }
 
     return (

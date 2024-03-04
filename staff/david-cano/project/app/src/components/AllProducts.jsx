@@ -33,8 +33,12 @@ export default function AllProducts(props) {
         refreshProducts()
     }
 
+    function handleProductDeleted() {
+        refreshProducts()
+    }
+
     return (
-        <Products products={products} onCartItemAdd={handleCartItemAdd} onError={props.onError} />
+        <Products products={products} onCartItemAdd={handleCartItemAdd} onProductDeleted ={handleProductDeleted} onError={props.onError} />
 
         
     )

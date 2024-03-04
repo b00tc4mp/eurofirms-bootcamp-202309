@@ -48,12 +48,12 @@ function handleAddCart() {
         <p>{product.name}</p>
         <img className="max-w-[300px]" src={product.img} />
         <p>{product.description}</p>
-        <p>{product.price}</p>
+        <p>{product.price} €</p>
         
-        <span><Button onClick = {handleAddCart}>Add Cart</Button></span>
-        <div className="flex">
+        <span></span>
+        <div className="flex items-center justify-center">
 
-            {product.author.id === logic.getLoggedInUserId() ? <Button title="Delete" aria-label="Delete" onClick={handleDeleteClick}>🗑️</Button> : null}
+            {product.author.id === logic.getLoggedInUserId() ? <Button title="Delete" aria-label="Delete" onClick={handleDeleteClick}>Delete ❌</Button> : <Button onClick = {handleAddCart}>{(product.cartItems ? 'Remove 🛍️' : 'Add 🛍️')}</Button>}
         </div>
     </article>
 
