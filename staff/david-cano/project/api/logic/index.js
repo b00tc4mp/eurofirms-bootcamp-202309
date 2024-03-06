@@ -6,6 +6,7 @@ const deleteProduct = require('./deleteProduct')
 const retrieveProducts = require('./retrieveProducts')
 const retrieveCartItems = require('./retrieveCartItems')
 const addCartItem = require('./addCartItem')
+const retrieveProductsForUser = require('./retrieveProductsForUser')
 
 const logic = {
     registerUser,
@@ -15,7 +16,8 @@ const logic = {
     deleteProduct,
     retrieveProducts,
     retrieveCartItems,
-    addCartItem
+    addCartItem,
+    retrieveProductsForUser
 }
 
 module.exports = logic

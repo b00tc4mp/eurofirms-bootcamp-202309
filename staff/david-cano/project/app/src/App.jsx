@@ -63,10 +63,10 @@ function App() {
 //     setFeedback(null)
 //   }
 
-//   function handleNewProductSubmit() {
-//     navigate("/")
-//     setTimestamp(Date.now())
-// }
+// //   function handleNewProductSubmit() {
+// //     navigate("/")
+// //     setTimestamp(Date.now())
+// // }
 
 // function handleNewProductCancelClick() {
 //     navigate("/dashboard")

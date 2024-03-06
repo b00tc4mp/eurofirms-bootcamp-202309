@@ -1,25 +1,14 @@
 import React from 'react'
 import AdminLogo from './AdminLogo'
-import { Link, Container, Button } from '../library'
-import { useNavigate } from 'react-router-dom'
+import { Container, Button } from '../library'
 import logic from '../logic'
 
 function AdminHeader(props) {
-
-    const navigate = useNavigate()
 
     function handleLogoutClick() {
         props.onLogout()
 
         logic.logoutUser()
-    }
-
-    function handleNewProductClick() {
-
-        navigate('/new-product')
-        // props.onCreateNewProduct()
-
-        //logic.createNewProduct()
     }
 
     return (
@@ -28,7 +17,7 @@ function AdminHeader(props) {
 
                 <AdminLogo />
             
-            <Button onClick={handleNewProductClick}>
+            <Button onClick={props.onNewProductClick}>
                 Create New Product
             </Button>
 
@@ -39,8 +28,5 @@ function AdminHeader(props) {
         </Container>
     )
 }
-
-
-
 
 export default AdminHeader

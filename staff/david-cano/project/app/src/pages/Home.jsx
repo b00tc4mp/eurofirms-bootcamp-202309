@@ -7,7 +7,7 @@ const Home = (props) => {
     return (
         <Container align="center">
             <Header />
-            <AllProducts  onError={props.onError}/>
+            <AllProducts onError={props.onError}/>
             <Footer />
         </Container>
     )

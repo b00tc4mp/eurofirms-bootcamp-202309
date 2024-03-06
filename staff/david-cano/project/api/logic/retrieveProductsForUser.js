@@ -3,7 +3,7 @@ const { validate } = require('./helpers')
 const { User, Product } = require('../data/models')
 const { NotFoundError, SystemError } = require('./errors')
 
-function retrieveCartItems(userId, callback) {
+function retrieveProductsForUser(userId, callback) {
     validate.text(userId, 'user id')
     validate.function(callback, 'callback')
 
@@ -15,9 +15,7 @@ function retrieveCartItems(userId, callback) {
                 return
             }
 
-            user.cartItems // [ObjectId('asfasdf'), ObjectId('asfasdfasdfasd'), ...]
-
-            Product.find({ _id: { $in: user.cartItems } }).select('-__v').populate('author', 'name').lean()
+            Product.find().select('-__v').populate('author', 'name').lean()
                 .then(products => {
                     products.forEach(product => {
                         product.id = product._id.toString()
@@ -31,11 +29,10 @@ function retrieveCartItems(userId, callback) {
                         product.cartItem = user.cartItems.some(productObjectId => productObjectId.toString() === product.id)
                     })
 
-                    callback(null, products.reverse())
+                    callback(null, products)
                 })
                 .catch(error => callback(new SystemError(error.message)))
         })
         .catch(error => callback(new SystemError(error.message)))
 }
-
-module.exports = retrieveCartItems
+module.exports = retrieveProductsForUser

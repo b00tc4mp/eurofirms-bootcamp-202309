@@ -13,7 +13,8 @@ const {
     deleteProductHandler,
     retrieveProductsHandler,
     retrieveCartItemsHandler,
-    addCartItemHandler
+    addCartItemHandler,
+    retrieveProductsForUserHandler
 } = require('./handlers')
 
 mongoose.connect(process.env.MONGODB_URL)
@@ -29,6 +30,8 @@ mongoose.connect(process.env.MONGODB_URL)
         api.post('/users/auth', jsonBodyParser, authenticateUserHandler)
 
         api.get('/users', retrieveUserHandler)
+
+api.get('/products/forUser', retrieveProductsForUserHandler)
 
         api.post('/products', jsonBodyParser, createProductHandler)
 

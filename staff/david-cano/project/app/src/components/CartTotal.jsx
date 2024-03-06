@@ -6,7 +6,7 @@ export default function CartTotal(props) {
 
     useEffect(() => {
         refreshCartTotal();
-    }, []);
+    }, [refreshCartTotal]);
 
     function refreshCartTotal() {
         try {
@@ -31,7 +31,9 @@ export default function CartTotal(props) {
 
     return (
         <div>
-            <p>Total del carrito: {cartTotal.toFixed(2)} €</p>
+            <h2>
+                Total del carrito: {cartTotal.toFixed(2)} €
+            </h2>
         </div>
     );
 }

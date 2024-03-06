@@ -14,6 +14,8 @@ function retrieveProducts(callback) {
                             delete product.author._id
                         }
 
+                        // product.cartItem = user.cartItems.some(productObjectId => productObjectId.toString() === product.id)
+
                     })
 
                     callback(null, products.reverse())

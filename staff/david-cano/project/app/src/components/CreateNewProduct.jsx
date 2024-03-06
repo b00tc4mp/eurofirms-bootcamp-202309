@@ -36,15 +36,16 @@ function CreateNewProduct(props) {
         }
     }
 
-    function handleCancelClick() {
-        props.onNewProductCancelClick
+    function handleCancelClick(event) {
+        event.preventDefault()
+        props.onNewProductCancelClick()
     }
 
     return (
         <Container align="center">
             <h2>Create New Product</h2>
 
-            <Form onSubmit={handleNewProductSubmit}>
+            <Form>
                 <Field type="text" id="name-field" required>
                     Product Name
                 </Field>
@@ -61,7 +62,7 @@ function CreateNewProduct(props) {
                     Product Price
                 </Field>
 
-                <Button type="submit">Create New Product</Button>
+                <Button onSubmit={handleNewProductSubmit}type="submit">Create New Product</Button>
                 <Button onClick={handleCancelClick}>Cancel</Button>
             </Form>
         </Container>
