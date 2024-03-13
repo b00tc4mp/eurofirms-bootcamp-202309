@@ -17,25 +17,25 @@ export default function Dashboard(props) {
         //logic.createNewProduct()
     }
 
-    function handleNewProductCancelClick() {
-        // Navegamos a la ruta '/dashboard' utilizando la función 'navigate'
-        navigate('/dashboard')
-    }
+    // function handleNewProductCancelClick() {
+    //     // Navegamos a la ruta '/dashboard' utilizando la función 'navigate'
+    //     navigate('/dashboard')
+    // }
 
-    function handleNewProductSubmit() {
-        // Navegamos a la ruta '/dashboard' utilizando la función 'navigate'
-        navigate('/')
-        // Actualizamos el estado 'timestamp' con la marca de tiempo actual
-        setTimestamp(Date.now())
+    // function handleNewProductSubmit() {
+    //     // Navegamos a la ruta '/dashboard' utilizando la función 'navigate'
+    //     navigate('/')
+    //     // Actualizamos el estado 'timestamp' con la marca de tiempo actual
+    //     setTimestamp(Date.now())
 
-    }
+    // }
 
     return <Container align="center">
             <AdminHeader onNewProductClick={handleNewProductClick} onLogout={props.onLogout} />
 
             <Routes>
                 <Route path="/new-product" element={<>
-                    <CreateNewProduct onNewProductSubmit={handleNewProductSubmit} onNewProductCancelClick={handleNewProductCancelClick} onError={props.onError} />
+                    <CreateNewProduct onNewProductSubmit={props.onNewProductSubmit} onNewProductCancelClick={props.onNewProductCancelClick} onError={props.onError} />
                     <AllProducts timestamp={timestamp} onError={props.onError} />
                 </>} /> 
 

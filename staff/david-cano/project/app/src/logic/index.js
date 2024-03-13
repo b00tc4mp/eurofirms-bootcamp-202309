@@ -9,6 +9,7 @@ import addCartItem from './addCartItem'
 import retrieveCartItems from './retrieveCartItems'
 import createNewProduct from './createNewProduct'
 import deleteProduct from './deleteProduct'
+import retrieveProductsForUser from './retrieveProductsForUser'
 
 const logic = {
     getLoggedInUserId,
@@ -21,7 +22,8 @@ const logic = {
     addCartItem,
     retrieveCartItems,
     createNewProduct,
-    deleteProduct
+    deleteProduct,
+    retrieveProductsForUser
 }
 
 export default logic

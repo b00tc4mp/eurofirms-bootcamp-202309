@@ -1,11 +1,15 @@
 import Button from '../library/Button'
 
 import logic from '../logic'
+//import isUserLoggedIn from '../logic/isUserLoggedIn'
 
 export default function Product(props) {
     console.log('Product')
 
     const product = props.product
+    // const productUser = logic.retrieveProductsForUser
+    // const productForUser = productUser.find(productUser => productUser.id === product.id);
+
 
     function handleAddCart() {
         console.log('Product Add Cart')
@@ -17,7 +21,6 @@ export default function Product(props) {
 
                     return
                 }
-
                 props.onCartAdd()
             })
         } catch (error) {
@@ -44,18 +47,22 @@ export default function Product(props) {
             }
     }
 
+    // const isInCart = productForUser.cartItem === true && productForUser.id === product.id && product.cartItem
+    const isInCart = product.cartItem
+
+    console.log(product)
+
     return <article className="flex flex-col p-[.5rem] hover:bg-[skyblue]">
         <p>{product.name}</p>
         <img className="max-w-[300px]" src={product.img} />
         <p>{product.description}</p>
         <p>{product.price} €</p>
 
-        <span></span>
+        {/* <span></span> */}
         <div className="flex items-center justify-center">
 
-            {product.author.id === logic.getLoggedInUserId() ? <Button title="Delete" aria-label="Delete" onClick={handleDeleteClick}>Delete ❌</Button> : <Button onClick={handleAddCart}>{(product.cartItems ? 'Remove 🛍️' : 'Add 🛍️')}</Button>}
+            {product.author.id === logic.getLoggedInUserId() ? 
+            <Button title="Delete" aria-label="Delete" onClick={handleDeleteClick}>Delete ❌</Button> : <Button onClick={handleAddCart}>{isInCart ? 'Remove 🛍️' : 'Add 🛍️'}</Button>}
         </div>
     </article>
-
-
 }

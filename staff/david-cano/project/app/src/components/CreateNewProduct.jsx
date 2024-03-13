@@ -45,7 +45,7 @@ function CreateNewProduct(props) {
         <Container align="center">
             <h2>Create New Product</h2>
 
-            <Form>
+            <Form onSubmit={handleNewProductSubmit}>
                 <Field type="text" id="name-field" required>
                     Product Name
                 </Field>
@@ -62,7 +62,7 @@ function CreateNewProduct(props) {
                     Product Price
                 </Field>
 
-                <Button onSubmit={handleNewProductSubmit}type="submit">Create New Product</Button>
+                <Button>Create New Product</Button>
                 <Button onClick={handleCancelClick}>Cancel</Button>
             </Form>
         </Container>

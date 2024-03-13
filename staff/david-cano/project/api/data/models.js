@@ -59,7 +59,8 @@ const product = new Schema({
 
     quantity: {
         type: Number,
-        required: true
+        required: true,
+        default: 1 // todo remove this props
     },
 })
 

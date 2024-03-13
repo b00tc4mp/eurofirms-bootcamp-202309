@@ -3,15 +3,23 @@ import { useState, useEffect } from 'react'
 import Products from './Products'
 
 import logic from '../logic'
+import context from '../logic/context'
 
 export default function AllProducts(props) {
     console.log('AllProducts')
 
     const [products, setProducts] = useState([])
 
+    const { jwt } = context
+
+    const token = jwt?.token
+
     useEffect(() => {
-        refreshProducts()
-    }, [props.timestamp])
+        if (token)
+            refreshProductsForUser()
+        else
+            refreshProducts()
+    }, [props.timestamp, token])
 
     function refreshProducts() {
         try {
@@ -29,8 +37,24 @@ export default function AllProducts(props) {
         }
     }
 
+    function refreshProductsForUser() {
+        try {
+            logic.retrieveProductsForUser((error, products) => {
+                if (error) {
+                    props.onError(error)
+
+                    return
+                }
+
+                setProducts(products)
+            })
+        } catch (error) {
+            props.onError(error)
+        }
+    }
+
     function handleCartItemAdd() {
-        refreshProducts()
+        refreshProductsForUser()
     }
 
     function handleProductDeleted() {
@@ -38,8 +62,8 @@ export default function AllProducts(props) {
     }
 
     return (
-        <Products products={products} onCartItemAdd={handleCartItemAdd} onProductDeleted ={handleProductDeleted} onError={props.onError} />
+        <Products products={products} onCartItemAdd={handleCartItemAdd} onProductDeleted={handleProductDeleted} onError={props.onError} />
 
-        
+
     )
 }

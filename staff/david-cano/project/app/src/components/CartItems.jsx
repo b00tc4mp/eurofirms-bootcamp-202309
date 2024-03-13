@@ -3,42 +3,43 @@ import { useState, useEffect } from 'react'
 import logic from '../logic'
 
 import Products from './Products'
+import { useCartContext } from './CartContext'
 
 
 export default function cartItems(props) {
     console.log('Cart Items')
 
-    const [products, setProducts] = useState([])
+    const products = useCartContext()
 
-    useEffect(() => {
-        refreshProducts()
-    }, [])
+    // const [products, setProducts] = useState([])
 
-    function refreshProducts() {
-        try {
-            logic.retrieveCartItems( (error, products) => {
-                if (error) {
-                    props.onError(error)
+    // useEffect(() => {
+    //     refreshProducts()
+    // }, [])
 
-                    return
-                }
+    // function refreshProducts() {
+    //     try {
+    //         logic.retrieveCartItems( (error, products) => {
+    //             if (error) {
+    //                 props.onError(error)
 
-                setProducts(products)
-            })
-        } catch (error) {
-            props.onError(error)
-        }
-    }
+    //                 return
+    //             }
 
-    function handleProductDeleted() {
-        refreshProducts()
-    }
+    //             setProducts(products)
+    //         })
+    //     } catch (error) {
+    //         props.onError(error)
+    //     }
+    // }
 
-    function handleCartItemAdd() {
-        refreshProducts()
-    }
+    // function handleProductDeleted() {
+    //     refreshProducts()
+    // }
 
-    return <Products products={products}
-    onCartItemAdd={handleCartItemAdd}
-    onProductDeleted={handleProductDeleted} onError={props.onError} />
+    // function handleCartItemAdd() {
+    //     refreshProducts()
+    // }
+
+    return <Products products={products} onCartItemAdd={props.onCartItemAdd} onError={props.onError} />
 }

@@ -1,37 +1,39 @@
 import React, { useState, useEffect } from 'react'
 import { CartItems, UserHeader, Footer, CartTotal } from '../components'
 import { Container } from '../library'
-import logic from '../logic'
+import { useCartContext } from '../components/CartContext'
 
 const Cart = (props) => {
-    const [cart, setCart] = useState([]);
+    // const [cart, setCart] = useState([]);
 
-    useEffect(() => {
-        refreshCart();
-    }, [refreshCart]);
+    const products = useCartContext()
 
-    function refreshCart() {
-        try {
-            logic.retrieveCartItems((error, products) => {
-                if (error) {
-                    props.onError(error);
-                    return;
-                }
+    // useEffect(() => {
+    //     refreshCart();
+    // }, []);
 
-                setCart(products);
-            });
-        } catch (error) {
-            props.onError(error);
-        }
-    }
+    // function refreshCart() {
+    //     try {
+    //         logic.retrieveCartItems((error, products) => {
+    //             if (error) {
+    //                 props.onError(error);
+    //                 return;
+    //             }
+
+    //             setCart(products);
+    //         });
+    //     } catch (error) {
+    //         props.onError(error);
+    //     }
+    // }
     
     return (
         <Container align="center">
             <UserHeader onLogout={props.onLogout} />
 
-            {cart.length > 0 ? (
+            {products.length > 0 ? (
                 <>
-                    <CartItems onError={props.onError} />
+                    <CartItems onCartItemAdd={props.onCartItemAdd} onError={props.onError} />
                     <CartTotal onError={props.onError} />
                 </>
             ) : (

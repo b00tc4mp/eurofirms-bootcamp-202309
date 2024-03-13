@@ -1,39 +1,43 @@
-import React, { useState, useEffect } from 'react';
-import logic from '../logic';
+import React from 'react';
+import { useCartContext } from './CartContext';
 
 export default function CartTotal(props) {
-    const [cartTotal, setCartTotal] = useState(0);
+    // const [cartTotal, setCartTotal] = useState(0);
 
-    useEffect(() => {
-        refreshCartTotal();
-    }, [refreshCartTotal]);
+    const products = useCartContext()
 
-    function refreshCartTotal() {
-        try {
-            logic.retrieveCartItems((error, products) => {
-                if (error) {
-                    props.onError(error);
-                    return;
-                }
+    // useEffect(() => {
+    //     refreshCartTotal();
+    // }, [refreshCartTotal]);
 
-                const total = calculateTotal(products);
-                setCartTotal(total);
-            });
-        } catch (error) {
-            props.onError(error);
-        }
-    }
+    // function refreshCartTotal() {
+    //     try {
+    //         logic.retrieveCartItems((error, products) => {
+    //             if (error) {
+    //                 props.onError(error);
+    //                 return;
+    //             }
 
-    function calculateTotal(products) {
-        // Suma los precios de todos los productos en el carrito
-        return products.reduce((total, product) => total + parseFloat(product.price), 0);
-    }
+    //             const total = calculateTotal(products);
+    //             setCartTotal(total);
+    //         });
+    //     } catch (error) {
+    //         props.onError(error);
+    //     }
+    // }
+
+    // function calculateTotal(products) {
+    //     // Suma los precios de todos los productos en el carrito
+    //     return products.reduce((total, product) => total + parseFloat(product.price), 0);
+    // }
+
+    const totalProducts = products.reduce((total, product) => total + parseFloat(product.price), 0);
 
     return (
         <div>
-            <h2>
-                Total del carrito: {cartTotal.toFixed(2)} €
-            </h2>
+            <h3>
+                Total del carrito: {totalProducts.toFixed(2)} €
+            </h3>
         </div>
     );
 }
