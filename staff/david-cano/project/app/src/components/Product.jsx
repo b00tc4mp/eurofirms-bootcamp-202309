@@ -1,15 +1,16 @@
 import Button from '../library/Button'
-
+import { useLocation } from 'react-router-dom'
 import logic from '../logic'
-//import isUserLoggedIn from '../logic/isUserLoggedIn'
+import CartItemQuantity from './CartItemQuantity'
+import React, { useState } from 'react'
 
 export default function Product(props) {
     console.log('Product')
 
     const product = props.product
-    // const productUser = logic.retrieveProductsForUser
-    // const productForUser = productUser.find(productUser => productUser.id === product.id);
-
+    const location = useLocation()
+    const isHomeOrDashboard = location.pathname === '/' || location.pathname === '/dashboard'
+    const [quantity, setQuantity] = useState(product.quantity)
 
     function handleAddCart() {
         console.log('Product Add Cart')
@@ -47,7 +48,6 @@ export default function Product(props) {
             }
     }
 
-    // const isInCart = productForUser.cartItem === true && productForUser.id === product.id && product.cartItem
     const isInCart = product.cartItem
 
     console.log(product)
@@ -55,14 +55,17 @@ export default function Product(props) {
     return <article className="flex flex-col p-[.5rem] hover:bg-[skyblue]">
         <p>{product.name}</p>
         <img className="max-w-[300px]" src={product.img} />
-        <p>{product.description}</p>
-        <p>{product.price} €</p>
+                {isHomeOrDashboard && <details>
+                <summary>Product Description</summary>
+                <p>{product.description}</p>
+            </details>}
+        {isInCart ? <p>Price: {product.price * product.quantity} €</p> : <p>Price: {product.price } €</p>}
 
-        {/* <span></span> */}
-        <div className="flex items-center justify-center">
+        <div>
+        {isInCart && !isHomeOrDashboard ? < CartItemQuantity quantity = {quantity} setQuantity={setQuantity} />: null}
 
             {product.author.id === logic.getLoggedInUserId() ? 
-            <Button title="Delete" aria-label="Delete" onClick={handleDeleteClick}>Delete ❌</Button> : <Button onClick={handleAddCart}>{isInCart ? 'Remove 🛍️' : 'Add 🛍️'}</Button>}
+            <Button title="Delete" aria-label="Delete" onClick={handleDeleteClick}>Delete ❌</Button> : <Button onClick={handleAddCart} isRemove={isInCart}>{isInCart ? 'Remove 🛍️' : 'Add 🛍️'}</Button>}
         </div>
     </article>
 }
