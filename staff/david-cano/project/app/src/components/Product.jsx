@@ -2,7 +2,7 @@ import Button from '../library/Button'
 import { useLocation } from 'react-router-dom'
 import logic from '../logic'
 import CartItemQuantity from './CartItemQuantity'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 export default function Product(props) {
     console.log('Product')
@@ -11,6 +11,11 @@ export default function Product(props) {
     const location = useLocation()
     const isHomeOrDashboard = location.pathname === '/' || location.pathname === '/dashboard'
     const [quantity, setQuantity] = useState(product.quantity)
+    const [price, setPrice] = useState(product.price * product.quantity)
+
+    useEffect(() => {
+        setPrice(product.price * quantity);
+    }, [quantity, product.price]);
 
     function handleAddCart() {
         console.log('Product Add Cart')
@@ -59,7 +64,7 @@ export default function Product(props) {
                 <summary>Product Description</summary>
                 <p>{product.description}</p>
             </details>}
-        {isInCart ? <p>Price: {product.price * product.quantity} €</p> : <p>Price: {product.price } €</p>}
+        {isInCart ? <p>Price: {price} €</p> : <p>Price: {product.price } €</p>}
 
         <div>
         {isInCart && !isHomeOrDashboard ? < CartItemQuantity quantity = {quantity} setQuantity={setQuantity} />: null}

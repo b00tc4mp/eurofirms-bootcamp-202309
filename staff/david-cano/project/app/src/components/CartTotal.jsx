@@ -3,9 +3,9 @@ import { useCartContext } from './CartContext';
 
 export default function CartTotal() {
 
-    const cartItems = useCartContext()
+    const products = useCartContext()
 
-    const totalProducts = cartItems.reduce((total, product) => total + parseFloat(product.price), 0);
+    const totalProducts = products.reduce((total, product) => total + parseFloat(product.price * product.quantity), 0);
 
     return (
         <div>
