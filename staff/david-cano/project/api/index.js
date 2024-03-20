@@ -8,13 +8,14 @@ const { cors } = require('./utils')
 const {
     registerUserHandler,
     authenticateUserHandler,
-    retrieveUserHandler, 
+    retrieveUserHandler,
     createProductHandler,
     deleteProductHandler,
     retrieveProductsHandler,
     retrieveCartItemsHandler,
     addCartItemHandler,
-    retrieveProductsForUserHandler
+    retrieveProductsForUserHandler,
+    updateCartItemQuantityHandler
 } = require('./handlers')
 
 mongoose.connect(process.env.MONGODB_URL)
@@ -31,7 +32,7 @@ mongoose.connect(process.env.MONGODB_URL)
 
         api.get('/users', retrieveUserHandler)
 
-api.get('/products/forUser', retrieveProductsForUserHandler)
+        api.get('/products/forUser', retrieveProductsForUserHandler)
 
         api.post('/products', jsonBodyParser, createProductHandler)
 
@@ -42,6 +43,8 @@ api.get('/products/forUser', retrieveProductsForUserHandler)
         api.get('/products/cartItems', retrieveCartItemsHandler)
 
         api.patch('/products/:productId/cartItems', addCartItemHandler)
+
+        api.patch('/products/forUser/:productId/quantity', jsonBodyParser, updateCartItemQuantityHandler)
 
         api.listen(process.env.PORT, () => console.log(`API listening on port ${process.env.PORT}`))
     })
