@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const {updateCartItemQuantity} = require('./updateCartItemQuantity')
+const updateCartItemQuantity = require('./updateCartItemQuantity')
 
 mongoose.connect('mongodb://127.0.0.1/ecommerce_test')
     .then(() => {

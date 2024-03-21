@@ -67,7 +67,7 @@ export default function Product(props) {
         {isInCart ? <p>Price: {price} €</p> : <p>Price: {product.price } €</p>}
 
         <div>
-        {isInCart && !isHomeOrDashboard ? < CartItemQuantity quantity = {quantity} setQuantity={setQuantity} />: null}
+        {/* {isInCart && !isHomeOrDashboard ? < CartItemQuantity quantity = {quantity} setQuantity={setQuantity} />: null} */}
 
             {product.author.id === logic.getLoggedInUserId() ? 
             <Button title="Delete" aria-label="Delete" onClick={handleDeleteClick}>Delete ❌</Button> : <Button onClick={handleAddCart} isRemove={isInCart}>{isInCart ? 'Remove 🛍️' : 'Add 🛍️'}</Button>}
