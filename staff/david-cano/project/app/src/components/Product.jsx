@@ -57,7 +57,7 @@ export default function Product(props) {
 
     console.log(product)
 
-    return <article className="flex flex-col p-[.5rem] hover:bg-[skyblue]">
+    return <article className="flex flex-col p-[.5rem] bg-[ghostwhite] border-2 border-indigo-600 ... rounded-3xl hover:bg-[skyblue] m-5">
         <p>{product.name}</p>
         <img className="max-w-[300px]" src={product.img} />
                 {isHomeOrDashboard && <details>

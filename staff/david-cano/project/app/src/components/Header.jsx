@@ -11,9 +11,9 @@ function header() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        const isLoggedIn = logic.isUserLoggedIn(); 
+        const isLoggedIn = logic.isUserLoggedIn();
         if (isLoggedIn) {
-            logic.retrieveUser((error, user) => { 
+            logic.retrieveUser((error, user) => {
                 if (error) {
                     console.error(error);
                     return;
@@ -56,7 +56,7 @@ function header() {
     }
     return (
         <Container align="center">
-            <div className="flex justify-between items-center md:min-w-[500px] lg:min-w-[768px]" aria-label="Header">
+            <div className="flex justify-between items-center md:min-w-[500px] lg:min-w-[768px] bg-[#ededaa] rounded-3xl" aria-label="Header">
                 <Link onClick={handleHomeClick}>
                     <Logo />
                 </Link>
@@ -71,13 +71,13 @@ function header() {
                     </>
                 )}
 
-                {user && (
+                <h2> Wellcome! {user && (
                     <span>{user.name}</span>
-                )}
+                )}</h2>
 
                 <Link onClick={handleCartClick}>
                     <h1>
-                        <img width='150px' height='150px' src="https://img.freepik.com/vector-premium/icono-cesta-compras-comercio-electronico-vector-color-sencillo_1178600-658.jpg?w=740" alt="https://img.freepik.com/vector-premium/icono-cesta-compras-comercio-electronico-vector-color-sencillo_1178600-658.jpg?w=740" />
+                        <img className='rounded-full' width='75px' height='75px' src="https://img.freepik.com/vector-premium/icono-cesta-compras-comercio-electronico-vector-color-sencillo_1178600-658.jpg?w=250" alt="https://img.freepik.com/vector-premium/icono-cesta-compras-comercio-electronico-vector-color-sencillo_1178600-658.jpg?w=250" />
                     </h1>
                 </Link>
             </div>
