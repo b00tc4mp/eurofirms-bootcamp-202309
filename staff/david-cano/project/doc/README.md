@@ -2,6 +2,10 @@
 
 ## Functional Description
 
+Ecommerce where the Home is the page. main with links to Login and Register and access to the cart, which if there is no logged in user sends you to Login and the display of articles.
+The logged in user can add and remove products in the cart and also in their home, in the cart they have their Logout.
+The admin in Login goes to his Dashboard where he can delete and create products and has his Logout.
+
 ### Data Model
 
 User
@@ -9,30 +13,14 @@ User
 - name (string, required)
 - email (string, unique, required)
 - password (string, required)
+- role ([regular, admin])
+- cartItems (ObjectId)
 
 Product
 - id (string, unique, required)
-- brand (string, required)
-- model (string, required)
-- price (number, required)
+- author (ObjectId, required)
+- name (string, required)
 - image (string, required)
 - description (string, required)
-- sizes (['xs', 's', 'm', 'l', 'xl'], required)
-- stock (number, required)
-
-Item
-- id (string, unique, required)
-- product (Product.id, required)
+- price (string, required)
 - quantity (number, required)
-- size (string, required)
-- price (number, required)
-
-Cart
-- id (string, unique, required)
-- items ([Item.id], required)
-
-Order
-- id (string, unique, required)
-- cart (Cart.id, required)
-- date (Date, required)
-- paymentMethod (['card', 'cash', 'paypal', ... ])
