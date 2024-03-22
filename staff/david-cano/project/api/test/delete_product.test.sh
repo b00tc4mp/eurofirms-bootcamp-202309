@@ -1,0 +1,2 @@
+curl -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWU1NGRiY2ZiYmJlYzAzMDNmYWM3ZjMiLCJpYXQiOjE3MDk1MjY2MTksImV4cCI6MTcxMjExODYxOX0.aJ3hbVyPp0wZUG9ORTv7LJu8dk-NyPj6X2ydd1kQznc' -X DELETE localhost:8080/products/'65e550553f7f7003d4fc8f8d' -v
+

@@ -1,0 +1,1 @@
+curl -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWU1NGNmYmZiYmJlYzAzMDNmYWM3ZGYiLCJpYXQiOjE3MDk3NDY4ODksImV4cCI6MTcxMjMzODg4OX0.dyBpY8fPwzCDkt2Z16SJsXZ0XmTtRArh3qFAXMD-v-c' localhost:8080/users -v

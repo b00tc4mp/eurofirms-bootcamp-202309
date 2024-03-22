@@ -1,0 +1,1 @@
+curl -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWU5YTY0MDczMTE3YzZkNDQ3ZmFhZTAiLCJpYXQiOjE3MTA5MDYzNDQsImV4cCI6MTcxMzQ5ODM0NH0.6JMvXBE-iG9PCZSYNo3q9szU23jkfwOh9mth9UM4OsA' -H 'Content-Type: application/json' -d '{"quantity":2}' -X PATCH localhost:8080/products/forUser/65f1ef7455ed6a0845599a39/quantity -v
