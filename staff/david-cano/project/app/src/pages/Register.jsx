@@ -1,5 +1,5 @@
 import { Button, Link, Field, Form, Container } from '../library'
-
+import { Header, Footer } from '../components'
 import logic from '../logic'
 
 export default function Register(props) {
@@ -39,19 +39,26 @@ export default function Register(props) {
     }
 
     return <Container align='center'>
+        <Header />
 
+        <div className='pt-[50px]'>
         <h1>Register</h1>
 
-        <Form onSubmit={handleRegisterSubmit}>
-            <Field type="text" id="name-field" title="Name" required>Name</Field>
+<Form onSubmit={handleRegisterSubmit}>
+    <Field type="text" id="name-field" title="Name" required>Name</Field>
 
-            <Field type="email" id="email-field" title="E-mail" required>E-mail</Field>
+    <Field type="email" id="email-field" title="E-mail" required>E-mail</Field>
 
-            <Field type="password" id="password-field" title="Password" required>Password</Field>
+    <Field type="password" id="password-field" title="Password" required>Password</Field>
 
-            <Button type="submit">Register</Button>
-        </Form>
+    <Button type="submit">Register</Button>
+</Form>
 
-        <Link onClick={handleLoginClick}>Login</Link>
+<Link onClick={handleLoginClick}>Login</Link>
+        </div>
+
+        <div className='pt-[50px]'>
+        <Footer />
+        </div>
     </Container>
 }

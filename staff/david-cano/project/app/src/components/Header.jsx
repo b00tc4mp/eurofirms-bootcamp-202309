@@ -77,7 +77,7 @@ function header() {
 
                 <Link onClick={handleCartClick}>
                     <h1>
-                        <img className='rounded-full' width='75px' height='75px' src="https://img.freepik.com/vector-premium/icono-cesta-compras-comercio-electronico-vector-color-sencillo_1178600-658.jpg?w=250" alt="https://img.freepik.com/vector-premium/icono-cesta-compras-comercio-electronico-vector-color-sencillo_1178600-658.jpg?w=250" />
+                        <img className='rounded-full' width='50px' height='50px' src="https://img.freepik.com/vector-premium/icono-cesta-compras-comercio-electronico-vector-color-sencillo_1178600-658.jpg?w=250" alt="https://img.freepik.com/vector-premium/icono-cesta-compras-comercio-electronico-vector-color-sencillo_1178600-658.jpg?w=250" />
                     </h1>
                 </Link>
             </div>

@@ -1,5 +1,5 @@
 import { Button, Link, Field, Form, Container } from '../library'
-
+import { Header, Footer } from '../components'
 import logic from '../logic'
 
 export default function Login(props) {
@@ -36,18 +36,24 @@ export default function Login(props) {
     }
 
     return <Container align="center">
+        <Header />
 
-
+        <div className='pt-[50px]'>
         <h1>Login</h1>
 
-        <Form onSubmit={handleLoginSubmit}>
-            <Field type="email" id="email-field" title="E-mail" required>E-mail</Field>
+<Form onSubmit={handleLoginSubmit}>
+    <Field type="email" id="email-field" title="E-mail" required>E-mail</Field>
 
-            <Field type="password" id="password-field" title="Password" required>Password</Field>
+    <Field type="password" id="password-field" title="Password" required>Password</Field>
 
-            <Button type="submit">Login</Button>
-        </Form>
+    <Button type="submit">Login</Button>
+</Form>
 
-        <Link onClick={handleRegisterClick}>Register</Link>
+<Link onClick={handleRegisterClick}>Register</Link>
+        </div>
+
+        <div className='pt-[50px]'>
+        <Footer />
+        </div>
     </Container>
 }
